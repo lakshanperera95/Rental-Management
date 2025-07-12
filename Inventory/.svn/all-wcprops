@@ -1,0 +1,1655 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/SVN/!svn/ver/33/trunk/Inventory
+END
+frmChangePassword.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmChangePassword.Designer.cs
+END
+frmSupplierReturn.resx
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmSupplierReturn.resx
+END
+rptCustomerPayment.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerPayment.rpt
+END
+rptCategoryProfit.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryProfit.rpt
+END
+frmPurchaseOrder.resx
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmPurchaseOrder.resx
+END
+rptInvoiceDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptInvoiceDetails.rpt
+END
+frmAccounts.resx
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/38/trunk/Inventory/frmAccounts.resx
+END
+frmTransactionInquary.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmTransactionInquary.Designer.cs
+END
+rptManufacturerItemStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufacturerItemStock.cs
+END
+rptDepartmentProfit.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentProfit.cs
+END
+rptDebetorBalance.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/31/trunk/Inventory/rptDebetorBalance.rpt
+END
+rptDepartmentSales.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentSales.cs
+END
+rptDailyProfitAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDailyProfitAnalys.rpt
+END
+rptManufactureProfit.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufactureProfit.rpt
+END
+MDI.resx
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/SVN/!svn/ver/21/trunk/Inventory/MDI.resx
+END
+rptCreditorStatement.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/30/trunk/Inventory/rptCreditorStatement.cs
+END
+frmBrand.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmBrand.designer.cs
+END
+rptProductSales.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductSales.cs
+END
+rptSupplierReOrderLevelReport.cs
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptSupplierReOrderLevelReport.cs
+END
+frmTransactionInquary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/32/trunk/Inventory/frmTransactionInquary.cs
+END
+frmUserProfile.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmUserProfile.cs
+END
+rptDepartmentAnalyse.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/14/trunk/Inventory/rptDepartmentAnalyse.rpt
+END
+rptPurchaseOrderSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptPurchaseOrderSummary.cs
+END
+rptSupplierProfit.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierProfit.cs
+END
+rptDepartmentProfit.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentProfit.rpt
+END
+frmMasterDetailsInquary.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmMasterDetailsInquary.designer.cs
+END
+rptMonthlySalesAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptMonthlySalesAnalys.rpt
+END
+rptStockValDeptwise.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValDeptwise.rpt
+END
+rptPaymentSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptPaymentSummary.cs
+END
+rptSupplierSales.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierSales.cs
+END
+frmCategory.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/38/trunk/Inventory/frmCategory.cs
+END
+rptMonthlyPurchaseAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptMonthlyPurchaseAnalys.rpt
+END
+rptProductAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductAnalyse.cs
+END
+frmStockAdjustment.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmStockAdjustment.Designer.cs
+END
+rptManufacturerStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufacturerStock.rpt
+END
+frmTransferGoodNote.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmTransferGoodNote.Designer.cs
+END
+rptDailySalesAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDailySalesAnalys.cs
+END
+rptManufactureSales.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufactureSales.cs
+END
+Splash.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/41/trunk/Inventory/Splash.designer.cs
+END
+rptProductDailySalesAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDailySalesAnalys.rpt
+END
+rptStockValProdwise.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValProdwise.cs
+END
+frmGrn.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmGrn.Designer.cs
+END
+rptCustomerReturnDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerReturnDetails.cs
+END
+rptDepartmentStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentStock.cs
+END
+frmStockOverwrite.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/11/trunk/Inventory/frmStockOverwrite.cs
+END
+frmStockAdjustment.resx
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmStockAdjustment.resx
+END
+frmBarcode.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmBarcode.Designer.cs
+END
+frmCustomerReturn.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmCustomerReturn.Designer.cs
+END
+frmSupplierPayment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/30/trunk/Inventory/frmSupplierPayment.cs
+END
+rptSupplierAnalyse.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/14/trunk/Inventory/rptSupplierAnalyse.rpt
+END
+Login.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/2/trunk/Inventory/Login.designer.cs
+END
+rptProductGrossProfit.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductGrossProfit.cs
+END
+rptDebtorsOutstanding.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptDebtorsOutstanding.rpt
+END
+rptSupplierProfit.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierProfit.rpt
+END
+frmDataUploading.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/27/trunk/Inventory/frmDataUploading.Designer.cs
+END
+frmAccounts.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/38/trunk/Inventory/frmAccounts.cs
+END
+frmDayEndProcess.resx
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/19/trunk/Inventory/frmDayEndProcess.resx
+END
+rptStockValManuwise.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValManuwise.rpt
+END
+rptCategoryItemStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryItemStock.rpt
+END
+Inventory.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/41/trunk/Inventory/Inventory.csproj
+END
+Splash.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/SVN/!svn/ver/3/trunk/Inventory/Splash.cs
+END
+rptDepartmentStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentStock.rpt
+END
+rptSupplierStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierStock.cs
+END
+rptTogSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptTogSummary.cs
+END
+rptCustomerReturnDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerReturnDetails.rpt
+END
+rptProductSales.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/26/trunk/Inventory/rptProductSales.rpt
+END
+rptCustomerReturnSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerReturnSummary.cs
+END
+rptStockAdjustment.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockAdjustment.rpt
+END
+MainClass.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/SVN/!svn/ver/2/trunk/Inventory/MainClass.cs
+END
+rptProfitableProduct.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/33/trunk/Inventory/rptProfitableProduct.cs
+END
+frmSupplierPayment.resx
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmSupplierPayment.resx
+END
+dsForReports.xsc
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/2/trunk/Inventory/dsForReports.xsc
+END
+dsForReports.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/41/trunk/Inventory/dsForReports.xsd
+END
+rptInvoiceDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptInvoiceDetails.cs
+END
+rptProductBinCard.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptProductBinCard.rpt
+END
+rptTogSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptTogSummary.rpt
+END
+rptSupplierStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierStock.rpt
+END
+frmAnalyse.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmAnalyse.Designer.cs
+END
+dsForReports.xss
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/41/trunk/Inventory/dsForReports.xss
+END
+rptFastMovingProduct.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptFastMovingProduct.rpt
+END
+rptCreditorBalance.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/31/trunk/Inventory/rptCreditorBalance.rpt
+END
+frmDepartment.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmDepartment.designer.cs
+END
+frmBrand.resx
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmBrand.resx
+END
+frmPurchaseOrder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmPurchaseOrder.cs
+END
+rptReOrderLevelReport.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptReOrderLevelReport.cs
+END
+rptReOrderLevelReport.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptReOrderLevelReport.rpt
+END
+rptSuppFastMovingProduct.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptSuppFastMovingProduct.cs
+END
+rptSuppFastMovingProduct.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptSuppFastMovingProduct.rpt
+END
+rptSupplierReturnNote.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierReturnNote.cs
+END
+rptCreditorOutstanding.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptCreditorOutstanding.cs
+END
+rptCategoryProfit.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryProfit.cs
+END
+rptChequeRecon.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/32/trunk/Inventory/rptChequeRecon.rpt
+END
+rptProductDailySalesAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDailySalesAnalys.cs
+END
+dsForReports.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/18/trunk/Inventory/dsForReports.Designer.cs
+END
+dsForReports.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/30/trunk/Inventory/dsForReports.cs
+END
+rptInvoiceSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptInvoiceSummary.cs
+END
+rptSupplierReOrderLevelReport.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/SVN/!svn/ver/40/trunk/Inventory/rptSupplierReOrderLevelReport.rpt
+END
+frmReportViewer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmReportViewer.cs
+END
+frmChequeRecon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/32/trunk/Inventory/frmChequeRecon.cs
+END
+Login.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/SVN/!svn/ver/41/trunk/Inventory/Login.cs
+END
+frmStockOverwrite.resx
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmStockOverwrite.resx
+END
+rptProductDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/39/trunk/Inventory/rptProductDetails.rpt
+END
+rptProductDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDetails.cs
+END
+rptDepartmentDailySalesAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentDailySalesAnalys.cs
+END
+rptDepartmentDailySalesAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentDailySalesAnalys.rpt
+END
+frmManufacturer.resx
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/11/trunk/Inventory/frmManufacturer.resx
+END
+rptProfitableProduct.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/33/trunk/Inventory/rptProfitableProduct.rpt
+END
+frmMasterDetailsInquary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmMasterDetailsInquary.cs
+END
+rptCategoryAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/14/trunk/Inventory/rptCategoryAnalyse.cs
+END
+frmDataUploading.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/27/trunk/Inventory/frmDataUploading.cs
+END
+rptDepartmentSales.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/26/trunk/Inventory/rptDepartmentSales.rpt
+END
+frmWholeSaleInvoice.resx
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmWholeSaleInvoice.resx
+END
+rptManufacWisePurchase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufacWisePurchase.cs
+END
+rptProductDailyProfitAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDailyProfitAnalys.rpt
+END
+rptSupplierPayment.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierPayment.rpt
+END
+frmTransferGoodNote.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmTransferGoodNote.cs
+END
+frmChangePassword.resx
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmChangePassword.resx
+END
+rptDebetorStatement.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/30/trunk/Inventory/rptDebetorStatement.cs
+END
+rptTransferNote.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptTransferNote.cs
+END
+frmCustomerPayment.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmCustomerPayment.Designer.cs
+END
+frmWholeSaleInvoice.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmWholeSaleInvoice.cs
+END
+frmGrn.resx
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/SVN/!svn/ver/19/trunk/Inventory/frmGrn.resx
+END
+Location.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/11/trunk/Inventory/Location.designer.cs
+END
+frmSupplierReturn.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmSupplierReturn.Designer.cs
+END
+rptDebtorsOutstanding.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptDebtorsOutstanding.cs
+END
+rptCategoryDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/39/trunk/Inventory/rptCategoryDetails.rpt
+END
+rptSupplierDailySalesAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierDailySalesAnalys.rpt
+END
+rptSupplierDailySalesAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierDailySalesAnalys.cs
+END
+rptDepartmentItemStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentItemStock.cs
+END
+rptDepartmentItemStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptDepartmentItemStock.rpt
+END
+frmChangePassword.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmChangePassword.cs
+END
+rptDepartmentDailyPurchaseAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentDailyPurchaseAnalys.cs
+END
+rptPaymentSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptPaymentSummary.rpt
+END
+rptSupplierSales.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierSales.rpt
+END
+frmChequeRecon.resx
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/33/trunk/Inventory/frmChequeRecon.resx
+END
+rptCustomerPayment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerPayment.cs
+END
+rptStockProdwise.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockProdwise.rpt
+END
+frmSearch.resx
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmSearch.resx
+END
+rptProductBinCard.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/14/trunk/Inventory/rptProductBinCard.cs
+END
+rptReceiptSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptReceiptSummary.cs
+END
+frmAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmAnalyse.cs
+END
+frmWholeSaleInvoice.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/8/trunk/Inventory/frmWholeSaleInvoice.Designer.cs
+END
+rptDepartmentAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentAnalyse.cs
+END
+rptCategoryStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryStock.rpt
+END
+frmDepartment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmDepartment.cs
+END
+rptStockAdjustment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockAdjustment.cs
+END
+rptStockValSuppwise.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValSuppwise.cs
+END
+rptStockValSuppwise.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptStockValSuppwise.rpt
+END
+rptSupplierItemStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierItemStock.cs
+END
+rptSupplierItemStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierItemStock.rpt
+END
+rptSupplierDailyPurchaseAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierDailyPurchaseAnalys.cs
+END
+rptSupplierReturnNote.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierReturnNote.rpt
+END
+frmBarcode.resx
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmBarcode.resx
+END
+clsDGV.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/SVN/!svn/ver/5/trunk/Inventory/clsDGV.cs
+END
+rptCategoryWisePurchase.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryWisePurchase.rpt
+END
+rptCategoryDailySalesAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryDailySalesAnalys.rpt
+END
+rptManufacturerStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufacturerStock.cs
+END
+rptCustomerDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerDetails.cs
+END
+frmCustomerReturn.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/30/trunk/Inventory/frmCustomerReturn.cs
+END
+rptSrnSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSrnSummary.rpt
+END
+rptSupplierAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/14/trunk/Inventory/rptSupplierAnalyse.cs
+END
+frmAccountAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/41/trunk/Inventory/frmAccountAnalyse.cs
+END
+frmCategory.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmCategory.designer.cs
+END
+rptProductAnalyse.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductAnalyse.rpt
+END
+rptDailyProfitAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDailyProfitAnalys.cs
+END
+rptManufactureProfit.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufactureProfit.cs
+END
+rptCategoryItemStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryItemStock.cs
+END
+frmBrand.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmBrand.cs
+END
+frmMasterDetailsInquary.resx
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmMasterDetailsInquary.resx
+END
+rptCustomerDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerDetails.rpt
+END
+rptDebetorStatement.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/32/trunk/Inventory/rptDebetorStatement.rpt
+END
+rptInvoiceSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptInvoiceSummary.rpt
+END
+frmProduct.resx
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmProduct.resx
+END
+rptStockAdjustSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockAdjustSummary.cs
+END
+rptManufacturerItemStock.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufacturerItemStock.rpt
+END
+frmDayEndProcess.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmDayEndProcess.Designer.cs
+END
+rptCreditorBalance.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/31/trunk/Inventory/rptCreditorBalance.cs
+END
+Location.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/SVN/!svn/ver/37/trunk/Inventory/Location.cs
+END
+rptCategoryDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptCategoryDetails.cs
+END
+MDI.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/SVN/!svn/ver/41/trunk/Inventory/MDI.cs
+END
+rptManufacturerDet.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/40/trunk/Inventory/rptManufacturerDet.cs
+END
+rptDepartmentDailyPurchaseAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptDepartmentDailyPurchaseAnalys.rpt
+END
+rptCategoryAnalyse.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/14/trunk/Inventory/rptCategoryAnalyse.rpt
+END
+rptCreditorOutstanding.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptCreditorOutstanding.rpt
+END
+frmCustomerReturn.resx
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmCustomerReturn.resx
+END
+rptStockValManuwise.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValManuwise.cs
+END
+frmProduct.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmProduct.cs
+END
+rptChequeRecon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/32/trunk/Inventory/rptChequeRecon.cs
+END
+rptCategoryDailyPurchaseAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryDailyPurchaseAnalys.rpt
+END
+frmAccountAnalyse.resx
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/41/trunk/Inventory/frmAccountAnalyse.resx
+END
+rptCategorySales.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategorySales.rpt
+END
+rptStockValCatwise.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValCatwise.cs
+END
+rptStockValCatwise.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValCatwise.rpt
+END
+rptReceiptSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptReceiptSummary.rpt
+END
+rptTransferNote.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptTransferNote.rpt
+END
+frmSalesInquary.resx
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmSalesInquary.resx
+END
+frmUserProfile.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmUserProfile.designer.cs
+END
+frmBarcode.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/SVN/!svn/ver/27/trunk/Inventory/frmBarcode.cs
+END
+frmSupplierReturn.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/30/trunk/Inventory/frmSupplierReturn.cs
+END
+frmAccountAnalyse.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/41/trunk/Inventory/frmAccountAnalyse.Designer.cs
+END
+rptSupplierDailyPurchaseAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierDailyPurchaseAnalys.rpt
+END
+rptMonthlyPurchaseAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptMonthlyPurchaseAnalys.cs
+END
+Login.resx
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/SVN/!svn/ver/19/trunk/Inventory/Login.resx
+END
+frmSalesInquary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/41/trunk/Inventory/frmSalesInquary.cs
+END
+rptCreditorStatement.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/32/trunk/Inventory/rptCreditorStatement.rpt
+END
+rptSupplierPayment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierPayment.cs
+END
+rptCategorySales.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategorySales.cs
+END
+frmGrn.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmGrn.cs
+END
+rptPurchaseOrder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptPurchaseOrder.cs
+END
+rptPurchaseOrder.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptPurchaseOrder.rpt
+END
+frmCategory.resx
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmCategory.resx
+END
+rptDepartmentDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptDepartmentDetails.cs
+END
+frmTransferGoodNote.resx
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmTransferGoodNote.resx
+END
+frmPurchaseOrder.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmPurchaseOrder.Designer.cs
+END
+rptGoodReceivedNote.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptGoodReceivedNote.rpt
+END
+frmCustomerPayment.resx
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmCustomerPayment.resx
+END
+frmAccounts.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/38/trunk/Inventory/frmAccounts.designer.cs
+END
+frmProduct.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/39/trunk/Inventory/frmProduct.designer.cs
+END
+frmSalesInquary.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/18/trunk/Inventory/frmSalesInquary.Designer.cs
+END
+rptGrnSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptGrnSummary.rpt
+END
+rptSupplierDetails.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptSupplierDetails.cs
+END
+frmManufacturer.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/11/trunk/Inventory/frmManufacturer.designer.cs
+END
+frmReportViewer.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmReportViewer.designer.cs
+END
+rptFastMovingProduct.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/41/trunk/Inventory/rptFastMovingProduct.cs
+END
+rptCustomerReturnSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCustomerReturnSummary.rpt
+END
+frmSupplierPayment.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmSupplierPayment.Designer.cs
+END
+Splash.resx
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/SVN/!svn/ver/30/trunk/Inventory/Splash.resx
+END
+rptCategoryStock.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryStock.cs
+END
+frmSearch.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmSearch.designer.cs
+END
+rptGoodReceivedNote.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptGoodReceivedNote.cs
+END
+rptMonthlyProfitAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptMonthlyProfitAnalys.cs
+END
+rptMonthlyProfitAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptMonthlyProfitAnalys.rpt
+END
+rptProdWisePurchase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProdWisePurchase.cs
+END
+rptManufacturerDet.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/40/trunk/Inventory/rptManufacturerDet.rpt
+END
+frmTransactionInquary.resx
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmTransactionInquary.resx
+END
+rptDebetorBalance.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/31/trunk/Inventory/rptDebetorBalance.cs
+END
+rptStockValDeptwise.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValDeptwise.cs
+END
+rptManufacWisePurchase.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufacWisePurchase.rpt
+END
+frmDepartment.resx
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/36/trunk/Inventory/frmDepartment.resx
+END
+rptProductDailyProfitAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDailyProfitAnalys.cs
+END
+rptStockProdwise.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockProdwise.cs
+END
+rptCategoryDailyPurchaseAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryDailyPurchaseAnalys.cs
+END
+rptProductDailyPurchaseAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDailyPurchaseAnalys.cs
+END
+rptProductDailyPurchaseAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptProductDailyPurchaseAnalys.rpt
+END
+frmDataUploading.resx
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/27/trunk/Inventory/frmDataUploading.resx
+END
+frmStockOverwrite.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/16/trunk/Inventory/frmStockOverwrite.Designer.cs
+END
+frmDayEndProcess.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/20/trunk/Inventory/frmDayEndProcess.cs
+END
+frmSearch.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/30/trunk/Inventory/frmSearch.cs
+END
+rptDepartmentWisePurchase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentWisePurchase.cs
+END
+rptDepartmentWisePurchase.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDepartmentWisePurchase.rpt
+END
+rptProdWisePurchase.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptProdWisePurchase.rpt
+END
+rptMonthlySalesAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptMonthlySalesAnalys.cs
+END
+rptCategoryWisePurchase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryWisePurchase.cs
+END
+rptCategoryDailySalesAnalys.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptCategoryDailySalesAnalys.cs
+END
+rptDailySalesAnalys.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptDailySalesAnalys.rpt
+END
+rptManufactureSales.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptManufactureSales.rpt
+END
+rptGrnSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptGrnSummary.cs
+END
+rptDepartmentDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/39/trunk/Inventory/rptDepartmentDetails.rpt
+END
+frmManufacturer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/37/trunk/Inventory/frmManufacturer.cs
+END
+frmCustomerPayment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/30/trunk/Inventory/frmCustomerPayment.cs
+END
+rptSrnSummary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSrnSummary.cs
+END
+rptProductGrossProfit.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptProductGrossProfit.rpt
+END
+rptSupplierWisePurchase.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierWisePurchase.rpt
+END
+rptSupplierWisePurchase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptSupplierWisePurchase.cs
+END
+frmAnalyse.resx
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmAnalyse.resx
+END
+frmReportViewer.resx
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/2/trunk/Inventory/frmReportViewer.resx
+END
+frmUserProfile.resx
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/21/trunk/Inventory/frmUserProfile.resx
+END
+Location.resx
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/2/trunk/Inventory/Location.resx
+END
+frmStockAdjustment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/30/trunk/Inventory/frmStockAdjustment.cs
+END
+rptStockValProdwise.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockValProdwise.rpt
+END
+rptSupplierDetails.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/36/trunk/Inventory/rptSupplierDetails.rpt
+END
+rptStockAdjustSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptStockAdjustSummary.rpt
+END
+frmChequeRecon.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/41/trunk/Inventory/frmChequeRecon.Designer.cs
+END
+MDI.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/41/trunk/Inventory/MDI.designer.cs
+END
+rptPurchaseOrderSummary.rpt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/Inventory/rptPurchaseOrderSummary.rpt
+END

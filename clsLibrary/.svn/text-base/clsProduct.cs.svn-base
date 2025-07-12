@@ -1,0 +1,922 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data.SqlClient;
+using System.Data;
+using System.Windows.Forms;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsProduct
+    {
+#region General Declarations
+
+        private string strCode;
+        private string strDescript;
+        private string strShort_Description;
+        private string strBarcode;
+        private string strDepartment;
+        private string strDeptName;
+        private string strCategory;
+        private string strCatName;
+        private string strSupplier;
+        private string strSuppName;
+        private string strManufacturer;
+        private string strManufacuturerName;
+        private string strPurchasePrice;
+        private string strSellingPrice;
+        private string strDiscountPrice;
+        private string strWholePrice;
+        private string strAvarage_Cost;
+        private string strReorderLevel;
+        private string strUnit;
+        private string strPurchaseDate;
+        private string strModified_Date;
+        private string strLockedItem;
+        private string strDisc_Str;
+        private string strCreated_User;
+        private string strModified_User;
+        private string strRack_No;
+        private string strNextProductCode;
+
+        private float fltReorderQty;
+        private float fltCurrentQty;
+        private float fltLast_Purch_Qty;
+        private int intPackSize;
+
+        private SqlDataReader DataReader;
+
+        private int intErrCode;
+        private string strMessage;
+        private string strSqlString;
+
+        private Boolean blRecordFound;
+        #endregion
+
+
+        private SqlDataAdapter adapter = new SqlDataAdapter();
+        private DataSet ds1 = new DataSet();
+
+
+#region Properties  
+        public string Code
+        {
+            get
+            {
+                return strCode;
+            }
+            set
+            {
+                strCode = value;
+            }
+        }
+
+        public string Descript
+        {
+            get
+            {
+                return strDescript;
+            }
+            set
+            {
+                strDescript = value;
+            }
+        }
+
+        public string Short_Description
+        {
+            get
+            {
+                return strShort_Description;
+            }
+            set
+            {
+                strShort_Description = value;
+            }
+        }
+
+        public string Barcode
+        {
+            get
+            {
+                return strBarcode;
+            }
+            set
+            {
+                strBarcode = value;
+            }
+        }
+
+        public string Department
+        {
+            get
+            {
+                return strDepartment;
+            }
+            set
+            {
+                strDepartment = value;
+            }
+        }
+
+        public string DepartmentName
+        {
+            get
+            {
+                return strDeptName;
+            }
+            set
+            {
+                strDeptName = value;
+            }
+        }
+
+        public string Category
+        {
+            get
+            {
+                return strCategory;
+            }
+            set
+            {
+                strCategory = value;
+            }
+        }
+
+        public string CategoryName
+        {
+            get
+            {
+                return strCatName;
+            }
+            set
+            {
+                strCatName = value;
+            }
+        }
+
+        public string Supplier
+        {
+            get
+            {
+                return strSupplier;
+            }
+            set
+            {
+                strSupplier = value;
+            }
+        }
+
+        public string SupplierName
+        {
+            get
+            {
+                return strSuppName;
+            }
+            set
+            {
+                strSuppName = value;
+            }
+        }
+
+        public string Manufacturer
+        {
+            get
+            {
+                return strManufacturer;
+            }
+            set
+            {
+                strManufacturer = value;
+            }
+        }
+
+        public string ManufacturerName
+        {
+            get
+            {
+                return strManufacuturerName;
+            }
+            set
+            {
+                strManufacuturerName = value;
+            }
+        }
+
+        public string PurchaseDate
+        {
+            get
+            {
+                return strPurchaseDate ;
+            }
+            set
+            {
+                strPurchaseDate = value;
+            }
+        }
+
+        public string Modified_Date
+        {
+            get
+            {
+                return strModified_Date;
+            }
+            set
+            {
+                strModified_Date = value;
+            }
+        }
+
+        public string Purchaseprice
+        {
+            get
+            {
+                return strPurchasePrice;
+            }
+            set
+            {
+                strPurchasePrice = value;
+            }
+        }
+
+        public string DiscountPrice
+        {
+            get
+            {
+                return strDiscountPrice;
+            }
+            set
+            {
+                strDiscountPrice = value;
+            }
+        }
+
+        public string WholePrice
+        {
+            get
+            {
+                return strWholePrice;
+            }
+            set
+            {
+                strWholePrice = value;
+            }
+        }
+
+        public string Avarage_Cost
+        {
+            get
+            {
+                return strAvarage_Cost;
+            }
+            set
+            {
+                strAvarage_Cost = value;
+            }
+        }
+
+        public string SellingPrice
+        {
+            get
+            {
+                return strSellingPrice;
+            }
+            set
+            {
+                strSellingPrice = value;
+            }
+        }
+
+        public string Reorderlevel
+        {
+            get
+            {
+                return strReorderLevel;
+            }
+            set
+            {
+                strReorderLevel = value;
+            }
+        }
+
+        public string Unit
+        {
+            get
+            {
+                return strUnit;
+            }
+            set
+            {
+                strUnit = value;
+            }
+        }
+
+        public string Disc_Str
+        {
+            get
+            {
+                return strDisc_Str;
+            }
+            set
+            {
+                strDisc_Str = value;
+            }
+        }
+
+        public float ReorderQty
+        {
+            get
+            {
+                return fltReorderQty;
+            }
+            set
+            {
+                fltReorderQty = value;
+            }
+        }
+
+        public float CurrentQty
+        {
+            get
+            {
+                return fltCurrentQty;
+            }
+            set
+            {
+                fltCurrentQty = value;
+            }
+        }
+
+        public float Last_Purch_Qty
+        {
+            get
+            {
+                return fltLast_Purch_Qty;
+            }
+            set
+            {
+                fltLast_Purch_Qty = value;
+            }
+        }
+
+        public int PackSize
+        {
+            get
+            {
+                return intPackSize;
+            }
+            set
+            {
+                intPackSize = value;
+            }
+        }
+
+        public string Rack_No
+        {
+            get
+            {
+                return strRack_No;
+            }
+            set
+            {
+                strRack_No = value;
+            }
+        }
+
+        public string NextProductCode
+        {
+            get
+            {
+                return strNextProductCode;
+            }
+            set
+            {
+                strNextProductCode = value;
+            }
+        }
+
+        public string SqlString
+        {
+            get
+            {
+                return strSqlString;
+            }
+            set
+            {
+                strSqlString = value;
+            }
+
+        }
+
+        public int ErrorCode
+        {
+            get
+            {
+                return intErrCode;
+            }
+            set
+            {
+                intErrCode = value;
+            }
+        }
+
+        public DataSet GetDataset1
+        {
+            get
+            {
+                return ds1;
+            }
+            set
+            {
+                ds1 = value;
+            }
+        }
+
+        public string LockedItem
+        {
+            get
+            {
+                return strLockedItem;
+            }
+            set
+            {
+                strLockedItem = value;
+            }
+        }
+
+        public string Created_User
+        {
+            get
+            {
+                return strCreated_User;
+            }
+            set
+            {
+                strCreated_User = value;
+            }
+        }
+
+        public string Modified_User
+        {
+            get
+            {
+                return strModified_User;
+            }
+            set
+            {
+                strModified_User = value;
+            }
+        }
+
+        public bool RecordFound
+        {
+            get
+            {
+                return blRecordFound;
+            }
+            set
+            {
+                blRecordFound = value;
+            }
+        }
+ #endregion 
+
+#region // Method for INSERT & UPDATE
+        public void UpdateData()
+        {
+            try
+            {
+                intErrCode = 0;
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "sp_ProductUpdate";
+                command.Parameters.Clear();
+                command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+                command.Parameters.Add(new SqlParameter("@Prod_Code", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strCode));
+                command.Parameters.Add(new SqlParameter("@Prod_Name", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDescript));
+                command.Parameters.Add(new SqlParameter("@Short_Description", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strShort_Description));
+                command.Parameters.Add(new SqlParameter("@Barcode", SqlDbType.VarChar, 30, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strBarcode));
+                command.Parameters.Add(new SqlParameter("@Department_Id", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDepartment));
+                command.Parameters.Add(new SqlParameter("@Category_Id", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strCategory));
+                command.Parameters.Add(new SqlParameter("@Supplier_Id", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strSupplier));
+                command.Parameters.Add(new SqlParameter("@Manufacturer_Id", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strManufacturer));
+                command.Parameters.Add(new SqlParameter("@Purchase_price", SqlDbType.Money, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strPurchasePrice));
+                command.Parameters.Add(new SqlParameter("@Selling_Price", SqlDbType.Money, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strSellingPrice));
+                command.Parameters.Add(new SqlParameter("@Disc_Price", SqlDbType.Money, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDiscountPrice));
+
+                command.Parameters.Add(new SqlParameter("@Whole_Price", SqlDbType.Money, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strWholePrice));
+                command.Parameters.Add(new SqlParameter("@Reorder_Level", SqlDbType.Float, 20, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strReorderLevel));
+                command.Parameters.Add(new SqlParameter("@Unit", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strUnit));
+                command.Parameters.Add(new SqlParameter("@Reorder_Qty", SqlDbType.Float, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, fltReorderQty));
+                command.Parameters.Add(new SqlParameter("@Rack_No", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strRack_No));
+                command.Parameters.Add(new SqlParameter("@Pack_Size", SqlDbType.Int , 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, intPackSize));
+                command.Parameters.Add(new SqlParameter("@Discontinued", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, 0));
+                command.Parameters.Add(new SqlParameter("@User", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.UserName));
+                command.Parameters.Add(new SqlParameter("@LockedItem", SqlDbType.VarChar, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strLockedItem ));
+                command.Parameters.Add(new SqlParameter("@Disc_Str", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDisc_Str));
+
+                command.ExecuteNonQuery();
+                command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+                ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+                dbcon.connection.Close();
+                if (intErrCode == 0)
+                {
+                    MessageBox.Show("Record updated successfully", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // clear used fields & focus to txtDepartment
+                    //Department = string.Empty;
+                    //Category = string.Empty;
+                    //CatDescript = string.Empty;
+
+                }
+                else
+                {
+                    MessageBox.Show("Error in Transaction", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+        }
+        #endregion  
+
+  #region //Method for DELETE
+        public void DeleteData()
+        {
+            try
+            {
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "sp_ProductDelete";
+
+                command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.Output, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+                command.Parameters.Add(new SqlParameter("@Prod_Code", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strCode));
+                command.Parameters.Add(new SqlParameter("@User_Name", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.UserName));
+                command.Parameters.Add(new SqlParameter("@getMessage", SqlDbType.VarChar, 50, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, "10"));
+
+                command.ExecuteNonQuery();
+                command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+                ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+                strMessage = (string)(command.Parameters["@getMessage"].Value);
+                dbcon.connection.Close();
+                if (intErrCode != 0)
+                {
+                    MessageBox.Show("an internal error has occurred while deleting the current record", "Product Details", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+            }
+            catch (
+                SqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Product Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+            MessageBox.Show(strMessage.ToString(), "Product Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+        #endregion
+
+  #region //Retrive Product CODE
+        public void GetProductDetails()
+        {
+            blRecordFound = false;
+            DataReader = dbcon.GetReader(strSqlString + LoginManager.LocaCode );
+            if (DataReader.Read())
+            {
+                strCode = DataReader["Prod_Code"].ToString();
+                strDescript = DataReader["Prod_Name"].ToString();
+                strShort_Description = DataReader["Short_Description"].ToString();
+                strBarcode = DataReader["Barcode"].ToString();
+                strDepartment = DataReader["Department_Id"].ToString();
+                strCategory = DataReader["Category_Id"].ToString();
+                strSupplier = DataReader["Supplier_Id"].ToString();
+                strManufacturer = DataReader["Manufacturer_Id"].ToString();
+                strPurchasePrice = DataReader["Purchase_price"].ToString();
+                strAvarage_Cost = DataReader["Avarage_Cost"].ToString();
+                strSellingPrice = DataReader["Selling_Price"].ToString();
+                strDiscountPrice = DataReader["Disc_Price"].ToString();
+                strWholePrice = DataReader["Whole_Price"].ToString();
+                strReorderLevel = DataReader["Reorder_Level"].ToString();
+                strPurchaseDate = DataReader["Purchased_Date"].ToString();
+                strModified_Date = DataReader["Modified_Date"].ToString();
+                strLockedItem = DataReader["LockedItem"].ToString();
+                fltLast_Purch_Qty = (float)DataReader.GetSqlDouble(13);
+                strUnit = DataReader["Unit"].ToString();
+                fltReorderQty = (float)DataReader.GetSqlDouble(16);
+                strRack_No = DataReader["Rack_No"].ToString();
+                intPackSize = (int)DataReader.GetSqlInt16(18);
+                fltCurrentQty = (float)DataReader.GetSqlDouble(26);
+                strDisc_Str = DataReader["Disc_Str"].ToString();
+                strCreated_User = DataReader["Created_User"].ToString();
+                strModified_User = DataReader["Modified_User"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strCode = string.Empty ;
+                strDescript = string.Empty;
+                strShort_Description = string.Empty;
+                strBarcode = string.Empty;
+                strDepartment = string.Empty;
+                strCategory = string.Empty;
+                strSupplier = string.Empty;
+                strManufacturer = string.Empty;
+                strPurchasePrice = string.Empty;
+                strAvarage_Cost = string.Empty;
+                strSellingPrice = string.Empty;
+                strDiscountPrice = string.Empty;
+                strWholePrice = string.Empty;
+                strReorderLevel = string.Empty;
+                strPurchaseDate = string.Empty;
+                strModified_Date = string.Empty;
+                strLockedItem = string.Empty;
+                fltLast_Purch_Qty = 0;
+                strUnit = string.Empty;
+                fltReorderQty = 0;
+                intPackSize = 0;
+                fltCurrentQty = 0;
+                strDisc_Str = string.Empty;
+                strCreated_User = string.Empty;
+                strModified_User = string.Empty;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void DeptRead()
+        {
+            blRecordFound = false;
+
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strDepartment = DataReader["Dept_Code"].ToString();
+                strDeptName = DataReader["Dept_Name"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strDepartment = string.Empty ;
+                strDeptName = string.Empty ;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void CategoryRead()
+        {
+            blRecordFound = false;
+
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strCategory = DataReader["Cat_Code"].ToString();
+                strCatName = DataReader["Cat_Name"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strCategory = string.Empty;
+                strCatName = string.Empty;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void SupplierRead()
+        {
+            blRecordFound = false;
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strSupplier = DataReader["Supp_Code"].ToString();
+                strSuppName = DataReader["Supp_Name"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strSupplier = string.Empty;
+                strSuppName = string.Empty;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void ManufacturerRead()
+        {
+            blRecordFound = false;
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strManufacturer = DataReader["Manf_Code"].ToString();
+                strManufacuturerName = DataReader["Manf_Name"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strManufacturer = string.Empty;
+                strManufacuturerName = string.Empty;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void BarcodeRead()
+        {
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strBarcode = DataReader["Barcode"].ToString();
+                strCode = DataReader["Prod_Code"].ToString();
+            }
+            else
+            {
+                strBarcode = string.Empty;
+                strCode = string.Empty;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void BarcodeReadForDuplicate()
+        {
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strBarcode = DataReader["Barcode"].ToString();
+                strCode = DataReader["Prod_Code"].ToString();
+            }
+            else
+            {
+                strBarcode = string.Empty;
+                strCode = string.Empty;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void RetrieveFields_ProductNo()
+        {
+            try
+            {
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = SqlString;
+                adapter.SelectCommand = command;
+                ds1.Clear();
+                adapter.Fill(ds1, "dsProduct");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+        }
+ #endregion
+
+#region //Retrive Department CODE
+        public void RetrieveFields_Department()
+        {
+            try
+            {
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = SqlString;
+                adapter.SelectCommand = command;
+                ds1.Clear();
+                adapter.Fill(ds1, "dsDept");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+        }
+#endregion
+
+#region //Retrive Supplier CODE
+        public void RetrieveFields_Supplier()
+        {
+            try
+            {
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = SqlString;
+                adapter.SelectCommand = command;
+                ds1.Clear();
+                adapter.Fill(ds1, "dsSupplier");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+        }
+        #endregion
+
+        #region //Retrive Category CODE
+        public void RetrieveFields_Category()
+        {
+            try
+            {
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = SqlString;
+                adapter.SelectCommand = command;
+                ds1.Clear();
+                adapter.Fill(ds1, "dsCategory");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+        }
+        #endregion
+
+        #region //Retrive Manufacturer CODE
+        public void RetrieveFields_Manufacturer()
+        {
+            try
+            {
+                dbcon.connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dbcon.connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = SqlString;
+                adapter.SelectCommand = command;
+                ds1.Clear();
+                adapter.Fill(ds1, "dsManufacturer");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                dbcon.connection.Close();
+            }
+        }
+        #endregion
+
+        public void ReadMaxProductCode()
+        {
+            blRecordFound = false;
+            DataReader = dbcon.GetReader(strSqlString);
+            if (DataReader.Read())
+            {
+                strNextProductCode = DataReader["Prod_Code"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strNextProductCode = string.Empty;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+    }
+}

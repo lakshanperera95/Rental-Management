@@ -1,0 +1,522 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsUserProfile
+    {
+        private int intErrCode;
+        private string strUserName;
+        private string strPassword;
+        private string strLoca;
+        private decimal decUserRole_Id;
+        private string strAcc_Desable;
+        private string strUserCannotChgPwd;
+        private string strChgPwdNxtLogin;
+        private string strUserRole_Id;
+        private string strMSTDT;
+        private string strMASTER;
+        private string strDETAILS;
+        private string strPUR;
+        private string strSALE;
+        private string strPMT;
+        private string strSTAD;
+        private string strREPSTBAL;
+        private string strREPSTVAL;
+        private string strREPSAL;
+        private string strREPPUR;
+        private string strREPGP;
+        private string strREPANY;
+        private string strSYSTL;
+        private string strUSER;
+
+        private string strSqlStatement;
+        private string strDataSetName;
+
+        private SqlDataReader DataReader;
+        private DataSet dsResultSet;
+        private Boolean blRecordFound;
+
+        public string UserName
+        {
+            get
+            {
+                return strUserName;
+            }
+            set
+            {
+                strUserName = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return strPassword;
+            }
+            set
+            {
+                strPassword = value;
+            }
+        }
+
+        public decimal UserRole_Id
+        {
+            get
+            {
+                return decUserRole_Id;
+            }
+            set
+            {
+                decUserRole_Id = value;
+            }
+        }
+
+        public string Acc_Desable
+        {
+            get
+            {
+                return strAcc_Desable;
+            }
+            set
+            {
+                strAcc_Desable = value;
+            }
+        }
+
+        public string UserCannotChgPwd
+        {
+            get
+            {
+                return strUserCannotChgPwd;
+            }
+            set
+            {
+                strUserCannotChgPwd = value;
+            }
+        }
+
+        public string ChgPwdNxtLogin
+        {
+            get
+            {
+                return strChgPwdNxtLogin;
+            }
+            set
+            {
+                strChgPwdNxtLogin = value;
+            }
+        }
+
+        public string Loca
+        {
+            get
+            {
+                return strLoca;
+            }
+            set
+            {
+                strLoca = value;
+            }
+        }
+
+        public Boolean RecordFound
+        {
+            get
+            {
+                return blRecordFound;
+            }
+            set
+            {
+                blRecordFound = value;
+            }
+        }
+
+        public DataSet ResultSet
+        {
+            get
+            {
+                return dsResultSet;
+            }
+            set
+            {
+                dsResultSet = value;
+            }
+        }
+
+        public string dsName
+        {
+            get
+            {
+                return strDataSetName;
+            }
+            set
+            {
+                strDataSetName = value;
+            }
+        }
+
+        public int ErrorCode
+        {
+            get
+            {
+                return intErrCode;
+            }
+            set
+            {
+                intErrCode = value;
+            }
+        }
+
+        public string SqlStatement
+        {
+            get
+            {
+                return strSqlStatement;
+            }
+            set
+            {
+                strSqlStatement = value;
+            }
+        }
+
+        public string MSTDT
+        {
+            get
+            {
+                return strMSTDT;
+            }
+            set
+            {
+                strMSTDT = value;
+            }
+        }
+
+        public string MASTER
+        {
+            get
+            {
+                return strMASTER;
+            }
+            set
+            {
+                strMASTER = value;
+            }
+        }
+
+        public string DETAILS
+        {
+            get
+            {
+                return strDETAILS;
+            }
+            set
+            {
+                strDETAILS = value;
+            }
+        }
+
+        public string PUR
+        {
+            get
+            {
+                return strPUR;
+            }
+            set
+            {
+                strPUR = value;
+            }
+        }
+
+        public string SALE
+        {
+            get
+            {
+                return strSALE;
+            }
+            set
+            {
+                strSALE = value;
+            }
+        }
+
+        public string PMT
+        {
+            get
+            {
+                return strPMT;
+            }
+            set
+            {
+                strPMT = value;
+            }
+        }
+
+        public string STAD
+        {
+            get
+            {
+                return strSTAD;
+            }
+            set
+            {
+                strSTAD = value;
+            }
+        }
+
+        public string REPSTBAL
+        {
+            get
+            {
+                return strREPSTBAL;
+            }
+            set
+            {
+                strREPSTBAL = value;
+            }
+        }
+
+        public string REPSTVAL
+        {
+            get
+            {
+                return strREPSTVAL;
+            }
+            set
+            {
+                strREPSTVAL = value;
+            }
+        }
+
+        public string REPSAL
+        {
+            get
+            {
+                return strREPSAL;
+            }
+            set
+            {
+                strREPSAL = value;
+            }
+        }
+
+        public string REPPUR
+        {
+            get
+            {
+                return strREPPUR;
+            }
+            set
+            {
+                strREPPUR = value;
+            }
+        }
+
+        public string REPGP
+        {
+            get
+            {
+                return strREPGP;
+            }
+            set
+            {
+                strREPGP = value;
+            }
+        }
+
+        public string REPANY
+        {
+            get
+            {
+                return strREPANY;
+            }
+            set
+            {
+                strREPANY = value;
+            }
+        }
+
+        public string SYSTL
+        {
+            get
+            {
+                return strSYSTL;
+            }
+            set
+            {
+                strSYSTL = value;
+            }
+        }
+
+        public string USER
+        {
+            get
+            {
+                return strUSER;
+            }
+            set
+            {
+                strUSER = value;
+            }
+        }
+
+            # region //Select Dataset
+            public void RetriveData()
+            {
+                dsResultSet = dbcon.getDataset(strSqlStatement, strDataSetName);
+            }
+            # endregion
+
+        public void ReadUserName()
+        {
+            DataReader = dbcon.GetReader(strSqlStatement);
+            blRecordFound = false;
+            if (DataReader.Read())
+            {
+                blRecordFound = true;
+            }
+            else
+            {
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void CreateUser()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_UserProfile";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Emp_Name", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strUserName));
+            command.Parameters.Add(new SqlParameter("@Pass_Word", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strPassword.ToUpper() ));
+            command.Parameters.Add(new SqlParameter("@Create_User", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.UserName.Trim().ToUpper()));
+            command.Parameters.Add(new SqlParameter("@UserRole_Id", SqlDbType.Int, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, decUserRole_Id));
+            command.Parameters.Add(new SqlParameter("@Acc_Desable", SqlDbType.NVarChar, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strAcc_Desable));
+            command.Parameters.Add(new SqlParameter("@UserCannotChgPwd", SqlDbType.NVarChar, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strUserCannotChgPwd));
+            command.Parameters.Add(new SqlParameter("@chgPwdNxtLogin", SqlDbType.NVarChar, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strChgPwdNxtLogin));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+
+        //Change Password
+        public void ChangePassword()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_UserUpdate";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Emp_Name", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strUserName));
+            command.Parameters.Add(new SqlParameter("@Pass_Word", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strPassword.ToUpper()));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+
+        public void ReadProfileDetails()
+        {
+            DataReader = dbcon.GetReader(strSqlStatement);
+
+            if (DataReader.Read() )
+            {
+                strUserCannotChgPwd = DataReader["UserCannotChgPwd"].ToString();
+                strChgPwdNxtLogin = DataReader["chgPwdNxtLogin"].ToString();
+                do
+                {
+                    switch (DataReader["Option_Id"].ToString())
+                    {
+                        case "MSTDT":
+                            strMSTDT = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "MASTER":
+                            strMASTER = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "DETAILS":
+                            strDETAILS = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "PUR":
+                            strPUR = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "SALE":
+                            strSALE = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "PMT":
+                            strPMT = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "STAD":
+                            strSTAD = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "REPSTBAL":
+                            strREPSTBAL = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "REPSTVAL":
+                            strREPSTVAL = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "REPSAL":
+                            strREPSAL = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "REPPUR":
+                            strREPPUR = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "REPGP":
+                            strREPGP = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "REPANY":
+                            strREPANY = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "SYSTL":
+                            strSYSTL = DataReader["Allow_Option"].ToString();
+                            break;
+                        case "USER":
+                            strUSER = DataReader["Allow_Option"].ToString();
+                            break;
+
+                        default:
+                            break;
+                    }
+                } while (DataReader.Read());
+            }
+            else
+            {
+                strMSTDT = "F";
+                strMASTER = "F";
+                strDETAILS = "F";
+                strPUR = "F";
+                strSALE = "F";
+                strPMT = "F";
+                strSTAD = "F";
+                strREPSTBAL = "F";
+                strREPSTVAL = "F";
+                strREPSAL = "F";
+                strREPPUR = "F";
+                strREPGP = "F";
+                strREPANY = "F";
+                strSYSTL = "F";
+                strUSER = "F";
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+    }
+}

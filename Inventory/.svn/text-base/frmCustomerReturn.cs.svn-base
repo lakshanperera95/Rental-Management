@@ -1,0 +1,928 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+using CrystalDecisions.Shared;
+
+namespace Inventory
+{
+    public partial class frmCustomerReturn : Form
+    {
+        private decimal decDiscountAmount;
+        private decimal decAmount;
+        private string strDisc;
+        private int intPosOfPerc;   // find Percentage mark on percentage
+        private float fltDiscPer;
+
+        clsCustomerReturn objCustomerReturn = new clsCustomerReturn();
+
+        public frmCustomerReturn()
+        {
+            InitializeComponent();
+        }
+
+        private static frmCustomerReturn CustomerReturn;
+
+        private frmSearch search = new frmSearch();
+
+        public static frmCustomerReturn GetCustomerReturn
+        {
+            get
+            {
+                return CustomerReturn;
+            }
+            set
+            {
+                CustomerReturn = value;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            CustomerReturn = null;
+        }
+
+        private void frmCustomerReturn_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CustomerReturn = null;
+        }
+
+        private void frmCustomerReturn_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void frmCustomerReturn_Load(object sender, EventArgs e)
+        {
+            objCustomerReturn.SqlStatement = "SELECT Temp_Cur FROM DocumentNoDetails WHERE Loca = ";
+            objCustomerReturn.GetTempDocumentNo();
+            lblTempDocNo.Text = objCustomerReturn.TempDocNo;
+            dataGridTempInvoice.DataSource = objCustomerReturn.TempInvoice;
+            dataGridTempInvoice.Refresh();
+        }
+
+        private void btnSaveDocSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            objCustomerReturn.SqlStatement = "SELECT Doc_No [Document No], Post_Date + '  ' + Customer.Cust_Name [Customer] FROM Transaction_Save_Header INNER JOIN Customer on Transaction_Save_Header.Supplier_Id = Customer.Cust_code WHERE Iid = 'CUR' AND Transaction_Save_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+            objCustomerReturn.DataetName = "Table";
+            objCustomerReturn.GetItemDetails();
+
+            search.dgSearch.DataSource = objCustomerReturn.GetItemDataset.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = lblTempDocNo;
+        }
+
+        private void btnSearchInvoice_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtCustCode.Text.Trim() != string.Empty)
+            {
+                objCustomerReturn.SqlStatement = "SELECT Doc_No [Document No], Transaction_Date + ' ' +  Customer.Cust_Name [Customer] FROM  Payment_Summary INNER JOIN Customer ON Payment_Summary.Acc_No = Customer.Cust_Code WHERE Acc_No = '"+ txtCustCode.Text.Trim() +"' AND Tr_Type = 'INV' AND Payment_Summary.Loca = '" + LoginManager.LocaCode + "' AND Balance_Amount > 0 ORDER BY RIGHT(Doc_No,6) DESC";
+            }
+            else
+            {
+                objCustomerReturn.SqlStatement = "SELECT Doc_No [Document No], Transaction_Date + ' ' +  Customer.Cust_Name [Customer] FROM  Payment_Summary INNER JOIN Customer ON Payment_Summary.Acc_No = Customer.Cust_Code WHERE Tr_Type = 'INV' AND Payment_Summary.Loca = '" + LoginManager.LocaCode + "' AND Balance_Amount > 0 ORDER BY RIGHT(Doc_No,6) DESC";
+            }
+            objCustomerReturn.DataetName = "Table";
+            objCustomerReturn.GetItemDetails();
+
+            search.dgSearch.DataSource = objCustomerReturn.GetItemDataset.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = txtInvoiceNo ;
+        }
+
+        private void lblTempDocNo_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                if (MessageBox.Show("Are You Sure You want to Load Saved Customer Return Document No :" + search.Code.Trim() + ". ", "Customer Return", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+
+                    objCustomerReturn.RecallSaveDocNo = search.Code.Trim();
+                    objCustomerReturn.SqlStatement = "SELECT Transaction_Save_Header.*, Customer.Cust_Name, Customer.Address1, Customer.Address2, Customer.Address3 FROM Transaction_Save_Header INNER JOIN Customer ON Customer.Cust_code = Transaction_Save_Header.Supplier_Id WHERE iid = 'CUR' AND Doc_No = '" + search.Code.Trim() + "' AND Loca = ";
+                    objCustomerReturn.ReadSavedDocument();
+                    if (objCustomerReturn.RecordFound)
+                    {
+                        lblTempDocNo.Text = objCustomerReturn.TempDocNo;
+                        txtInvoiceNo.Text = objCustomerReturn.InvoiceNo.ToString();
+                        txtCustCode.Text = objCustomerReturn.CustCode.ToString();
+                        txtCustName.Text = objCustomerReturn.CustName.ToString();
+                        lblCustAddress1.Text = objCustomerReturn.Address1.ToString();
+                        lblCustAddress2.Text = objCustomerReturn.Address2.ToString();
+                        lblCustAddress3.Text = objCustomerReturn.Address3.ToString();
+                        txtReference.Text = objCustomerReturn.Reference.ToString();
+                        txtRemarks.Text = objCustomerReturn.Remark.ToString();
+                        txtSalesAssist.Text = objCustomerReturn.SalesAssistant.ToString();
+                        txtComments.Text = objCustomerReturn.Comments.ToString();
+                        objCustomerReturn.GetTempDataset();
+                        dataGridTempInvoice.DataSource = objCustomerReturn.TempInvoice.Tables["Invoice"];
+                        dataGridTempInvoice.Refresh();
+
+                        objCustomerReturn.GetTotalValues();
+
+                        lblTotalQty.Text = string.Format("{0:0.00}", objCustomerReturn.TotalQty);
+                        lblTotalAmount.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+                        txtSubDiscount.Text = "0";
+                        txtSubDiscPer.Text = string.Empty;
+                        txtTaxAmount.Text = "0";
+                        lblSubTotal.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+                        lblNetAmount.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+                        txtCustCode.Enabled = false;
+                        txtCustName.Enabled = false;
+                        dtpDate.Enabled = false;
+                        txtReference.Enabled = false;
+                        txtRemarks.Enabled = false;
+                        btnSaveDocSearch.Enabled = false;
+                        btnCustomerSearch.Enabled = false;
+                    }
+                }
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+            }
+        }
+
+        private void btnCustomerSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtCustCode.Text.Trim() == string.Empty && txtCustName.Text.Trim() == string.Empty)
+            {
+                objCustomerReturn.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer";
+            }
+            else
+            {
+                if (txtCustCode.Text.Trim() != string.Empty && txtCustName.Text.Trim() == string.Empty)
+                {
+                    objCustomerReturn.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer WHERE Cust_Code LIKE '%" + txtCustCode.Text.Trim() + "%'";
+                }
+                else
+                {
+                    if (txtCustCode.Text.Trim() == string.Empty && txtCustName.Text.Trim() != string.Empty)
+                    {
+                        objCustomerReturn.SqlStatement = "Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer WHERE Cust_Name LIKE '%" + txtCustName.Text.Trim() + "%'";
+                    }
+                }
+            }
+            objCustomerReturn.DataetName = "dsCustomer";
+            objCustomerReturn.GetCustomerDetails();
+            search.dgSearch.DataSource = objCustomerReturn.GetCustomerDataSet.Tables["dsCustomer"];
+            search.prop_Focus = txtCustCode;
+            search.Show();
+        }
+
+        private void txtCustCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtCustCode.Text = search.Code.Trim();
+                txtCustName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void txtCustCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtCustCode.Text.Trim() != "")
+            {
+                objCustomerReturn.CustCode = txtCustCode.Text.ToString().Trim();
+                objCustomerReturn.SqlStatement = "SELECT Cust_Code, Cust_Name, Address1, Address2, Address3 FROM Customer WHERE Cust_Code = '" + txtCustCode.Text.Trim() + "'";
+                objCustomerReturn.ReadCustomerDetails();
+                if (objCustomerReturn.RecordFound == true)
+                {
+                    txtCustCode.Text = objCustomerReturn.CustCode;
+                    txtCustName.Text = objCustomerReturn.CustName;
+                    lblCustAddress1.Text = objCustomerReturn.Address1;
+                    lblCustAddress2.Text = objCustomerReturn.Address2;
+                    lblCustAddress3.Text = objCustomerReturn.Address3;
+                    txtCustName.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Customer Code Not Found.", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCustCode.Focus();
+                }
+            }
+
+        }
+
+        private void txtSalesAssist_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtSalesAssist.Text.Trim() != string.Empty)
+            {
+                txtReference.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtSalesAssist.Text.Trim() == string.Empty)
+                {
+                    txtSalesAssist.Text = ".";
+                    txtReference.Focus();
+                }
+            }
+        }
+
+        private void txtReference_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtReference.Text.Trim() != string.Empty)
+            {
+                txtRemarks.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtReference.Text.Trim() == string.Empty)
+                {
+                    txtReference.Text = ".";
+                    txtRemarks.Focus();
+                }
+            }
+        }
+
+        private void txtRemarks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtRemarks.Text.Trim() != string.Empty)
+            {
+                txtProductCode.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtRemarks.Text.Trim() == string.Empty)
+                {
+                    txtRemarks.Text = ".";
+                    txtProductCode.Focus();
+                }
+            }
+        }
+
+        private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                objCustomerReturn.CustCode = txtCustCode.Text.ToString().Trim();
+                objCustomerReturn.SqlStatement = "SELECT Cust_Code, Cust_Name, Address1, Address2, Address3 FROM Customer WHERE Cust_Code = '" + txtCustCode.Text.Trim() + "'";
+                objCustomerReturn.ReadCustomerDetails();
+                if (objCustomerReturn.RecordFound == true)
+                {
+                    txtCustCode.Text = objCustomerReturn.CustCode;
+                    txtCustName.Text = objCustomerReturn.CustName;
+                }
+                else
+                {
+                    MessageBox.Show("Customer Code Not Found.", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCustCode.Focus();
+                }
+
+                txtProductCode.Text = txtProductCode.Text.ToUpper();
+                objCustomerReturn.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objCustomerReturn.ReadProductDetails();
+                if (objCustomerReturn.RecordFound == true)
+                {
+                    txtProductName.Text = objCustomerReturn.ProductName;
+                    txtSellingPrice.Text = (string)objCustomerReturn.SellingPrice.ToString();
+                    lblCurrentQty.Text = (string)objCustomerReturn.CurrentQty.ToString();
+                    txtFreeQty.Text = "0";
+                    txtDiscount.Text = "0";
+                    objCustomerReturn.SqlStatement = "SELECT qty FROM TransactionTemp_Details WHERE Prod_Code = '" + objCustomerReturn.ProductCode + "' AND Doc_No = '" + objCustomerReturn.TempDocNo + "' AND IId = 'CUR' AND Loca = ";
+                    objCustomerReturn.ReadExsistProductDetails();
+                    txtQty.Text = (string)objCustomerReturn.Qty.ToString();
+                    txtQty.Select(0, txtQty.Text.Trim().Length);
+                    txtQty.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found Or Locked For Transaction. Please Check Product Code.", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void txtProductCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtProductCode.Text = search.Code.Trim();
+                txtProductName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtProductCode.Text.Trim() != string.Empty && txtProductName.Text.Trim() == string.Empty)
+            {
+                objCustomerReturn.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%'";
+            }
+            else
+            {
+                if (txtProductCode.Text.Trim() == string.Empty && txtProductName.Text.Trim() != string.Empty)
+                {
+                    objCustomerReturn.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Name LIKE '%" + txtProductName.Text.Trim() + "%'";
+                }
+                else
+                {
+                    objCustomerReturn.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product";
+                }
+            }
+
+            objCustomerReturn.DataetName = "dsProduct";
+            objCustomerReturn.GetItemDetails();
+
+            search.dgSearch.DataSource = objCustomerReturn.GetItemDataset.Tables["dsProduct"];
+            search.prop_Focus = txtProductCode;
+            search.Show();
+        }
+
+        private void txtCustName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtCustCode.Text.Trim() != "" && txtCustName.Text.Trim() != "")
+            {
+                txtInvoiceNo.Focus();
+            }
+        }
+
+        private void txtInvoiceNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtInvoiceNo.Text.Trim() != string.Empty)
+            {
+                txtSalesAssist.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtInvoiceNo.Text.Trim() == string.Empty)
+                {
+                    txtSalesAssist.Text = ".";
+                    txtSalesAssist.Focus();
+                }
+            }
+        }
+
+        private void txtQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtQty.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtQty.Text) > 0)
+            {
+                decAmount = decimal.Parse(txtSellingPrice.Text.ToString()) * decimal.Parse(txtQty.Text.ToString());
+                lblAmount.Text = decAmount.ToString();
+                txtFreeQty.Focus();
+            }
+        }
+
+        private void txtFreeQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtFreeQty.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtFreeQty.Text) >= 0)
+            {
+                txtDiscount.Focus();
+            }
+        }
+
+        private void txtDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtDiscount.Text.Trim() != string.Empty)
+            {
+                txtProductCode.Text = txtProductCode.Text.ToUpper();
+                objCustomerReturn.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objCustomerReturn.ReadProductDetails();
+                if (objCustomerReturn.RecordFound == true)
+                {
+                    txtProductName.Text = objCustomerReturn.ProductName;
+                    txtSellingPrice.Text = (string)objCustomerReturn.SellingPrice.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found or Transaction Locked for This Product. Please Check Product Code.", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtProductCode.Focus();
+                    return;
+                }
+
+                strDisc = string.Empty;
+
+                if (clsValidation.isNumeric(txtDiscount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateDiscount(txtDiscount.Text.Trim());
+                }
+                else
+                {
+                    CalculateDiscountAmount(decimal.Parse(txtDiscount.Text.Trim()));
+                }
+
+                //Check For Invoice Value and Return Value If Select Invoice is Select
+                decAmount = decimal.Parse(lblNetAmount.Text.ToString()) + decimal.Parse(lblAmount.Text.ToString());
+                if (txtInvoiceNo.Text.Trim() != string.Empty && decAmount > decimal.Parse(lblInvoiceAmount.Text.ToString()))
+                {
+                    MessageBox.Show("Return Value Greater Than Selected Invoice Value. Please Enter Correct Return Value.", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtQty.Select(0, txtQty.Text.Trim().Length);
+                    txtQty.Focus();
+                    return;
+                }
+                //***********
+                objCustomerReturn.TempDocNo = lblTempDocNo.Text.Trim();
+                objCustomerReturn.ProductCode = txtProductCode.Text.Trim();
+                objCustomerReturn.ProductName = txtProductName.Text.Trim();
+                lblCurrentQty.Text = objCustomerReturn.CurrentQty.ToString();
+                objCustomerReturn.Qty = float.Parse(txtQty.Text.ToString());
+                objCustomerReturn.FreeQty = float.Parse(txtFreeQty.Text.ToString());
+                objCustomerReturn.Disc = strDisc;
+                objCustomerReturn.Discount = decimal.Parse(txtDiscount.Text.ToString());
+
+                objCustomerReturn.Amount = decimal.Parse(lblAmount.Text.ToString());
+                objCustomerReturn.UpdateInvoiceTempDataSet();
+                objCustomerReturn.GetTempDataset();
+                dataGridTempInvoice.DataSource = objCustomerReturn.TempInvoice.Tables["Invoice"];
+                dataGridTempInvoice.Refresh();
+                //Set Grid Last Record
+                if (dataGridTempInvoice.RowCount > 13)
+                {
+                    dataGridTempInvoice.FirstDisplayedCell = dataGridTempInvoice[0, 12];
+                }
+                //******************
+                txtProductCode.Text = string.Empty;
+                txtProductName.Text = string.Empty;
+                txtQty.Text = string.Empty;
+                lblCurrentQty.Text = string.Empty;
+                txtSellingPrice.Text = string.Empty;
+                txtDiscount.Text = "0";
+                txtQty.Text = "0";
+                txtFreeQty.Text = "0";
+
+                lblAmount.Text = string.Empty;
+                objCustomerReturn.Disc = string.Empty;
+                txtReference.Enabled = false;
+                txtRemarks.Enabled = false;
+
+                objCustomerReturn.GetTotalValues();
+
+                lblTotalQty.Text = string.Format("{0:0.00}", objCustomerReturn.TotalQty);
+                lblTotalAmount.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+
+                txtSubDiscount.Text = "0";
+                txtSubDiscPer.Text = string.Empty;
+                txtTaxAmount.Text = "0";
+                lblSubTotal.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+                lblNetAmount.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+                txtCustCode.Enabled = false;
+                txtCustName.Enabled = false;
+                txtSalesAssist.Enabled = false;
+                txtInvoiceNo.Enabled = false;
+                dtpDate.Enabled = false;
+                txtReference.Enabled = false;
+                txtRemarks.Enabled = false;
+                txtSubDiscPer.Enabled = true;
+                txtSubDiscount.Enabled = true;
+                txtTaxAmount.Enabled = true;
+                txtProductCode.Focus();
+            }
+        }
+
+        private void CalculateDiscount(string strDiscText)
+        {
+            if (strDiscText.IndexOf("%") > 0 && strDiscText.IndexOf("%") < 3)
+            {
+                strDisc = strDiscText;
+                intPosOfPerc = strDiscText.IndexOf("%");
+                fltDiscPer = float.Parse(strDiscText.Substring(0, intPosOfPerc).ToString());
+                decAmount = decimal.Parse(txtSellingPrice.Text.ToString()) * decimal.Parse(txtQty.Text.ToString());
+                fltDiscPer = 100 - fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                decDiscountAmount = decimal.Parse(lblAmount.Text) - decAmount;
+                txtDiscount.Text = decDiscountAmount.ToString();
+                lblAmount.Text = decAmount.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiscount.Focus();
+            }
+        }
+
+        private void CalculateDiscountAmount(decimal decDiscText)
+        {
+            if (decDiscText <= decimal.Parse(lblAmount.Text.ToString()))
+            {
+                decAmount = decimal.Parse(txtSellingPrice.Text.ToString()) * decimal.Parse(txtQty.Text.ToString());
+                decAmount = decAmount - decDiscText;
+                decDiscountAmount = decDiscText;
+                txtDiscount.Text = decDiscountAmount.ToString();
+                lblAmount.Text = decAmount.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiscount.Focus();
+            }
+        }
+
+        //calculating subtotal discount
+        private void CalculateSubTotalDiscount(string strDiscText)
+        {
+            if (strDiscText.IndexOf("%") > 0 && strDiscText.IndexOf("%") < 3)
+            {
+                strDisc = strDiscText;
+                intPosOfPerc = strDiscText.IndexOf("%");
+                fltDiscPer = float.Parse(strDiscText.Substring(0, intPosOfPerc).ToString());
+                decAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                fltDiscPer = 100 - fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                decDiscountAmount = decimal.Parse(lblTotalAmount.Text) - decAmount;
+                txtSubDiscount.Text = string.Format("{0:0.00}", decDiscountAmount);
+                lblSubTotal.Text = string.Format("{0:0.00}", decAmount);
+                txtTaxAmount.Text = "0";
+                lblNetAmount.Text = string.Format("{0:0.00}", decAmount);
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSubDiscPer.Select(0, txtSubDiscPer.Text.Trim().Length);
+
+            }
+        }
+
+        private void CalculateSubTotalDiscountAmount(decimal decDiscText)
+        {
+            if (decDiscText <= decimal.Parse(lblTotalAmount.Text.ToString()))
+            {
+                decAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                decAmount = decAmount - decDiscText;
+                decDiscountAmount = decDiscText;
+                //txtSubDiscount.Text = decDiscountAmount.ToString();
+                txtSubDiscount.Text = string.Format("{0:0.00}", decDiscountAmount);
+                lblSubTotal.Text = string.Format("{0:0.00}", decAmount);
+                txtTaxAmount.Text = "0";
+                lblNetAmount.Text = string.Format("{0:0.00}", decAmount);
+                txtSubDiscPer.Text = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 225.00)", "Customer Return", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSubDiscount.Text = "0";
+                txtSubDiscount.Select(0, txtSubDiscount.Text.Trim().Length);
+            }
+        }
+
+        //Tax Calculation
+        private void CalculateTax(string strTaxText)
+        {
+            if (strTaxText.IndexOf("%") > 0 && strTaxText.IndexOf("%") < 3)
+            {
+                strDisc = strTaxText;
+                intPosOfPerc = strTaxText.IndexOf("%");
+                fltDiscPer = float.Parse(strTaxText.Substring(0, intPosOfPerc).ToString());
+                decAmount = decimal.Parse(lblSubTotal.Text.ToString());
+                fltDiscPer = 100 + fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                decDiscountAmount = decAmount - decimal.Parse(lblSubTotal.Text);
+                txtTaxAmount.Text = string.Format("{0:0.00}", decDiscountAmount);
+                lblNetAmount.Text = string.Format("{0:0.00}", decAmount);
+            }
+            else
+            {
+                MessageBox.Show("Invalid Tax Percentage. Please Enter Valid Percentage(Ex: 22% )", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTaxAmount.Focus();
+            }
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            objCustomerReturn.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'CUR' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+            objCustomerReturn.ReadTempTransDetails();
+            if (objCustomerReturn.RecordFound != true)
+            {
+                MessageBox.Show("Customer Return Details Not Found.", "Customer Return Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            objCustomerReturn.InvoiceNo = txtInvoiceNo.Text.Trim();
+            objCustomerReturn.SalesAssistant = txtSalesAssist.Text.Trim();
+            objCustomerReturn.Reference = txtReference.Text.Trim();
+            objCustomerReturn.Remark = txtRemarks.Text.Trim();
+            objCustomerReturn.Comments = txtComments.Text.Trim();
+            objCustomerReturn.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+            objCustomerReturn.Disc = txtSubDiscPer.Text.Trim();
+            objCustomerReturn.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+            objCustomerReturn.Amount = decimal.Parse(lblNetAmount.Text.ToString());
+            objCustomerReturn.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+
+            objCustomerReturn.GetDataSetForPreview();
+            dsDataForReport = objCustomerReturn.GetReportDataset;
+            rptCustomerReturnDetails rptCusRet = new rptCustomerReturnDetails();
+            rptCusRet.SetDataSource(dsDataForReport);
+
+            objRepViewer.crystalReportViewer1.ReportSource = rptCusRet;
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (txtSalesAssist.Text.Trim() == string.Empty)
+            {
+                txtSalesAssist.Text = ".";
+            }
+
+            if (txtInvoiceNo.Text.Trim() == string.Empty)
+            {
+                txtInvoiceNo.Text = ".";
+            }
+
+            if (txtReference.Text.Trim() == string.Empty)
+            {
+                txtReference.Text = ".";
+            }
+
+            if (txtReference.Text.Trim() == string.Empty)
+            {
+                txtRemarks.Text = ".";
+            }
+
+            if (MessageBox.Show("Are You Sure You want to Save This Document. ", "Customer Return", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                DataSet dsDataForReport = new DataSet();
+                frmReportViewer objRepViewer = new frmReportViewer();
+
+                objCustomerReturn.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'CUR' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                objCustomerReturn.ReadTempTransDetails();
+                if (objCustomerReturn.RecordFound != true)
+                {
+                    MessageBox.Show("Customer Return  Details Not Found.", "Customer Return Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                objCustomerReturn.InvoiceNo = txtInvoiceNo.Text.Trim();
+                objCustomerReturn.SalesAssistant = txtSalesAssist.Text.Trim();
+                objCustomerReturn.Reference = txtReference.Text.Trim();
+                objCustomerReturn.Remark = txtRemarks.Text.Trim();
+                objCustomerReturn.Comments = txtComments.Text.Trim();
+                objCustomerReturn.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                objCustomerReturn.Disc = txtSubDiscPer.Text.Trim();
+                objCustomerReturn.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                objCustomerReturn.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                objCustomerReturn.CustomerReturnSave();
+                MessageBox.Show("Customer Return Successfully Saved as Document No. " + objCustomerReturn.OrgDocNo, "Customer Return Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
+                this.Dispose();
+                CustomerReturn = null;
+
+            }
+
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            if (txtSalesAssist.Text.Trim() == string.Empty)
+            {
+                txtSalesAssist.Text = ".";
+            }
+
+            if (txtInvoiceNo.Text.Trim() == string.Empty)
+            {
+                txtInvoiceNo.Text = ".";
+            }
+
+            if (txtReference.Text.Trim() == string.Empty)
+            {
+                txtReference.Text = ".";
+            }
+
+            if (txtReference.Text.Trim() == string.Empty)
+            {
+                txtRemarks.Text = ".";
+            }
+
+            if (MessageBox.Show("Are You Sure You want to Apply This Document. ", "Customer Retrun", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                DataSet dsDataForReport = new DataSet();
+                frmReportViewer objRepViewer = new frmReportViewer();
+
+                objCustomerReturn.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'CUR' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                objCustomerReturn.ReadTempTransDetails();
+                if (objCustomerReturn.RecordFound != true)
+                {
+                    MessageBox.Show("Customer Return Details Not Found.", "Customer Retrun Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                objCustomerReturn.InvoiceNo = txtInvoiceNo.Text.Trim();
+                objCustomerReturn.SalesAssistant = txtSalesAssist.Text.Trim();
+                objCustomerReturn.Reference = txtReference.Text.Trim();
+                objCustomerReturn.Remark = txtRemarks.Text.Trim();
+                objCustomerReturn.Comments = txtComments.Text.Trim();
+                objCustomerReturn.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                objCustomerReturn.Disc = txtSubDiscPer.Text.Trim();
+                objCustomerReturn.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                objCustomerReturn.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                objCustomerReturn.CustomerReturnApply();
+                MessageBox.Show("Customer Retrun Successfully Applied as Document No. " + objCustomerReturn.OrgDocNo, "Customer Retrun Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                objCustomerReturn.GetDataSetForReport();
+                dsDataForReport = objCustomerReturn.GetReportDataset;
+                rptCustomerReturnDetails rptCusRet = new rptCustomerReturnDetails();
+                rptCusRet.SetDataSource(dsDataForReport);
+
+                objRepViewer.crystalReportViewer1.ReportSource = rptCusRet;
+                objRepViewer.WindowState = FormWindowState.Maximized;
+                objRepViewer.Show();
+
+                this.Close();
+                this.Dispose();
+                CustomerReturn = null;
+            }
+        }
+
+        private void txtInvoiceNo_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                if (MessageBox.Show("Are You Sure You want to Return Invoice No :" + search.Code.Trim() + ". ", "Customer Return", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    objCustomerReturn.InvoiceNo  = search.Code.Trim();
+                    objCustomerReturn.SqlStatement = "SELECT Transaction_Header.*, Customer.Cust_Name, Customer.Address1, Customer.Address2, Customer.Address3, Payment_Summary.Balance_Amount FROM Transaction_Header INNER JOIN Customer ON Customer.Cust_code = Transaction_Header.Supplier_Id INNER JOIN Payment_Summary ON Payment_Summary.Doc_No = Transaction_Header.Doc_No AND Payment_Summary.Tr_Type = Transaction_Header.Iid AND Payment_Summary.Loca = Transaction_Header.Loca AND Payment_Summary.Acc_No = Transaction_Header.Supplier_Id WHERE iid = 'INV' AND Transaction_Header.Doc_No = '" + search.Code.Trim() + "' AND Transaction_Header.Loca = ";
+                    objCustomerReturn.ReadInvoiceDetail();
+                    if (objCustomerReturn.RecordFound)
+                    {
+                        txtCustCode.Text = objCustomerReturn.CustCode.ToString();
+                        txtCustName.Text = objCustomerReturn.CustName.ToString();
+                        lblCustAddress1.Text = objCustomerReturn.Address1.ToString();
+                        lblCustAddress2.Text = objCustomerReturn.Address2.ToString();
+                        lblCustAddress3.Text = objCustomerReturn.Address3.ToString();
+                        lblInvoiceAmount.Text = objCustomerReturn.InvoiceAmount.ToString();
+                        txtCustCode.Enabled = false;
+                        txtCustName.Enabled = false;
+                        txtInvoiceNo.Enabled = false;
+                        btnSearchInvoice.Enabled = false;
+                        btnSaveDocSearch.Enabled = false;
+                        btnCustomerSearch.Enabled = false;
+                        txtSalesAssist.Focus();
+                    }
+                    else
+                    {
+                        txtCustCode.Text = string.Empty ;
+                        txtCustName.Text = string.Empty;
+                        lblCustAddress1.Text = string.Empty;
+                        lblCustAddress2.Text = string.Empty;
+                        lblCustAddress3.Text = string.Empty;
+                        lblInvoiceAmount.Text = "0";
+                    }
+                }
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void dataGridTempInvoice_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridTempInvoice_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridTempInvoice.SelectedRows.Count <= 0 || dataGridTempInvoice.SelectedRows[0].Cells[0].ToString() == ""  )
+            {
+                MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                txtProductCode.Text = dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString();
+                txtProductName.Text = dataGridTempInvoice.SelectedRows[0].Cells[1].Value.ToString();
+                objCustomerReturn.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objCustomerReturn.ReadProductDetails();
+                txtSellingPrice.Text = dataGridTempInvoice.SelectedRows[0].Cells[3].Value.ToString();
+                txtQty.Text = dataGridTempInvoice.SelectedRows[0].Cells[4].Value.ToString();
+                txtFreeQty.Text = dataGridTempInvoice.SelectedRows[0].Cells[5].Value.ToString();
+                txtDiscount.Text = dataGridTempInvoice.SelectedRows[0].Cells[6].Value.ToString();
+                lblAmount.Text = dataGridTempInvoice.SelectedRows[0].Cells[7].Value.ToString();
+                txtQty.Focus();
+            }
+
+        }
+
+        private void dataGridTempInvoice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString() != string.Empty)
+            {
+                if (MessageBox.Show("Are You Sure You want to Delete This Item. ", "Invoice", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    objCustomerReturn.TempDocNo = lblTempDocNo.Text.Trim();
+                    objCustomerReturn.ProductCode = dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString();
+                    objCustomerReturn.DeleteProductDetaile();
+                    objCustomerReturn.GetTempDataset();
+                    dataGridTempInvoice.DataSource = objCustomerReturn.TempInvoice.Tables["Invoice"];
+                    dataGridTempInvoice.Refresh();
+
+                    objCustomerReturn.GetTotalValues();
+
+                    lblTotalQty.Text = objCustomerReturn.TotalQty.ToString();
+                    lblTotalAmount.Text = objCustomerReturn.TotalAmount.ToString();
+
+                    objCustomerReturn.GetTotalValues();
+
+                    lblTotalQty.Text = string.Format("{0:0.00}", objCustomerReturn.TotalQty);
+                    lblTotalAmount.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+
+                    txtSubDiscount.Text = "0";
+                    txtSubDiscPer.Text = string.Empty;
+                    txtTaxAmount.Text = "0";
+                    lblSubTotal.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+                    lblNetAmount.Text = string.Format("{0:0.00}", objCustomerReturn.TotalAmount);
+
+                    txtProductCode.Focus();
+                }
+            }
+        }
+
+        private void txtSubDiscPer_KeyDown(object sender, KeyEventArgs e)
+        {
+            strDisc = string.Empty;
+            if (e.KeyCode == Keys.Enter && txtSubDiscPer.Text.Trim() != string.Empty)
+            {
+                if (clsValidation.isNumeric(txtSubDiscPer.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateSubTotalDiscount(txtSubDiscPer.Text.Trim());
+                    txtTaxAmount.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSubDiscPer.Focus();
+                }
+            }
+        }
+
+        private void txtSubDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            strDisc = string.Empty;
+            if (e.KeyCode == Keys.Enter && txtSubDiscount.Text.Trim() != string.Empty)
+            {
+                if (clsValidation.isNumeric(txtSubDiscount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSubDiscount.Text = "0";
+                    txtSubDiscount.Select(0, txtSubDiscount.Text.Trim().Length);
+                }
+                else
+                {
+                    CalculateSubTotalDiscountAmount(decimal.Parse(txtSubDiscount.Text.Trim()));
+                    txtTaxAmount.Focus();
+                }
+            }
+        }
+
+        private void txtTaxAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            strDisc = string.Empty;
+            if (e.KeyCode == Keys.Enter && txtTaxAmount.Text.Trim() != string.Empty)
+            {
+                if (clsValidation.isNumeric(txtTaxAmount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateTax(txtTaxAmount.Text.Trim());
+                    txtTaxAmount.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Tax Percentage. Please Enter Valid Tax Percentage(Ex: 22%)", "Invoice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void dataGridTempInvoice_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridTempInvoice_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            clsDGV dg = new clsDGV();
+            dg.invoke(e);
+        }
+    }
+}

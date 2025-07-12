@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using clsLibrary;
+namespace Inventory
+{
+    public partial class frmDayEndProcess : Form
+    {
+        public frmDayEndProcess()
+        {
+            InitializeComponent();
+        }
+
+        clsDayEndProcess objDayEndProcess = new clsDayEndProcess();
+
+        private static frmDayEndProcess DayEndProcess;
+
+        public static frmDayEndProcess GetDayEndProcess
+        {
+            get
+            {
+                return DayEndProcess;
+            }
+            set
+            {
+                DayEndProcess = value;
+            }
+        }
+
+        private void frmDayEndProcess_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DayEndProcess = null;
+        }
+
+        private void frmDayEndProcess_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            DayEndProcess = null;
+        }
+
+        private void btnDayEnd_Click(object sender, EventArgs e)
+        {
+            objDayEndProcess.DayEndProcess();
+            if (objDayEndProcess.ErrorCode == 0)
+            {
+                MessageBox.Show("DayEnd Process Completed Successfully.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information );
+            }
+            else
+            {
+                MessageBox.Show("Error Found On DayEnd Process.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+    }
+}

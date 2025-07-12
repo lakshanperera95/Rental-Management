@@ -1,0 +1,269 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DbConnection;
+namespace clsLibrary
+{
+    public class clsBarcode
+    {
+        #region General Declaration
+        private string strSuppCode;
+        private string strProductCode;
+        private string strProductName;
+        private string strSqlStatement;
+        private string strDataSetName;
+
+        private int intErrCode;
+        private decimal decSellingPrice;
+
+        private float fltQty;
+
+        private DataSet dsItemDataSet;
+        private DataSet dsTempBarcode;
+        private Boolean blRecordFound;
+
+        private SqlDataReader DataReader;
+        #endregion
+
+        public int ErrorCode
+        {
+            get
+            {
+                return intErrCode;
+            }
+            set
+            {
+                intErrCode = value;
+            }
+        }
+
+        public string SuppCode
+        {
+            get
+            {
+                return strSuppCode;
+            }
+            set
+            {
+                strSuppCode = value;
+            }
+        }
+
+        public string ProductCode
+        {
+            get
+            {
+                return strProductCode;
+            }
+            set
+            {
+                strProductCode = value;
+            }
+        }
+
+        public string ProductName
+        {
+            get
+            {
+                return strProductName;
+            }
+            set
+            {
+                strProductName = value;
+            }
+        }
+
+        public float Qty
+        {
+            get
+            {
+                return fltQty;
+            }
+            set
+            {
+                fltQty = value;
+            }
+        }
+
+        public decimal SellingPrice
+        {
+            get
+            {
+                return decSellingPrice;
+            }
+            set
+            {
+                decSellingPrice = value;
+            }
+        }
+
+        public string DataetName
+        {
+            get
+            {
+                return strDataSetName;
+            }
+            set
+            {
+                strDataSetName = value;
+            }
+        }
+
+        public DataSet GetItemDataset
+        {
+            get
+            {
+                return dsItemDataSet;
+            }
+            set
+            {
+                dsItemDataSet = value;
+            }
+        }
+
+        public DataSet TempBarcode
+        {
+            get
+            {
+                return dsTempBarcode;
+            }
+            set
+            {
+                dsTempBarcode = value;
+            }
+        }
+
+        public Boolean RecordFound
+        {
+            get
+            {
+                return blRecordFound;
+            }
+            set
+            {
+                blRecordFound = value;
+            }
+        }
+
+        public string SqlStatement
+        {
+            get
+            {
+                return strSqlStatement;
+            }
+            set
+            {
+                strSqlStatement = value;
+            }
+        }
+
+        public void ReadProductDetails()
+        {
+            DataReader = dbcon.GetReader(strSqlStatement);
+            blRecordFound = false;
+            if (DataReader.Read())
+            {
+                strProductCode = DataReader["Prod_Code"].ToString();
+                strProductName = DataReader["Prod_Name"].ToString();
+                decSellingPrice = (decimal)DataReader["Selling_Price"];
+                strSuppCode = DataReader["Supplier_Id"].ToString();
+                blRecordFound = true;
+            }
+            else
+            {
+                strProductCode = string.Empty;
+                strProductName = string.Empty;
+                strSuppCode = string.Empty;
+                decSellingPrice = 0;
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void ReadExsistProductDetails()
+        {
+            DataReader = dbcon.GetReader(strSqlStatement);
+            if (DataReader.Read())
+            {
+                fltQty = (float)DataReader.GetSqlDouble(0);
+            }
+            else
+            {
+                fltQty = 0;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void GetTempDataset()
+        {
+            //get Temporary DataSet For Barcode
+            dsTempBarcode = dbcon.getDataset("select Prod_Code, Prod_Name, Supp_Code, Selling_Price, Qty from tbBarcode Order By Idx", "dsBarcode");
+        }
+
+        public void GetItemDetails()
+        {
+            dsItemDataSet = dbcon.getDataset(strSqlStatement, strDataSetName);
+        }
+
+        public void UpdateBarcodeTempDataSet()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_Barcode_Update";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Prod_Code", SqlDbType.NVarChar, 25, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strProductCode));
+            command.Parameters.Add(new SqlParameter("@Prod_Name", SqlDbType.NVarChar, 100, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strProductName));
+            command.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Float, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, fltQty));
+            command.Parameters.Add(new SqlParameter("@Selling_Price", SqlDbType.Money, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, decSellingPrice));
+            command.Parameters.Add(new SqlParameter("@Supp_Code", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strSuppCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+
+        public void DeleteBarcodeTempDataSet()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_Barcode_Delete";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Prod_Code", SqlDbType.NVarChar, 25, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strProductCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+
+        public void DeleteAllBarcodeTempDataSet()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_Barcode_DeleteAll";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+    }
+}

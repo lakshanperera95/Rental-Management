@@ -1,0 +1,504 @@
+namespace Inventory
+{
+    partial class frmStockAdjustment
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbBatch = new System.Windows.Forms.ComboBox();
+            this.btnItemSearch = new System.Windows.Forms.Button();
+            this.txtPhysicalQty = new System.Windows.Forms.TextBox();
+            this.lblVarienceQty = new System.Windows.Forms.Label();
+            this.lblCurrentQty = new System.Windows.Forms.Label();
+            this.txtProductName = new System.Windows.Forms.TextBox();
+            this.txtProductCode = new System.Windows.Forms.TextBox();
+            this.lblTotalVarienceQty = new System.Windows.Forms.Label();
+            this.lblTotalPhysicalQty = new System.Windows.Forms.Label();
+            this.lblTotalcurrQty = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblDocumentNo = new System.Windows.Forms.Label();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridTempGrn = new System.Windows.Forms.DataGridView();
+            this.BatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pack_Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.prodCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellingPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchasepriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phyQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.varQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockAdjustBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsForReports = new Inventory.dsForReports();
+            this.txtMemo = new System.Windows.Forms.TextBox();
+            this.lblMemo = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTempGrn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockAdjustBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblMemo);
+            this.groupBox1.Controls.Add(this.txtMemo);
+            this.groupBox1.Controls.Add(this.cmbBatch);
+            this.groupBox1.Controls.Add(this.btnItemSearch);
+            this.groupBox1.Controls.Add(this.txtPhysicalQty);
+            this.groupBox1.Controls.Add(this.lblVarienceQty);
+            this.groupBox1.Controls.Add(this.lblCurrentQty);
+            this.groupBox1.Controls.Add(this.txtProductName);
+            this.groupBox1.Controls.Add(this.txtProductCode);
+            this.groupBox1.Controls.Add(this.lblTotalVarienceQty);
+            this.groupBox1.Controls.Add(this.lblTotalPhysicalQty);
+            this.groupBox1.Controls.Add(this.lblTotalcurrQty);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.lblDocumentNo);
+            this.groupBox1.Controls.Add(this.dtpDate);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.dataGridTempGrn);
+            this.groupBox1.Location = new System.Drawing.Point(3, 1);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1036, 443);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // cmbBatch
+            // 
+            this.cmbBatch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBatch.FormattingEnabled = true;
+            this.cmbBatch.Location = new System.Drawing.Point(454, 400);
+            this.cmbBatch.Name = "cmbBatch";
+            this.cmbBatch.Size = new System.Drawing.Size(175, 21);
+            this.cmbBatch.TabIndex = 136;
+            this.cmbBatch.SelectedIndexChanged += new System.EventHandler(this.cmbBatch_SelectedIndexChanged);
+            this.cmbBatch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbBatch_KeyDown);
+            // 
+            // btnItemSearch
+            // 
+            this.btnItemSearch.Location = new System.Drawing.Point(411, 400);
+            this.btnItemSearch.Name = "btnItemSearch";
+            this.btnItemSearch.Size = new System.Drawing.Size(37, 21);
+            this.btnItemSearch.TabIndex = 3;
+            this.btnItemSearch.Text = "....";
+            this.btnItemSearch.UseVisualStyleBackColor = true;
+            this.btnItemSearch.Click += new System.EventHandler(this.btnItemSearch_Click);
+            // 
+            // txtPhysicalQty
+            // 
+            this.txtPhysicalQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPhysicalQty.Location = new System.Drawing.Point(810, 399);
+            this.txtPhysicalQty.Name = "txtPhysicalQty";
+            this.txtPhysicalQty.Size = new System.Drawing.Size(105, 20);
+            this.txtPhysicalQty.TabIndex = 4;
+            this.txtPhysicalQty.Text = "0.00";
+            this.txtPhysicalQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPhysicalQty.TextChanged += new System.EventHandler(this.txtPhysicalQty_TextChanged);
+            this.txtPhysicalQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPhysicalQty_KeyDown);
+            // 
+            // lblVarienceQty
+            // 
+            this.lblVarienceQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblVarienceQty.Location = new System.Drawing.Point(928, 399);
+            this.lblVarienceQty.Name = "lblVarienceQty";
+            this.lblVarienceQty.Size = new System.Drawing.Size(100, 20);
+            this.lblVarienceQty.TabIndex = 135;
+            this.lblVarienceQty.Text = "0.00";
+            this.lblVarienceQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCurrentQty
+            // 
+            this.lblCurrentQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCurrentQty.Location = new System.Drawing.Point(706, 398);
+            this.lblCurrentQty.Name = "lblCurrentQty";
+            this.lblCurrentQty.Size = new System.Drawing.Size(98, 22);
+            this.lblCurrentQty.TabIndex = 134;
+            this.lblCurrentQty.Text = "0.00";
+            this.lblCurrentQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCurrentQty.Click += new System.EventHandler(this.lblCurrentQty_Click);
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.Location = new System.Drawing.Point(124, 401);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Size = new System.Drawing.Size(290, 20);
+            this.txtProductName.TabIndex = 2;
+            this.txtProductName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProductName_KeyDown);
+            this.txtProductName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProductName_KeyUp);
+            // 
+            // txtProductCode
+            // 
+            this.txtProductCode.Location = new System.Drawing.Point(5, 401);
+            this.txtProductCode.Name = "txtProductCode";
+            this.txtProductCode.Size = new System.Drawing.Size(113, 20);
+            this.txtProductCode.TabIndex = 1;
+            this.txtProductCode.Enter += new System.EventHandler(this.txtProductCode_Enter);
+            this.txtProductCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProductCode_KeyDown);
+            // 
+            // lblTotalVarienceQty
+            // 
+            this.lblTotalVarienceQty.BackColor = System.Drawing.Color.LightCyan;
+            this.lblTotalVarienceQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotalVarienceQty.Location = new System.Drawing.Point(928, 422);
+            this.lblTotalVarienceQty.Name = "lblTotalVarienceQty";
+            this.lblTotalVarienceQty.Size = new System.Drawing.Size(100, 21);
+            this.lblTotalVarienceQty.TabIndex = 131;
+            this.lblTotalVarienceQty.Text = "0.00";
+            this.lblTotalVarienceQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTotalPhysicalQty
+            // 
+            this.lblTotalPhysicalQty.BackColor = System.Drawing.Color.LightCyan;
+            this.lblTotalPhysicalQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotalPhysicalQty.Location = new System.Drawing.Point(809, 422);
+            this.lblTotalPhysicalQty.Name = "lblTotalPhysicalQty";
+            this.lblTotalPhysicalQty.Size = new System.Drawing.Size(106, 21);
+            this.lblTotalPhysicalQty.TabIndex = 130;
+            this.lblTotalPhysicalQty.Text = "0.00";
+            this.lblTotalPhysicalQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblTotalcurrQty
+            // 
+            this.lblTotalcurrQty.BackColor = System.Drawing.Color.LightCyan;
+            this.lblTotalcurrQty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotalcurrQty.Location = new System.Drawing.Point(706, 422);
+            this.lblTotalcurrQty.Name = "lblTotalcurrQty";
+            this.lblTotalcurrQty.Size = new System.Drawing.Size(98, 21);
+            this.lblTotalcurrQty.TabIndex = 129;
+            this.lblTotalcurrQty.Text = "0.00";
+            this.lblTotalcurrQty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(598, 426);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 128;
+            this.label2.Text = "Total";
+            // 
+            // lblDocumentNo
+            // 
+            this.lblDocumentNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDocumentNo.Location = new System.Drawing.Point(151, 16);
+            this.lblDocumentNo.Name = "lblDocumentNo";
+            this.lblDocumentNo.Size = new System.Drawing.Size(100, 15);
+            this.lblDocumentNo.TabIndex = 127;
+            this.lblDocumentNo.Text = "TE01000001";
+            // 
+            // dtpDate
+            // 
+            this.dtpDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpDate.Enabled = false;
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(368, 12);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(128, 20);
+            this.dtpDate.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(306, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 124;
+            this.label6.Text = "Date:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(20, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.TabIndex = 123;
+            this.label1.Text = "Temp Document No:";
+            // 
+            // dataGridTempGrn
+            // 
+            this.dataGridTempGrn.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridTempGrn.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridTempGrn.AutoGenerateColumns = false;
+            this.dataGridTempGrn.BackgroundColor = System.Drawing.Color.PowderBlue;
+            this.dataGridTempGrn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridTempGrn.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.prodCodeDataGridViewTextBoxColumn,
+            this.prodNameDataGridViewTextBoxColumn,
+            this.BatchNo,
+            this.sellingPriceDataGridViewTextBoxColumn,
+            this.purchasepriceDataGridViewTextBoxColumn,
+            this.Pack_Size,
+            this.currQtyDataGridViewTextBoxColumn,
+            this.phyQtyDataGridViewTextBoxColumn,
+            this.varQtyDataGridViewTextBoxColumn});
+            this.dataGridTempGrn.DataSource = this.stockAdjustBindingSource;
+            this.dataGridTempGrn.Location = new System.Drawing.Point(5, 39);
+            this.dataGridTempGrn.Name = "dataGridTempGrn";
+            this.dataGridTempGrn.ReadOnly = true;
+            this.dataGridTempGrn.Size = new System.Drawing.Size(1025, 356);
+            this.dataGridTempGrn.TabIndex = 126;
+            this.dataGridTempGrn.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridTempGrn_RowPostPaint);
+            this.dataGridTempGrn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridTempGrn_KeyDown);
+            // 
+            // BatchNo
+            // 
+            this.BatchNo.DataPropertyName = "BatchNo";
+            this.BatchNo.HeaderText = "BatchNo";
+            this.BatchNo.Name = "BatchNo";
+            this.BatchNo.ReadOnly = true;
+            // 
+            // Pack_Size
+            // 
+            this.Pack_Size.DataPropertyName = "Pack_Size";
+            this.Pack_Size.HeaderText = "Pack Size";
+            this.Pack_Size.Name = "Pack_Size";
+            this.Pack_Size.ReadOnly = true;
+            this.Pack_Size.Width = 50;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Location = new System.Drawing.Point(0, 447);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1039, 66);
+            this.toolStrip1.TabIndex = 131;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnApply
+            // 
+            this.btnApply.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnApply.FlatAppearance.BorderSize = 0;
+            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApply.Location = new System.Drawing.Point(798, 456);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(100, 50);
+            this.btnApply.TabIndex = 5;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = false;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(1010, 458);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(96, 43);
+            this.btnClose.TabIndex = 133;
+            this.btnClose.Text = "Exit";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(927, 454);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 50);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Exit";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // prodCodeDataGridViewTextBoxColumn
+            // 
+            this.prodCodeDataGridViewTextBoxColumn.DataPropertyName = "Prod_Code";
+            this.prodCodeDataGridViewTextBoxColumn.HeaderText = "Product Code";
+            this.prodCodeDataGridViewTextBoxColumn.Name = "prodCodeDataGridViewTextBoxColumn";
+            this.prodCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.prodCodeDataGridViewTextBoxColumn.Width = 110;
+            // 
+            // prodNameDataGridViewTextBoxColumn
+            // 
+            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "Prod_Name";
+            this.prodNameDataGridViewTextBoxColumn.HeaderText = "Product Name";
+            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
+            this.prodNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.prodNameDataGridViewTextBoxColumn.Width = 280;
+            // 
+            // sellingPriceDataGridViewTextBoxColumn
+            // 
+            this.sellingPriceDataGridViewTextBoxColumn.DataPropertyName = "Selling_Price";
+            this.sellingPriceDataGridViewTextBoxColumn.HeaderText = "Selling Price";
+            this.sellingPriceDataGridViewTextBoxColumn.Name = "sellingPriceDataGridViewTextBoxColumn";
+            this.sellingPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sellingPriceDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // purchasepriceDataGridViewTextBoxColumn
+            // 
+            this.purchasepriceDataGridViewTextBoxColumn.DataPropertyName = "Purchase_price";
+            this.purchasepriceDataGridViewTextBoxColumn.HeaderText = "Purchase Price";
+            this.purchasepriceDataGridViewTextBoxColumn.Name = "purchasepriceDataGridViewTextBoxColumn";
+            this.purchasepriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.purchasepriceDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // currQtyDataGridViewTextBoxColumn
+            // 
+            this.currQtyDataGridViewTextBoxColumn.DataPropertyName = "Curr_Qty";
+            this.currQtyDataGridViewTextBoxColumn.HeaderText = "Current Qty";
+            this.currQtyDataGridViewTextBoxColumn.Name = "currQtyDataGridViewTextBoxColumn";
+            this.currQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.currQtyDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // phyQtyDataGridViewTextBoxColumn
+            // 
+            this.phyQtyDataGridViewTextBoxColumn.DataPropertyName = "Phy_Qty";
+            this.phyQtyDataGridViewTextBoxColumn.HeaderText = "Physical Qty";
+            this.phyQtyDataGridViewTextBoxColumn.Name = "phyQtyDataGridViewTextBoxColumn";
+            this.phyQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.phyQtyDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // varQtyDataGridViewTextBoxColumn
+            // 
+            this.varQtyDataGridViewTextBoxColumn.DataPropertyName = "Var_Qty";
+            this.varQtyDataGridViewTextBoxColumn.HeaderText = "Varience Qty";
+            this.varQtyDataGridViewTextBoxColumn.Name = "varQtyDataGridViewTextBoxColumn";
+            this.varQtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.varQtyDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // stockAdjustBindingSource
+            // 
+            this.stockAdjustBindingSource.DataMember = "StockAdjust";
+            this.stockAdjustBindingSource.DataSource = this.dsForReports;
+            // 
+            // dsForReports
+            // 
+            this.dsForReports.DataSetName = "dsForReports";
+            this.dsForReports.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // txtMemo
+            // 
+            this.txtMemo.Location = new System.Drawing.Point(554, 13);
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(391, 20);
+            this.txtMemo.TabIndex = 137;
+            // 
+            // lblMemo
+            // 
+            this.lblMemo.AutoSize = true;
+            this.lblMemo.BackColor = System.Drawing.Color.Transparent;
+            this.lblMemo.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemo.ForeColor = System.Drawing.Color.Black;
+            this.lblMemo.Location = new System.Drawing.Point(509, 17);
+            this.lblMemo.Name = "lblMemo";
+            this.lblMemo.Size = new System.Drawing.Size(41, 13);
+            this.lblMemo.TabIndex = 138;
+            this.lblMemo.Text = "Memo";
+            // 
+            // frmStockAdjustment
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(1039, 513);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnApply);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.toolStrip1);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmStockAdjustment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Stock Adustment";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStockAdjustment_FormClosed);
+            this.Load += new System.EventHandler(this.frmStockAdjustment_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmStockAdjustment_KeyDown);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTempGrn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockAdjustBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridTempGrn;
+        private System.Windows.Forms.BindingSource stockAdjustBindingSource;
+        private dsForReports dsForReports;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label lblDocumentNo;
+        private System.Windows.Forms.Label lblTotalVarienceQty;
+        private System.Windows.Forms.Label lblTotalPhysicalQty;
+        private System.Windows.Forms.Label lblTotalcurrQty;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblVarienceQty;
+        private System.Windows.Forms.Label lblCurrentQty;
+        private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.TextBox txtProductCode;
+        private System.Windows.Forms.Button btnItemSearch;
+        private System.Windows.Forms.TextBox txtPhysicalQty;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbBatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodCodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BatchNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellingPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn purchasepriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pack_Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn currQtyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phyQtyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn varQtyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label lblMemo;
+        private System.Windows.Forms.TextBox txtMemo;
+    }
+}

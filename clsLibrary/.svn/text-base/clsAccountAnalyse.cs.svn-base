@@ -1,0 +1,219 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsAccountAnalyse
+    {
+        #region General Declaration
+        private int intErrCode;
+
+        private int intDayStartTo;
+        private int intSecondDayTo;
+        private int intThirdDayTo;
+
+        private string strCust_Code;
+        private string strCust_Name;
+        private string strSqlStatement;
+        private string strDataSetName;
+        private string strIid;
+
+        private DataSet dsCustomerDataSet;
+
+        private Boolean blRecordFound;
+
+        private SqlDataReader DataReader;
+        #endregion
+
+        public string Cust_Code
+        {
+            get
+            {
+                return strCust_Code;
+            }
+            set
+            {
+                strCust_Code = value;
+            }
+        }
+
+        public string Cust_Name
+        {
+            get
+            {
+                return strCust_Name;
+            }
+            set
+            {
+                strCust_Name = value;
+            }
+        }
+
+        public string Iid
+        {
+            get
+            {
+                return strIid;
+            }
+            set
+            {
+                strIid = value;
+            }
+        }
+
+        public string DataSetName
+        {
+            get
+            {
+                return strDataSetName;
+            }
+            set
+            {
+                strDataSetName = value;
+            }
+        }
+
+        public int ErrorCode
+        {
+            get
+            {
+                return intErrCode;
+            }
+            set
+            {
+                intErrCode = value;
+            }
+        }
+
+        public int DayStartTo
+        {
+            get
+            {
+                return intDayStartTo;
+            }
+            set
+            {
+                intDayStartTo = value;
+            }
+        }
+
+        public int SecondDayTo
+        {
+            get
+            {
+                return intSecondDayTo;
+            }
+            set
+            {
+                intSecondDayTo = value;
+            }
+        }
+
+        public int ThirdDayTo
+        {
+            get
+            {
+                return intThirdDayTo;
+            }
+            set
+            {
+                intThirdDayTo = value;
+            }
+        }
+
+        public string SqlStatement
+        {
+            get
+            {
+                return strSqlStatement;
+            }
+            set
+            {
+                strSqlStatement = value;
+            }
+        }
+
+        public Boolean RecordFound
+        {
+            get
+            {
+                return blRecordFound;
+            }
+            set
+            {
+                blRecordFound = value;
+            }
+        }
+
+        public DataSet GetCustomerDataset
+        {
+            get
+            {
+                return dsCustomerDataSet;
+            }
+            set
+            {
+                dsCustomerDataSet = value;
+            }
+        }
+
+        public void ReadCustomerDetails()
+        {
+            DataReader = dbcon.GetReader(strSqlStatement);
+            blRecordFound = false;
+            if (DataReader.Read())
+            {
+                strCust_Code = DataReader["Cust_Code"].ToString();
+                strCust_Name = DataReader["Cust_Name"].ToString();
+
+                blRecordFound = true;
+            }
+            else
+            {
+                strCust_Code = string.Empty;
+                strCust_Name = string.Empty;
+
+                blRecordFound = false;
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+        }
+
+        public void GetCustomerDetails()
+        {
+            dsCustomerDataSet = dbcon.getDataset(strSqlStatement, strDataSetName);
+        }
+
+        public void GetDetailsForDisplay()
+        {
+            dsCustomerDataSet = dbcon.getDataset(strSqlStatement, "dsCreditorsOutstanding");
+        }
+
+        public void GetDetails()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_SupplierAnalyse";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+            command.Parameters.Add(new SqlParameter("@Supp_Code", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strCust_Code));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.NVarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strIid ));
+            command.Parameters.Add(new SqlParameter("@DayStartTo", SqlDbType.Int, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, intDayStartTo));
+            command.Parameters.Add(new SqlParameter("@SecondDayTo", SqlDbType.Int, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, intSecondDayTo));
+            command.Parameters.Add(new SqlParameter("@ThirdDayTo", SqlDbType.Int, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, intThirdDayTo));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+    }
+}

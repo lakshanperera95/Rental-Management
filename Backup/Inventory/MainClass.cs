@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+
+
+namespace Inventory
+{
+    public partial class  MainClass
+    {
+        public static Splash splsh = null;
+        public static MDI mdi = null;
+        public static frmLogin login = null;
+
+
+        [STAThread]
+        static void Main()
+        {
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                splsh  = new Splash();
+                Application.Run(splsh);
+            }
+            catch (Exception ex)
+            {             
+                 MessageBox.Show(ex.Message, "Inventory ",MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+        public static void ShowMdi() {
+            mdi = new MDI();
+            mdi.Show();       
+        }
+        public static void ShowLogin() {
+
+            //frmLogin = new frmLogin();
+            //frmLogin.MdiParent = mdi;
+            //frmLogin.Show();
+        }
+        public static MDI getmdi() {
+            return mdi;
+        }
+
+    }
+}

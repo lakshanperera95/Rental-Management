@@ -1,0 +1,97 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>clsLibrary</RootNamespace>
+    <AssemblyName>clsLibrary</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DbConnection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DbConnection\bin\Debug\DbConnection.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsAccount.cs" />
+    <Compile Include="clsAccountAnalyse.cs" />
+    <Compile Include="clsAnalyse.cs" />
+    <Compile Include="clsBarcode.cs" />
+    <Compile Include="clsBrand.cs" />
+    <Compile Include="clsCategory.cs" />
+    <Compile Include="clsChangeDateFormat.cs" />
+    <Compile Include="clsChequeRecon.cs" />
+    <Compile Include="clsClear.cs" />
+    <Compile Include="clsCustomer.cs" />
+    <Compile Include="clsCustomerPayment.cs" />
+    <Compile Include="clsCustomerReturn.cs" />
+    <Compile Include="clsDataUploading.cs" />
+    <Compile Include="clsDayEndProcess.cs" />
+    <Compile Include="clsDepartment.cs" />
+    <Compile Include="clsGrn.cs" />
+    <Compile Include="clsLocation.cs" />
+    <Compile Include="clsLogin.cs" />
+    <Compile Include="clsManufacturer.cs" />
+    <Compile Include="clsMasterDetailsInquary.cs" />
+    <Compile Include="clsProduct.cs" />
+    <Compile Include="clsPurchaseOrder.cs" />
+    <Compile Include="clsReportViewer.cs" />
+    <Compile Include="clsRetriveGenaral.cs" />
+    <Compile Include="clsSalesInquary.cs" />
+    <Compile Include="clsSplash.cs" />
+    <Compile Include="clsStockAdjustment.cs" />
+    <Compile Include="clsStockOverwrite.cs" />
+    <Compile Include="clsSupplier.cs" />
+    <Compile Include="clsSupplier2.cs" />
+    <Compile Include="clsSupplierPayment.cs" />
+    <Compile Include="clsSupplierReturn.cs" />
+    <Compile Include="clsTransactionInquary.cs" />
+    <Compile Include="clsTransferGoodNote.cs" />
+    <Compile Include="clsUserProfile.cs" />
+    <Compile Include="clsValidation.cs" />
+    <Compile Include="clsWholeSaleInvoice.cs" />
+    <Compile Include="LoginManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

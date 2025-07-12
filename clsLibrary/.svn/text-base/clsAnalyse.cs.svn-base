@@ -1,0 +1,456 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsAnalyse
+    {
+        private int intErrCode;
+        private int intTempDocNo;
+
+        private string strLoca;
+        private string strLocaName;
+        private string strCode;
+        private string strName;
+        private string strSqlStatement;
+        private string strTempDocumentNo;
+        private string strDateFrom;
+        private string strDateTo;
+        private string strIid;
+
+        private DataSet dsTempCollection;
+        private DataSet dsTempSelected;
+        private SqlDataReader DataReader;
+
+        public string TempDocNo
+        {
+            get
+            {
+                return strTempDocumentNo;
+            }
+            set
+            {
+                strTempDocumentNo = value;
+            }
+        }
+
+        public int ErrorCode
+        {
+            get
+            {
+                return intErrCode;
+            }
+            set
+            {
+                intErrCode = value;
+            }
+        }
+
+        public string Code
+        {
+            get
+            {
+                return strCode;
+            }
+            set
+            {
+                strCode = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return strName;
+            }
+            set
+            {
+                strName = value;
+            }
+        }
+
+        public string DateFrom
+        {
+            get
+            {
+                return strDateFrom;
+            }
+            set
+            {
+                strDateFrom = value;
+            }
+        }
+
+        public string DateTo
+        {
+            get
+            {
+                return strDateTo;
+            }
+            set
+            {
+                strDateTo = value;
+            }
+        }
+
+        public string Loca
+        {
+            get
+            {
+                return strLoca;
+            }
+            set
+            {
+                strLoca = value;
+            }
+        }
+
+        public string Iid
+        {
+            get
+            {
+                return strIid;
+            }
+            set
+            {
+                strIid = value;
+            }
+        }
+
+        public DataSet TempCollection
+        {
+            get
+            {
+                return dsTempCollection;
+            }
+            set
+            {
+                dsTempCollection = value;
+            }
+        }
+
+        public DataSet TempSelected
+        {
+            get
+            {
+                return dsTempSelected;
+            }
+            set
+            {
+                dsTempSelected = value;
+            }
+        }
+
+        public string SqlStatement
+        {
+            get
+            {
+                return strSqlStatement;
+            }
+            set
+            {
+                strSqlStatement = value;
+            }
+        }
+        //Get Tempory Document No
+        public void GetTempDocumentNo()
+        {
+            DataReader = dbcon.GetReader(strSqlStatement + LoginManager.LocaCode);
+            if (DataReader.Read())
+            {
+                intTempDocNo = (int)DataReader.GetSqlInt32(0);
+                //String.Format("{0:00000}", 15); 
+                strTempDocumentNo = string.Format("{0:000000}", intTempDocNo);
+                if (LoginManager.UserName.Trim().Length > 2)
+                {
+                    strTempDocumentNo = LoginManager.UserName.Trim().Substring(0, 2).ToUpper() + LoginManager.LocaCode.Trim().Substring(0, 2) + strTempDocumentNo; ;
+                }
+                else
+                {
+                    strTempDocumentNo = LoginManager.UserName.Trim().ToUpper() + "0" + LoginManager.LocaCode.Trim().Substring(0, 2) + strTempDocumentNo; ;
+                }
+            }
+            dbcon.CloseReader();
+            DataReader.Dispose();
+
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_UpdateTempDocNo";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.NVarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, "ANA"));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void GetTempDataset()
+        {
+            //get Temporary DataSet For Grn
+            dsTempCollection = dbcon.getDataset("select Code, Name FROM tbAnalyseCollection WHERE TempDoc_No = '" + strTempDocumentNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Code", "Collection");
+            dsTempSelected = dbcon.getDataset("select Code, Name FROM tbAnalyseSelected WHERE TempDoc_No = '" + strTempDocumentNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Code", "Selected");
+        }
+
+        public void RetriveProductDetails()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.NVarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, "PR"));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void RetriveDepartmentDetails()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.NVarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, "DP"));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void RetriveCategoryDetails()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.NVarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, "CT"));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void RetriveSupplierDetails()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.NVarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, "SP"));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void AddCodeToSelected()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductAddCodeToSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Code", SqlDbType.NVarChar, 25, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strCode));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void AddAllCodeToSelected()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductAddAllCodeToSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void RemoveCodeToSelected()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProductRemoveCodeToSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@Code", SqlDbType.NVarChar, 25, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strCode));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void RemoveAllCodeToSelected()
+        {
+            //UpDate Record No
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_AnalyseProducRemoveAllCodeToSelect";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@TempDoc_No", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.LocaCode));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+
+            GetTempDataset();
+        }
+
+        public void ProductDailySalesSummary()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_DailySalesSummaryProductwise";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDateFrom));
+            command.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDateTo));
+            command.Parameters.Add(new SqlParameter("@Temp_DocNo", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strIid));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strLoca));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+
+        public void ProductDailyPurchasing()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_DailyPurchasingAnalyse";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDateFrom));
+            command.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDateTo));
+            command.Parameters.Add(new SqlParameter("@Temp_DocNo", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strIid));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strLoca));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+        //profit
+        public void ProductDailyProfitSummary()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_DailyProfitSummaryProductwise";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDateFrom));
+            command.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strDateTo));
+            command.Parameters.Add(new SqlParameter("@Temp_DocNo", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strTempDocumentNo));
+            command.Parameters.Add(new SqlParameter("@Iid", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strIid));
+            command.Parameters.Add(new SqlParameter("@Loca", SqlDbType.VarChar, 5, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strLoca));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+    }
+}

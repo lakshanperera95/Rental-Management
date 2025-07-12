@@ -1,0 +1,3 @@
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.vbprojResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache

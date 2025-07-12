@@ -1,0 +1,215 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    
+    public partial class frmStockAdjustment : Form
+    {
+
+        clsStockAdjustment objStockAdjustment = new clsStockAdjustment();
+        
+        public frmStockAdjustment()
+        {
+            InitializeComponent();
+        }
+
+        private static frmStockAdjustment StockAdjust;
+        private frmSearch search = new frmSearch();
+        public static frmStockAdjustment GetStockAdjust
+        {
+            get
+            {
+                return StockAdjust;
+            }
+            set
+            {
+                StockAdjust = value;
+            }
+        }
+
+        private void frmStockAdjustment_Load(object sender, EventArgs e)
+        {
+            objStockAdjustment.SqlString = "SELECT Temp_Sta FROM DocumentNoDetails WHERE Loca = ";
+            objStockAdjustment.GetTempDocumentNo();
+            lblDocumentNo.Text = objStockAdjustment.TempDocNo;
+            dataGridTempGrn.DataSource = objStockAdjustment.GetTempStockAdjustDataSet;
+            dataGridTempGrn.Refresh();
+        }
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            objStockAdjustment.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product";
+            objStockAdjustment.DataetName = "dsProduct";
+            objStockAdjustment.GetItemDetails();
+            search.dgSearch.DataSource = objStockAdjustment.GetItemDataset.Tables["dsProduct"];
+            search.prop_Focus = txtProductCode;
+            search.Show();
+        }
+
+        private void txtProductCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+
+                txtProductCode.Text = search.Code.Trim(); ;
+                txtProductName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void txtProductCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                objStockAdjustment.SqlString = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, Stock_Master.Qty FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objStockAdjustment.ReadProductDetails();
+                if (objStockAdjustment.ProductName!= string.Empty )
+                {
+                txtProductName.Text = objStockAdjustment.ProductName;
+                lblCurrentQty.Text = (string) objStockAdjustment.CurrentQty.ToString();
+                txtPhysicalQty.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found. Please Check Product Code.", "Stock Adjustment Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void txtPhysicalQty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPhysicalQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtPhysicalQty.Text, System.Globalization.NumberStyles.Float) == true)
+            {
+                objStockAdjustment.ProductCode = txtProductCode.Text.Trim();
+                objStockAdjustment.ProductName = txtProductName.Text.Trim();
+                objStockAdjustment.CurrentQty = float.Parse(lblCurrentQty.Text.ToString());
+                objStockAdjustment.PhyQty  = float.Parse(txtPhysicalQty.Text.ToString());
+                objStockAdjustment.UpdateStockAdjustDataSet();
+                objStockAdjustment.GetTempDataset();
+                dataGridTempGrn.DataSource = objStockAdjustment.GetTempStockAdjustDataSet.Tables["StockAdjust"];
+                dataGridTempGrn.Refresh();
+                txtProductCode.Text = string.Empty;
+                txtProductName.Text = string.Empty;
+                txtPhysicalQty.Text = string.Empty;
+                lblCurrentQty.Text = string.Empty;
+                lblVarienceQty.Text = string.Empty;
+                objStockAdjustment.GetTotalValues();
+
+                lblTotalcurrQty.Text = objStockAdjustment.CurrentTotalQty.ToString();
+                lblTotalPhysicalQty.Text = objStockAdjustment.PhyTotalQty.ToString();
+                float f = objStockAdjustment.PhyTotalQty - objStockAdjustment.CurrentTotalQty;
+                lblTotalVarienceQty.Text = f.ToString();
+                txtProductCode.Focus();
+            }
+            
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            objStockAdjustment = null;
+        }
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            objStockAdjustment.StockAdjustApply();
+            MessageBox.Show("Stock Adjustment Successfully Applied as Document No. " + objStockAdjustment.OrgDocNo, "Stock Adjustment Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            objStockAdjustment.GetDataSetForReport();
+            dsDataForReport = objStockAdjustment.GetReportDataset;
+            rptStockAdjustment StockAdjustment = new rptStockAdjustment();
+            StockAdjustment.SetDataSource(dsDataForReport);
+
+            objRepViewer.crystalReportViewer1.ReportSource = StockAdjustment;
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+
+            this.Close();
+            this.Dispose();
+            StockAdjust = null;
+        }
+
+        private void lblCurrentQty_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmStockAdjustment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StockAdjust = null;
+        }
+
+        private void frmStockAdjustment_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void dataGridTempGrn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && dataGridTempGrn.SelectedRows[0].Cells[0].Value.ToString() != string.Empty)
+            {
+                if (MessageBox.Show("Are You Sure You want to Delete This Item. ", "Transfer Of Goods Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes);
+                {
+                    objStockAdjustment.TempDocNo = lblDocumentNo.Text.Trim();
+                    objStockAdjustment.ProductCode = dataGridTempGrn.SelectedRows[0].Cells[0].Value.ToString();
+                    objStockAdjustment.DeleteProductDetaile();
+                    objStockAdjustment.GetTempDataset();
+                    dataGridTempGrn.DataSource = objStockAdjustment.GetTempStockAdjustDataSet.Tables["StockAdjust"];
+                    dataGridTempGrn.Refresh();
+                    objStockAdjustment.GetTotalValues();
+
+                    lblTotalcurrQty.Text = objStockAdjustment.CurrentTotalQty.ToString();
+                    lblTotalPhysicalQty.Text = objStockAdjustment.PhyTotalQty.ToString();
+                    float f = objStockAdjustment.PhyTotalQty - objStockAdjustment.CurrentTotalQty;
+                    lblTotalVarienceQty.Text = f.ToString();
+                
+                    txtProductCode.Focus();
+                }
+            }
+        }
+
+        private void dataGridTempGrn_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            clsDGV dg = new clsDGV();
+            dg.invoke(e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            StockAdjust = null;
+        }
+
+    }
+}

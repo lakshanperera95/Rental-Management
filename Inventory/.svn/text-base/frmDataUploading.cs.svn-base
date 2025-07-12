@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using clsLibrary;
+namespace Inventory
+{
+    public partial class frmDataUploading : Form
+    {
+        public frmDataUploading()
+        {
+            InitializeComponent();
+        }
+        clsDataUploading objDataUploading = new clsDataUploading();
+        private static frmDataUploading DataUpload;
+
+        public static frmDataUploading GetDataUpload
+        {
+            get
+            {
+                return DataUpload;
+            }
+            set
+            {
+                DataUpload = value;
+            }
+        }
+        private void frmDataUploading_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmDataUploading_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DataUpload = null;
+        }
+
+        private void frmDataUploading_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            DataUpload = null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            objDataUploading.DataUploading();
+            if (objDataUploading.ErrorCode == 0)
+            {
+                MessageBox.Show("Data Uploading Process Completed Successfully.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information );
+            }
+            else
+            {
+                MessageBox.Show("Error Found On Data Uploading Process.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+    }
+}

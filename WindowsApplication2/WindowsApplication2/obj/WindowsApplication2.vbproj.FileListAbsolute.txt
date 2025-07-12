@@ -1,0 +1,205 @@
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\clsLibrary.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\clsLibrary.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\clsLibrary.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\clsLibrary.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\Other\Vi John -\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\clsLibrary.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\clsLibrary.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Sangrilla Common\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Form1.resources
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication1.Resources.resources
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb

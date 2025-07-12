@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data ;
+using System.Data.SqlClient;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsReportViewer
+    {
+        # region //General Declartion
+        private string strSqlSatemet;
+        private string strDatasetName;
+        private DataSet dsTempResult;
+        # endregion
+
+        public string  SqlStatement
+        {
+            get
+            {
+                return strSqlSatemet;
+            }
+            set
+            {
+                strSqlSatemet = value;
+            }
+        }
+
+        public string DataSetName
+        {
+            get
+            {
+                return strDatasetName;
+            }
+            set
+            {
+                strDatasetName = value;
+            }
+        }
+
+        public DataSet TempResultSet
+        {
+            get
+            {
+                return dsTempResult;
+            }
+            set
+            {
+                dsTempResult = value;
+            }
+        }
+
+        public void RetrieveData()
+        {
+            TempResultSet = dbcon.getDataset(strSqlSatemet,strDatasetName);
+        }
+    }
+
+}

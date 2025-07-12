@@ -1,0 +1,23 @@
+1.jjV4YCHMsEydeubUPjryriFthLRIlvFreSt6MYgSsGM=
+2.NewInv
+3.sa
+4.5OgPIZq7z57A8PDm1ibjMPIbK/mhtMHM8GNLpJQg5wE=
+5.5000
+6.100
+7.Extension Location
+8.aaaa
+9.11
+A.10
+B.bbbb
+C.Amila
+D.2222
+E.COM1
+F.MSSQL
+//If MSSQL-API, provide base URL
+G.http://194.233.76.58:4445/api/
+//Empty For All Location / Loca Code for Show location
+H.
+//System time Out
+I.33
+//Com port for Customer display 
+J.COM4

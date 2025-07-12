@@ -1,0 +1,13 @@
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe.config
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Release\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\bin\Release\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbprojResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Form1.resources
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication1.Resources.resources
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrilla Systems\WindowsApplication2\WindowsApplication2\obj\Release\WindowsApplication2.pdb

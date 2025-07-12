@@ -1,0 +1,153 @@
+Date/Time :' 26/02/2025 14:32:52'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadProductDetailsInv() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1342.   Error Description  :Column 'MinimumPrice' does not belong to table . 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/02/2025 14:33:49'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadProductDetailsInv() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1342.   Error Description  :Column 'MinimumPrice' does not belong to table . 'Location :'01'User Name :'ONIMTA'
+'Connection Open Failier. Date/Time :' 14/03/2025 15:10:35 Error Description Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Date/Time :' 01/05/2025 18:49:19'clsReportViewer 001. Error Description Arithmetic overflow error converting nvarchar to data type numeric. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 01/05/2025 18:52:44'frmTransactionInqary 005. Error Description Object reference not set to an instance of an object. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 01/05/2025 18:52:53'frmTransactionInqary 005. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{98CDE168-C1BF-4179-BE4C-F2CFA7CB8398}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+'Connection Open Failier. Date/Time :' 17/05/2025 10:46:32 Error Description Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Date/Time :' 19/05/2025 10:59:36'frmTransferGoodNote 012. Error Description Invalid column name 'Id_no'. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 19/05/2025 11:05:44'Error Location  :  Inventory.MDI.recursiveLoop(ToolStripMenuItem item).   Error Description  :System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at DbConnection.dbcon.getDataset(String query, String strName) in H:\Source Code\Inventory\Shangrilla Systems\DbConnection\dbcon.cs:line 158
+   at clsLibrary.clsCommon.getData(String sqlStatement) in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsCommon.cs:line 61
+   at Inventory.MDI.recursiveLoop(ToolStripMenuItem item)
+ClientConnectionId:ddea7ed8-523e-4b2e-9ead-f6cc2507295a
+Error Number:8152,State:2,Class:16 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 19/05/2025 11:05:47'Error Location  :  Inventory.MDI.recursiveLoop(ToolStripMenuItem item).   Error Description  :System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at DbConnection.dbcon.getDataset(String query, String strName) in H:\Source Code\Inventory\Shangrilla Systems\DbConnection\dbcon.cs:line 158
+   at clsLibrary.clsCommon.getData(String sqlStatement) in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsCommon.cs:line 61
+   at Inventory.MDI.recursiveLoop(ToolStripMenuItem item)
+ClientConnectionId:989f1303-6c75-4f65-bc2a-5124f65c409c
+Error Number:8152,State:2,Class:16 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 19/05/2025 11:05:48'Error Location  :  Inventory.MDI.recursiveLoop(ToolStripMenuItem item).   Error Description  :System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at DbConnection.dbcon.getDataset(String query, String strName) in H:\Source Code\Inventory\Shangrilla Systems\DbConnection\dbcon.cs:line 158
+   at clsLibrary.clsCommon.getData(String sqlStatement) in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsCommon.cs:line 61
+   at Inventory.MDI.recursiveLoop(ToolStripMenuItem item)
+ClientConnectionId:6c46514e-f011-4f70-9d0f-5fd1fce3f1b8
+Error Number:8152,State:2,Class:16 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 19/05/2025 11:05:49'Error Location  :  Inventory.MDI.recursiveLoop(ToolStripMenuItem item).   Error Description  :System.Data.SqlClient.SqlException (0x80131904): String or binary data would be truncated.
+The statement has been terminated.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at DbConnection.dbcon.getDataset(String query, String strName) in H:\Source Code\Inventory\Shangrilla Systems\DbConnection\dbcon.cs:line 158
+   at clsLibrary.clsCommon.getData(String sqlStatement) in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsCommon.cs:line 61
+   at Inventory.MDI.recursiveLoop(ToolStripMenuItem item)
+ClientConnectionId:20d293cf-0b0b-4ab7-8f38-945d474fd8f1
+Error Number:8152,State:2,Class:16 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 29/05/2025 09:32:45'frmWholeSaleInvoice 001. Error Description There is no row at position 0. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 29/05/2025 09:32:57'frmWholeSaleInvoice 001. Error Description There is no row at position 0. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 29/05/2025 09:37:03'frmWholeSaleInvoice 001. Error Description There is no row at position 0. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 29/05/2025 09:42:12'Error Location  :  Inventory.FrmPrinterSelect.FrmPrinterSelect_Load(Object sender, EventArgs e).   Error Description  :There is no row at position 0. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 29/05/2025 10:09:55'frmWholeSaleInvoice 001. Error Description There is no row at position 0. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 31/05/2025 09:16:36'frmWholeSaleInvoice 001. Error Description There is no row at position 0. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/06/2025 09:22:29'Error Location  :  Inventory.frmWholeSaleInvoice.SendLoyalityMSG(String DocNo) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmWholeSaleInvoice.cs:line 2407.   Error Description  :Incorrect syntax near 'app'. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 05/06/2025 11:53:35'Error Location  :  Inventory.frmWholeSaleInvoice.txtDiscount_KeyDown(Object sender, KeyEventArgs e) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmWholeSaleInvoice.cs:line 3127.   Error Description  :Input string was not in a correct format. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 05/06/2025 11:54:02'Error Location  :  Inventory.frmWholeSaleInvoice.txtDiscount_KeyDown(Object sender, KeyEventArgs e) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmWholeSaleInvoice.cs:line 3127.   Error Description  :Input string was not in a correct format. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 05/06/2025 11:56:16'Error Location  :  Inventory.frmWholeSaleInvoice.txtDiscount_KeyDown(Object sender, KeyEventArgs e) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmWholeSaleInvoice.cs:line 3127.   Error Description  :Input string was not in a correct format. 'Location :'01'User Name :'ONIMTA'
+'Connection Open Failier. Date/Time :' 18/06/2025 15:56:23 Error Description Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Date/Time :' 25/06/2025 17:15:12'frmSalesInquary 008. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+'Connection Open Failier. Date/Time :' 25/06/2025 17:15:17 Error Description Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Date/Time :' 25/06/2025 17:16:16'frmSalesInquary 008. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 25/06/2025 17:16:30'Error Location  :  Inventory.FrmPrinterSelect.pnlDoc_Click(Object sender, EventArgs e) in \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\Inventory\FrmPrinterSelect.cs:line 237.   Error Description  :Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/06/2025 09:23:38'Error Location  :  Inventory.MDI.CustomPaperPrint(ReportDocument VReport, String strPrinter, String strCustomPaper, Int32 NoOfCopies) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\MDI.cs:line 5067.   Error Description  :Invalid printer specified.
+rptInvoiceDetails_NonTax 15004_17096_{A2A5DBB6-A5FC-43AE-B8C9-02B441CD50B5}.rpt 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/06/2025 09:26:40'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadTempTransDetails() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1688.   Error Description  :String or binary data would be truncated.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1.
+The statement has been terminated. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/06/2025 09:27:22'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadTempTransDetails() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1688.   Error Description  :String or binary data would be truncated.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1.
+The statement has been terminated. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/06/2025 09:30:32'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadTempTransDetails() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1688.   Error Description  :String or binary data would be truncated.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1.
+The statement has been terminated. 'Location :'01'User Name :'ONIMTA'
+'Connection Open Failier. Date/Time :' 26/06/2025 09:32:46 Error Description A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Date/Time :' 26/06/2025 09:32:49'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadTempTransDetails() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1688.   Error Description  :ExecuteReader requires an open and available Connection. The connection's current state is closed. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/06/2025 09:33:27'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadTempTransDetails() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1688.   Error Description  :Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 26/06/2025 09:33:32'Error Location  :  clsLibrary.clsWholeSaleInvoice.ReadTempTransDetails() in H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\clsWholeSaleInvoice.cs:line 1688.   Error Description  :String or binary data would be truncated.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1.
+The statement has been terminated. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 05/07/2025 08:51:53'frmTransactionInqary 005. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 10:00:00'frmTransactionInqary 005. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 10:43:14'frmTransactionInqary 005. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 10:55:00'frmTransactionInqary 005. Error Description Unable to cast COM object of type 'CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass' to interface type 'CrystalDecisions.ReportAppServer.Controllers.ISCRReportSource'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{31E7715A-8AD0-4D1C-958E-C1BE0A6F2D0C}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)). 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 10:59:48'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:07:45'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:07:55'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:08:53'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:10:02'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:12:09'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:12:58'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+'Connection Open Failier. Date/Time :' 05/07/2025 11:17:38 Error Description A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Date/Time :' 05/07/2025 11:18:45'Login 008. Error Description The type initializer for 'CrystalDecisions.CrystalReports.Engine.ReportDocument' threw an exception. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:47:47'Login 008. Error Description Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 11:56:09'Login 008. Error Description Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 05/07/2025 13:02:55'Login 008. Error Description Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 08/07/2025 11:43:59'Login 008. Error Description Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 08/07/2025 11:52:54'Login 008. Error Description Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 08/07/2025 11:55:07'Login 008. Error Description Could not load file or assembly 'CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304' or one of its dependencies. The system cannot find the file specified. 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 08/07/2025 12:17:40'Error Location  :  Inventory.FrmPrinterSelect.FrmPrinterSelect_Load(Object sender, EventArgs e) in \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\Inventory\FrmPrinterSelect.cs:line 43.   Error Description  :There is no row at position 0. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 08/07/2025 12:17:52'Error Location  :  Inventory.FrmPrinterSelect.FrmPrinterSelect_Load(Object sender, EventArgs e) in \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\Inventory\FrmPrinterSelect.cs:line 43.   Error Description  :There is no row at position 0. 'Location :'01'User Name :'ONIMTA'

@@ -1,0 +1,14 @@
+bin\Release\clsLibrary.dll
+bin\Release\clsLibrary.pdb
+bin\Release\DbConnection.dll
+bin\Release\DbConnection.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\clsLibrary.dll
+obj\Release\clsLibrary.pdb
+bin\Debug\clsLibrary.dll
+bin\Debug\clsLibrary.pdb
+bin\Debug\DbConnection.dll
+bin\Debug\DbConnection.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\clsLibrary.dll
+obj\Debug\clsLibrary.pdb

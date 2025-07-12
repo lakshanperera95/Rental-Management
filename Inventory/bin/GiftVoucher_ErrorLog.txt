@@ -1,0 +1,10 @@
+Date/Time :' 17/06/2025 17:21:59'   at System.Data.DataTableCollection.get_Item(Int32 index)
+   at Inventory.frmSpaVoucher.cmbLocation_SelectedIndexChanged(Object sender, EventArgs e) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmSpaVoucher.cs:line 523. Error Description:- << Cannot find table 1. >>  'User Name :' ONIMTA '
+Date/Time :' 17/06/2025 17:22:01'   at System.Data.DataTableCollection.get_Item(Int32 index)
+   at Inventory.frmSpaVoucher.cmbLocation_SelectedIndexChanged(Object sender, EventArgs e) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmSpaVoucher.cs:line 523. Error Description:- << Cannot find table 1. >>  'User Name :' ONIMTA '
+Date/Time :' 17/06/2025 17:22:04'   at System.Data.DataTableCollection.get_Item(Int32 index)
+   at Inventory.frmSpaVoucher.cmbLocation_SelectedIndexChanged(Object sender, EventArgs e) in H:\Source Code\Inventory\Shangrilla Systems\Inventory\frmSpaVoucher.cs:line 523. Error Description:- << Cannot find table 1. >>  'User Name :' ONIMTA '
+Date/Time :' 17/06/2025 17:22:48'   at System.Data.DataTableCollection.get_Item(Int32 index)
+   at Inventory.frmSpaVoucher.cmbLocation_SelectedIndexChanged(Object sender, EventArgs e). Error Description:- << Cannot find table 1. >>  'User Name :' ONIMTA '
+Date/Time :' 17/06/2025 17:23:04'   at System.Data.DataTableCollection.get_Item(Int32 index)
+   at Inventory.frmSpaVoucher.cmbLocation_SelectedIndexChanged(Object sender, EventArgs e). Error Description:- << Cannot find table 1. >>  'User Name :' ONIMTA '

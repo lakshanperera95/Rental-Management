@@ -1,0 +1,241 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmUserProfile : Form
+    {
+        public frmUserProfile()
+        {
+            InitializeComponent();
+        }
+
+        frmSearch search = new frmSearch();
+        clsUserProfile objUserProfile = new clsUserProfile();
+
+        private string strQuery;
+
+        private static frmUserProfile UserProfile;
+
+        public static frmUserProfile GetUserProfile
+        {
+            get
+            {
+                return UserProfile;
+            }
+            set
+            {
+                UserProfile = value;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            UserProfile = null;
+        }
+
+        private void frmUserProfile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+             UserProfile = null;
+        }
+
+        private void frmUserProfile_FormClosing(object sender, FormClosingEventArgs e)
+        {
+                        // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void frmUserProfile_Load(object sender, EventArgs e)
+        {
+            cmbMemberOf.Items.Add("Administrator");         //1
+            cmbMemberOf.Items.Add("Manager");               //2
+            cmbMemberOf.Items.Add("Purchasing Manager");    //3
+            cmbMemberOf.Items.Add("Store Keeper");          //4
+            cmbMemberOf.Items.Add("Operator");              //5
+            //cmbMemberOf.Items.Add("Accountant");
+            //cmbMemberOf.Items.Add("Accountan Clark");
+        }
+
+        private void txtUserName_TextChanged(object sender, EventArgs e)
+        {
+            if (txtUserName.Text.Trim() != string.Empty)
+            {
+                txtPassword.Enabled = true;
+                txtConfirmPassword.Enabled = true;
+                chkAccountDesable.Enabled = true;
+                chkUserCannotchangepwd.Enabled = true;
+                chkUserMustChangePwd.Enabled = true;
+                btnAdvance.Enabled = true;
+                btnCreate.Enabled = true;
+                cmbMemberOf.Enabled = true;
+            }
+            else
+            {
+                txtPassword.Enabled = false;
+                txtConfirmPassword.Enabled = false ;
+                chkAccountDesable.Enabled = false;
+                chkUserCannotchangepwd.Enabled = false;
+                chkUserMustChangePwd.Enabled = false;
+                btnAdvance.Enabled = false;
+                btnCreate.Enabled = false;
+                cmbMemberOf.Enabled = false;
+            }
+        }
+
+        private void btnSearchCodeFrom_Click(object sender, EventArgs e)
+        {
+            MainClass.mdi.Cursor = Cursors.WaitCursor;
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            strQuery = "SELECT Emp_Name AS [User Name], Loca [Loca] from employee WHERE Loca = '" + LoginManager.LocaCode + "' ORDER BY [User Name]";
+
+            objUserProfile.SqlStatement = strQuery;
+            objUserProfile.dsName = "Table";
+            objUserProfile.RetriveData();
+
+            search.dgSearch.DataSource = objUserProfile.ResultSet.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = txtUserName;
+        }
+
+        private void txtUserName_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            
+            objUserProfile.SqlStatement = "SELECT Emp_Name, Loca from employee WHERE Emp_Name = '"+ txtUserName.Text.Trim() +"' and Loca = '" + LoginManager.LocaCode + "'";
+            objUserProfile.ReadUserName();
+            if (objUserProfile.RecordFound == true)
+            {
+                MessageBox.Show("The User Name Already Exists. Please Use Another User Name", "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtUserName.Focus();
+                return;
+            }
+            else
+            {
+                if (cmbMemberOf.Text.Trim() == string.Empty)
+                {
+                    MessageBox.Show("Please Select Member Of.", "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cmbMemberOf.Focus();
+                    return;
+                }
+
+                if (txtPassword.Text.Trim().ToUpper() != txtConfirmPassword.Text.Trim().ToUpper())
+                {
+                    MessageBox.Show("The Password was Not Correctly Confirmed. Please Check Password and Confirmed Password are Match exactly.", "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtPassword.Focus();
+                    return;
+                }
+
+                objUserProfile.UserName = txtUserName.Text.Trim();
+                objUserProfile.Password = txtPassword.Text.Trim();
+                if (chkUserMustChangePwd.Checked == true)
+                {
+                    objUserProfile.ChgPwdNxtLogin = "T";
+                }
+                else
+                {
+                    objUserProfile.ChgPwdNxtLogin = "F";
+                }
+                if (chkUserCannotchangepwd.Checked == true)
+                {
+                    objUserProfile.UserCannotChgPwd  = "T";
+                }
+                else
+                {
+                    objUserProfile.UserCannotChgPwd = "F";
+                }
+                if (chkAccountDesable.Checked == true)
+                {
+                    objUserProfile.Acc_Desable = "T";
+                }
+                else
+                {
+                    objUserProfile.Acc_Desable = "F";
+                }
+
+            if (cmbMemberOf.Text.Trim() == "Administrator")        //1
+                objUserProfile.UserRole_Id = 1;
+            else if (cmbMemberOf.Text.Trim() == "Manager")        //2
+                objUserProfile.UserRole_Id = 2;
+            else if (cmbMemberOf.Text.Trim() == "Purchasing Manager")        //3
+                objUserProfile.UserRole_Id = 3;
+            else if (cmbMemberOf.Text.Trim() == "Store Keeper")        //4
+                objUserProfile.UserRole_Id = 4;
+            else if (cmbMemberOf.Text.Trim() == "Operator")        //5
+                objUserProfile.UserRole_Id = 5;
+            else
+            {
+                MessageBox.Show("Please Select Member Of.", "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cmbMemberOf.Focus();
+                return;
+            }
+
+            objUserProfile.CreateUser();
+            MessageBox.Show("User Created Successfully.", "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            txtUserName.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtConfirmPassword.Text = string.Empty;
+            chkAccountDesable.Checked = false;
+            chkUserCannotchangepwd.Checked = false;
+            chkUserMustChangePwd.Checked = false;
+            cmbMemberOf.Text = string.Empty;
+
+            txtUserName.Focus();
+            return;
+            }
+        }
+
+        private void txtUserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtUserName.Text.Trim() != "")
+            {
+                txtPassword.Focus();
+            }
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtPassword.Text.Trim() != "")
+            {
+                txtConfirmPassword.Focus();
+            }
+        }
+
+        private void txtConfirmPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtPassword.Text.Trim() != "")
+            {
+                if (txtPassword.Text.Trim().ToUpper() != txtConfirmPassword.Text.Trim().ToUpper())
+                {
+                    MessageBox.Show("The Password was Not Correctly Confirmed. Please Check Password and Confirmed Password are Match exactly.", "User Profile", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtPassword.Focus();
+                    return;
+                }
+                else
+                {
+                    cmbMemberOf.Focus();
+                }
+            }
+        }
+
+    }
+}

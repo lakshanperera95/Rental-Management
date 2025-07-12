@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Threading;
+using clsLibrary;
+
+
+namespace Inventory
+{
+    public partial class Splash : Form
+    {
+
+        static Thread th = null;
+        static Splash splash = null;
+
+
+        int min = 0;
+        int max = 473;
+
+        public Splash()
+        {
+            InitializeComponent();
+            timer1.Start();
+        }
+
+        static private void CreateSplash()
+        {
+            splash = new Splash();
+            Application.Run(splash);
+        }
+        static public void ShowSplash()
+        {
+            if (th != null)
+                return;
+            th = new Thread(new ThreadStart(Splash.CreateSplash));
+            th.IsBackground = true;
+            th.ApartmentState = ApartmentState.STA;
+            th.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            int lable = (int)((min / max) * 100);
+
+            if (min >= max)
+            {
+                timer1.Stop();
+                this.Hide();
+
+                if (MainClass.getmdi() == null)
+                {
+                    MainClass.ShowMdi();
+                }
+                else 
+                {
+                    MainClass.getmdi().Focus();
+                }
+            }
+            min = min + 4;
+            pnlProgress.Width = min;
+
+            if (min > 100)
+            {
+                timer1.Interval = 60;
+                lblStates.Text = "Checking Database Connection...";
+                clsSplash dbstate =  new clsSplash();
+                    if (dbstate.checkCon()== 1){
+                        timer1.Stop();
+                        MessageBox.Show("Error in Initializing Database connection", "Inventory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        Application.Exit();
+                    
+                    }
+                    
+            }
+            if (min > 150)
+            {
+                timer1.Interval = 1;
+                lblStates.Text = "Initializing components...";
+                lblStates.Refresh();
+            }
+
+
+
+
+            
+        }
+    }
+}

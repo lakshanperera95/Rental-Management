@@ -1,0 +1,239 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/SVN/!svn/ver/33/trunk/clsLibrary
+END
+clsAccountAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/41/trunk/clsLibrary/clsAccountAnalyse.cs
+END
+clsRetriveGenaral.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsRetriveGenaral.cs
+END
+clsDataUploading.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/27/trunk/clsLibrary/clsDataUploading.cs
+END
+clsSalesInquary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/33/trunk/clsLibrary/clsSalesInquary.cs
+END
+clsProduct.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/38/trunk/clsLibrary/clsProduct.cs
+END
+clsClear.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsClear.cs
+END
+clsAccount.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/38/trunk/clsLibrary/clsAccount.cs
+END
+clsReportViewer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsReportViewer.cs
+END
+clsTransactionInquary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsTransactionInquary.cs
+END
+clsCustomerPayment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsCustomerPayment.cs
+END
+clsLibrary.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/41/trunk/clsLibrary/clsLibrary.csproj
+END
+clsBarcode.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/36/trunk/clsLibrary/clsBarcode.cs
+END
+clsSupplierPayment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsSupplierPayment.cs
+END
+LoginManager.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/LoginManager.cs
+END
+clsDepartment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/SVN/!svn/ver/36/trunk/clsLibrary/clsDepartment.cs
+END
+clsPurchaseOrder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/39/trunk/clsLibrary/clsPurchaseOrder.cs
+END
+clsMasterDetailsInquary.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsMasterDetailsInquary.cs
+END
+clsCategory.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/22/trunk/clsLibrary/clsCategory.cs
+END
+clsStockAdjustment.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsStockAdjustment.cs
+END
+clsTransferGoodNote.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/39/trunk/clsLibrary/clsTransferGoodNote.cs
+END
+clsSupplier2.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/38/trunk/clsLibrary/clsSupplier2.cs
+END
+clsGrn.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsGrn.cs
+END
+clsBrand.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/36/trunk/clsLibrary/clsBrand.cs
+END
+clsSplash.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/3/trunk/clsLibrary/clsSplash.cs
+END
+clsStockOverwrite.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsStockOverwrite.cs
+END
+clsValidation.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsValidation.cs
+END
+clsManufacturer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/SVN/!svn/ver/37/trunk/clsLibrary/clsManufacturer.cs
+END
+clsAnalyse.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsAnalyse.cs
+END
+clsChangeDateFormat.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/SVN/!svn/ver/41/trunk/clsLibrary/clsChangeDateFormat.cs
+END
+clsUserProfile.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/25/trunk/clsLibrary/clsUserProfile.cs
+END
+clsWholeSaleInvoice.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsWholeSaleInvoice.cs
+END
+clsCustomer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/SVN/!svn/ver/38/trunk/clsLibrary/clsCustomer.cs
+END
+clsCustomerReturn.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/30/trunk/clsLibrary/clsCustomerReturn.cs
+END
+clsChequeRecon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/SVN/!svn/ver/32/trunk/clsLibrary/clsChequeRecon.cs
+END
+clsSupplierReturn.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/SVN/!svn/ver/30/trunk/clsLibrary/clsSupplierReturn.cs
+END
+clsSupplier.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsSupplier.cs
+END
+clsDayEndProcess.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/SVN/!svn/ver/20/trunk/clsLibrary/clsDayEndProcess.cs
+END
+clsLogin.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/SVN/!svn/ver/24/trunk/clsLibrary/clsLogin.cs
+END
+clsLocation.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/SVN/!svn/ver/2/trunk/clsLibrary/clsLocation.cs
+END

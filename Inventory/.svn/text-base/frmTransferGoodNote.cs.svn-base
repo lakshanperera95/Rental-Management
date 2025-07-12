@@ -1,0 +1,458 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+using CrystalDecisions.Shared;
+
+namespace Inventory
+{
+    public partial class frmTransferGoodNote : Form
+    {
+        private string selectquery;
+        clsTransferGoodNote objTransferNote = new clsTransferGoodNote();
+        public frmTransferGoodNote()
+        {
+            InitializeComponent();
+        }
+
+        private static frmTransferGoodNote TransferNote;
+
+        private frmSearch search = new frmSearch();
+        
+        public static frmTransferGoodNote GetTransferNote
+        {
+            get
+            {
+                return TransferNote;
+            }
+            set
+            {
+                TransferNote = value;
+            }
+        }
+
+        private void btnLocaSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+            selectquery = "SELECT Loca AS Code, Loca_Descrip AS Description FROM Location ORDER BY Loca";
+
+            search.dgSearch.DataSource = clsRetriveGenaral.combofill1(selectquery).Tables["Table"];
+            search.Show();
+            search.prop_Focus = txtLocaCode;
+            txtLocaName.Text = search.Descript; 
+        }
+
+        private void txtLocaCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLocaCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtLocaCode.Text = search.Code.Trim(); 
+                txtLocaName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void txtLocaCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Display Departemnt
+                if (txtLocaCode.Text.Trim() != "" && txtLocaName.Text.Trim() == "" && txtLocaCode.Text.Trim() != lblLocaCode.Text.Trim())
+                {
+                    objTransferNote.ToLocaCode = txtLocaCode.Text.ToString().Trim();
+                    objTransferNote.SqlStatement = "SELECT Loca, Loca_Descrip FROM location WHERE Loca = '";
+                    objTransferNote.ReadToLocationCode();
+                    if (objTransferNote.ToLocaName != string.Empty)
+                    {
+                        txtLocaName.Text = objTransferNote.ToLocaName;
+                        txtReference.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Locaion Code Not Found.", this.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtLocaCode.Focus();
+                    }
+                }
+            }
+        }
+
+        private void frmTransferGoodNote_Load(object sender, EventArgs e)
+        {
+            objTransferNote.SqlStatement  = "SELECT Temp_Tog FROM DocumentNoDetails WHERE Loca = ";
+            objTransferNote.GetTempDocumentNo();
+            lblTempDocNo.Text = objTransferNote.TempDocNo ;
+            dataGridTempTGN.DataSource = objTransferNote.TempTransferNote;
+            dataGridTempTGN.Refresh();
+            objTransferNote.SqlStatement = "SELECT Loca, Loca_Descrip FROM location WHERE Loca = ";
+            objTransferNote.ReadFromLocationCode();
+            lblLocaCode.Text = objTransferNote.LocaCode;
+            lblLocaName.Text = objTransferNote.LocaName ;
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            TransferNote = null;
+        }
+
+        private void txtReference_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtRemarks.Focus();
+            }
+        }
+
+        private void txtRemarks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtProductCode.Focus();
+            }
+        }
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+            if (txtProductCode.Text.Trim() == string.Empty && txtProductName.Text.Trim() == string.Empty)
+            {
+                objTransferNote.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product ORDER BY Prod_Code";
+            }
+            else
+            {
+                if (txtProductCode.Text.Trim() != string.Empty && txtProductName.Text.Trim() == string.Empty)
+                {
+                    objTransferNote.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%' ORDER BY Prod_Code";
+                }
+                else
+                {
+                    if (txtProductCode.Text.Trim() == string.Empty && txtProductName.Text.Trim() != string.Empty)
+                    {
+                        objTransferNote.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%' ORDER BY Prod_Code";
+                    }
+                    else
+                    {
+                        objTransferNote.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product ORDER BY Prod_Code";
+                    }
+                }
+            }
+            objTransferNote.DataetName = "dsProduct";
+            objTransferNote.GetItemDetails();
+            search.dgSearch.DataSource = objTransferNote.GetItemDataset.Tables["dsProduct"];
+            search.prop_Focus = txtProductCode;
+            search.Show();
+        }
+
+        private void txtProductCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtProductCode.Text = search.Code.Trim();
+                txtProductName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void txtPhysicalQty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                    objTransferNote.ToLocaCode = txtLocaCode.Text.ToString().Trim();
+                    objTransferNote.SqlStatement = "SELECT Loca, Loca_Descrip FROM location WHERE Loca = '";
+                    objTransferNote.ReadToLocationCode();
+                    if (objTransferNote.ToLocaName  == string.Empty)
+                    {
+                        MessageBox.Show("Destination Location Not Found. Please Select Destination Locatin.", "Transfer Goods Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtLocaCode.Focus();
+                    }
+
+                    objTransferNote.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, Stock_Master.Qty, product.Pack_Size FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                    objTransferNote.ReadProductDetails();
+                    if (objTransferNote.ProductName != string.Empty)
+                    {
+                        txtProductName.Text = objTransferNote.ProductName;
+                        lblCurrentQty.Text = (string)objTransferNote.CurrentQty.ToString();
+                        objTransferNote.SqlStatement = "SELECT qty FROM TransactionTemp_Details WHERE Prod_Code = '" + objTransferNote.ProductCode + "' AND Doc_No = '" + objTransferNote.TempDocNo + "' AND IId = 'TGN' AND Loca = ";
+                        objTransferNote.ReadExsistProductDetails();
+                        txtQty.Text = (string)objTransferNote.Qty.ToString();
+                        txtQty.Select(0, txtQty.Text.Trim().Length);
+                        txtQty.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Product Code Not Found. Please Check Product Code.", "Transfer Goods Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+            }
+        }
+
+        private void txtQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtQty.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtQty.Text) > 0)
+            {
+                objTransferNote.ProductCode = txtProductCode.Text.Trim().ToUpper();
+                objTransferNote.ProductName = txtProductName.Text.Trim().ToUpper();
+                objTransferNote.CurrentQty = float.Parse(lblCurrentQty.Text.ToString());
+                objTransferNote.Qty  = float.Parse(txtQty.Text.ToString());
+                objTransferNote.Amount = decimal.Parse(txtQty.Text.ToString()) * objTransferNote.SellingPrice;
+                objTransferNote.UpdateTransferNoteTempDataSet();
+                objTransferNote.GetTempDataset();
+                dataGridTempTGN.DataSource = objTransferNote.TempTransferNote.Tables["TransferNote"];
+                dataGridTempTGN.Refresh();
+                txtProductCode.Text = string.Empty;
+                txtProductName.Text = string.Empty;
+                txtQty.Text = string.Empty;
+                lblCurrentQty.Text = string.Empty;
+                txtLocaCode.Enabled = false;
+                txtLocaName.Enabled = false;
+                btnLocaSearch.Enabled = false;
+                txtReference.Enabled = false;
+                txtRemarks.Enabled = false;
+
+                objTransferNote.GetTotalValues();
+
+                lblTotalQty.Text = objTransferNote.TotalQty.ToString();
+                lblTotalAmount.Text = objTransferNote.TotalAmount.ToString();
+                
+                txtProductCode.Focus();
+            }
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            objTransferNote.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'TGN' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+            objTransferNote.ReadTempTransDetails();
+            if (objTransferNote.RecordFound != true)
+            {
+                MessageBox.Show("Transfer Of Goods Note Details Not Found.", "Transfer Of Goods Note Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            objTransferNote.Remark = txtRemarks.Text.Trim();
+            objTransferNote.Reference = txtReference.Text.Trim();
+            objTransferNote.TransferNoteApply();
+            MessageBox.Show("Transfer Of Goods Note Successfully Applied as Document No. " + objTransferNote.OrgDocNo, "Transfer Of Goods Note Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            objTransferNote.GetDataSetForReport();
+            dsDataForReport = objTransferNote.GetReportDataset;
+            rptTransferNote TransferNote = new rptTransferNote();
+            TransferNote.SetDataSource(dsDataForReport);
+
+            objRepViewer.crystalReportViewer1.ReportSource = TransferNote;
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+
+            this.Close();
+            this.Dispose();
+            TransferNote = null;
+        }
+
+        private void frmTransferGoodNote_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void frmTransferGoodNote_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            TransferNote = null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridTempTGN_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridTempTGN_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridTempTGN.SelectedRows.Count <= 0 || dataGridTempTGN.SelectedRows[0].Cells[0].ToString() == ""  )
+            {
+                MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                txtProductCode.Text= dataGridTempTGN.SelectedRows[0].Cells[0].Value.ToString();
+                txtProductName.Text = dataGridTempTGN.SelectedRows[0].Cells[1].Value.ToString();
+                objTransferNote.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, Stock_Master.Qty, product.Pack_Size FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objTransferNote.ReadProductDetails();
+                lblCurrentQty.Text = (string)objTransferNote.CurrentQty.ToString();
+                txtQty.Text = dataGridTempTGN.SelectedRows[0].Cells[5].Value.ToString();
+                lblAmount.Text = dataGridTempTGN.SelectedRows[0].Cells[6].Value.ToString();
+                txtQty.Focus();
+            }
+        }
+
+        private void dataGridTempTGN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && dataGridTempTGN.SelectedRows[0].Cells[0].Value.ToString()!= string.Empty )
+            {
+                if (MessageBox.Show("Are You Sure You want to Delete This Item. ", "Transfer Of Goods Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) 
+                {
+                objTransferNote.TempDocNo = lblTempDocNo.Text.Trim();
+                objTransferNote.ProductCode = dataGridTempTGN.SelectedRows[0].Cells[0].Value.ToString();
+                objTransferNote.DeleteProductDetaile();
+                objTransferNote.GetTempDataset();
+                dataGridTempTGN.DataSource = objTransferNote.TempTransferNote.Tables["TransferNote"];
+                dataGridTempTGN.Refresh();
+
+                objTransferNote.GetTotalValues();
+
+                lblTotalQty.Text = objTransferNote.TotalQty.ToString();
+                lblTotalAmount.Text = objTransferNote.TotalAmount.ToString();
+                
+                txtProductCode.Focus();
+                }
+            }
+        }
+
+        private void dataGridTempTGN_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            clsDGV dg = new clsDGV();
+            dg.invoke(e);
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            objTransferNote.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'TGN' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+            objTransferNote.ReadTempTransDetails();
+            if (objTransferNote.RecordFound != true)
+            {
+                MessageBox.Show("Transfer Of Goods Note Details Not Found.", "Transfer Of Goods Note Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            objTransferNote.Remark = txtRemarks.Text.Trim();
+
+            objTransferNote.GetDataSetForPreview();
+            dsDataForReport = objTransferNote.GetReportDataset;
+            rptTransferNote TransferNote = new rptTransferNote();
+            TransferNote.SetDataSource(dsDataForReport);
+
+            objRepViewer.crystalReportViewer1.ReportSource = TransferNote;
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+        }
+
+        private void btnSaveDocSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            objTransferNote.SqlStatement = "SELECT Doc_No [Document No], Post_Date + '  ' + Transaction_Save_Header.To_Loca, Location.Loca_Descrip [To Location] FROM Transaction_Save_Header INNER JOIN location on Transaction_Save_Header.To_Loca = Location.Loca WHERE Iid = 'TGN' AND Transaction_Save_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+            objTransferNote.DataetName = "Table";
+            objTransferNote.GetItemDetails();
+
+            search.dgSearch.DataSource = objTransferNote.GetItemDataset.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = lblTempDocNo;
+        }
+
+        private void lblTempDocNo_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                if (MessageBox.Show("Are You Sure You want to Load Saved Transfer Of Goods Note Document No :" + search.Code.Trim() + ". ", "Transfer Of Goods Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+
+                    objTransferNote.RecallSaveDocNo = search.Code.Trim();
+                    objTransferNote.SqlStatement = "SELECT Transaction_Save_Header.*, Location.Loca_Descrip FROM Transaction_Save_Header INNER JOIN Location ON Location.Loca = Transaction_Save_Header.To_Loca WHERE iid = 'TGN' AND Doc_No = '" + search.Code.Trim() + "' AND Transaction_Save_Header.Loca = ";
+                    objTransferNote.ReadSavedDocument();
+                    if (objTransferNote.RecordFound)
+                    {
+                        lblTempDocNo.Text = objTransferNote.TempDocNo;
+                        txtLocaCode.Text = objTransferNote.ToLocaCode.ToString();
+                        txtLocaName.Text = objTransferNote.ToLocaName.ToString();
+                        txtReference.Text = objTransferNote.Remark.ToString();
+                        txtRemarks.Text = objTransferNote.Remark.ToString();
+
+                        objTransferNote.GetTempDataset();
+                        dataGridTempTGN.DataSource = objTransferNote.TempTransferNote.Tables["TransferNote"];
+                        dataGridTempTGN.Refresh();
+
+                        objTransferNote.GetTotalValues();
+
+                        lblTotalQty.Text = objTransferNote.TotalQty.ToString();
+                        lblTotalAmount.Text = objTransferNote.TotalAmount.ToString();
+                        txtLocaCode.Enabled = false;
+                        txtLocaName.Enabled = false;
+                        btnLocaSearch.Enabled = false;
+                        btnSaveDocSearch.Enabled = false;
+
+                        //txtProductCode.Focus();
+                    }
+                }
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure You want to Save This Document. ", "Transfer Of Goods Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                objTransferNote.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'TGN' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                objTransferNote.ReadTempTransDetails();
+                if (objTransferNote.RecordFound != true)
+                {
+                    MessageBox.Show("Transfer Of Goods Note Details Not Found.", "Transfer Of Goods Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                objTransferNote.Remark = txtRemarks.Text.Trim();
+                objTransferNote.Reference = txtReference.Text.Trim();
+                objTransferNote.TransferNoteSave();
+                MessageBox.Show("Transfer Of Goods Note Successfully Saved as Document No. " + objTransferNote.OrgDocNo, "Transfer Of Goods Note Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
+                this.Dispose();
+                TransferNote = null;
+            }
+        }
+
+    }
+}

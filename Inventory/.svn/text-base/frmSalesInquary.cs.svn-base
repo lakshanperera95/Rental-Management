@@ -1,0 +1,1518 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmSalesInquary : Form
+    {
+        public frmSalesInquary()
+        {
+            InitializeComponent();
+        }
+
+                public int intRepOption;
+
+        frmSearch search = new frmSearch();
+
+        clsSalesInquary objMasterDetails = new clsSalesInquary();
+
+        private string strQuery;
+
+        private static frmSalesInquary SalesInquary;
+
+        public static frmSalesInquary GetSalesInquary
+        {
+            get
+            {
+                return SalesInquary;
+            }
+            set
+            {
+                SalesInquary = value;
+            }
+        }
+
+        private void frmSalesInquary_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SalesInquary = null;
+        }
+
+        private void frmSalesInquary_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            SalesInquary = null;
+        }
+
+        private void txtCodeFrom_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null)
+            {
+                txtCodeFrom.Text = search.Code.Trim();
+                txtDescriptionFrom.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtCodeFrom.Text != string.Empty)
+            {
+                txtCodeTo.Focus();
+            }
+        }
+
+        private void txtCodeTo_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null)
+            {
+                txtCodeTo.Text = search.Code.Trim();
+                txtDescriptionTo.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtCodeTo.Text != string.Empty)
+            {
+                btnDisplay.Focus();
+            }
+        }
+
+        private void btnSearchCodeFrom_Click(object sender, EventArgs e)
+        {
+            MainClass.mdi.Cursor = Cursors.WaitCursor;
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            switch (intRepOption)
+            {
+                case 100://Product select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionFrom.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 101://Deaprtment select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Dept_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Name LIKE'%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Dept_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department ORDER BY Dept_Code";
+                        }
+                    }
+                    break;
+
+                case 102://stock Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+                case 103://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 104://manufacturer Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                    }
+                    break;
+
+                case 200://Product select for the search in Purchasing Report
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionFrom.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 201://Deaprtment select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Dept_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Name LIKE'%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Dept_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department ORDER BY Dept_Code";
+                        }
+                    }
+                    break;
+
+                case 202://stock Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+                case 203://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 204://manufacturer Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                    }
+                    break;
+
+                case 300://Product select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionFrom.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 301://Deaprtment select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Dept_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Name LIKE'%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Dept_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department ORDER BY Dept_Code";
+                        }
+                    }
+                    break;
+
+                case 302://stock Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+                case 303://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 304://manufacturer Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                    }
+                    break;
+
+                case 400://Product select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionFrom.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 401://Deaprtment select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Dept_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department WHERE Dept_Name LIKE'%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Dept_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department ORDER BY Dept_Code";
+                        }
+                    }
+                    break;
+
+                case 402://stock Category-wise
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionFrom.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+
+                case 403://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 404://Product select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeFrom.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionFrom.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+                case 405://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+                case 406://Customer select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Cust_code [Code], Cust_Name [Customer Name] FROM Customer WHERE Cust_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Cust_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Cust_code [Code], Cust_Name [Customer Name] FROM Customer Cust_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Cust_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Cust_code [Code], Cust_Name [Customer Name] FROM Customer ORDER BY Cust_Code";
+                        }
+                    }
+                    break;
+                case 407://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+                case 408://Customer select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Cust_code [Code], Cust_Name [Customer Name] FROM Customer WHERE Cust_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Cust_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Cust_code [Code], Cust_Name [Customer Name] FROM Customer Cust_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Cust_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Cust_code [Code], Cust_Name [Customer Name] FROM Customer ORDER BY Cust_Code";
+                        }
+                    }
+                    break;
+
+                case 411://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 413://Supplier select for the search
+                    if (txtCodeFrom.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionFrom.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionFrom.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            objMasterDetails.CodeFrom = txtDescriptionFrom.Text.Trim();
+            objMasterDetails.SqlStatement = strQuery;
+            objMasterDetails.dsName = "Table";
+            objMasterDetails.RetriveData();
+
+            search.dgSearch.DataSource = objMasterDetails.ResultSet.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = txtCodeFrom;
+        }
+
+        private void btnSearchCodeTo_Click(object sender, EventArgs e)
+        {
+            MainClass.mdi.Cursor = Cursors.WaitCursor;
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            switch (intRepOption)
+            {
+                case 100://Product select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeTo.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionTo.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 101://Deaprtment select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE Dept_Code LIKE '%" + txtCodeTo.Text.Trim() + "%' ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE Dept_Name LIKE '%" + txtDescriptionTo.Text.Trim() + "%' ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department ORDER BY Code";
+                        }
+                    }
+                    break;
+                case 102://stock Category-wise
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeTo.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionTo.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+                case 103://Supplier select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeTo.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionTo.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 104://manufacturer Category-wise
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                    }
+                    break;
+
+                case 200://Product select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeTo.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionTo.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 201://Deaprtment select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE Dept_Code LIKE '%" + txtCodeTo.Text.Trim() + "%' ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE Dept_Name LIKE '%" + txtDescriptionTo.Text.Trim() + "%' ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department ORDER BY Code";
+                        }
+                    }
+                    break;
+                case 202://stock Category-wise
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeTo.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionTo.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+                case 203://Supplier select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeTo.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionTo.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 204://manufacturer Category-wise
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                    }
+                    break;
+
+                case 300://Product select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtCodeTo.Text.Trim() + "%') ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product WHERE (Prod_Code LIKE '%" + txtDescriptionTo.Text.Trim() + "%') ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Prod_Code AS Code, Prod_Name AS Product FROM Product ORDER BY Code";
+                        }
+                    }
+                    break;
+
+                case 301://Deaprtment select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE Dept_Code LIKE '%" + txtCodeTo.Text.Trim() + "%' ORDER BY Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE Dept_Name LIKE '%" + txtDescriptionTo.Text.Trim() + "%' ORDER BY Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department ORDER BY Code";
+                        }
+                    }
+                    break;
+                case 302://stock Category-wise
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Code LIKE '%" + txtCodeTo.Text.Trim() + "%'ORDER BY Cat_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category WHERE Cat_Name LIKE '%" + txtDescriptionTo.Text.Trim() + "%'ORDER BY Cat_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Cat_Code [Category Code], Cat_Name [Category Name] FROM Category ORDER BY Cat_Code ";
+                        }
+                    }
+                    break;
+                case 303://Supplier select for the search
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier WHERE Supp_Code Like '%" + txtCodeTo.Text.Trim() + "%' ORDER BY Supp_Code";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier Supp_Name Like '%" + txtDescriptionTo.Text.Trim() + "%' ORDER BY Supp_Code";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT  Supp_code [Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                        }
+                    }
+                    break;
+
+                case 304://manufacturer Category-wise
+                    if (txtCodeTo.Text.Trim() != string.Empty)
+                    {
+                        strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                    }
+                    else
+                    {
+                        if (txtDescriptionTo.Text != string.Empty)
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                        else
+                        {
+                            strQuery = "SELECT Manf_Code [Manufacturer Code],Manf_Name [Manufacturer Name] FROM manufacturer ORDER BY Manf_Code ";
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            objMasterDetails.CodeFrom = txtDescriptionTo.Text.Trim();
+            objMasterDetails.SqlStatement = strQuery;
+            objMasterDetails.dsName = "Table";
+            objMasterDetails.RetriveData();
+
+            search.dgSearch.DataSource = objMasterDetails.ResultSet.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = txtCodeTo;
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+            MainClass.mdi.Cursor = Cursors.WaitCursor;
+            ///////////////////////////
+            try
+            {
+                // Cursor cu = new Cursor(@"..\\..\\horse.ani");
+
+                //this.Cursor = new Cursor(this.GetType().Assembly.GetManifestResourceStream("Resources.horse.ani"));
+
+                // MainClass.mdi.Cursor = cu;
+                // this.Cursor = AdvancedCursors.Create(Path.Combine(Application.StartupPath, "blob.ani"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            DataSet dsDataForReport = new DataSet();
+            clsReportViewer objRepView = new clsReportViewer();
+            clsSalesInquary objSalesInquary = new clsSalesInquary();
+
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            if (DateTime.Parse(dtDateFrom.Text) > DateTime.Parse(dtDateTo.Text))
+            {
+                MessageBox.Show("Selected Date Is Not Valid. Please Select Valid Date Range.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            MainClass.mdi.Cursor = Cursors.WaitCursor;
+            switch (intRepOption)
+            {
+                case 100:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND ProductSalesSummery.Prod_Code between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProductSales ProductSaleDet = new rptProductSales();
+                    ProductSaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ProductSaleDet;
+                    break;
+
+                case 101:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Department_Id, Department.Dept_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN Department ON Department.Dept_Code = Product.Department_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Department_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDepartmentSales DepartmentSaleDet = new rptDepartmentSales();
+                    DepartmentSaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DepartmentSaleDet;
+                    break;
+
+                case 102:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Category_Id, Category.Cat_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN Category ON Category.Cat_Code = Product.Category_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Category_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCategorySales CategorySaleDet = new rptCategorySales();
+                    CategorySaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = CategorySaleDet;
+                    break;
+
+                case 103:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Supplier_Id, Supplier.Supp_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN Supplier ON Supplier.Supp_Code = Product.Supplier_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Supplier_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSupplierSales SupplierSaleDet = new rptSupplierSales();
+                    SupplierSaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = SupplierSaleDet;
+                    break;
+
+                case 104:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Manufacturer_Id, manufacturer.Manf_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN manufacturer ON manufacturer.Manf_Code = Product.Manufacturer_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Manufacturer_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptManufactureSales ManufacturSaleDet = new rptManufactureSales();
+                    ManufacturSaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ManufacturSaleDet;
+                    break;
+
+                case 105:
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.MonthlySalesSummary();
+                    objRepView.SqlStatement = "select Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbReportMonthlyAnalyse Order by Idx";
+                    objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptMonthlySalesAnalys MonyhlySaleDet = new rptMonthlySalesAnalys();
+                    MonyhlySaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = MonyhlySaleDet;
+                    break;
+
+                case 106:
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailySalesSummary ();
+                    objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbReportDailyAnalyse Order by Idx";
+                    objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDailySalesAnalys DailySaleDet = new rptDailySalesAnalys();
+                    DailySaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DailySaleDet;
+                    break;
+
+                case 107:
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailySalesSummary();
+                    objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Product.Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Product ON tbSalesAnalyseType2.Prod_Code = Product.Prod_Code Order by Idx";
+                    objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProductDailySalesAnalys ProdDailySaleDet = new rptProductDailySalesAnalys();
+                    ProdDailySaleDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ProdDailySaleDet;
+                    break;
+                    //Purchasing Repot
+                case 200:
+                    objRepView.SqlStatement = "select Transaction_Details.Loca, Location.Loca_Descrip,Transaction_Details.Doc_No, Transaction_Details.Iid, Transaction_Details.Post_Date Purch_Date, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Qty WHEN 'SRN' THEN -Transaction_Details.Qty ELSE 0 END Qty, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Amount WHEN 'SRN' THEN -Transaction_Details.Amount ELSE 0 END Amount, Transaction_Details.Purchase_price, Transaction_Details.Selling_Price , '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from Transaction_Details INNER JOIN Product ON Transaction_Details.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = Transaction_Details.Loca WHERE (Transaction_Details.IId = 'GRN' OR Transaction_Details.Iid = 'SRN') AND Transaction_Details.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,Transaction_Details.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Transaction_Details.Prod_Code between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsPurchasingDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProdWisePurchase ProductPurchDet = new rptProdWisePurchase();
+                    ProductPurchDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ProductPurchDet;
+                    break;
+
+                case 201:
+                    objRepView.SqlStatement = "select Transaction_Details.Loca, Location.Loca_Descrip,Transaction_Details.Doc_No, Transaction_Details.Iid, Transaction_Details.Post_Date Purch_Date, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Product.Department_Id, Department.Dept_Name, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Qty WHEN 'SRN' THEN -Transaction_Details.Qty ELSE 0 END Qty, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Amount WHEN 'SRN' THEN -Transaction_Details.Amount ELSE 0 END Amount, Transaction_Details.Purchase_price, Transaction_Details.Selling_Price , '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from Transaction_Details INNER JOIN Product ON Transaction_Details.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = Transaction_Details.Loca INNER JOIN Department ON Product.Department_Id = Department.Dept_Code WHERE (Transaction_Details.IId = 'GRN' OR Transaction_Details.Iid = 'SRN') AND Transaction_Details.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,Transaction_Details.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Department_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsPurchasingDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDepartmentWisePurchase DeptPurchDet = new rptDepartmentWisePurchase();
+                    DeptPurchDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DeptPurchDet;
+                    break;
+                case 202:
+                    objRepView.SqlStatement = "select Transaction_Details.Loca, Location.Loca_Descrip,Transaction_Details.Doc_No, Transaction_Details.Iid, Transaction_Details.Post_Date Purch_Date, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Product.Category_Id, Category.Cat_Name, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Qty WHEN 'SRN' THEN -Transaction_Details.Qty ELSE 0 END Qty, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Amount WHEN 'SRN' THEN -Transaction_Details.Amount ELSE 0 END Amount, Transaction_Details.Purchase_price, Transaction_Details.Selling_Price , '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from Transaction_Details INNER JOIN Product ON Transaction_Details.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = Transaction_Details.Loca INNER JOIN Category ON Product.Category_Id = Category.Cat_Code WHERE (Transaction_Details.IId = 'GRN' OR Transaction_Details.Iid = 'SRN') AND Transaction_Details.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,Transaction_Details.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Category_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsPurchasingDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCategoryWisePurchase CatPurchDet = new rptCategoryWisePurchase();
+                    CatPurchDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = CatPurchDet;
+                    break;
+                case 203:
+                    objRepView.SqlStatement = "select Transaction_Details.Loca, Location.Loca_Descrip,Transaction_Details.Doc_No, Transaction_Details.Iid, Transaction_Details.Post_Date Purch_Date, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Product.Supplier_Id, Supplier.Supp_Name, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Qty WHEN 'SRN' THEN -Transaction_Details.Qty ELSE 0 END Qty, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Amount WHEN 'SRN' THEN -Transaction_Details.Amount ELSE 0 END Amount, Transaction_Details.Purchase_price, Transaction_Details.Selling_Price , '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from Transaction_Details INNER JOIN Product ON Transaction_Details.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = Transaction_Details.Loca INNER JOIN Supplier ON Product.Supplier_Id = Supplier.Supp_Code WHERE (Transaction_Details.IId = 'GRN' OR Transaction_Details.Iid = 'SRN') AND Transaction_Details.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,Transaction_Details.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Supplier_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsPurchasingDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSupplierWisePurchase SuppPurchDet = new rptSupplierWisePurchase();
+                    SuppPurchDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = SuppPurchDet;
+                    break;
+                case 204:
+                    objRepView.SqlStatement = "select Transaction_Details.Loca, Location.Loca_Descrip,Transaction_Details.Doc_No, Transaction_Details.Iid, Transaction_Details.Post_Date Purch_Date, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Product.Manufacturer_Id, manufacturer.Manf_Name, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Qty WHEN 'SRN' THEN -Transaction_Details.Qty ELSE 0 END Qty, CASE Transaction_Details.Iid WHEN 'GRN' THEN Transaction_Details.Amount WHEN 'SRN' THEN -Transaction_Details.Amount ELSE 0 END Amount, Transaction_Details.Purchase_price, Transaction_Details.Selling_Price , '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from Transaction_Details INNER JOIN Product ON Transaction_Details.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = Transaction_Details.Loca INNER JOIN manufacturer ON Product.Manufacturer_Id = manufacturer.Manf_Code WHERE (Transaction_Details.IId = 'GRN' OR Transaction_Details.Iid = 'SRN') AND Transaction_Details.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,Transaction_Details.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Manufacturer_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsPurchasingDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptManufacWisePurchase MnauPurchDet = new rptManufacWisePurchase();
+                    MnauPurchDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = MnauPurchDet;
+                    break;
+
+                case 205:
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.MonthlyPurchaseSummary();
+                    objRepView.SqlStatement = "select Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbReportMonthlyAnalyse Order by Idx";
+                    objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptMonthlyPurchaseAnalys MonyhlyPurchDet = new rptMonthlyPurchaseAnalys();
+                    MonyhlyPurchDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = MonyhlyPurchDet;
+                    break;
+                    //Profit Report
+                case 300:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND ProductSalesSummery.Prod_Code between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProductGrossProfit ProductProfitDet = new rptProductGrossProfit();
+                    ProductProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ProductProfitDet;
+                    break;
+
+                case 301:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Department_Id, Department.Dept_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN Department ON Department.Dept_Code = Product.Department_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Department_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDepartmentProfit DepartmentProfitDet = new rptDepartmentProfit();
+                    DepartmentProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DepartmentProfitDet;
+                    break;
+
+                case 302:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Category_Id, Category.Cat_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN Category ON Category.Cat_Code = Product.Category_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Category_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCategoryProfit CategoryProfitDet = new rptCategoryProfit();
+                    CategoryProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = CategoryProfitDet;
+                    break;
+
+                case 303:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Supplier_Id, Supplier.Supp_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN Supplier ON Supplier.Supp_Code = Product.Supplier_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Supplier_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSupplierProfit SupplierProfitDet = new rptSupplierProfit();
+                    SupplierProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = SupplierProfitDet;
+                    break;
+
+                case 304:
+                    objRepView.SqlStatement = "select ProductSalesSummery.Loca, Location.Loca_Descrip, CASE ProductSalesSummery.Iid WHEN 'INV' THEN '001' WHEN 'CUR' THEN 'R01' ELSE ProductSalesSummery.Iid END Iid, ProductSalesSummery.Sales_Date, ProductSalesSummery.Prod_Code, Product.Manufacturer_Id, manufacturer.Manf_Name, ProductSalesSummery.Prod_Name, ProductSalesSummery.Qty, ProductSalesSummery.Amount, ProductSalesSummery.Purchase_price, ProductSalesSummery.Selling_Price, '" + txtCodeFrom.Text.Trim() + "' CodeFrom, '" + txtCodeTo.Text.Trim() + "' CodeTo, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Location ON Location.Loca = ProductSalesSummery.Loca INNER JOIN manufacturer ON manufacturer.Manf_Code = Product.Manufacturer_Id WHERE ProductSalesSummery.Loca = " + LoginManager.LocaCode + " AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "',103) ) AND Product.Manufacturer_Id between '" + txtCodeFrom.Text.Trim() + "' and '" + txtCodeTo.Text.Trim() + "'";
+                    objRepView.DataSetName = "dsSalesDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptManufactureProfit ManufacturProfitDet = new rptManufactureProfit();
+                    ManufacturProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ManufacturProfitDet;
+                    break;
+
+                case 305:
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.MonthlyProfitSummary();
+                    objRepView.SqlStatement = "select Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbReportMonthlyAnalyse Order by Idx";
+                    objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptMonthlyProfitAnalys MonyhlyProfitDet = new rptMonthlyProfitAnalys();
+                    MonyhlyProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = MonyhlyProfitDet;
+                    break;
+
+                case 306:
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailySalesSummary();
+                    objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbReportDailyAnalyse Order by Idx";
+                    objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDailyProfitAnalys DailyProfitDet = new rptDailyProfitAnalys();
+                    DailyProfitDet.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DailyProfitDet;
+                    break;
+
+                case 400:
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Iid = "PR";
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailyProfitSummary();
+                    objRepView.SqlStatement = "select Prod_Code, Prod_Name, Purchase_price, Selling_Price, Purch_Amount, Sel_Amount, Pro_Amount, Tr_Date, Sel_Qty, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbDailyPurSaleProfAnalyse";
+                    objRepView.DataSetName = "dsAnalyseData";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProductAnalyse DailyProfitSummary = new rptProductAnalyse();
+                    DailyProfitSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DailyProfitSummary;
+                    break;
+                case 401:
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Iid = "DP";
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailyProfitSummary();
+                    objRepView.SqlStatement = "select Prod_Code, Prod_Name, Purchase_price, Selling_Price, Purch_Amount, Sel_Amount, Pro_Amount, Tr_Date, Sel_Qty, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbDailyPurSaleProfAnalyse";
+                    objRepView.DataSetName = "dsAnalyseData";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDepartmentAnalyse DailyDepartmentProfitSummary = new rptDepartmentAnalyse();
+                    DailyDepartmentProfitSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DailyDepartmentProfitSummary;
+                    break;
+                case 402:
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Iid = "CT";
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailyProfitSummary();
+                    objRepView.SqlStatement = "select Prod_Code, Prod_Name, Purchase_price, Selling_Price, Purch_Amount, Sel_Amount, Pro_Amount, Tr_Date, Sel_Qty, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbDailyPurSaleProfAnalyse";
+                    objRepView.DataSetName = "dsAnalyseData";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCategoryAnalyse DailyCategoryProfitSummary = new rptCategoryAnalyse();
+                    DailyCategoryProfitSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DailyCategoryProfitSummary;
+                    break;
+                case 403:
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.DateFrom = dtDateFrom.Text.Trim();
+                    objSalesInquary.DateTo = dtDateTo.Text.Trim();
+                    objSalesInquary.Iid = "SP";
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.DailyProfitSummary();
+                    objRepView.SqlStatement = "select Prod_Code, Prod_Name, Purchase_price, Selling_Price, Purch_Amount, Sel_Amount, Pro_Amount, Tr_Date, Sel_Qty, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbDailyPurSaleProfAnalyse";
+                    objRepView.DataSetName = "dsAnalyseData";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSupplierAnalyse DailySupplierProfitSummary = new rptSupplierAnalyse();
+                    DailySupplierProfitSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DailySupplierProfitSummary;
+                    break;
+
+                case 404:   //Product Bin Card
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.ProductBinCard();
+                    objRepView.SqlStatement = "select tbBinCard.*, Product.Prod_Name, Product.Purchase_price, Product.Selling_Price, Location.Loca_Descrip FROM tbBinCard INNER JOIN Product On tbBinCard.Prod_Code = Product.Prod_Code INNER JOIN Location On Location.Loca = " + LoginManager.LocaCode;
+                    objRepView.DataSetName = "dsProductBinCard";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProductBinCard ProductBinCard = new rptProductBinCard();
+                    ProductBinCard.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ProductBinCard;
+                    break;
+
+                case 405:   //Creditor Statement
+                    objSalesInquary.Iid = "SUP";
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.CreditorStatement();
+                    objRepView.SqlStatement = "select tbCreditorStatement.*, Supplier.Supp_Name, Location.Loca_Descrip from tbCreditorStatement inner join Supplier On tbCreditorStatement.Acc_No = Supplier.Supp_Code inner join Location on tbCreditorStatement.Loca = Location.Loca";
+                    objRepView.DataSetName = "SupplierStatement";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCreditorStatement CreditorStatement = new rptCreditorStatement();
+                    CreditorStatement.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = CreditorStatement;
+                    break;
+
+                case 406:   //debtor Statement
+                    objSalesInquary.Iid = "CUS";
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.CreditorStatement();
+                    objRepView.SqlStatement = "select tbCreditorStatement.*, Customer.Cust_Name Supp_Name, Location.Loca_Descrip from tbCreditorStatement inner join Customer On tbCreditorStatement.Acc_No = Customer.Cust_Code inner join Location on tbCreditorStatement.Loca = Location.Loca";
+                    objRepView.DataSetName = "SupplierStatement";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDebetorStatement DebtorStatement = new rptDebetorStatement();
+                    DebtorStatement.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DebtorStatement;
+                    break;
+
+                case 407:   //Creditor Balance
+                    objSalesInquary.Iid = "SUP";
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.CreditorBalance();
+                    objRepView.SqlStatement = "select tbCreditorStatement.*, Supplier.Supp_Name, Location.Loca_Descrip from tbCreditorStatement inner join Supplier On tbCreditorStatement.Acc_No = Supplier.Supp_Code inner join Location on tbCreditorStatement.Loca = Location.Loca";
+                    objRepView.DataSetName = "SupplierStatement";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCreditorBalance CreditorBalance = new rptCreditorBalance();
+                    CreditorBalance.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = CreditorBalance;
+                    break;
+
+                case 408:   //debtor Balance
+                    objSalesInquary.Iid = "CUS";
+                    objSalesInquary.CodeFrom = txtCodeFrom.Text.Trim();
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.CreditorBalance();
+                    objRepView.SqlStatement = "select tbCreditorStatement.*, Customer.Cust_Name Supp_Name, Location.Loca_Descrip from tbCreditorStatement inner join Customer On tbCreditorStatement.Acc_No = Customer.Cust_Code inner join Location on tbCreditorStatement.Loca = Location.Loca";
+                    objRepView.DataSetName = "SupplierStatement";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptDebetorBalance DebtorBalance = new rptDebetorBalance();
+                    DebtorBalance.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = DebtorBalance;
+                    break;
+
+                case 409:   //Profitable Moving Report
+                    objSalesInquary.DateFrom =  dtDateFrom.Text ;
+                    objSalesInquary.DateTo = dtDateTo.Text;
+                    objSalesInquary.Loca = LoginManager.LocaCode;
+                    objSalesInquary.ProfitableMovingProduct();
+                    if (MessageBox.Show("Do You wan't to Sort By Profit Amount. ", this.Text , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        objRepView.SqlStatement = "select tbProfitableMovingProduct.Prod_Code, tbProfitableMovingProduct.Prod_Name, tbProfitableMovingProduct.Purchase_price, tbProfitableMovingProduct.Selling_Price, tbProfitableMovingProduct.Sold_Qty, tbProfitableMovingProduct.Pur_Qty, tbProfitableMovingProduct.Profit_Amount, tbProfitableMovingProduct.Loca, Location.Loca_Descrip, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from tbProfitableMovingProduct INNER JOIN Location On tbProfitableMovingProduct.Loca = Location.Loca order by Profit_Amount desc, Sold_Qty Desc";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select tbProfitableMovingProduct.Prod_Code, tbProfitableMovingProduct.Prod_Name, tbProfitableMovingProduct.Purchase_price, tbProfitableMovingProduct.Selling_Price, tbProfitableMovingProduct.Sold_Qty, tbProfitableMovingProduct.Pur_Qty, tbProfitableMovingProduct.Profit_Amount, tbProfitableMovingProduct.Loca, Location.Loca_Descrip, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo from tbProfitableMovingProduct INNER JOIN Location On tbProfitableMovingProduct.Loca = Location.Loca order by Sold_Qty Desc, Profit_Amount desc";
+                    }
+                    objRepView.DataSetName = "dsProfitableProduct";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptProfitableProduct ProfitableProduct = new rptProfitableProduct();
+                    ProfitableProduct.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ProfitableProduct;
+                    break;
+
+                case 410:
+
+                    objRepView.SqlStatement = "select product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Supplier_Id, Supplier.Supp_Name, product.Reorder_Level, Product.Reorder_Qty, stock_master.Qty from product Inner Join stock_master on product.Prod_Code = stock_master.Prod_Code inner join supplier on product.Supplier_Id = Supplier.Supp_Code where product.Reorder_Level > 0 and product.Reorder_Level < stock_master.Qty And Stock_Master.Loca = '" + LoginManager.LocaCode + "'";
+                    objRepView.DataSetName = "dsReOrderLevelDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptReOrderLevelReport ReOrderLevel = new rptReOrderLevelReport();
+                    ReOrderLevel.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = ReOrderLevel;
+                    break;
+
+                case 411:
+
+                    objRepView.SqlStatement = "select product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Supplier_Id, Supplier.Supp_Name, product.Reorder_Level, Product.Reorder_Qty, stock_master.Qty from product Inner Join stock_master on product.Prod_Code = stock_master.Prod_Code inner join supplier on product.Supplier_Id = Supplier.Supp_Code where product.Reorder_Level > 0 and product.Reorder_Level < stock_master.Qty Andproduct.Supplier_Id = '" + txtCodeFrom.Text.Trim() + "' and  Stock_Master.Loca = '" + LoginManager.LocaCode + "'";
+                    objRepView.DataSetName = "dsReOrderLevelDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSupplierReOrderLevelReport SuppReOrderLevel = new rptSupplierReOrderLevelReport();
+                    SuppReOrderLevel.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = SuppReOrderLevel;
+                    break;
+
+                case 412:
+
+                    objRepView.SqlStatement = "select ProductSalesSummery.Prod_Code, ProductSalesSummery.Prod_Name, ISNULL(SUM(CASE Iid WHEN '001' THEN ProductSalesSummery.Qty WHEN 'R01' THEN -ProductSalesSummery.Qty END), 0) Qty, Product.Purchase_price, Product.Selling_Price, Sum(Stock_Master.Qty) Bal_Qty, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo, ProductSalesSummery.Loca, Location.Loca_Descrip from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Stock_Master ON Product.Prod_Code = Stock_Master.Prod_Code INNER JOIN Location ON ProductSalesSummery.Loca = Location.Loca WHERE (CONVERT(DATETIME,ProductSalesSummery.Sales_Date, 103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text + "', 103) AND CONVERT(DATETIME,'" + dtDateTo.Text + "', 103)) AND ProductSalesSummery.Loca = '" + LoginManager.LocaCode + "' GROUP BY ProductSalesSummery.Prod_Code, ProductSalesSummery.Prod_Name,Product.Purchase_price, Product.Selling_Price";
+                    objRepView.DataSetName = "dsProductMoving";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptFastMovingProduct FastMove = new rptFastMovingProduct();
+                    FastMove.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = FastMove;
+                    break;
+
+                case 413:
+
+                    objRepView.SqlStatement = "select ProductSalesSummery.Prod_Code, ProductSalesSummery.Prod_Name, ISNULL(SUM(CASE Iid WHEN '001' THEN ProductSalesSummery.Qty WHEN 'R01' THEN -ProductSalesSummery.Qty END), 0) Qty, Product.Purchase_price, Product.Selling_Price, Sum(Stock_Master.Qty) Bal_Qty, '" + dtDateFrom.Text + "' DateFrom, '" + dtDateTo.Text + "' DateTo, ProductSalesSummery.Loca, Location.Loca_Descrip from ProductSalesSummery INNER JOIN Product ON ProductSalesSummery.Prod_Code = Product.Prod_Code INNER JOIN Stock_Master ON Product.Prod_Code = Stock_Master.Prod_Code INNER JOIN Location ON ProductSalesSummery.Loca = Location.Loca WHERE (Product.Supplier_Id = '"+ txtCodeFrom.Text.Trim() +"') AND (CONVERT(DATETIME,ProductSalesSummery.Sales_Date, 103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text + "', 103) AND CONVERT(DATETIME,'" + dtDateTo.Text + "', 103)) AND ProductSalesSummery.Loca = '" + LoginManager.LocaCode + "' GROUP BY ProductSalesSummery.Prod_Code, ProductSalesSummery.Prod_Name,Product.Purchase_price, Product.Selling_Price";
+                    objRepView.DataSetName = "dsProductMoving";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSuppFastMovingProduct SuppFastMove = new rptSuppFastMovingProduct();
+                    SuppFastMove.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = SuppFastMove;
+                    break;
+                default:
+                    break;
+
+            }
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            MainClass.mdi.Cursor = Cursors.Default;
+            objRepViewer.Show();
+            
+        }
+
+        private void frmSalesInquary_Load(object sender, EventArgs e)
+        {
+            switch (intRepOption)
+            {
+                case 105:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+                case 106:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+                case 205:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+
+                case 305:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+                case 306:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+
+                case 400:
+                    txtCodeFrom.Enabled = true ;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true ;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+
+                case 401:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+
+                case 402:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+
+                case 403:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true;
+                    btnSearchCodeTo.Enabled = false;
+                    break;
+
+                case 404:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    break;
+
+                case 405:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    break;
+
+                case 406:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = true;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    break;
+
+                case 407:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    break;
+
+                case 409:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = true;
+                    dtDateTo.Enabled = true;
+                    break;
+
+                case 410:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    break;
+
+                case 411:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true ;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    break;
+
+                case 412:
+                    txtCodeFrom.Enabled = false;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = false;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = true;
+                    dtDateTo.Enabled = true;
+                    break;
+
+                case 413:
+                    txtCodeFrom.Enabled = true;
+                    txtCodeTo.Enabled = false;
+                    txtDescriptionFrom.Enabled = true;
+                    txtDescriptionTo.Enabled = false;
+                    btnSearchCodeFrom.Enabled = false;
+                    btnSearchCodeTo.Enabled = false;
+                    dtDateFrom.Enabled = true;
+                    dtDateTo.Enabled = true;
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    }
+}

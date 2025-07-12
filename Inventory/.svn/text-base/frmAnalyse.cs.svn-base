@@ -1,0 +1,460 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+namespace Inventory
+{
+    public partial class frmAnalyse : Form
+    {
+        public int intRepOption;    //1000   For Sales Analyse Report   1100    Purchasing analyse Report
+
+        clsAnalyse objAnalyse = new clsAnalyse();
+        private string   strTempDocNo;
+        public frmAnalyse()
+        {
+            InitializeComponent();
+        }
+
+        private static frmAnalyse Analyse;
+
+        private frmSearch search = new frmSearch();
+
+        public static frmAnalyse GetAnalyse
+        {
+            get
+            {
+                return Analyse;
+            }
+            set
+            {
+                Analyse = value;
+            }
+        }
+
+        private void frmAnalyse_Load(object sender, EventArgs e)
+        {
+            objAnalyse.SqlStatement = "SELECT Analyse_Temp FROM DocumentNoDetails WHERE Loca = ";
+            objAnalyse.GetTempDocumentNo();
+            strTempDocNo = objAnalyse.TempDocNo;
+            dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+            dataGridViewCollection.Refresh();
+            dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+            dataGridViewSelected.Refresh();
+        }
+
+        private void frmAnalyse_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Analyse = null;
+        }
+
+        private void frmAnalyse_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            Analyse = null;
+        }
+
+        private void radioButtonProduct_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonProduct.Checked == true)
+            {
+                MainClass.mdi.Cursor = Cursors.WaitCursor;
+                objAnalyse.RetriveProductDetails();
+                dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                dataGridViewCollection.Refresh();
+                dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                dataGridViewSelected.Refresh();
+                btnSelectCode.Enabled = false;
+                btnSelectAllCode.Enabled = true;
+                MainClass.getmdi().Cursor = Cursors.Default;
+            }
+        }
+
+        private void radioButtonDepartment_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDepartment.Checked == true)
+            {
+                MainClass.mdi.Cursor = Cursors.WaitCursor;
+                objAnalyse.RetriveDepartmentDetails();
+                dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                dataGridViewCollection.Refresh();
+                dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                dataGridViewSelected.Refresh();
+                btnSelectCode.Enabled = false;
+                btnSelectAllCode.Enabled = true;
+                MainClass.getmdi().Cursor = Cursors.Default;
+            }
+        }
+
+        private void radioButtonCategory_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonCategory.Checked == true)
+            {
+                MainClass.mdi.Cursor = Cursors.WaitCursor;
+                objAnalyse.RetriveCategoryDetails();
+                dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                dataGridViewCollection.Refresh();
+                dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                dataGridViewSelected.Refresh();
+                btnSelectCode.Enabled = false;
+                btnSelectAllCode.Enabled = true;
+                MainClass.getmdi().Cursor = Cursors.Default;
+            }
+        }
+
+        private void radioButtonSupplier_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonSupplier.Checked == true)
+            {
+                MainClass.mdi.Cursor = Cursors.WaitCursor;
+                objAnalyse.RetriveSupplierDetails();
+                dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                dataGridViewCollection.Refresh();
+                dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                dataGridViewSelected.Refresh();
+                btnSelectCode.Enabled = false;
+                btnSelectAllCode.Enabled = true;
+                MainClass.getmdi().Cursor = Cursors.Default;
+            }
+        }
+
+        private void dataGridViewCollection_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewCollection_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (dataGridViewCollection.SelectedRows.Count <= 0 || dataGridViewCollection.SelectedRows[0].Cells[0].ToString() == "")
+                {
+                    MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    objAnalyse.Code = dataGridViewCollection.SelectedRows[0].Cells[0].Value.ToString();
+                    objAnalyse.AddCodeToSelected();
+                    //dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                    //dataGridViewCollection.Refresh();
+                    dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                    dataGridViewSelected.Refresh();
+                    btnSelectCode.Enabled = false;
+                    btnRemoveCode.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {             
+                 MessageBox.Show(ex.Message, "Inventory ",MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void dataGridViewCollection_Click(object sender, EventArgs e)
+        {
+            btnSelectCode.Enabled = true;
+            btnSelectAllCode.Enabled = true;
+        }
+
+        private void btnSelectCode_Click(object sender, EventArgs e)
+        {
+            objAnalyse.Code = dataGridViewCollection.SelectedRows[0].Cells[0].Value.ToString();
+            objAnalyse.AddCodeToSelected();
+            dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+            dataGridViewCollection.Refresh();
+            dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+            dataGridViewSelected.Refresh();
+            btnSelectCode.Enabled = false;
+            btnRemoveCode.Enabled = false;
+        }
+
+        private void btnSelectAllCode_Click(object sender, EventArgs e)
+        {
+            MainClass.mdi.Cursor = Cursors.WaitCursor;
+            objAnalyse.AddAllCodeToSelected();
+            dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+            dataGridViewCollection.Refresh();
+            dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+            dataGridViewSelected.Refresh();
+            btnSelectCode.Enabled = false;
+            btnSelectAllCode.Enabled = false;
+            btnRemoveCode.Enabled = false;
+            MainClass.getmdi().Cursor = Cursors.Default;
+        }
+
+        private void dataGridViewSelected_Click(object sender, EventArgs e)
+        {
+            btnRemoveCode.Enabled = true;
+            btnRemoveAllCode.Enabled = true;
+        }
+
+        private void dataGridViewSelected_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if ( dataGridViewSelected.SelectedRows.Count <= 0 || dataGridViewSelected.SelectedRows[0].Cells[0].ToString() == "" )
+                {
+                    MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    objAnalyse.Code = dataGridViewSelected.SelectedRows[0].Cells[0].Value.ToString();
+                    objAnalyse.RemoveCodeToSelected ();
+                    dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                    dataGridViewCollection.Refresh();
+                    dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                    dataGridViewSelected.Refresh();
+                    btnRemoveCode.Enabled = false;
+                    btnSelectAllCode.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Inventory ", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void btnRemoveCode_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if ( dataGridViewSelected.SelectedRows.Count <= 0 || dataGridViewSelected.SelectedRows[0].Cells[0].ToString() == "" )
+                {
+                    MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    objAnalyse.Code = dataGridViewSelected.SelectedRows[0].Cells[0].Value.ToString();
+                    objAnalyse.RemoveCodeToSelected ();
+                    dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+                    dataGridViewCollection.Refresh();
+                    dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+                    dataGridViewSelected.Refresh();
+                    btnRemoveCode.Enabled = false;
+                    btnRemoveAllCode.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Inventory ", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void btnRemoveAllCode_Click(object sender, EventArgs e)
+        {
+            objAnalyse.RemoveAllCodeToSelected();
+            dataGridViewCollection.DataSource = objAnalyse.TempCollection.Tables["Collection"];
+            dataGridViewCollection.Refresh();
+            dataGridViewSelected.DataSource = objAnalyse.TempSelected.Tables["Selected"];
+            dataGridViewSelected.Refresh();
+            btnSelectCode.Enabled = false;
+            btnRemoveAllCode.Enabled = false;
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+                DataSet dsDataForReport = new DataSet();
+                clsReportViewer objRepView = new clsReportViewer();
+
+                frmReportViewer objRepViewer = new frmReportViewer();
+                if (DateTime.Parse( dtDateFrom.Text) > DateTime.Parse( dtDateTo.Text))
+                {
+                    MessageBox.Show("Selected Date Is Not Valid. Please Select Valid Date Range.", this.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                objAnalyse.DateFrom = dtDateFrom.Text.Trim();
+                objAnalyse.DateTo = dtDateTo.Text.Trim();
+                objAnalyse.Loca = LoginManager.LocaCode;
+                MainClass.mdi.Cursor = Cursors.WaitCursor;
+                if (intRepOption == 1000)
+                {
+                    if (radioButtonProduct.Checked == true) //Sales Analyse
+                    {
+                        objAnalyse.Iid = "PR";
+                        objAnalyse.ProductDailySalesSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Product.Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Product ON tbSalesAnalyseType2.Prod_Code = Product.Prod_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptProductDailySalesAnalys ProdDailySaleDet = new rptProductDailySalesAnalys();
+                        ProdDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = ProdDailySaleDet;
+                    }
+                    else if (radioButtonDepartment.Checked == true)
+                    {
+                        objAnalyse.Iid = "DP";
+                        objAnalyse.ProductDailySalesSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Department.Dept_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Department ON tbSalesAnalyseType2.Prod_Code = Department.Dept_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptDepartmentDailySalesAnalys DeptDailySaleDet = new rptDepartmentDailySalesAnalys();
+                        DeptDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = DeptDailySaleDet;
+                    }
+
+                    else if (radioButtonCategory.Checked == true)
+                    {
+                        objAnalyse.Iid = "CT";
+                        objAnalyse.ProductDailySalesSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Category.Cat_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Category ON tbSalesAnalyseType2.Prod_Code = Category.Cat_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptCategoryDailySalesAnalys CatDailySaleDet = new rptCategoryDailySalesAnalys();
+                        CatDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = CatDailySaleDet;
+                    }
+                    else if (radioButtonSupplier.Checked == true)
+                    {
+                        objAnalyse.Iid = "SP";
+                        objAnalyse.ProductDailySalesSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Supplier.Supp_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Supplier ON tbSalesAnalyseType2.Prod_Code = Supplier.Supp_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptSupplierDailySalesAnalys CatDailySaleDet = new rptSupplierDailySalesAnalys();
+                        CatDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = CatDailySaleDet;
+                    }
+                    else
+                    {
+                        MainClass.getmdi().Cursor = Cursors.Default;
+                        return;
+                    }
+                }
+                else if (intRepOption == 1100)
+                {
+                    if (radioButtonProduct.Checked == true) //Sales Analyse
+                    {
+                        objAnalyse.Iid = "PR";
+                        objAnalyse.ProductDailyPurchasing();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Product.Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Product ON tbSalesAnalyseType2.Prod_Code = Product.Prod_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptProductDailyPurchaseAnalys ProdDailyPurchDet = new rptProductDailyPurchaseAnalys();
+                        ProdDailyPurchDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = ProdDailyPurchDet;
+                    }
+                    else if (radioButtonDepartment.Checked == true)
+                    {
+                        objAnalyse.Iid = "DP";
+                        objAnalyse.ProductDailyPurchasing();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Department.Dept_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Department ON tbSalesAnalyseType2.Prod_Code = Department.Dept_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptDepartmentDailyPurchaseAnalys DeptDailyPurDet = new rptDepartmentDailyPurchaseAnalys();
+                        DeptDailyPurDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = DeptDailyPurDet;
+                    }
+                    else if (radioButtonCategory.Checked == true)
+                    {
+                        objAnalyse.Iid = "CT";
+                        objAnalyse.ProductDailyPurchasing();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Category.Cat_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Category ON tbSalesAnalyseType2.Prod_Code = Category.Cat_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptCategoryDailyPurchaseAnalys CatDailyPurcDet = new rptCategoryDailyPurchaseAnalys();
+                        CatDailyPurcDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = CatDailyPurcDet;
+                    }
+                    else if (radioButtonSupplier.Checked == true)
+                    {
+                        objAnalyse.Iid = "SP";
+                        objAnalyse.ProductDailyPurchasing();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Supplier.Supp_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Supplier ON tbSalesAnalyseType2.Prod_Code = Supplier.Supp_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptSupplierDailyPurchaseAnalys SuppDailyPurDet = new rptSupplierDailyPurchaseAnalys();
+                        SuppDailyPurDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = SuppDailyPurDet;
+                    }
+                    else
+                    {
+                        MainClass.getmdi().Cursor = Cursors.Default;
+                        return;
+                    }
+                }
+                //ProductDailyProfitSummary
+                else if (intRepOption == 1200)//Profit Reports
+                {
+                    if (radioButtonProduct.Checked == true) //Sales Analyse
+                    {
+                        objAnalyse.Iid = "PR";
+                        objAnalyse.ProductDailyProfitSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Product.Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Product ON tbSalesAnalyseType2.Prod_Code = Product.Prod_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptProductDailyProfitAnalys ProdDailySaleDet = new rptProductDailyProfitAnalys();
+                        ProdDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = ProdDailySaleDet;
+                    }
+                    else if (radioButtonDepartment.Checked == true)
+                    {
+                        objAnalyse.Iid = "DP";
+                        objAnalyse.ProductDailyProfitSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Department.Dept_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Department ON tbSalesAnalyseType2.Prod_Code = Department.Dept_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptDepartmentDailySalesAnalys DeptDailySaleDet = new rptDepartmentDailySalesAnalys();
+                        DeptDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = DeptDailySaleDet;
+                    }
+
+                    else if (radioButtonCategory.Checked == true)
+                    {
+                        objAnalyse.Iid = "CT";
+                        objAnalyse.ProductDailyProfitSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Category.Cat_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Category ON tbSalesAnalyseType2.Prod_Code = Category.Cat_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptCategoryDailySalesAnalys CatDailySaleDet = new rptCategoryDailySalesAnalys();
+                        CatDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = CatDailySaleDet;
+                    }
+                    else if (radioButtonSupplier.Checked == true)
+                    {
+                        objAnalyse.Iid = "SP";
+                        objAnalyse.ProductDailyProfitSummary();
+                        objRepView.SqlStatement = "select Day_Name Month_Name, Sale_Amount, Purch_amount, Sale_Qty, Purch_Qty, tbSalesAnalyseType2.Prod_Code, Supplier.Supp_Name Prod_Name, Idx, 'Date From " + dtDateFrom.Text + "' DateFrom, 'Date To " + dtDateTo.Text + "' DateTo from tbSalesAnalyseType2 INNER JOIN Supplier ON tbSalesAnalyseType2.Prod_Code = Supplier.Supp_Code WHERE tbSalesAnalyseType2.doc_no = '" + strTempDocNo + "' AND Loca = " + LoginManager.LocaCode + " Order by Idx";
+                        objRepView.DataSetName = "tbReportMonthlyAnalyse";
+                        objRepView.RetrieveData();
+                        dsDataForReport = objRepView.TempResultSet;
+                        rptSupplierDailySalesAnalys CatDailySaleDet = new rptSupplierDailySalesAnalys();
+                        CatDailySaleDet.SetDataSource(dsDataForReport);
+                        objRepViewer.crystalReportViewer1.ReportSource = CatDailySaleDet;
+                    }
+                    else
+                    {
+                        MainClass.getmdi().Cursor = Cursors.Default;
+                        return;
+                    }
+                }
+
+                objRepViewer.WindowState = FormWindowState.Maximized;
+                MainClass.getmdi().Cursor = Cursors.Default;
+                objRepViewer.Show();
+        }
+    }
+}

@@ -1,0 +1,242 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmCategory : Form
+    {
+        public frmCategory()
+        {
+            InitializeComponent();
+        }
+
+        private int Err;
+
+        private static frmCategory category;
+        private frmSearch search = new frmSearch();
+        private clsCategory ObjCategory = new clsCategory();
+        private string strSqlString;
+        private string strDatasetName;
+
+        public static frmCategory GetCategory {
+            get 
+            {
+                return category;
+            }
+
+            set 
+            {
+                category = value;
+            }
+        }
+
+        //Department
+
+        void filldata() {
+            if (search.Descript != null)
+            {
+                txtCategory.Text = search.Code.Trim();
+                txtCatDescript.Text = search.Descript.Trim();
+            }
+        }
+
+        private void btnDepSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed ){
+                search = new frmSearch();
+            
+            }
+
+            if (txtDepartment.Text == string.Empty)
+            {  
+                strSqlString = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department ORDER BY Code";
+                strDatasetName = "dsDepartment";
+
+                ObjCategory.SqlString = strSqlString;
+                ObjCategory.DatasetName = strDatasetName;
+
+                ObjCategory.RetrieveFields_Department();
+                search.dgSearch.DataSource = ObjCategory.GetDataset1.Tables[strDatasetName];
+                search.prop_Focus = txtDepartment;
+                search.Cont_Descript = txtDepDescript;
+                search.Show();
+            }
+            else 
+            {
+
+                strSqlString = "SELECT Dept_Code AS Code, Dept_Name AS Department FROM Department WHERE (Dept_Code LIKE '" + txtDepartment.Text + "%') ORDER BY Code";
+                strDatasetName =  "dsDepartment";
+                ObjCategory.SqlString = strSqlString;
+                ObjCategory.DatasetName = strDatasetName;
+
+                ObjCategory.RetrieveFields_Department();
+                search.dgSearch.DataSource = ObjCategory.GetDataset1.Tables[strDatasetName];
+                search.prop_Focus = txtDepartment;
+                search.Show();            
+            }
+        }
+
+       // Category
+
+        private void btnCatSearch_Click(object sender, EventArgs e)
+        {
+            if (search .IsDisposed ){
+                search = new frmSearch();
+            }
+            
+            if (txtDepartment.Text == string.Empty)
+            {
+                MessageBox.Show("Please Select the Department", "Category", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                btnDepSearch.Focus();
+            }
+
+            else
+            {
+                strSqlString = "SELECT Cat_Code AS [Category Code], Cat_Name AS [Category Name] FROM Category WHERE (Dept_Code = '" + txtDepartment.Text + "')ORDER BY [Category Code]";
+                strDatasetName = "dsCategory";
+
+                ObjCategory.SqlString = strSqlString;
+                ObjCategory.DatasetName = strDatasetName;
+                ObjCategory.RetrieveFields_Category();
+                search.dgSearch.DataSource = ObjCategory.GetDataset1.Tables[strDatasetName];
+                search.prop_Focus = txtCategory;
+                search.Cont_Descript = txtCatDescript;
+                search.Show();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Err = 0;
+            if ((txtCategory.Text == string.Empty) || (txtCatDescript.Text == string.Empty))
+            {
+                MessageBox.Show("Category Detail Not Found", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Err++;
+            }
+
+            if ((txtDepartment.Text == string.Empty) || (txtCategory.Text == string.Empty))
+            {
+                MessageBox.Show("Department Detail Not Found", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Err++;
+            }
+
+            if (txtDepartment.Text.Contains("'") || txtDepDescript.Text.Contains("'") || txtCategory.Text.Contains("'") || txtCatDescript.Text.Contains("'"))
+            {
+                Err++;
+                MessageBox.Show("Invalid characters in Textfeilds Please check the characters entered.", "Invalid character ['] found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+
+            if (Err == 0)
+            {
+                ObjCategory.ErrorCode = 0;
+                ObjCategory.Department = txtDepartment.Text.Trim().ToUpper();
+                ObjCategory.Category = txtCategory.Text.Trim().ToUpper();
+                ObjCategory.CatDescript = txtCatDescript.Text.Trim().ToUpper();
+
+                //clear all the properties used in search form
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+                search.prop_Focus = null;
+                search.prop_Name = string.Empty;
+
+                ObjCategory.UpdateData();
+
+                clsClear.getclear().clearfeilds(category, txtDepartment);
+                clsClear.getclear().clearfeilds(grpMain, txtDepartment);
+
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+            if (txtCategory.Text != string.Empty)
+            {
+                if (MessageBox.Show("Do you really want to delete the record ?  " + txtCategory .Text + "", " Department Details",
+                      MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                      == DialogResult.Yes)
+                {
+                    ObjCategory.DeleteData(txtDepartment.Text, txtCategory.Text);
+
+            clsClear.getclear().clearfeilds(category, txtDepartment);
+            clsClear.getclear().clearfeilds(grpMain, txtDepartment);
+                }
+
+            }
+
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {         
+            clsClear.getclear().clearfeilds(category, txtDepartment);
+            clsClear.getclear().clearfeilds(grpMain, txtDepartment);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            category = null;
+        }
+
+        private void frmCategory_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            category = null;
+        }
+
+        private void txtDepartment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtDepartment.Text.Trim() != string.Empty)
+            {
+                ObjCategory.SqlString = "select * from Department Where Dept_code = '" + txtDepartment.Text.Trim() + "'";
+                ObjCategory.ReadDepartmentDetails();
+                if (ObjCategory.RecordFound == true)
+                {
+                    txtDepartment.Text = ObjCategory.Department;
+                    txtDepDescript.Text = ObjCategory.DeptName;
+                }
+                txtDepDescript.Focus();
+            }
+
+        }
+
+        private void txtCategory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtCategory.Text.Trim() != string.Empty)
+            {
+                ObjCategory.SqlString = "select * from category Where Dept_code = '" + txtDepartment.Text.Trim() + "' and cat_code = '" + txtCategory.Text.Trim() + "'";
+                ObjCategory.ReadCategoryDetails();
+                if (ObjCategory.RecordFound == true)
+                {
+                    txtCategory.Text = ObjCategory.Category;
+                    txtCatDescript.Text = ObjCategory.CatDescript;
+                }
+                txtCatDescript.Focus();
+            }
+
+        }
+
+        private void txtDepDescript_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCategory.Focus();
+            }
+        }
+
+        private void txtCatDescript_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSave.Select();
+            }
+        }
+    }
+}

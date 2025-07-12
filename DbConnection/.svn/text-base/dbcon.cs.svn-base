@@ -1,0 +1,166 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data.SqlClient;
+using System.Data;
+using System.Windows.Forms;
+using System.IO;
+namespace DbConnection
+{
+    public class dbcon
+    {
+        //private static string ServerName = "gihannotebook";
+        private static string ServerName = "onimta1";
+        //private static string ServerName = "Server";
+
+        private static string DbName = "NewINV";
+        private static string UserName = "sa";
+        //private static string PassWord = "itonimta";
+        private static string PassWord = "sa";
+
+        public static string ConnectionString = "data source=" + ServerName + ";initial catalog=" + DbName + ";persist security info=False;user id=" + UserName + " ; password=" + PassWord + "  ;workstation id=" + ServerName + ";packet size=4096;Min pool size=2";
+        
+        public static SqlConnection connection = new SqlConnection(ConnectionString);
+        public static SqlCommand command;
+        public static SqlDataReader reader;
+        public static string getstr()
+        {
+            return ConnectionString;
+        }
+        #region open connection
+        public static void OpenConnection()
+        {
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                //Write to Log
+                DateTime dtCurrentDate = DateTime.Now;
+                FileStream fileStream = new FileStream(@"..\ErrorLog.txt", FileMode.Append);
+                StreamWriter m_streamWriter = new StreamWriter(fileStream);
+                try
+                {
+                    m_streamWriter.WriteLine("'Connection Open Failier. Date/Time :' " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", dtCurrentDate) + " Error Description " + ex.Message);
+                    // read from file or write to file
+                }
+                finally
+                {
+                    m_streamWriter.Close();
+                    fileStream.Close();
+                }
+
+                MessageBox.Show(ex.Message.ToString(), "Error in Opening Database Connection. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (Exception ex)
+            {
+                //Write to Log
+                DateTime dtCurrentDate = DateTime.Now;
+                FileStream fileStream = new FileStream(@"..\ErrorLog.txt", FileMode.Append);
+                StreamWriter m_streamWriter = new StreamWriter(fileStream);
+                try
+                {
+                    m_streamWriter.WriteLine("'Connection Open Failier. Date/Time :' " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", dtCurrentDate) + " Error Description " + ex.Message);
+                    // read from file or write to file
+                }
+                finally
+                {
+                    m_streamWriter.Close();
+                    fileStream.Close();
+                }
+                
+                MessageBox.Show(ex.Message.ToString(), "Error in Opening Database Connection. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region close connection
+        public static void CloseConnection()
+        {
+            try
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error in Closing Database Connection. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error in Closing Database Connection. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+        #endregion
+
+        # region Get dataset
+        public static DataSet getDataset(string query, string strName)
+        {
+            DataSet tempds = new DataSet();
+            SqlDataAdapter tempadapter;
+
+            OpenConnection();
+            tempadapter = new SqlDataAdapter(query, connection);
+            tempadapter.Fill(tempds, strName);
+            CloseConnection();
+            tempds.Dispose();
+            return tempds;
+        }
+
+        # endregion
+
+        public static SqlDataReader GetReader(string query)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = query;
+            OpenConnection();
+            reader = command.ExecuteReader();
+            return reader;
+
+        }
+
+        public static void CloseReader()
+        {
+            reader.Close();
+            connection.Close();
+        }
+
+        public static byte checkCon(){
+            try
+            {
+                dbcon.connection.Open();
+                dbcon.connection.Close();
+            }
+            catch (Exception ex)
+            {
+                //Write to Log
+                DateTime dtCurrentDate = DateTime.Now;
+                FileStream fileStream = new FileStream(@"..\ErrorLog.txt", FileMode.Append);
+                StreamWriter m_streamWriter = new StreamWriter(fileStream);
+                try
+                {
+                    m_streamWriter.WriteLine("'Connection Open Failier. Date/Time :' " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", dtCurrentDate) + " Error Description " + ex.Message);
+                    // read from file or write to file
+                }
+                finally
+                {
+                    m_streamWriter.Close();
+                    fileStream.Close();
+                }
+                return 1;
+            }
+            return 0;
+        }
+
+    }
+}

@@ -1,0 +1,456 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmSupplierPayment : Form
+    {
+        private DataSet dsBankName;
+        private decimal decBalanceAmount;
+        private decimal decSelectAmount;
+
+        clsSupplierPayment objSupplierPayment = new clsSupplierPayment();
+
+        public frmSupplierPayment()
+        {
+            InitializeComponent();
+        }
+
+        private static frmSupplierPayment SupplierPayment;
+
+        private frmSearch search = new frmSearch();
+
+        public static frmSupplierPayment GetSupplierPayment
+        {
+            get
+            {
+                return SupplierPayment;
+            }
+            set
+            {
+                SupplierPayment = value;
+            }
+        }
+
+        private void frmSupplierPayment_Load(object sender, EventArgs e)
+        {
+            objSupplierPayment.SqlStatement = "SELECT Temp_Payment FROM DocumentNoDetails WHERE Loca = ";
+            objSupplierPayment.GetTempDocumentNo();
+            lblTempDocNo.Text = objSupplierPayment.TempDocNo;
+
+            //Refreshing DataGrid View
+            dataGridViewPendingPayments.DataSource = objSupplierPayment.GetPendingPayment.Tables["PendingPayments"];
+            dataGridViewPendingPayments.Refresh();
+            dataGridViewSelectedPayments.DataSource = objSupplierPayment.SelectedPayment.Tables["SelectedPayment"];
+            dataGridViewSelectedPayments.Refresh();
+            dataGridViewPayments.DataSource = objSupplierPayment.Payments.Tables["Payments"];
+            dataGridViewPayments.Refresh();
+
+            cmbPaymentMode.Items.Add("CASH");
+            cmbPaymentMode.Items.Add("CHEQUE");
+
+            objSupplierPayment.GetBankDetails(); 
+            dsBankName = objSupplierPayment.BankName;
+            cmbBankName.DataSource = dsBankName.Tables["BankDetails"];
+            cmbBankName.DisplayMember = "Bank_Name";
+            lblDate.Text = objSupplierPayment.PostDate;
+        }
+
+        private void frmSupplierPayment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SupplierPayment = null;
+        }
+
+        private void frmSupplierPayment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSupplierSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtSuppCode.Text.Trim() == string.Empty && txtSuppName.Text.Trim() == string.Empty)
+            {
+                objSupplierPayment.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier";
+            }
+            else
+            {
+                if (txtSuppCode.Text.Trim() != string.Empty && txtSuppName.Text.Trim() == string.Empty)
+                {
+                    objSupplierPayment.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier WHERE Supp_Code LIKE '%" + txtSuppCode.Text.Trim() + "%'";
+                }
+                else
+                {
+                    if (txtSuppCode.Text.Trim() == string.Empty && txtSuppName.Text.Trim() != string.Empty)
+                    {
+                        objSupplierPayment.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier WHERE Supp_Name LIKE '%" + txtSuppName.Text.Trim() + "%'";
+                    }
+                    else
+                    {
+                        objSupplierPayment.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier";
+                    }
+                }
+            }
+            objSupplierPayment.DataetName = "dsSupplier";
+            objSupplierPayment.GetSupplierDetails();
+            search.dgSearch.DataSource = objSupplierPayment.GetSupplierDataset.Tables["dsSupplier"];
+            search.prop_Focus = txtSuppCode;
+            search.Show();
+        }
+
+        private void txtSuppCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtSuppCode.Text = search.Code.Trim();
+                txtSuppName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            SupplierPayment = null;
+        }
+
+        private void txtSuppCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtSuppCode.Text.Trim() != "")
+            {
+                objSupplierPayment.SuppCode = txtSuppCode.Text.ToString().Trim();
+                objSupplierPayment.SqlStatement = "SELECT Supp_Code, Supp_Name FROM Supplier WHERE Supp_Code = '" + txtSuppCode.Text.Trim() + "'";
+                objSupplierPayment.ReadSupplierDetails();
+                if (objSupplierPayment.RecordFound == true)
+                {
+                    txtSuppCode.Text = objSupplierPayment.SuppCode;
+                    txtSuppName.Text = objSupplierPayment.SuppName;
+                    //txtSuppName.Focus();
+                    if (MessageBox.Show("Are You Sure You want to Load Supplier Transaction ", "Supplier Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        objSupplierPayment.LoadSupplierTransaction();
+                        objSupplierPayment.GetTempDataset();
+                        //Refreshing DataGrid View
+                        dataGridViewPendingPayments.DataSource = objSupplierPayment.GetPendingPayment.Tables["PendingPayments"];
+                        dataGridViewPendingPayments.Refresh();
+                        dataGridViewSelectedPayments.DataSource = objSupplierPayment.SelectedPayment.Tables["SelectedPayment"];
+                        dataGridViewSelectedPayments.Refresh();
+                        dataGridViewPayments.DataSource = objSupplierPayment.Payments.Tables["Payments"];
+                        dataGridViewPayments.Refresh();
+
+                        objSupplierPayment.SqlStatement = "select ISNULL(SUM(Balance_Amount), 0) PendingPayTotalAmt from tbPendingPayments WHERE Temp_DocNo = '" + lblTempDocNo.Text.Trim() + "' AND Loca = ";
+                        objSupplierPayment.ReadPendingTotalAmounts();
+                        lblTotalOutstanding.Text = objSupplierPayment.PendingPayTotalAmt.ToString();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Supplier Code Not Found.", "Supplier Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSuppCode.Focus();
+                }
+            }
+        }
+
+        private void dataGridViewPendingPayments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtPendingPaymentAmount_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewPendingPayments_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridViewPendingPayments.SelectedRows.Count <= 0 || dataGridViewPendingPayments.SelectedRows[0].Cells[0].ToString() == "" )
+            {
+                MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                lblPendingDocNo.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[0].Value.ToString();
+                lblPendingDocumentDate.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[1].Value.ToString();
+                lblPendingDocumentAmount.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[2].Value.ToString();
+                txtPendingPaymentAmount.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[3].Value.ToString();
+                decSelectAmount = decimal.Parse(dataGridViewPendingPayments.SelectedRows[0].Cells[3].Value.ToString());
+                txtPendingPaymentAmount.Select(0, txtPendingPaymentAmount.Text.Trim().Length);
+                txtPendingPaymentAmount.Focus();
+            }
+        }
+
+        private void txtPendingPaymentAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && lblPendingDocNo.Text.Trim() != string.Empty && clsValidation.isNumeric(txtPendingPaymentAmount.Text, System.Globalization.NumberStyles.Currency) == true && float.Parse(txtPendingPaymentAmount.Text) > 0 && float.Parse(txtPendingPaymentAmount.Text) <= float.Parse(lblPendingDocumentAmount.Text))
+            {
+                if (MessageBox.Show("Do You Want Add to Payment List ? ", "Supplier Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    if (decSelectAmount < decimal.Parse(txtPendingPaymentAmount.Text.ToString()))
+                    {
+                        MessageBox.Show("Invalid Amount. Please Enter Valid Amount. ", "Receipt", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtPendingPaymentAmount.Text = decSelectAmount.ToString();
+                        return;
+                    }
+
+                    objSupplierPayment.TempDocNo = lblTempDocNo.Text.Trim();
+                    objSupplierPayment.PendingDocNo = lblPendingDocNo.Text.Trim();
+                    objSupplierPayment.PendingPayAmount = decimal.Parse( txtPendingPaymentAmount.Text.ToString());
+                    objSupplierPayment.AddToPaymentList();
+                    //Refreshing DataGrid View
+                    objSupplierPayment.GetTempDataset();
+                    dataGridViewSelectedPayments.DataSource = objSupplierPayment.SelectedPayment.Tables["SelectedPayment"];
+                    dataGridViewSelectedPayments.Refresh();
+
+                    objSupplierPayment.SqlStatement = "select ISNULL(SUM(Paid_Amount),0) SelTotalAmount from tbSelectedPayments WHERE Iid = 'PMT' AND Temp_DocNo = '" + lblTempDocNo.Text.Trim() + "' AND Loca = ";
+                    objSupplierPayment.ReadSelTotalAmount();
+                    lblTotalSelectedValue.Text =  objSupplierPayment.SelTotalAmount.ToString();
+                    txtPaymentModeAmount.Text = objSupplierPayment.SelTotalAmount.ToString();
+                    lblBalance.Text = objSupplierPayment.SelTotalAmount.ToString();
+
+                    lblPendingDocNo.Text = string.Empty;
+                    lblPendingDocumentDate.Text = string.Empty;
+                    lblPendingDocumentAmount.Text = string.Empty;
+                    txtPendingPaymentAmount.Text = string.Empty;
+                    txtSuppCode.Enabled = false;
+                    txtSuppName.Enabled = false;
+                    btnSupplierSearch.Enabled = false;
+                }
+            }
+        }
+
+        private void dataGridViewSelectedPayments_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && dataGridViewSelectedPayments.SelectedRows[0].Cells[0].Value.ToString() != string.Empty)
+            {
+                if (MessageBox.Show("Are You Sure You want to Remove From Payment List ?. ", "Supplier Payments", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    objSupplierPayment.TempDocNo = lblTempDocNo.Text.Trim();
+                    objSupplierPayment.PendingDocNo = dataGridViewSelectedPayments.SelectedRows[0].Cells[0].Value.ToString();
+                    objSupplierPayment.PendingPayAmount = 0;
+                    objSupplierPayment.DeleteFromPaymentList();
+
+                    objSupplierPayment.GetTempDataset();
+                    dataGridViewSelectedPayments.DataSource = objSupplierPayment.SelectedPayment.Tables["SelectedPayment"];
+                    dataGridViewSelectedPayments.Refresh();
+
+                    objSupplierPayment.SqlStatement = "select ISNULL(SUM(Paid_Amount),0) SelTotalAmount from tbSelectedPayments WHERE Iid = 'PMT' Temp_DocNo = '" + lblTempDocNo.Text.Trim() + "' AND Loca = ";
+                    objSupplierPayment.ReadSelTotalAmount();
+                    lblTotalSelectedValue.Text = objSupplierPayment.SelTotalAmount.ToString();
+                    txtPaymentModeAmount.Text = objSupplierPayment.SelTotalAmount.ToString();
+                    lblBalance.Text = objSupplierPayment.SelTotalAmount.ToString();
+                }
+            }
+        }
+
+        private void cmbPaymentMode_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbPaymentMode_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cmbPaymentMode.Text.Trim() == "CHEQUE")
+            {
+                cmbBankName.Enabled = true;
+                txtChequeNo.Enabled = true;
+                dtpChequeDate.Enabled = true;
+                txtBranchName.Enabled = true;
+
+            }
+            else
+            {
+                cmbBankName.Text = string.Empty;
+                txtChequeNo.Text = string.Empty;
+                txtChequeNo.Text = string.Empty;
+                dtpChequeDate.Enabled = false;
+
+                cmbBankName.Enabled = false;
+                txtChequeNo.Enabled = false;
+                dtpChequeDate.Enabled = false;
+                txtBranchName.Enabled = false;
+            }
+        }
+
+        private void txtPaymentModeAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+           // if (e.KeyCode == Keys.Enter && cmbPaymentMode.Text.Trim() != string.Empty && txtPaymentModeAmount.Text.Trim() != string.Empty && clsValidation.isNumeric(txtPaymentModeAmount.Text, System.Globalization.NumberStyles.Currency) == true && float.Parse(txtPaymentModeAmount.Text.ToString()) > 0 && float.Parse(txtPaymentModeAmount.Text.ToString()) <= float.Parse(lblTotalSelectedValue.Text.ToString()) && float.Parse(txtPaymentModeAmount.Text.ToString()) <= float.Parse(lblBalance.Text.ToString()))
+            if (e.KeyCode == Keys.Enter && cmbPaymentMode.Text.Trim() != string.Empty && txtPaymentModeAmount.Text.Trim() != string.Empty && clsValidation.isNumeric(txtPaymentModeAmount.Text, System.Globalization.NumberStyles.Currency) == true && float.Parse(txtPaymentModeAmount.Text.ToString()) > 0 && float.Parse(txtPaymentModeAmount.Text.ToString()) <= float.Parse(lblTotalSelectedValue.Text.ToString()) && float.Parse(txtPaymentModeAmount.Text.ToString()) <= float.Parse(lblBalance.Text.ToString()))
+            {
+                if (MessageBox.Show("Do You Want Add to Payment Mode List ? ", "Supplier Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    if (cmbPaymentMode.Text.Trim() == "CHEQUE" && cmbBankName.Text.Trim() != string.Empty && txtBranchName.Text.Trim() != string.Empty && txtChequeNo.Text.Trim() != string.Empty)
+                    {
+                        objSupplierPayment.TempDocNo = lblTempDocNo.Text.Trim();
+                        objSupplierPayment.Pay_Type = cmbPaymentMode.Text.Trim();
+                        objSupplierPayment.ChequeNo = txtChequeNo.Text.Trim();
+                        objSupplierPayment.SelectBankName = cmbBankName.Text.Trim().ToUpper();
+                        objSupplierPayment.BranchName = txtBranchName.Text.Trim().ToUpper();
+                        objSupplierPayment.ChequeDate = dtpChequeDate.Text;
+                        objSupplierPayment.Amount = decimal.Parse(txtPaymentModeAmount.Text.ToString());
+                        objSupplierPayment.AddToPaymentMode();
+                    }
+                    else
+                    {
+                        if (cmbPaymentMode.Text.Trim() == "CASH" )
+                        {
+                            objSupplierPayment.TempDocNo = lblTempDocNo.Text.Trim();
+                            objSupplierPayment.Pay_Type = cmbPaymentMode.Text.Trim();
+                            objSupplierPayment.ChequeNo = "" ;
+                            objSupplierPayment.SelectBankName = "";
+                            objSupplierPayment.BranchName = "";
+                            objSupplierPayment.ChequeDate = "";
+                            objSupplierPayment.Amount = decimal.Parse (txtPaymentModeAmount.Text.ToString());
+                            objSupplierPayment.AddToPaymentMode();
+                        }
+                    }
+                    objSupplierPayment.GetTempDataset();
+                    dataGridViewPayments.DataSource = objSupplierPayment.Payments.Tables["Payments"];
+                    dataGridViewPayments.Refresh();
+
+                    objSupplierPayment.SqlStatement = "select ISNULL(SUM(Amount), 0) decTotalPayment from tbPaymentDetails WHERE Temp_DocNo = '" + lblTempDocNo.Text.Trim() + "' AND Loca = ";
+                    objSupplierPayment.ReadTotalPayment();
+                    lblTotalPayment.Text = objSupplierPayment.TotalPayment.ToString();
+                    decBalanceAmount = decimal.Parse( lblTotalSelectedValue.Text.ToString()) - decimal.Parse( lblTotalPayment.Text.ToString());
+                    lblBalance.Text = decBalanceAmount.ToString();
+                    txtPaymentModeAmount.Text = decBalanceAmount.ToString();
+                    cmbPaymentMode.Text = "";
+//                    txtPaymentModeAmount.Text = "";
+                    txtChequeNo.Text = "";
+                    cmbBankName.Text = "";
+                    txtBranchName.Text = "";
+                    txtChequeNo.Enabled = false;
+                    cmbBankName.Enabled = false;
+                    txtBranchName.Enabled = false;
+
+                    cmbPaymentMode.Focus();
+                }
+            }
+        }
+
+        private void cmbPaymentMode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && cmbPaymentMode.Text.Trim() != string.Empty && cmbPaymentMode.Text.Trim() == "CASH")
+            {
+                txtPaymentModeAmount.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && cmbPaymentMode.Text.Trim() != string.Empty && cmbPaymentMode.Text.Trim() == "CHEQUE")
+                {
+                    cmbBankName.Focus();
+                }
+            }
+        }
+
+        private void cmbBankName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && cmbBankName.Text.Trim() != string.Empty )
+            {
+                txtBranchName.Focus();
+            }
+        }
+
+        private void txtBranchName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtBranchName.Text.Trim() != string.Empty)
+            {
+                txtChequeNo.Focus();
+            }
+        }
+
+        private void txtChequeNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtChequeNo.Text.Trim() != string.Empty)
+            {
+                dtpChequeDate.Focus();
+            }
+        }
+
+        private void dtpChequeDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter )
+            {
+                txtPaymentModeAmount.Focus();
+            }
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            objSupplierPayment.SqlStatement = "SELECT * from tbPendingPayments WHERE tbPendingPayments.IId = 'PMT' AND tbPendingPayments.Temp_DocNo = '" + lblTempDocNo.Text.ToString() + "' AND tbPendingPayments.Loca = " + LoginManager.LocaCode;
+            objSupplierPayment.ReadTempTransDetails();
+            if (objSupplierPayment.RecordFound != true)
+            {
+                MessageBox.Show("Pending Payment Details Not Found.", "Supplier Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            objSupplierPayment.SqlStatement = "SELECT * from tbSelectedPayments WHERE tbSelectedPayments.IId = 'PMT' AND tbSelectedPayments.Temp_DocNo = '" + lblTempDocNo.Text.ToString() + "' AND tbSelectedPayments.Loca = " + LoginManager.LocaCode;
+            objSupplierPayment.ReadTempTransDetails();
+            if (objSupplierPayment.RecordFound != true)
+            {
+                MessageBox.Show("Selected Payment Details Not Found.", "Supplier Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            objSupplierPayment.SqlStatement = "SELECT * from tbPaymentDetails WHERE tbPaymentDetails.IId = 'PMT' AND tbPaymentDetails.Temp_DocNo = '" + lblTempDocNo.Text.ToString() + "' AND tbPaymentDetails.Loca = " + LoginManager.LocaCode;
+            objSupplierPayment.ReadTempTransDetails();
+            if (objSupplierPayment.RecordFound != true)
+            {
+                MessageBox.Show("Selected Payment Mode Details Not Found.", "Supplier Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            //Payment Apply
+            if (MessageBox.Show("Are You Sure You want to Apply This Supplier Payment. ", "Supplier Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                DataSet dsDataForReport = new DataSet();
+                DataSet dsDataForSubReport = new DataSet();
+
+                frmReportViewer objRepViewer = new frmReportViewer();
+
+                objSupplierPayment.SupplierPaymentApply();
+                MessageBox.Show("Supplier Payment Successfully Applied as Document No. " + objSupplierPayment.OrgDocNo, "Supplier Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                objSupplierPayment.GetDataSetForReport();
+                dsDataForReport = objSupplierPayment.GetReportDataset;
+                dsDataForSubReport = objSupplierPayment.GetSubReportDataset;
+
+                rptSupplierPayment rptPayment = new rptSupplierPayment();
+                
+                rptPayment.SetDataSource(dsDataForReport);
+                rptPayment.OpenSubreport("rptSupplierPaymentMode").SetDataSource(dsDataForSubReport);
+                objRepViewer.crystalReportViewer1.ReportSource = rptPayment;
+                objRepViewer.WindowState = FormWindowState.Maximized;
+                objRepViewer.Show();
+
+                this.Close();
+                this.Dispose();
+                SupplierPayment = null;
+            }
+        }
+
+        }
+}
+    

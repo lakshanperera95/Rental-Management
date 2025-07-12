@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory", "Inventory\Inventory.csproj", "{89578AFC-F4C3-41EF-A968-489B44A65B13}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58} = {45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clsLibrary", "clsLibrary\clsLibrary.csproj", "{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0D610DAE-72B3-41B0-876A-EF117BBC30DD} = {0D610DAE-72B3-41B0-876A-EF117BBC30DD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnection", "DbConnection\DbConnection.csproj", "{0D610DAE-72B3-41B0-876A-EF117BBC30DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89578AFC-F4C3-41EF-A968-489B44A65B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89578AFC-F4C3-41EF-A968-489B44A65B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89578AFC-F4C3-41EF-A968-489B44A65B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89578AFC-F4C3-41EF-A968-489B44A65B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D610DAE-72B3-41B0-876A-EF117BBC30DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D610DAE-72B3-41B0-876A-EF117BBC30DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D610DAE-72B3-41B0-876A-EF117BBC30DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D610DAE-72B3-41B0-876A-EF117BBC30DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = 
+	EndGlobalSection
+EndGlobal

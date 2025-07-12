@@ -1,0 +1,114 @@
+9
+
+dir
+33
+https://onimta1/svn/SVN/trunk
+https://onimta1/svn/SVN
+
+
+
+2008-10-15T06:34:19.093750Z
+33
+Dinusha@ONIMTA1
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+510ac5f0-cb1d-8f49-901a-7e9196f92ed4
+
+DbConnection
+dir
+
+clsLibrary
+dir
+
+Inventory.sln
+file
+41
+
+
+
+2008-10-23T13:51:50.671875Z
+dd36d8f1e39002f73c6f15d208c79e81
+2008-10-24T07:00:24.865961Z
+41
+Dinusha@ONIMTA1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2303
+
+PhotoshopSZ.ico
+file
+40
+
+
+
+2006-05-13T20:13:18.000000Z
+636d23f801d40ca6c3224d583aaa2339
+2008-10-23T08:29:54.421875Z
+40
+Dinusha@ONIMTA1
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+170278
+
+Onimta Inventory System
+dir
+
+OnimtaInventorySystemSetup
+dir
+
+Inventory
+dir
+
+Setup-1
+dir
+

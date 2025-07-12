@@ -1,0 +1,137 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmBrand : Form
+    {
+        public frmBrand()
+        {
+            InitializeComponent();
+        }
+
+        clsBrand ObjBarand = new clsBrand();
+        frmSearch search = new frmSearch();
+        private  static frmBrand brand;
+
+        private string strSqlString;
+        private string strDatasetName;
+
+        public static frmBrand GetBrand {
+            get {
+                return brand;
+            }
+            set {
+                brand = value;
+            }
+        }
+
+
+
+        private void txtDescription_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBrand_Click(object sender, EventArgs e)
+        {
+            if (search .IsDisposed ){
+                search = new frmSearch();
+            }
+            strSqlString = "SELECT Brand_Code AS [Brand Code],Brand_Name AS [Brand Name] FROM Brand ORDER BY [Brand Code]";
+            strDatasetName = "dsBarand";
+            
+            ObjBarand.SqlString = strSqlString;
+            ObjBarand.DatasetName = strDatasetName;
+            ObjBarand.retriveBrand();
+            search.dgSearch.DataSource = ObjBarand.GetDataset.Tables[strDatasetName];
+            search.prop_Focus = txtBrand;
+            search.Cont_Descript = txtDescription;
+            search.Show();
+        }
+
+        //--------------------------------------------------------------------
+
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            ObjBarand.Brand = txtBrand.Text.ToUpper();
+            ObjBarand.Description = txtDescription.Text.Trim().ToUpper();
+            ObjBarand.UpdateBrand();
+            txtBrand.Text = string.Empty;
+            txtDescription.Text = string.Empty;
+            MessageBox.Show("Brand Save Successfully ", this.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            txtBrand.Focus();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure You want to Delete This Brand. ", this.Text , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+            ObjBarand.Brand = txtBrand.Text.ToUpper();
+            ObjBarand.Description = txtDescription.Text.Trim().ToUpper();
+            ObjBarand.DeleteBrand();
+            txtBrand.Text = string.Empty;
+            txtDescription.Text = string.Empty;
+            MessageBox.Show("Brand Deleted Successfully ", this.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtBrand.Text = string.Empty;
+            txtDescription.Text = string.Empty;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            brand = null;
+        }
+
+        private void frmBrand_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            brand = null;
+        }
+
+        private void frmBrand_KeyPress(object sender, KeyPressEventArgs e)
+        {
+              if(e.KeyChar==(char)27)
+              {
+                this.Hide();
+              }
+        }
+
+        private void txtBrand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                    ObjBarand.Brand = txtBrand.Text.ToUpper();
+                    ObjBarand.SqlString = "select * from brand where Brand_Code = '"+ txtBrand.Text.Trim() +"'";
+                    ObjBarand.ReadBrandDetails();
+                    if (ObjBarand.RecordFound == true)
+                    {
+                        txtDescription.Text = ObjBarand.Description;
+                    }
+                    txtDescription.Focus();
+                }
+
+            }
+
+        private void txtDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSave.Focus();
+            }
+        }
+        }
+
+}

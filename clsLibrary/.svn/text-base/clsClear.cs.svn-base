@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+
+namespace clsLibrary
+{
+    public class clsClear
+    {
+         static clsClear clear = new clsClear();
+        public static clsClear getclear() {
+            return clear;
+        }
+
+#region clear all data feilds used & Focus
+        public void clearfeilds(Control GrbHeader,Control focus)
+        {
+            try
+            {
+                for (int i = 0; i < GrbHeader.Controls.Count; i++)
+                {
+                    if (GrbHeader.Controls[i].GetType() == typeof(TextBox))
+                    {
+                        ((TextBox)GrbHeader.Controls[i]).Text = string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+            finally
+            {
+                focus.Focus();
+            }
+        }
+        #endregion 
+    }
+}

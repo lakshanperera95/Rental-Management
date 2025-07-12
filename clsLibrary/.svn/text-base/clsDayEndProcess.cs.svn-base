@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DbConnection;
+namespace clsLibrary
+{
+    public class clsDayEndProcess
+    {
+
+        private int intErrCode;
+
+        public int ErrorCode
+        {
+            get
+            {
+                return intErrCode;
+            }
+            set
+            {
+                intErrCode = value;
+            }
+        }
+
+        public void DayEndProcess()
+        {
+            intErrCode = 0;
+            dbcon.connection.Open();
+            SqlCommand command = new SqlCommand();
+            command.Connection = dbcon.connection;
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_DayEndProcess";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@Err_x", SqlDbType.Int, 0, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Default, intErrCode));
+            command.Parameters.Add(new SqlParameter("@User_Name", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.UserName.Trim().ToUpper()));
+
+            command.ExecuteNonQuery();
+            command.UpdatedRowSource = UpdateRowSource.OutputParameters;
+            ErrorCode = (int)(command.Parameters["@Err_x"].Value);
+            dbcon.connection.Close();
+        }
+
+    }
+}

@@ -1,0 +1,94 @@
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\clsLibrary\obj\Debug\clsLibrary.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\clsLibrary.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\clsLibrary.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Debug\clsLibrary.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Release\clsLibrary.dll
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Release\clsLibrary.pdb
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\Microsoft.PointOfService.dll
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Sangrilla Common\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\clsLibrary.pdb

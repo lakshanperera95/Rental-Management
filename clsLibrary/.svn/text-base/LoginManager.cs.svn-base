@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace clsLibrary
+{
+    public class LoginManager
+    {
+        private  static string username;
+        private  static string location;
+        private static  string strLocaCode;
+
+        public static string UserName {
+            get {
+                return username;
+            }
+            set {
+                username = value;
+            }
+        }
+
+        public static string Location
+        {
+            get
+            {
+                return location;
+            }
+            set
+            {
+                location = value;
+            }
+        }
+
+        public static string LocaCode
+        {
+            get
+            {
+                return strLocaCode ;
+            }
+            set
+            {
+                strLocaCode = value;
+            }
+        }
+
+    }
+}

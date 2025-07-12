@@ -1,0 +1,1878 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class MDI : Form
+    {
+        
+       // clsMenuControler mnucont = new clsMenuControler();
+        public static Login login = null;
+
+        public MDI()
+        {
+            InitializeComponent();           
+        }
+
+        private void MDI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MDI_Load(object sender, EventArgs e)
+        {
+            //set Visible false all menu Item
+            //MainClass.mdi.mnuMain.Items["masterFileToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["masterDetailsToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["transactionToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["StockBalanceToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["stockValuationReportToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["salesReportToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["purchasingReportToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["grossProfitReportToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["analyseReportToolStripMenuItem"].Visible = false;
+            //MainClass.mdi.mnuMain.Items["systemToolsToolStripMenuItem"].Visible = false;
+
+            MainClass.ShowLogin();
+        }
+
+        private void mnuLocationDetails_Click(object sender, EventArgs e)
+        {
+           // frmLocation l = new frmLocation();
+
+            if (frmLocation.GetLocation == null)
+            {
+                frmLocation.GetLocation = new frmLocation();
+                frmLocation.GetLocation.MdiParent = this;
+                frmLocation.GetLocation.Show();
+            }
+            else {
+                frmLocation.GetLocation.Focus();
+            }
+        }
+
+        private void mnuDepartment_Click(object sender, EventArgs e)
+        {
+            if (frmDepartment.GetDepartment == null)
+            {
+                frmDepartment.GetDepartment = new frmDepartment();
+                frmDepartment.GetDepartment.MdiParent = this;
+                frmDepartment.GetDepartment.Show();
+            }
+            else
+            {
+                frmDepartment.GetDepartment.Focus();
+            }
+        }
+
+        private void mnuSupplier_Click_1(object sender, EventArgs e)
+        {
+            if (frmAccounts.GetAccount  == null)
+            {
+                frmAccounts.GetAccount = new frmAccounts ();
+                frmAccounts.GetAccount.MdiParent = this;
+                frmAccounts.GetAccount.Show();
+            }
+            else
+            {
+                frmDepartment.GetDepartment.Focus();
+            }
+        }
+
+        private void mnuCategory_Click(object sender, EventArgs e)
+        {
+            if (frmCategory .GetCategory == null ){
+                frmCategory.GetCategory = new frmCategory();
+                frmCategory.GetCategory.MdiParent = this;
+                frmCategory.GetCategory.Show();          
+            }else {
+                frmCategory.GetCategory.Focus();
+            }
+        }
+
+        private void mnuBrand_Click(object sender, EventArgs e)
+        {
+            if (frmBrand.GetBrand == null)
+            {
+                frmBrand.GetBrand = new frmBrand();
+                frmBrand.GetBrand.MdiParent = this;
+                frmBrand.GetBrand.Show();
+            }
+            else {
+                frmBrand.GetBrand.Focus();
+            }
+        }
+
+        private void mnuProduct_Click(object sender, EventArgs e)
+        {
+            if (frmProduct.GetProduct == null)
+            {
+                frmProduct.GetProduct = new frmProduct();
+                frmProduct.GetProduct.MdiParent = this;
+                frmProduct.GetProduct.Show();
+            }
+            else {
+                frmProduct.GetProduct.Focus();
+            }
+        }
+
+        private void mnuManufact_Click(object sender, EventArgs e)
+        {
+            if (frmManufacturer.GetManufacturer == null)
+            {
+                frmManufacturer.GetManufacturer = new frmManufacturer();
+                frmManufacturer.GetManufacturer.MdiParent = this;
+                frmManufacturer.GetManufacturer.Show();
+
+            }
+            else {
+                frmManufacturer.GetManufacturer.Focus();
+            }
+        }
+
+        private void departmentDeatilsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Department Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 1;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void categoryDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Category Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 2;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void goodReceivedNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmGrn.GetGrn == null)
+            {
+                frmGrn.GetGrn = new frmGrn();
+                frmGrn.GetGrn.MdiParent = this;
+                frmGrn.GetGrn.Show();
+            }
+            else
+            {
+                frmGrn.GetGrn.Focus();
+            }
+        }
+
+        private void stockAdjustmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void transferOfGoodsNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmTransferGoodNote.GetTransferNote == null)
+            {
+                frmTransferGoodNote.GetTransferNote = new frmTransferGoodNote();
+                frmTransferGoodNote.GetTransferNote.MdiParent = this;
+                frmTransferGoodNote.GetTransferNote.Show();
+            }
+            else
+            {
+                frmTransferGoodNote.GetTransferNote.Focus();
+            }
+        }
+
+        private void transferOfGoodsNoteDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void stockAdjustmentDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void goodReceivedNoteDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void purchaseOrderNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuProductDetails_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Product Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 3;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void purchaseOrderDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuCustomerDetails_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Customer Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 4;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void mnuSupplierDetails_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Supplier Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 5;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void wholeSaleInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmWholeSaleInvoice.GetInvoice == null)
+            {
+                frmWholeSaleInvoice.GetInvoice = new frmWholeSaleInvoice();
+                frmWholeSaleInvoice.GetInvoice.MdiParent = this;
+                frmWholeSaleInvoice.GetInvoice.Show();
+            }
+            else
+            {
+                frmWholeSaleInvoice.GetInvoice.Focus();
+            }
+        }
+
+        private void mnuProductWise_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Product-Wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 50;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void supplierPaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuDeptWise_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Department Wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 51;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void mnuCatgrywise_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Category Wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 52;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void mnuManufacturerwise_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Manufacturer Wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 53;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void mnuSupplierwise_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Supplier Wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 54;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void supplierPaymentDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void wholeSaleInvoiceDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customerReturnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void supplierReturnNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSupplierReturn.GetSupplierReturn == null)
+            {
+                frmSupplierReturn.GetSupplierReturn = new frmSupplierReturn();
+                frmSupplierReturn.GetSupplierReturn.MdiParent = this;
+                frmSupplierReturn.GetSupplierReturn.Show();
+            }
+            else
+            {
+                frmSupplierReturn.GetSupplierReturn.Focus();
+            }
+        }
+
+        private void customerPaymentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmCustomerPayment.GetCustomerPayment == null)
+            {
+                frmCustomerPayment.GetCustomerPayment = new frmCustomerPayment();
+                frmCustomerPayment.GetCustomerPayment.MdiParent = this;
+                frmCustomerPayment.GetCustomerPayment.Show();
+            }
+            else
+            {
+                frmCustomerPayment.GetCustomerPayment.Focus();
+            }
+        }
+
+        private void receiptDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customerReturnDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void wholeSaleInvoiceToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customerReturnNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void purchaseOrderNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void goodReceivedNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stockAdjustmentNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Stock Adjustment Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 203;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void transferOfGoodNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void supplierPaymentNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void receiptNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void supplierPaymentSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void receiptSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void invoiceSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customerReturnSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void purchaseOrderSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void goodReceivedSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stockAdjustmentSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Stock Adjustment Note Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 214;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void transferOfGoodNoteSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void departmentwiseProductWiseStockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Department Wise Item wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 55;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void categorywiseProductWiseStockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Category Wise Item wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 56;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void manufacturerwiseProductWiseStockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Manufacturer Wise Item wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 57;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void supplierwiseProductWiseStockDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Supplier Wise Item wise Stock Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 58;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+
+        private void mnuStockOverwrite_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void productwiseStockValuationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Product Wise Stock Valuation";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 59;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+
+        private void departmentwiseProductWiseValuationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Department Wise Product wise Stock Valuation";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 60;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void categoryWiseProductWiseValuationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Category Wise Product wise Stock Valuation";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 61;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void supplierwiseProductWiseValuationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Supplier Wise Product wise Stock Valuation";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 62;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void manufacturerwiseWiseProductWiseValuationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Manufacturer Wise Product wise Stock Valuation";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 63;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void productWiseSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product wise Sales Report";
+                frmSalesInquary.GetSalesInquary.Show();
+                frmSalesInquary.GetSalesInquary.intRepOption = 100;
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void departmentWiseSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Department wise Sales Report";
+                frmSalesInquary.GetSalesInquary.Show();
+                frmSalesInquary.GetSalesInquary.intRepOption = 101;
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void categoryWiseSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Category wise Sales Report";
+                frmSalesInquary.GetSalesInquary.Show();
+                frmSalesInquary.GetSalesInquary.intRepOption = 102;
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void supplierWiseSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Supplier wise Sales Report";
+                frmSalesInquary.GetSalesInquary.Show();
+                frmSalesInquary.GetSalesInquary.intRepOption = 103;
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void manufacturerWiseSalesReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Manufacturer wise Sales Report";
+                frmSalesInquary.GetSalesInquary.Show();
+                frmSalesInquary.GetSalesInquary.intRepOption = 104;
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void aaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Monthly Sales Summary";
+                frmSalesInquary.GetSalesInquary.intRepOption = 105;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void dailySalesSummaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Daily Sales Summary";
+                frmSalesInquary.GetSalesInquary.intRepOption = 106;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void productWiseSalesAnalyseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void salesAnalyseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmAnalyse.GetAnalyse == null)
+            {
+                frmAnalyse.GetAnalyse = new frmAnalyse();
+                frmAnalyse.GetAnalyse.MdiParent = this;
+                frmAnalyse.GetAnalyse.Text = "Sales Analyse";
+                frmAnalyse.GetAnalyse.intRepOption = 1000;
+                frmAnalyse.GetAnalyse.Show();
+            }
+            else
+            {
+                frmAnalyse.GetAnalyse.Focus();
+            }
+        }
+
+        private void purchaseAnalyseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmAnalyse.GetAnalyse == null)
+            {
+                frmAnalyse.GetAnalyse = new frmAnalyse();
+                frmAnalyse.GetAnalyse.MdiParent = this;
+                frmAnalyse.GetAnalyse.Text = "Purchase Analyse";
+                frmAnalyse.GetAnalyse.intRepOption = 1100;
+                frmAnalyse.GetAnalyse.Show();
+            }
+            else
+            {
+                frmAnalyse.GetAnalyse.Focus();
+            }
+        }
+
+        private void pToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300, Analyse Report 400
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product wise Purchasing Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 200;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void departmentWisePurchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Department wise Purchasing Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 201;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void categoryWisePurchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Category wise Purchasing Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 202;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void supplierWisePurchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Supplier wise Purchasing Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 203;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void manufacturerWisePurchaseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Manufacturer wise Purchasing Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 204;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void monthlyPurchaseSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Monthly Purchasing Summary";
+                frmSalesInquary.GetSalesInquary.intRepOption = 205;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void productWiseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product wise Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 300;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void departmentWiseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Department wise Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 301;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void categoryWiseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Category wise Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 302;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Supplier wise Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 303;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void manufactureWiseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Manufacture wise Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 304;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void monthlyProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Monthly Profit Summary Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 305;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void dailyProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Daily Profit Summary Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 306;
+                frmSalesInquary.GetSalesInquary.Show();
+
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void profitAnalyseReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmAnalyse.GetAnalyse == null)
+            {
+                frmAnalyse.GetAnalyse = new frmAnalyse();
+                frmAnalyse.GetAnalyse.MdiParent = this;
+                frmAnalyse.GetAnalyse.Text = "Profit Analyse";
+                frmAnalyse.GetAnalyse.intRepOption = 1200;
+                frmAnalyse.GetAnalyse.Show();
+            }
+            else
+            {
+                frmAnalyse.GetAnalyse.Focus();
+            }
+        }
+
+        private void salesPurchaseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product Purchase/Sales/Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 400;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void salesPurchaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Department Purchase/Sales/Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 401;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void categorySalesPurchaseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Category Purchase/Sales/Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 402;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void supplierSalesPurchaseProfitReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Sales Report Start 100,  Purchasing Report start 200,    Gross Profit Report 300
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Supplier Purchase/Sales/Profit Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 403;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void purchaseOrderNoteToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (frmPurchaseOrder.GetPon == null)
+            {
+                frmPurchaseOrder.GetPon = new frmPurchaseOrder();
+                frmPurchaseOrder.GetPon.MdiParent = this;
+                frmPurchaseOrder.GetPon.Show();
+            }
+            else
+            {
+                frmPurchaseOrder.GetPon.Focus();
+            }
+        }
+
+        private void goodReceivedNoteToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (frmGrn.GetGrn == null)
+            {
+                frmGrn.GetGrn = new frmGrn();
+                frmGrn.GetGrn.MdiParent = this;
+                frmGrn.GetGrn.Show();
+            }
+            else
+            {
+                frmGrn.GetGrn.Focus();
+            }
+        }
+
+        private void iffrmSupplierReturnGetSupplierReturnNullToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSupplierReturn.GetSupplierReturn == null)
+            {
+                frmSupplierReturn.GetSupplierReturn = new frmSupplierReturn();
+                frmSupplierReturn.GetSupplierReturn.MdiParent = this;
+                frmSupplierReturn.GetSupplierReturn.Show();
+            }
+            else
+            {
+                frmSupplierReturn.GetSupplierReturn.Focus();
+            }
+        }
+
+        private void transferOfGoodsNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransferGoodNote.GetTransferNote == null)
+            {
+                frmTransferGoodNote.GetTransferNote = new frmTransferGoodNote();
+                frmTransferGoodNote.GetTransferNote.MdiParent = this;
+                frmTransferGoodNote.GetTransferNote.Show();
+            }
+            else
+            {
+                frmTransferGoodNote.GetTransferNote.Focus();
+            }
+        }
+
+        private void wholeSaleInvoiceToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (frmWholeSaleInvoice.GetInvoice == null)
+            {
+                frmWholeSaleInvoice.GetInvoice = new frmWholeSaleInvoice();
+                frmWholeSaleInvoice.GetInvoice.MdiParent = this;
+                frmWholeSaleInvoice.GetInvoice.Show();
+            }
+            else
+            {
+                frmWholeSaleInvoice.GetInvoice.Focus();
+            }
+        }
+
+        private void customerReturnToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmCustomerReturn.GetCustomerReturn == null)
+            {
+                frmCustomerReturn.GetCustomerReturn = new frmCustomerReturn();
+                frmCustomerReturn.GetCustomerReturn.MdiParent = this;
+                frmCustomerReturn.GetCustomerReturn.Show();
+            }
+            else
+            {
+                frmCustomerReturn.GetCustomerReturn.Focus();
+            }
+        }
+
+        private void supplierPaymentToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmSupplierPayment.GetSupplierPayment == null)
+            {
+                frmSupplierPayment.GetSupplierPayment = new frmSupplierPayment();
+                frmSupplierPayment.GetSupplierPayment.MdiParent = this;
+                frmSupplierPayment.GetSupplierPayment.Show();
+            }
+            else
+            {
+                frmSupplierPayment.GetSupplierPayment.Focus();
+            }
+        }
+
+        private void receiptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmCustomerPayment.GetCustomerPayment == null)
+            {
+                frmCustomerPayment.GetCustomerPayment = new frmCustomerPayment();
+                frmCustomerPayment.GetCustomerPayment.MdiParent = this;
+                frmCustomerPayment.GetCustomerPayment.Show();
+            }
+            else
+            {
+                frmCustomerPayment.GetCustomerPayment.Focus();
+            }
+        }
+
+        private void stockAdjustmentToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmStockAdjustment.GetStockAdjust == null)
+            {
+                frmStockAdjustment.GetStockAdjust = new frmStockAdjustment();
+                frmStockAdjustment.GetStockAdjust.MdiParent = this;
+                frmStockAdjustment.GetStockAdjust.Show();
+            }
+            else
+            {
+                frmStockAdjustment.GetStockAdjust.Focus();
+            }
+        }
+
+        private void stockOverwriteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmStockOverwrite.GetStockOverwrite == null)
+            {
+
+                frmStockOverwrite.GetStockOverwrite = new frmStockOverwrite();
+                frmStockOverwrite.GetStockOverwrite.MdiParent = this;
+                frmStockOverwrite.GetStockOverwrite.Show();
+            }
+            else
+            {
+                frmStockOverwrite.GetStockOverwrite.Focus();
+            }
+        }
+
+        private void wholeSaleInvoiceNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Whole Sale Invoice Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 200;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void invoiceSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Invoice Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 210;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void customerReturnNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Customer Return Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 207;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void customerReturnSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Customer Return Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 211;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void purchaseOrderNoteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Purchase Order Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 201;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void purchaseOrderSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Purchase Order Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 212;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void goodReceivedNoteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Goods Received Note Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 202;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void goodReceivedSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Good Received Note Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 213;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void transferOfGoodNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Transfer Of Goods Note Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 204;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void transferOfGoodNoteSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Transfer Of Goods Note Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 215;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void supplierPaymentNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Supplier Payment Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 205;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void supplierPaymentSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Payment Summary Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 208;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void receiptNoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Receipt Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 206;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void receiptSummaryToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Receipt Summary Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 209;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void productBinCardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption 404 Bin card
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product Bin Card";
+                frmSalesInquary.GetSalesInquary.intRepOption = 404;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void userProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmUserProfile.GetUserProfile == null)
+            {
+                frmUserProfile.GetUserProfile = new frmUserProfile();
+                frmUserProfile.GetUserProfile.MdiParent = this;
+                frmUserProfile.GetUserProfile.Show();
+            }
+            else
+            {
+                frmUserProfile.GetUserProfile.Focus();
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("calc.exe");
+        }
+
+        private void supplierReturnNoteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Supplier Return Note Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 216;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void supplierReturnSummaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Supplier Return Note Summary";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 217;
+                frmTransactionInquary.GetTransactionInquary.Show();
+
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmChangePassword.GetChangePassword == null)
+            {
+                frmChangePassword.GetChangePassword = new frmChangePassword();
+                frmChangePassword.GetChangePassword.MdiParent = this;
+                frmChangePassword.GetChangePassword.Show();
+            }
+            else
+            {
+                frmChangePassword.GetChangePassword.Focus();
+            }
+        }
+
+        private void logoffToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure You want to Log Off. All Open Dialog Boxes are will Close without Save.", "Log Off", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                foreach (Form f in this.MdiChildren)
+                {
+                    f.Close();
+                }
+
+                MainClass.mdi.mnuMain.Enabled = false;
+                MainClass.mdi.Text = "Inventory System";
+                login = new Login();
+                login.MdiParent = this;
+                login.Show();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void barcodePrintToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmBarcode.GetBarcode == null)
+            {
+                frmBarcode.GetBarcode = new frmBarcode();
+                frmBarcode.GetBarcode.MdiParent = this;
+                frmBarcode.GetBarcode.Show();
+            }
+            else
+            {
+                frmBarcode.GetBarcode.Focus();
+            }
+        }
+
+        private void dayEndProcessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmDayEndProcess.GetDayEndProcess == null)
+            {
+                frmDayEndProcess.GetDayEndProcess = new frmDayEndProcess();
+                frmDayEndProcess.GetDayEndProcess.MdiParent = this;
+                frmDayEndProcess.GetDayEndProcess.Show();
+            }
+            else
+            {
+                frmDayEndProcess.GetDayEndProcess.Focus();
+            }
+        }
+
+        private void dataUploadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmDataUploading.GetDataUpload == null)
+            {
+                frmDataUploading.GetDataUpload = new frmDataUploading();
+                frmDataUploading.GetDataUpload.MdiParent = this;
+                frmDataUploading.GetDataUpload.Show();
+            }
+            else
+            {
+                frmDataUploading.GetDataUpload.Focus();
+            }
+        }
+
+        private void toolStripFile_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void creditorStatementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Creditor
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Creditor Statement";
+                frmSalesInquary.GetSalesInquary.intRepOption = 405;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void debtorStatementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Creditor
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Debtor Statement";
+                frmSalesInquary.GetSalesInquary.intRepOption = 406;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void creditorBalanceReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Creditor
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Creditor Balance Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 407;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void debtorsBalanceReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption Creditor
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Debtors Balance Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 408;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void chequeReconsiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmChequeRecon.GetChequeRecon == null)    
+            {
+                frmChequeRecon.GetChequeRecon = new frmChequeRecon();
+                frmChequeRecon.GetChequeRecon.MdiParent = this;
+                frmChequeRecon.GetChequeRecon.Show();
+            }
+            else
+            {
+                frmChequeRecon.GetChequeRecon.Focus();
+            }
+        }
+
+        private void chequeReconciliationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmTransactionInquary.GetTransactionInquary == null)
+            {
+                frmTransactionInquary.GetTransactionInquary = new frmTransactionInquary();
+                frmTransactionInquary.GetTransactionInquary.Text = "Cheque Reconciliation Details";
+                frmTransactionInquary.GetTransactionInquary.MdiParent = this;
+                frmTransactionInquary.GetTransactionInquary.intRepOption = 218;
+                frmTransactionInquary.GetTransactionInquary.Show();
+            }
+            else
+            {
+                frmTransactionInquary.GetTransactionInquary.Focus();
+            }
+        }
+
+        private void productWiseReOrderLevelReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product Wise Re-Order Level Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 410;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void supplierWiseReOrderLevelReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Supplier Wise Re-Order Level Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 411;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void creditorAccountAnalyseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmAccountAnalyse.GetAccountAnalyse == null)
+            {
+                frmAccountAnalyse.GetAccountAnalyse = new frmAccountAnalyse();
+                frmAccountAnalyse.GetAccountAnalyse.MdiParent = this;
+                frmAccountAnalyse.GetAccountAnalyse.Text = "Creditor Account Analyse";
+                frmAccountAnalyse.GetAccountAnalyse.intRepOption = 412;
+                frmAccountAnalyse.GetAccountAnalyse.Show();
+            }
+            else
+            {
+                frmAccountAnalyse.GetAccountAnalyse.Focus();
+            }
+        }
+
+        private void debtorAccountAnalyseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmAccountAnalyse.GetAccountAnalyse == null)
+            {
+                frmAccountAnalyse.GetAccountAnalyse = new frmAccountAnalyse();
+                frmAccountAnalyse.GetAccountAnalyse.MdiParent = this;
+                frmAccountAnalyse.GetAccountAnalyse.Text = "Debtor Account Analyse";
+                frmAccountAnalyse.GetAccountAnalyse.intRepOption = 413;
+                frmAccountAnalyse.GetAccountAnalyse.Show();
+            }
+            else
+            {
+                frmAccountAnalyse.GetAccountAnalyse.Focus();
+            }
+        }
+
+        private void manufacturerDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMasterDetailsInquary.GetMasterDetailsInquary == null)
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary = new frmMasterDetailsInquary();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.MdiParent = this;
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Text = "Manufacturer Details";
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Show();
+                frmMasterDetailsInquary.GetMasterDetailsInquary.intRepOption = 6;
+            }
+            else
+            {
+                frmMasterDetailsInquary.GetMasterDetailsInquary.Focus();
+            }
+        }
+
+        private void profitableMovingProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption 409 Profitable Moving Product
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Product Moving Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 409;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void fastMovingProductReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption 412 Fast Moving Product
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Fast Moving Product Report";
+                frmSalesInquary.GetSalesInquary.intRepOption = 412;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+
+        private void fastMovingProductReportSupplierWiseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmSalesInquary.GetSalesInquary == null)    //intRepOption 412 Fast Moving Product
+            {
+                frmSalesInquary.GetSalesInquary = new frmSalesInquary();
+                frmSalesInquary.GetSalesInquary.MdiParent = this;
+                frmSalesInquary.GetSalesInquary.Text = "Fast Moving Product Report (Supplier wise)";
+                frmSalesInquary.GetSalesInquary.intRepOption = 413;
+                frmSalesInquary.GetSalesInquary.Show();
+            }
+            else
+            {
+                frmSalesInquary.GetSalesInquary.Focus();
+            }
+        }
+    }
+}

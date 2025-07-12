@@ -1,0 +1,310 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+namespace Inventory
+{
+    public partial class frmStockOverwrite : Form
+    {
+        public frmStockOverwrite()
+        {
+            InitializeComponent();
+        }
+
+        private  static frmStockOverwrite StockOverwrite;
+        private frmSearch search = new frmSearch();
+        private int intCehked;
+        public static frmStockOverwrite GetStockOverwrite
+        {
+            get
+            {
+                return StockOverwrite;
+            }
+            set {
+                StockOverwrite = value;
+            }
+
+        }
+        private clsStockOverwrite ObjStockOverwrite = new clsStockOverwrite();
+
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+
+
+            if (optProduct.Checked)
+            {
+                intCehked = 1;
+            }
+            if (optDepartment.Checked)
+            {
+                intCehked = 2;
+            }
+            if (optCategory.Checked)
+            {
+                intCehked = 3;
+            }
+            if (optSupplier.Checked)
+            {
+                intCehked = 4;
+            }
+
+
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+
+            switch (intCehked) { 
+               case 1:
+                ObjStockOverwrite.SqlString = "SELECT Prod_Code AS [Product Code], Prod_Name AS [Product Name] FROM Product ORDER BY Prod_Code";
+                ObjStockOverwrite.DataSetName = "dsProd";
+                ObjStockOverwrite.GetProduct();
+                search.dgSearch.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsProd"];
+                search.prop_Focus = txtProductCode;
+                search.Cont_Descript = txtProductName;
+                search.Show();
+               break;
+               case 2:
+                ObjStockOverwrite.SqlString = "SELECT Dept_Code [Department Code],Dept_Name [Department Name] FROM Department ORDER BY Dept_Code";
+                ObjStockOverwrite.DataSetName = "dsDept";
+                ObjStockOverwrite.GetProduct();
+                search.dgSearch.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsDept"];
+                search.prop_Focus = txtProductCode;
+                search.Cont_Descript = txtProductName;
+                search.Show();
+               break;
+               case 3:
+                ObjStockOverwrite.SqlString = "SELECT Cat_Code AS [Category Code], Cat_Name AS [Category Name] FROM Category ORDER BY Cat_Code";
+                ObjStockOverwrite.DataSetName = "dsCat";
+                ObjStockOverwrite.GetProduct();
+                search.dgSearch.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsCat"];
+                search.prop_Focus = txtProductCode;
+                search.Cont_Descript = txtProductName;
+                search.Show();
+               break;
+               case 4:
+                ObjStockOverwrite.SqlString = "SELECT  Supp_Code [Supplier Code], Supp_Name [Supplier Name] FROM Supplier ORDER BY Supp_Code";
+                ObjStockOverwrite.DataSetName = "dsSupplier";
+                ObjStockOverwrite.GetProduct();
+                search.dgSearch.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsSupplier"];
+                search.prop_Focus = txtProductCode;
+                search.Cont_Descript = txtProductName;
+                search.Show();
+               break;
+               default:
+                    MessageBox .Show ("Invalid selection.Please select 1, 2, 3,or 4.");
+
+               break;
+            }
+
+        }
+        private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                switch (intCehked)
+                {
+                   case 1:
+                    optProduct.Select();
+                    ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price, S.Qty FROM product P INNER JOIN Stock_Master S ON P.Prod_Code = S.Prod_Code WHERE  P.Prod_Code = '"+txtProductCode.Text.Trim ()+"' and S.Loca = '"+LoginManager.LocaCode+"' ORDER BY P.Prod_Code";
+                    ObjStockOverwrite.ReadProductDetails();
+                    if (ObjStockOverwrite.ProductName != string.Empty)
+                    {
+                        txtProductName.Text = ObjStockOverwrite.ProductName;
+                        lblCurrentQty.Text = (string)ObjStockOverwrite.CurrentQty.ToString();
+                        txtPhysicalQty.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Product Code Not Found. Please Check Product Code.", "Stock Adjustment Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                        break;
+                    case 2:
+                        optDepartment.Select();
+                        if (ObjStockOverwrite.ProductName != string.Empty)
+                        {
+                            this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["empty"];
+                            this.dataGridTempGrn.Refresh();
+                            ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price,P.Pack_Size,S.Qty [Curr_Qty],'00' [Phy_Qty],'00' [Var_Qty] FROM Product P INNER JOIN Stock_Master S ON P.Prod_Code = S.Prod_Code WHERE P.Department_Id = '" + txtProductCode.Text.Trim() + "' ORDER BY P.Prod_Code";
+                            ObjStockOverwrite.DataetName = "dsLocation";
+                            ObjStockOverwrite.GetProduct();
+                            this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsLocation"];
+                            ObjStockOverwrite.ItemDataSet.Dispose();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Location Code Not Found. Please Check Product Code.", "Stock Adjustment Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        break;
+                    case 3:
+                        optCategory.Select();
+                        if (ObjStockOverwrite.ProductName != string.Empty)
+                        {
+                            this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["empty"];
+                            this.dataGridTempGrn.Refresh();
+                            ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price,P.Pack_Size,S.Qty [Curr_Qty],'00' [Phy_Qty],'00' [Var_Qty] FROM Product P INNER JOIN Stock_Master S ON P.Prod_Code = S.Prod_Code WHERE P.Category_Id = '"+txtProductCode.Text.Trim()+"' ORDER BY P.Prod_Code";
+                            ObjStockOverwrite.DataetName = "dsCategory";
+                            ObjStockOverwrite.GetProduct();
+                            this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsCategory"];
+                            ObjStockOverwrite.ItemDataSet.Dispose();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Location Code Not Found. Please Check Product Code.", "Stock Adjustment Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        break;
+                    case 4:
+                        optSupplier.Select();
+                        if (ObjStockOverwrite.ProductName != string.Empty)
+                        {
+                            this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["empty"];
+                            this.dataGridTempGrn.Refresh();
+                            ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price,P.Pack_Size,S.Qty [Curr_Qty],'00' [Phy_Qty],'00' [Var_Qty] FROM Product P INNER JOIN Stock_Master S ON P.Prod_Code = S.Prod_Code WHERE P.Supplier_Id = '"+txtProductCode.Text.Trim ()+"' ORDER BY P.Supplier_Id";
+                            ObjStockOverwrite.DataetName = "dsCategory";
+                            ObjStockOverwrite.GetProduct();
+                            this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsCategory"];
+                            ObjStockOverwrite.ItemDataSet.Dispose();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Location Code Not Found. Please Check Product Code.", "Stock Adjustment Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        break;
+                    default :
+                        break;
+                }
+
+
+            }
+        }
+
+        private void txtPhysicalQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtPhysicalQty.Text, System.Globalization.NumberStyles.Float) == true)
+            {
+                ObjStockOverwrite.ProductCode = txtProductCode.Text.Trim();
+                ObjStockOverwrite.ProductName = txtProductName.Text.Trim();
+                ObjStockOverwrite.CurrentQty = float.Parse(lblCurrentQty.Text.ToString());
+                ObjStockOverwrite.PhyQty = float.Parse(txtPhysicalQty.Text.ToString());
+                ObjStockOverwrite.UpdateStockAdjustDataSet();
+                ObjStockOverwrite.GetTempDataset();
+                dataGridTempGrn.DataSource = ObjStockOverwrite.GetTempStockAdjustDataSet.Tables["StockAdjust"];
+                dataGridTempGrn.Refresh();
+                txtProductCode.Text = string.Empty;
+                txtProductName.Text = string.Empty;
+                txtPhysicalQty.Text = string.Empty;
+                lblCurrentQty.Text = string.Empty;
+                lblVarienceQty.Text = string.Empty;
+                ObjStockOverwrite.GetTotalValues();
+
+                lblTotalcurrQty.Text = ObjStockOverwrite.CurrentTotalQty.ToString();
+                lblTotalPhysicalQty.Text = ObjStockOverwrite.PhyTotalQty.ToString();
+                float f = ObjStockOverwrite.PhyTotalQty - ObjStockOverwrite.CurrentTotalQty;
+                lblTotalVarienceQty.Text = f.ToString();
+                txtProductCode.Focus();
+            }
+        }
+
+        private void frmStockOverwrite_Load(object sender, EventArgs e)
+        {
+            ObjStockOverwrite.SqlString = "SELECT Temp_Sta FROM DocumentNoDetails WHERE Loca = ";
+            ObjStockOverwrite.GetTempDocumentNo();
+            lblDocumentNo.Text = ObjStockOverwrite.TempDocNo;
+            dataGridTempGrn.DataSource = ObjStockOverwrite.GetTempStockAdjustDataSet;
+            dataGridTempGrn.Refresh();
+        }
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            ObjStockOverwrite.StockAdjustApply();
+            MessageBox.Show("Stock Adjustment Successfully Applied as Document No. " + ObjStockOverwrite.OrgDocNo, "Stock Adjustment Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            ObjStockOverwrite.GetDataSetForReport();
+            dsDataForReport = ObjStockOverwrite.GetReportDataset;
+            rptStockAdjustment StockAdjustment = new rptStockAdjustment();
+            StockAdjustment.SetDataSource(dsDataForReport);
+
+            objRepViewer.crystalReportViewer1.ReportSource = StockAdjustment;
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+
+            this.Close();
+            this.Dispose();
+            StockOverwrite = null;
+        }
+
+        private void frmStockOverwrite_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StockOverwrite = null;
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            switch (intCehked ){
+                case 1:
+                    optProduct.Select();
+                    break;
+                case 2:
+                    optDepartment.Select();
+                      ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price,P.Pack_Size,P.Current_Qty [Curr_Qty],T.Qty [Phy_Qty],(T.Qty - P.Current_Qty ) [Var_Qty] FROM Product P INNER JOIN tbStockCount T ON T.Prod_Code = P.Prod_Code WHERE P.Department_Id = '"+txtProductCode .Text .Trim ()+"' ORDER BY Department_Id ";
+                      ObjStockOverwrite.DataetName = "dsDept";
+                      ObjStockOverwrite.GetProduct();
+                      this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsDept"];
+                      ObjStockOverwrite.ItemDataSet.Dispose();
+                      break;
+                case 3:
+                    optCategory.Select();
+                    ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price,P.Pack_Size,P.Current_Qty [Curr_Qty],T.Qty [Phy_Qty],(T.Qty - P.Current_Qty ) [Var_Qty] FROM Product P INNER JOIN tbStockCount T ON T.Prod_Code = P.Prod_Code WHERE P.Category_Id = '"+txtProductCode .Text .Trim ()+"' ORDER BY P.Category_Id ";
+                    ObjStockOverwrite.DataetName = "dsDept";
+                    ObjStockOverwrite.GetProduct();
+                    this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsDept"];
+                    ObjStockOverwrite.ItemDataSet.Dispose();
+
+                    break;
+                case 4:
+                    optSupplier.Select();
+                    ObjStockOverwrite.SqlString = "SELECT P.Prod_Code, P.Prod_Name, P.Purchase_price, P.Selling_Price,P.Pack_Size,P.Current_Qty [Curr_Qty],T.Qty [Phy_Qty],(T.Qty - P.Current_Qty ) [Var_Qty] FROM Product P INNER JOIN tbStockCount T ON T.Prod_Code = P.Prod_Code WHERE P.Supplier_Id = '" + txtProductCode.Text.Trim() + "' ORDER BY P.Supplier_Id ";
+                    ObjStockOverwrite.DataetName = "dsDept";
+                    ObjStockOverwrite.GetProduct();
+                    this.dataGridTempGrn.DataSource = ObjStockOverwrite.ItemDataSet.Tables["dsDept"];
+                    ObjStockOverwrite.ItemDataSet.Dispose();
+                    break;
+                default :
+                    break;
+      
+            }
+        }
+
+        private void txtProductCode_Enter(object sender, EventArgs e)
+        {
+            if (txtProductCode.Text.Trim () != string .Empty ){
+            btnDownload.Enabled = true;            
+            }
+
+        }
+
+        private void dataGridTempGrn_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            clsDGV dg = new clsDGV();
+            dg.invoke(e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            StockOverwrite = null;
+        }
+
+    }
+}

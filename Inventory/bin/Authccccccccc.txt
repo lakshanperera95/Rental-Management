@@ -1,0 +1,18 @@
+1.26.219.0.173
+2.Test
+//2.Newinv
+3.sa
+4.itonimta
+5.5000
+6.10
+7.Extension Location
+8.aaaa
+9.11
+A.10
+B.bbbb
+C.Amila
+D.2222
+E.COM1
+F.MSSQL
+//If MSSQL-API, provide base URL
+G.http://194.233.76.58:4445/api/

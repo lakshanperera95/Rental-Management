@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsTransactionInquary
+    {
+        # region General Declartion
+
+        private string strSqlStatement;
+        private string strDataSetName;
+        private DataSet dsResultSet;
+        #endregion
+
+        #region //properties
+        
+        public DataSet ResultSet
+        {
+            get
+            {
+                return dsResultSet;
+            }
+            set
+            {
+                dsResultSet = value;
+            }
+        }
+
+        public string dsName
+        {
+            get
+            {
+                return strDataSetName;
+            }
+            set
+            {
+                strDataSetName = value;
+            }
+        }
+
+        public string SqlStatement
+        {
+            get
+            {
+                return strSqlStatement;
+            }
+            set
+            {
+                strSqlStatement = value;
+            }
+        }
+
+        #endregion
+
+        # region //Select Dataset
+        public void RetriveData()
+        {
+            dsResultSet = dbcon.getDataset(strSqlStatement, strDataSetName);
+        }
+        # endregion
+    }
+}

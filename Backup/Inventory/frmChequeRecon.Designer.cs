@@ -1,0 +1,448 @@
+namespace Inventory
+{
+    partial class frmChequeRecon
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblTempDocNo = new System.Windows.Forms.Label();
+            this.btnSupplierSearch = new System.Windows.Forms.Button();
+            this.txtSuppName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtSuppCode = new System.Windows.Forms.TextBox();
+            this.radioButtonSupplierPayment = new System.Windows.Forms.RadioButton();
+            this.radioButtonCustomerReceipt = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblAmount = new System.Windows.Forms.Label();
+            this.lblRealized = new System.Windows.Forms.Label();
+            this.txtRemark = new System.Windows.Forms.TextBox();
+            this.lblBranch = new System.Windows.Forms.Label();
+            this.lblBankName = new System.Windows.Forms.Label();
+            this.lblChequeNo = new System.Windows.Forms.Label();
+            this.lblChequeDate = new System.Windows.Forms.Label();
+            this.dataGridViewChequeRecon = new System.Windows.Forms.DataGridView();
+            this.chequeDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chequeNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bankNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realizedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dsChequeReconBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsForReports = new Inventory.dsForReports();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChequeRecon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsChequeReconBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblTempDocNo);
+            this.groupBox1.Controls.Add(this.btnSupplierSearch);
+            this.groupBox1.Controls.Add(this.txtSuppName);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.txtSuppCode);
+            this.groupBox1.Controls.Add(this.radioButtonSupplierPayment);
+            this.groupBox1.Controls.Add(this.radioButtonCustomerReceipt);
+            this.groupBox1.Location = new System.Drawing.Point(4, -1);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(995, 46);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // lblTempDocNo
+            // 
+            this.lblTempDocNo.Location = new System.Drawing.Point(734, 17);
+            this.lblTempDocNo.Name = "lblTempDocNo";
+            this.lblTempDocNo.Size = new System.Drawing.Size(75, 18);
+            this.lblTempDocNo.TabIndex = 130;
+            this.lblTempDocNo.Text = "0000000000";
+            this.lblTempDocNo.Visible = false;
+            // 
+            // btnSupplierSearch
+            // 
+            this.btnSupplierSearch.ForeColor = System.Drawing.Color.DimGray;
+            this.btnSupplierSearch.Image = global::Inventory.Properties.Resources.Finder_Toolbar_Search;
+            this.btnSupplierSearch.Location = new System.Drawing.Point(703, 14);
+            this.btnSupplierSearch.Name = "btnSupplierSearch";
+            this.btnSupplierSearch.Size = new System.Drawing.Size(25, 22);
+            this.btnSupplierSearch.TabIndex = 5;
+            this.btnSupplierSearch.UseVisualStyleBackColor = true;
+            this.btnSupplierSearch.Click += new System.EventHandler(this.btnSupplierSearch_Click);
+            // 
+            // txtSuppName
+            // 
+            this.txtSuppName.Location = new System.Drawing.Point(485, 16);
+            this.txtSuppName.Name = "txtSuppName";
+            this.txtSuppName.Size = new System.Drawing.Size(216, 20);
+            this.txtSuppName.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(262, 19);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 13);
+            this.label7.TabIndex = 127;
+            this.label7.Text = "Account No :";
+            // 
+            // txtSuppCode
+            // 
+            this.txtSuppCode.Location = new System.Drawing.Point(352, 16);
+            this.txtSuppCode.Name = "txtSuppCode";
+            this.txtSuppCode.Size = new System.Drawing.Size(128, 20);
+            this.txtSuppCode.TabIndex = 3;
+            this.txtSuppCode.Enter += new System.EventHandler(this.txtSuppCode_Enter);
+            this.txtSuppCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSuppCode_KeyDown);
+            // 
+            // radioButtonSupplierPayment
+            // 
+            this.radioButtonSupplierPayment.AutoSize = true;
+            this.radioButtonSupplierPayment.Location = new System.Drawing.Point(145, 17);
+            this.radioButtonSupplierPayment.Name = "radioButtonSupplierPayment";
+            this.radioButtonSupplierPayment.Size = new System.Drawing.Size(112, 17);
+            this.radioButtonSupplierPayment.TabIndex = 1;
+            this.radioButtonSupplierPayment.Text = "Supplier Payments";
+            this.radioButtonSupplierPayment.UseVisualStyleBackColor = true;
+            this.radioButtonSupplierPayment.CheckedChanged += new System.EventHandler(this.radioButtonSupplierPayment_CheckedChanged);
+            // 
+            // radioButtonCustomerReceipt
+            // 
+            this.radioButtonCustomerReceipt.AutoSize = true;
+            this.radioButtonCustomerReceipt.Checked = true;
+            this.radioButtonCustomerReceipt.Location = new System.Drawing.Point(15, 17);
+            this.radioButtonCustomerReceipt.Name = "radioButtonCustomerReceipt";
+            this.radioButtonCustomerReceipt.Size = new System.Drawing.Size(109, 17);
+            this.radioButtonCustomerReceipt.TabIndex = 0;
+            this.radioButtonCustomerReceipt.TabStop = true;
+            this.radioButtonCustomerReceipt.Text = "Customer Receipt";
+            this.radioButtonCustomerReceipt.UseVisualStyleBackColor = true;
+            this.radioButtonCustomerReceipt.CheckedChanged += new System.EventHandler(this.radioButtonCustomerReceipt_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblAmount);
+            this.groupBox2.Controls.Add(this.lblRealized);
+            this.groupBox2.Controls.Add(this.txtRemark);
+            this.groupBox2.Controls.Add(this.lblBranch);
+            this.groupBox2.Controls.Add(this.lblBankName);
+            this.groupBox2.Controls.Add(this.lblChequeNo);
+            this.groupBox2.Controls.Add(this.lblChequeDate);
+            this.groupBox2.Controls.Add(this.dataGridViewChequeRecon);
+            this.groupBox2.Location = new System.Drawing.Point(4, 47);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(995, 286);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            // 
+            // lblAmount
+            // 
+            this.lblAmount.BackColor = System.Drawing.Color.LightCyan;
+            this.lblAmount.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblAmount.Location = new System.Drawing.Point(597, 255);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(117, 20);
+            this.lblAmount.TabIndex = 5;
+            this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblRealized
+            // 
+            this.lblRealized.BackColor = System.Drawing.Color.LightCyan;
+            this.lblRealized.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRealized.Location = new System.Drawing.Point(929, 255);
+            this.lblRealized.Name = "lblRealized";
+            this.lblRealized.Size = new System.Drawing.Size(56, 20);
+            this.lblRealized.TabIndex = 7;
+            this.lblRealized.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(713, 255);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(217, 20);
+            this.txtRemark.TabIndex = 6;
+            this.txtRemark.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRemark_KeyDown);
+            // 
+            // lblBranch
+            // 
+            this.lblBranch.BackColor = System.Drawing.Color.LightCyan;
+            this.lblBranch.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBranch.Location = new System.Drawing.Point(441, 255);
+            this.lblBranch.Name = "lblBranch";
+            this.lblBranch.Size = new System.Drawing.Size(157, 20);
+            this.lblBranch.TabIndex = 4;
+            // 
+            // lblBankName
+            // 
+            this.lblBankName.BackColor = System.Drawing.Color.LightCyan;
+            this.lblBankName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBankName.Location = new System.Drawing.Point(234, 255);
+            this.lblBankName.Name = "lblBankName";
+            this.lblBankName.Size = new System.Drawing.Size(208, 20);
+            this.lblBankName.TabIndex = 3;
+            // 
+            // lblChequeNo
+            // 
+            this.lblChequeNo.BackColor = System.Drawing.Color.LightCyan;
+            this.lblChequeNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblChequeNo.Location = new System.Drawing.Point(137, 255);
+            this.lblChequeNo.Name = "lblChequeNo";
+            this.lblChequeNo.Size = new System.Drawing.Size(101, 20);
+            this.lblChequeNo.TabIndex = 2;
+            // 
+            // lblChequeDate
+            // 
+            this.lblChequeDate.BackColor = System.Drawing.Color.LightCyan;
+            this.lblChequeDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblChequeDate.Location = new System.Drawing.Point(46, 255);
+            this.lblChequeDate.Name = "lblChequeDate";
+            this.lblChequeDate.Size = new System.Drawing.Size(95, 20);
+            this.lblChequeDate.TabIndex = 1;
+            // 
+            // dataGridViewChequeRecon
+            // 
+            this.dataGridViewChequeRecon.AllowUserToAddRows = false;
+            this.dataGridViewChequeRecon.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dataGridViewChequeRecon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewChequeRecon.AutoGenerateColumns = false;
+            this.dataGridViewChequeRecon.BackgroundColor = System.Drawing.Color.PowderBlue;
+            this.dataGridViewChequeRecon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewChequeRecon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.chequeDateDataGridViewTextBoxColumn,
+            this.chequeNoDataGridViewTextBoxColumn,
+            this.bankNameDataGridViewTextBoxColumn,
+            this.branchDataGridViewTextBoxColumn,
+            this.Amount,
+            this.Remark,
+            this.realizedDataGridViewTextBoxColumn});
+            this.dataGridViewChequeRecon.DataSource = this.dsChequeReconBindingSource;
+            this.dataGridViewChequeRecon.Location = new System.Drawing.Point(2, 12);
+            this.dataGridViewChequeRecon.Name = "dataGridViewChequeRecon";
+            this.dataGridViewChequeRecon.ReadOnly = true;
+            this.dataGridViewChequeRecon.Size = new System.Drawing.Size(987, 238);
+            this.dataGridViewChequeRecon.TabIndex = 0;
+            this.dataGridViewChequeRecon.DoubleClick += new System.EventHandler(this.dataGridViewChequeRecon_DoubleClick);
+            // 
+            // chequeDateDataGridViewTextBoxColumn
+            // 
+            this.chequeDateDataGridViewTextBoxColumn.DataPropertyName = "Cheque_Date";
+            this.chequeDateDataGridViewTextBoxColumn.Frozen = true;
+            this.chequeDateDataGridViewTextBoxColumn.HeaderText = "Cheque Date";
+            this.chequeDateDataGridViewTextBoxColumn.Name = "chequeDateDataGridViewTextBoxColumn";
+            this.chequeDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // chequeNoDataGridViewTextBoxColumn
+            // 
+            this.chequeNoDataGridViewTextBoxColumn.DataPropertyName = "Cheque_No";
+            this.chequeNoDataGridViewTextBoxColumn.Frozen = true;
+            this.chequeNoDataGridViewTextBoxColumn.HeaderText = "Cheque No";
+            this.chequeNoDataGridViewTextBoxColumn.Name = "chequeNoDataGridViewTextBoxColumn";
+            this.chequeNoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bankNameDataGridViewTextBoxColumn
+            // 
+            this.bankNameDataGridViewTextBoxColumn.DataPropertyName = "Bank_Name";
+            this.bankNameDataGridViewTextBoxColumn.Frozen = true;
+            this.bankNameDataGridViewTextBoxColumn.HeaderText = "Bank Name";
+            this.bankNameDataGridViewTextBoxColumn.Name = "bankNameDataGridViewTextBoxColumn";
+            this.bankNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bankNameDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // branchDataGridViewTextBoxColumn
+            // 
+            this.branchDataGridViewTextBoxColumn.DataPropertyName = "Branch";
+            this.branchDataGridViewTextBoxColumn.Frozen = true;
+            this.branchDataGridViewTextBoxColumn.HeaderText = "Branch";
+            this.branchDataGridViewTextBoxColumn.Name = "branchDataGridViewTextBoxColumn";
+            this.branchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.branchDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Width = 120;
+            // 
+            // Remark
+            // 
+            this.Remark.DataPropertyName = "Remark";
+            this.Remark.HeaderText = "Remark";
+            this.Remark.Name = "Remark";
+            this.Remark.ReadOnly = true;
+            this.Remark.Width = 210;
+            // 
+            // realizedDataGridViewTextBoxColumn
+            // 
+            this.realizedDataGridViewTextBoxColumn.DataPropertyName = "Realized";
+            this.realizedDataGridViewTextBoxColumn.HeaderText = "Realized";
+            this.realizedDataGridViewTextBoxColumn.Name = "realizedDataGridViewTextBoxColumn";
+            this.realizedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.realizedDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // dsChequeReconBindingSource
+            // 
+            this.dsChequeReconBindingSource.DataMember = "dsChequeRecon";
+            this.dsChequeReconBindingSource.DataSource = this.dsForReports;
+            // 
+            // dsForReports
+            // 
+            this.dsForReports.DataSetName = "dsForReports";
+            this.dsForReports.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnClose);
+            this.groupBox3.Controls.Add(this.btnApply);
+            this.groupBox3.Controls.Add(this.toolStrip1);
+            this.groupBox3.Location = new System.Drawing.Point(4, 339);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(995, 71);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(855, 11);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(100, 50);
+            this.btnClose.TabIndex = 8;
+            this.btnClose.Text = "Exit";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnApply
+            // 
+            this.btnApply.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnApply.Enabled = false;
+            this.btnApply.FlatAppearance.BorderSize = 0;
+            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApply.Location = new System.Drawing.Point(725, 11);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(100, 50);
+            this.btnApply.TabIndex = 7;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = false;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(989, 65);
+            this.toolStrip1.TabIndex = 134;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // frmChequeRecon
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(1001, 411);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmChequeRecon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Cheque Reconciliation";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmChequeRecon_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChequeRecon_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmChequeRecon_KeyDown);
+            this.Load += new System.EventHandler(this.frmChequeRecon_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChequeRecon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsChequeReconBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButtonSupplierPayment;
+        private System.Windows.Forms.RadioButton radioButtonCustomerReceipt;
+        private System.Windows.Forms.Button btnSupplierSearch;
+        private System.Windows.Forms.TextBox txtSuppName;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtSuppCode;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblTempDocNo;
+        private System.Windows.Forms.DataGridView dataGridViewChequeRecon;
+        private System.Windows.Forms.BindingSource dsChequeReconBindingSource;
+        private dsForReports dsForReports;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.TextBox txtRemark;
+        private System.Windows.Forms.Label lblAmount;
+        private System.Windows.Forms.Label lblBranch;
+        private System.Windows.Forms.Label lblBankName;
+        private System.Windows.Forms.Label lblChequeNo;
+        private System.Windows.Forms.Label lblChequeDate;
+        private System.Windows.Forms.Label lblRealized;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chequeDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chequeNoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bankNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn branchDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Remark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn realizedDataGridViewTextBoxColumn;
+    }
+}

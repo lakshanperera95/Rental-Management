@@ -1,0 +1,254 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.IO;
+using System.Windows.Forms;
+using clsLibrary;
+namespace Inventory
+{
+    public partial class frmBarcode : Form
+    {
+        public frmBarcode()
+        {
+            InitializeComponent();
+        }
+
+        frmSearch search = new frmSearch();
+
+        clsBarcode objBarcode = new clsBarcode();
+
+        private string strQuery;
+
+        private static frmBarcode Barcode;
+
+        public static frmBarcode GetBarcode
+        {
+            get
+            {
+                return Barcode;
+            }
+            set
+            {
+                Barcode = value;
+            }
+        }
+
+        private void frmBarcode_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Barcode = null;
+        }
+
+        private void frmBarcode_FormClosing(object sender, FormClosingEventArgs e)
+        {
+                    // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtProductCode.Text.Trim() != string.Empty && txtProductName.Text.Trim() == string.Empty)
+            {
+                objBarcode.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%'";
+            }
+            else
+            {
+                if (txtProductCode.Text.Trim() == string.Empty && txtProductName.Text.Trim() != string.Empty)
+                {
+                    objBarcode.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Name LIKE '%" + txtProductName.Text.Trim() + "%'";
+                }
+                else
+                {
+                    objBarcode.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product";
+                }
+            }
+
+            objBarcode.DataetName = "dsProduct";
+            objBarcode.GetItemDetails();
+
+            search.dgSearch.DataSource = objBarcode.GetItemDataset.Tables["dsProduct"];
+            search.prop_Focus = txtProductCode;
+            search.Show();
+        }
+
+        private void txtProductCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtProductCode.Text = search.Code.Trim();
+                txtProductName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+
+                txtProductCode.Text = txtProductCode.Text.ToUpper();
+                objBarcode.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Pack_Size, product.Unit, Supplier_Id FROM product WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "'";
+                objBarcode.ReadProductDetails();
+                if (objBarcode.RecordFound == true)
+                {
+                    txtProductName.Text = objBarcode.ProductName;
+                    txtSellingPrice.Text = (string) objBarcode.SellingPrice.ToString();
+                    //txtSellingPrice.Text = string.Format("{0:0.00}", objBarcode.SellingPrice);
+                    lblSuppCode.Text = objBarcode.SuppCode;
+                    objBarcode.SqlStatement = "SELECT qty FROM tbBarcode WHERE Prod_Code = '" + objBarcode.ProductCode + "'";
+                    objBarcode.ReadExsistProductDetails();
+                    txtQty.Text = (string)objBarcode.Qty.ToString();
+                    txtQty.Select(0, txtQty.Text.Trim().Length);
+                    txtQty.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found. Please Check Product Code.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void txtQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtQty.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtQty.Text) > 0)
+            {
+                txtProductCode.Text = txtProductCode.Text.ToUpper();
+                objBarcode.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Pack_Size, product.Unit, Supplier_Id FROM product WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "'";
+                objBarcode.ReadProductDetails();
+                if (objBarcode.RecordFound == true)
+                {
+                    txtProductName.Text = objBarcode.ProductName;
+                    lblSuppCode.Text = objBarcode.SuppCode ;
+                    txtSellingPrice.Text = (string)objBarcode.SellingPrice.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found. Please Check Product Code.", this.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtProductCode.Focus();
+                    return;
+                }
+
+                objBarcode.ProductCode = txtProductCode.Text.Trim();
+                objBarcode.ProductName = txtProductName.Text.Trim();
+                objBarcode.Qty = float.Parse(txtQty.Text.ToString());
+                lblSuppCode.Text = objBarcode.SuppCode;
+
+                objBarcode.UpdateBarcodeTempDataSet();
+                objBarcode.GetTempDataset();
+                dataGridViewBarcode.DataSource = objBarcode.TempBarcode.Tables["dsBarcode"];
+                dataGridViewBarcode.Refresh();
+                txtProductCode.Text = string.Empty;
+                txtProductName.Text = string.Empty;
+                txtQty.Text = string.Empty;
+                txtSellingPrice.Text = string.Empty;
+                txtQty.Text = "0";
+
+                txtProductCode.Focus();
+            }
+        }
+
+        private void frmBarcode_Load(object sender, EventArgs e)
+        {
+            objBarcode.DeleteAllBarcodeTempDataSet();
+            dataGridViewBarcode.DataSource = objBarcode.TempBarcode;
+            dataGridViewBarcode.Refresh();
+        }
+
+        private void dataGridViewBarcode_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridViewBarcode.SelectedRows.Count <= 0 || dataGridViewBarcode.SelectedRows[0].Cells[0].ToString() == "")
+            {
+                MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                txtProductCode.Text = dataGridViewBarcode.SelectedRows[0].Cells[0].Value.ToString();
+                txtProductName.Text = dataGridViewBarcode.SelectedRows[0].Cells[1].Value.ToString();
+                objBarcode.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Pack_Size, product.Unit, Supplier_Id FROM product WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "'";
+                objBarcode.ReadProductDetails();
+                txtSellingPrice.Text = dataGridViewBarcode.SelectedRows[0].Cells[2].Value.ToString();
+                txtQty.Text = dataGridViewBarcode.SelectedRows[0].Cells[3].Value.ToString();
+                lblSuppCode.Text = dataGridViewBarcode.SelectedRows[0].Cells[4].Value.ToString();
+                txtQty.Focus();
+            }
+        }
+
+        private void dataGridViewBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && dataGridViewBarcode.SelectedRows[0].Cells[0].Value.ToString() != string.Empty)
+            {
+                if (MessageBox.Show("Are You Sure You want to Delete This Item. ", this.Text , MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    objBarcode.ProductCode = dataGridViewBarcode.SelectedRows[0].Cells[0].Value.ToString();
+                    objBarcode.DeleteBarcodeTempDataSet();
+                    objBarcode.GetTempDataset();
+                    dataGridViewBarcode.DataSource = objBarcode.TempBarcode.Tables["dsBarcode"];
+                    dataGridViewBarcode.Refresh();
+
+                    txtProductCode.Focus();
+                }
+            }
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            Barcode = null;
+        }
+
+        private void btnDisplay_Click(object sender, EventArgs e)
+        {
+            double  dblQty;
+            int count;
+
+            //Write to Log
+            FileStream fileStream = new FileStream(@"C:\barcode\BarcodeSource.txt", FileMode.Create);
+            StreamWriter m_streamWriter = new StreamWriter(fileStream);
+            try
+            {
+                foreach (DataRow row in objBarcode.TempBarcode.Tables["dsBarcode"].Rows)
+                {
+                    dblQty = Convert.ToDouble(row["Qty"]);
+                    string  strSellingPrice;
+                    strSellingPrice = string.Format("{0:0.00}",row["Selling_Price"]);
+                    for (count = 0; count < dblQty; count = count + 1)
+                    {
+                        m_streamWriter.WriteLine(row["Prod_Code"] + "," + row["Prod_Name"] + "," + strSellingPrice +","+ row["Supp_Code"]);
+                    }
+                }
+                //while (objBarcode.TempBarcode.Tables["dsBarcode"].Rows.e
+                //m_streamWriter.WriteLine("'Location :'" + string.Format("{0:dd/MM/yyyy HH:mm:ss}", DateTime.Now));
+                // read from file or write to file
+            }
+            finally
+            {
+                m_streamWriter.Close();
+                fileStream.Close();
+            }
+
+            //Barcode Software
+            System.Diagnostics.ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo();
+
+            processStartInfo.FileName = @"C:\barcode\LW.exe";
+            processStartInfo.Arguments = @"C:\barcode\BARCODE1.lbl";
+
+            System.Diagnostics.Process.Start(processStartInfo);
+            
+            //System.Diagnostics.Process.Start("C:\\barcode\\LW.exe");
+        }
+
+    }
+}

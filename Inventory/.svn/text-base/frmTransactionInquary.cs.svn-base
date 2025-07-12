@@ -1,0 +1,757 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+using CrystalDecisions.Shared;
+namespace Inventory
+{
+    public partial class frmTransactionInquary : Form
+    {
+        public int intRepOption;
+        private string strQuery;
+
+        public frmTransactionInquary()
+        {
+            InitializeComponent();
+        }
+
+        private static frmTransactionInquary TransactionInquary;
+
+        clsTransactionInquary  objTransactionInquary = new clsTransactionInquary();
+
+        private frmSearch search = new frmSearch();
+
+        public static frmTransactionInquary GetTransactionInquary
+        {
+            get
+            {
+                return TransactionInquary;
+            }
+            set
+            {
+                TransactionInquary = value;
+            }
+        }
+
+        private void frmTransactionInquary_Load(object sender, EventArgs e)
+        {
+            DateTime PostDate = DateTime.Now;
+
+            dtDateFrom.Value   = PostDate;
+            dtDateTo.Value = PostDate;
+
+            switch (intRepOption)
+            {
+                case 200://whole sale invoice
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled=false ;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 201://Purchase Order
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 202://Good Received Note
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 203://Stock adjustment
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 204://transfer note details
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 205://Supplier Payment
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 206://whole sale invoice
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 207://Customer Return
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 208://Payment Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 209://Receipt Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 210://Receipt Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 211://Customer Return Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 212://Purchase Order Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 213://Good Received Note Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 214://Stock Adjustment Note Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 216://Supplier Return Note
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+
+                case 217://Supplier Return Summary
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Checked = true;
+                    break;
+
+                case 218://Cheque Recon Note
+
+                    txtCodeTo.Enabled = false;
+                    btnDocumentTo.Enabled = false;
+                    dtDateFrom.Enabled = false;
+                    dtDateTo.Enabled = false;
+                    radioButtonDocumentNo.Enabled = false;
+                    radioButtonDate.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            TransactionInquary = null;
+        }
+
+        private void btnDocumentFrom_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+                switch (intRepOption)
+                {
+                    case 200:   //Whole Sale Invoice
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'INV' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 201://Purchase Order
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'PON' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 202://Grn
+
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'GRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 203: //Stock Adjustment
+
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'STA' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 204://transfer note details
+
+                        strQuery = "SELECT Doc_No [Document No], To_LocaDesc [To Location] FROM Transaction_Header WHERE Iid = 'TGN' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 205://Supp Payment
+                        strQuery = "SELECT tbPaidPaymentSummary.Org_Doc_no [Document No], Supplier.Supp_Name [Supplier] FROM tbPaidPaymentSummary INNER JOIN Supplier ON tbPaidPaymentSummary.Acc_Code = Supplier.Supp_Code WHERE Iid = 'PMT' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "' GROUP BY Org_Doc_no, Supp_Name ORDER BY RIGHT(Org_Doc_no,6) DESC";
+                        break;
+
+                    case 206:// Receipt
+                        strQuery = "SELECT tbPaidPaymentSummary.Org_Doc_no [Document No], Customer.Cust_Name [Customer] FROM tbPaidPaymentSummary INNER JOIN Customer ON tbPaidPaymentSummary.Acc_Code = Customer.Cust_Code WHERE Iid = 'REC' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "' GROUP BY Org_Doc_no, Cust_Name ORDER BY RIGHT(Org_Doc_no,6) DESC";
+                        break;
+
+                    case 207:   //Customer Return
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'CUR' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 208://Supp Payment  Summary
+                        strQuery = "SELECT tbPaidPaymentSummary.Org_Doc_no [Document No], Supplier.Supp_Name [Supplier] FROM tbPaidPaymentSummary INNER JOIN Supplier ON tbPaidPaymentSummary.Acc_Code = Supplier.Supp_Code WHERE Iid = 'PMT' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "' GROUP BY Org_Doc_no, Supp_Name ORDER BY RIGHT(Org_Doc_no,6) ";
+                        break;
+
+                    case 209:// Receipt Summary
+                        strQuery = "SELECT tbPaidPaymentSummary.Org_Doc_no [Document No], Customer.Cust_Name [Customer] FROM tbPaidPaymentSummary INNER JOIN Customer ON tbPaidPaymentSummary.Acc_Code = Customer.Cust_Code WHERE Iid = 'REC' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "' GROUP BY Org_Doc_no, Cust_Name ORDER BY RIGHT(Org_Doc_no,6) ";
+                        break;
+
+                    case 210:// Invoice Summary
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'INV' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 211:// Customer Return Summary
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'CUR' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 212://Purchase Order
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'PON' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 213://Grn summary
+
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'GRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+                    case 214: //Stock Summary
+
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'STA' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 215://transfer note Summary
+
+                        strQuery = "SELECT Doc_No [Document No], To_LocaDesc [To Location] FROM Transaction_Header WHERE Iid = 'TGN' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 216://Supplier Return
+
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'SRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 217://Supplier Return summary
+
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'SRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 218://Cheque Reco Note
+
+                        strQuery = "select Doc_No [Document No], Post_Date + ' ' + Reference [Date  Account] from transaction_header where (iid = 'PRT' OR Iid = 'RRT') AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' GROUP BY Doc_No,Reference, Post_Date ORDER BY RIGHT(Doc_No,6)";
+                        break;
+                    default:
+                        break;
+                }
+
+                objTransactionInquary.SqlStatement = strQuery;
+                objTransactionInquary.dsName = "Table";
+                objTransactionInquary.RetriveData();
+
+                search.dgSearch.DataSource = objTransactionInquary.ResultSet.Tables["Table"];
+                search.Show();
+
+                search.prop_Focus = txtCodeFrom;
+        }
+
+        private void txtCodeFrom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void txtCodeFrom_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txtCodeFrom_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCodeFrom_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null)
+            {
+                txtCodeFrom.Text = search.Code.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtCodeFrom.Text != string.Empty)
+            {
+                txtCodeTo.Focus();
+            }
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            DataSet dsDataForReport2 = new DataSet();
+
+            clsReportViewer objRepView = new clsReportViewer();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            switch (intRepOption)
+            {
+                case 200:
+             
+                    objRepView.SqlStatement = "SELECT Transaction_Header.Doc_no, Transaction_Header.Supplier_Id ,Customer.Cust_Name, Transaction_Header.Loca,Location.Loca_Descrip, Transaction_Header.Post_Date, Transaction_Header.inv_no, Transaction_Header.Inv_Amt, Transaction_Header.Porder_no, Transaction_Header.Net_Amount,Transaction_Header.Amount Gross_Amount ,Transaction_Header.Discount Sub_Discount, Transaction_Header.Disc, Transaction_Header.Remarks, Transaction_Header.Reference, Transaction_Header.Pay_Type, Transaction_Header.Tax, Ref_Name Sales_Assist,Transaction_Details.Prod_code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.FreeQty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Discount, Transaction_Details.Amount, Transaction_Details.Ln, Transaction_Header.PayRemark1, Customer.Address1, Customer.Address2, Customer.Address3, Customer.Address4, 'Original' Status FROM Transaction_Header INNER JOIN Transaction_Details ON Transaction_Header.Doc_No = Transaction_Details.Doc_No AND Transaction_Header.Loca = Transaction_Details.Loca AND Transaction_Header.Iid = Transaction_Details.Iid INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN customer ON Transaction_Header.Supplier_Id = Customer.Cust_code WHERE Transaction_Header.Doc_No = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'INV' ORDER BY Ln";
+                    objRepView.DataSetName = "dsInvoiceDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptInvoiceDetails rptWholeInvoice = new rptInvoiceDetails();
+                    rptWholeInvoice.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptWholeInvoice;
+                    break;
+
+                case 201:
+                    objRepView.SqlStatement = "SELECT Transaction_Header.Doc_No, Transaction_Header.Post_Date, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Pay_Type, Transaction_Header.Remarks, Transaction_Header.Expected_Date, Transaction_Header.AddRemarks, Transaction_Header.Reference, Transaction_Header.PayRemark1, Transaction_Header.PayRemark2, Transaction_Header.Tax, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Amount, Transaction_Details.Ln, Supplier.Address1, Supplier.Address2, Supplier.Address3, Supplier.Address4, Supplier.Tel, Supplier.Fax, Transaction_Header.Amount NetAmount, Transaction_Header.Pay1, 'Duplicate' Status from Transaction_Header INNER JOIN Transaction_Details ON Transaction_Header.Doc_No = Transaction_Details.Doc_No AND Transaction_Header.Loca = Transaction_Details.Loca AND Transaction_Header.Iid = Transaction_Details.Iid INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE Transaction_Header.IId = 'PON' AND Transaction_Header.Doc_No = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = " + LoginManager.LocaCode;
+                    objRepView.DataSetName = "dsPurchaseOrderDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptPurchaseOrder rptPo = new rptPurchaseOrder();
+                    rptPo.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptPo;
+                    break;
+
+                case 202:
+                    objRepView.SqlStatement = "SELECT Transaction_Header.Doc_no, Transaction_Header.Supplier_Id ,Supplier.Supp_Name, Transaction_Header.Loca,Location.Loca_Descrip, Transaction_Header.Post_Date, Transaction_Header.inv_no, Transaction_Header.Inv_Amt, Transaction_Header.Porder_no, Transaction_Header.Net_Amount,Transaction_Header.Amount Gross_Amount ,Transaction_Header.Discount Sub_Discount, Transaction_Header.Disc, Transaction_Header.Remarks, Transaction_Header.Reference, Transaction_Header.Pay_Type, Transaction_Header.Tax,Transaction_Details.Prod_code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.FreeQty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Discount, Transaction_Details.Amount, Transaction_Details.Ln, 'Duplicate' Status FROM Transaction_Header INNER JOIN Transaction_Details ON Transaction_Header.Doc_No = Transaction_Details.Doc_No AND Transaction_Header.Loca = Transaction_Details.Loca AND Transaction_Header.Iid = Transaction_Details.Iid INNER JOIN Location ON Transaction_Header.Loca = Location.Loca inner join supplier ON Transaction_Header.Supplier_Id = supplier.supp_code WHERE Transaction_Header.Doc_No = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'GRN' ORDER BY Ln";
+                    objRepView.DataSetName = "dsGRNDetailsForRep";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptGoodReceivedNote rptGrn = new rptGoodReceivedNote();
+                    rptGrn.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptGrn;
+                    break;
+
+                case 203:
+                    objRepView.SqlStatement = "select Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.Doc_No, Transaction_Header.Post_Date, Transaction_Header.[User_Name], Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.Phy_Qty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Pack_Size, Transaction_Details.Ln, 'Duplicate' Status FROM Transaction_Header INNER JOIN Transaction_Details ON Transaction_Header.Doc_no = Transaction_Details.Doc_no AND Transaction_Header.Loca = Transaction_Details.Loca AND Transaction_Header.Iid = Transaction_Details.Iid INNER JOIN Location ON Transaction_Header.Loca = Location.Loca WHERE Transaction_Header.doc_no = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'STA' ORDER BY Ln";
+                    objRepView.DataSetName = "dsStockAdjustDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptStockAdjustment StockAdjustment = new rptStockAdjustment();
+                    StockAdjustment.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = StockAdjustment;
+                    break;
+
+                case 204:
+                    objRepView.SqlStatement = "SELECT Transaction_Header.doc_no, Transaction_Header.Loca, Location.Loca_Descrip LocaDesc, Transaction_Header.To_Loca, Transaction_Header.To_LocaDesc, Transaction_Header.Post_Date, Transaction_Header.Remarks, Transaction_Details.Prod_Code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Pack_Size, Transaction_Details.Amount,'Duplicate' Status FROM Transaction_Header INNER join Transaction_Details ON Transaction_Header.doc_no = Transaction_Details.doc_no AND Transaction_Header.iid = Transaction_Details.iid AND Transaction_Header.Loca = Transaction_Details.Loca INNER JOIN Location ON Location.Loca = Transaction_Header.Loca WHERE Transaction_Header.doc_no = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'TGN' ORDER BY Ln";
+                    objRepView.DataSetName =  "dsTogDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptTransferNote TransferNote = new rptTransferNote();
+                    TransferNote.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = TransferNote;
+                    break;
+
+                case 205:
+
+                    objRepView.SqlStatement = "SELECT tbPaidPaymentDetails.Org_Doc_no, tbPaidPaymentDetails.Post_Date, tbPaidPaymentDetails.Doc_No, tbPaidPaymentDetails.Transaction_Date, tbPaidPaymentDetails.Balance_Amount, tbPaidPaymentDetails.Transaction_Amount, tbPaidPaymentDetails.Paid_Amount, tbPaidPaymentDetails.Loca, Location.Loca_Descrip, tbPaidPaymentDetails.Acc_Code, Supplier.Supp_Name Acc_Name, Supplier.Address1, Supplier.Address2, Supplier.Address3, Supplier.Address4, tbPaidPaymentDetails.[User_Name], 'Duplicate' Status FROM tbPaidPaymentDetails INNER JOIN Supplier ON tbPaidPaymentDetails.Acc_Code = Supplier.Supp_Code INNER JOIN Location ON tbPaidPaymentDetails.Loca = Location.Loca WHERE tbPaidPaymentDetails.Org_Doc_no = '" + txtCodeFrom.Text.ToString() + "' AND tbPaidPaymentDetails.Iid = 'PMT' AND tbPaidPaymentDetails.Loca = '" + LoginManager.LocaCode + "'";
+                    objRepView.DataSetName = "tbPaidPaymentSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+
+                    objRepView.SqlStatement = "SELECT Payment_Mode, Bank_Name, Cheque_No, Cheque_Date, Branch, Amount FROM tbPaidPaymentSummary WHERE tbPaidPaymentSummary.Iid = 'PMT' AND tbPaidPaymentSummary.Org_Doc_no = '" + txtCodeFrom.Text.ToString() + "' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "'";
+                    objRepView.DataSetName = "tbPaidPaymentMode";
+                    objRepView.RetrieveData();
+                    dsDataForReport2 = objRepView.TempResultSet;
+
+                    rptSupplierPayment rptPayment = new rptSupplierPayment();
+                    rptPayment.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptPayment;
+
+                    rptPayment.OpenSubreport("rptSupplierPaymentMode").SetDataSource(dsDataForReport2);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptPayment;
+                    break;
+
+                case 206:
+
+                    objRepView.SqlStatement = "SELECT tbPaidPaymentDetails.Org_Doc_no, tbPaidPaymentDetails.Post_Date, tbPaidPaymentDetails.Doc_No, tbPaidPaymentDetails.Transaction_Date, tbPaidPaymentDetails.Balance_Amount, tbPaidPaymentDetails.Transaction_Amount, tbPaidPaymentDetails.Paid_Amount, tbPaidPaymentDetails.Loca, Location.Loca_Descrip, tbPaidPaymentDetails.Acc_Code, Customer.Cust_Name Acc_Name, Customer.Address1, Customer.Address2, Customer.Address3, Customer.Address4, tbPaidPaymentDetails.[User_Name], 'Duplicate' Status FROM tbPaidPaymentDetails INNER JOIN Customer ON tbPaidPaymentDetails.Acc_Code = Customer.Cust_Code INNER JOIN Location ON tbPaidPaymentDetails.Loca = Location.Loca WHERE tbPaidPaymentDetails.Org_Doc_no = '" + txtCodeFrom.Text.ToString() + "' AND tbPaidPaymentDetails.Iid = 'REC' AND tbPaidPaymentDetails.Loca = '" + LoginManager.LocaCode + "'";
+                    objRepView.DataSetName = "tbPaidPaymentSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+
+                    objRepView.SqlStatement = "SELECT Payment_Mode, Bank_Name, Cheque_No, Cheque_Date, Branch, Amount FROM tbPaidPaymentSummary WHERE tbPaidPaymentSummary.Iid = 'REC' AND tbPaidPaymentSummary.Org_Doc_no = '" + txtCodeFrom.Text.ToString() + "' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "'";
+                    objRepView.DataSetName = "tbPaidPaymentMode";
+                    objRepView.RetrieveData();
+                    dsDataForReport2 = objRepView.TempResultSet;
+
+                    rptCustomerPayment rptReceipt = new rptCustomerPayment();
+                    rptReceipt.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptReceipt;
+
+                    rptReceipt.OpenSubreport("rptSupplierPaymentMode").SetDataSource(dsDataForReport2);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptReceipt;
+                    break;
+
+                case 207:
+                    objRepView.SqlStatement = "SELECT Transaction_Header.Doc_no, Transaction_Header.Supplier_Id ,Customer.Cust_Name, Transaction_Header.Loca,Location.Loca_Descrip, Transaction_Header.Post_Date, Transaction_Header.inv_no, Transaction_Header.Inv_Amt, Transaction_Header.Porder_no, Transaction_Header.Net_Amount,Transaction_Header.Amount Gross_Amount ,Transaction_Header.Discount Sub_Discount, Transaction_Header.Disc, Transaction_Header.Remarks, Transaction_Header.Reference, Transaction_Header.Pay_Type, Transaction_Header.Tax, Ref_Name Sales_Assist,Transaction_Details.Prod_code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.FreeQty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Discount, Transaction_Details.Amount, Transaction_Details.Ln, Transaction_Header.PayRemark1, Customer.Address1, Customer.Address2, Customer.Address3, Customer.Address4, 'Original' Status FROM Transaction_Header INNER JOIN Transaction_Details ON Transaction_Header.Doc_No = Transaction_Details.Doc_No AND Transaction_Header.Loca = Transaction_Details.Loca AND Transaction_Header.Iid = Transaction_Details.Iid INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN customer ON Transaction_Header.Supplier_Id = Customer.Cust_code WHERE Transaction_Header.Doc_No = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'CUR' ORDER BY Ln";
+                    objRepView.DataSetName = "dsInvoiceDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCustomerReturnDetails rptCustomerReturn = new rptCustomerReturnDetails();
+                    rptCustomerReturn.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptCustomerReturn;
+                    break;
+
+                case 208:
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Acc_Code, Supplier.Supp_Name Acc_Name, Org_Doc_no, Post_Date, Payment_Mode, Bank_Name, Cheque_No, Cheque_Date, Branch, Amount, 'Code From " + txtCodeFrom.Text.Trim() + "' CodeFrom, 'Code To " + txtCodeTo.Text.Trim() + "' CodeTo from tbPaidPaymentSummary INNER JOIN Supplier On tbPaidPaymentSummary.Acc_Code = Supplier.Supp_Code WHERE (tbPaidPaymentSummary.Org_Doc_no BETWEEN '" + txtCodeFrom.Text.Trim() + "' AND '" + txtCodeTo.Text.Trim() + "') AND tbPaidPaymentSummary.Iid = 'PMT' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "'";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Acc_Code, Supplier.Supp_Name Acc_Name, Org_Doc_no, Post_Date, Payment_Mode, Bank_Name, Cheque_No, Cheque_Date, Branch, Amount, 'Date From " + dtDateFrom.Text.Trim() + "' CodeFrom, 'Date To " + dtDateTo.Text.Trim() + "' CodeTo from tbPaidPaymentSummary INNER JOIN Supplier On tbPaidPaymentSummary.Acc_Code = Supplier.Supp_Code WHERE (CONVERT(DATETIME,tbPaidPaymentSummary.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND tbPaidPaymentSummary.Iid = 'PMT' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "'";
+                    }
+                    objRepView.DataSetName = "SupplierPaymentSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptPaymentSummary rptPaymentSummary = new rptPaymentSummary();
+                    rptPaymentSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptPaymentSummary;
+                    break;
+
+                case 209:
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Acc_Code, Customer.Cust_Name Acc_Name, Org_Doc_no, Post_Date, Payment_Mode, Bank_Name, Cheque_No, Cheque_Date, Branch, Amount, 'Code From " + txtCodeFrom.Text.Trim() + "' CodeFrom, 'Code To " + txtCodeTo.Text.Trim() + "' CodeTo from tbPaidPaymentSummary INNER JOIN Customer On tbPaidPaymentSummary.Acc_Code = Customer.Cust_Code WHERE (tbPaidPaymentSummary.Org_Doc_no BETWEEN '" + txtCodeFrom.Text.Trim() + "' AND '" + txtCodeTo.Text.Trim() + "') AND tbPaidPaymentSummary.Iid = 'REC' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "'";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Acc_Code, Customer.Cust_Name Acc_Name, Org_Doc_no, Post_Date, Payment_Mode, Bank_Name, Cheque_No, Cheque_Date, Branch, Amount, 'Date From " + dtDateFrom.Text.Trim() + "' CodeFrom, 'Date To " + dtDateTo.Text.Trim() + "' CodeTo from tbPaidPaymentSummary INNER JOIN Customer On tbPaidPaymentSummary.Acc_Code = Customer.Cust_Code WHERE (CONVERT(DATETIME,tbPaidPaymentSummary.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND tbPaidPaymentSummary.Iid = 'REC' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "'";
+                    }
+                    objRepView.DataSetName = "SupplierPaymentSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptReceiptSummary rptReceiptummary = new rptReceiptSummary();
+                    rptReceiptummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptReceiptummary;
+                    break;
+
+                case 210: //Invoice Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Customer.Cust_Name Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount, 'Code From " + txtCodeFrom.Text.Trim() + "' CodeFrom, 'Code To " + txtCodeTo.Text.Trim() + "' CodeTo from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Customer ON Transaction_Header.Supplier_Id = Customer.Cust_Code WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'INV' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Customer.Cust_Name Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount, 'Code From " + txtCodeFrom.Text.Trim() + "' CodeFrom, 'Code To " + txtCodeTo.Text.Trim() + "' CodeTo from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Customer ON Transaction_Header.Supplier_Id = Customer.Cust_Code WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'INV' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptInvoiceSummary rptInvSummary = new rptInvoiceSummary();
+                    rptInvSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptInvSummary;
+                    break;
+
+                case 211: //Customer Return Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Customer.Cust_Name Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Customer ON Transaction_Header.Supplier_Id = Customer.Cust_Code WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'CUR' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Customer.Cust_Name Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount, 'Code From " + txtCodeFrom.Text.Trim() + "' CodeFrom, 'Code To " + txtCodeTo.Text.Trim() + "' CodeTo from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Customer ON Transaction_Header.Supplier_Id = Customer.Cust_Code WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'CUR' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptCustomerReturnSummary rptCusRetSummary = new rptCustomerReturnSummary();
+                    rptCusRetSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptCusRetSummary;
+                    break;
+
+                case 212: //Purchase Order Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'PON' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'PON' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptPurchaseOrderSummary rptPurchSummary = new rptPurchaseOrderSummary();
+                    rptPurchSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptPurchSummary;
+                    break;
+
+                case 213: //Grn Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'GRN' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'GRN' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptGrnSummary rptGrnSummary = new rptGrnSummary();
+                    rptGrnSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptGrnSummary;
+                    break;
+
+                case 214: //Stock Adjustment Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, '' Supplier_Id, '' Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'STA' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, '' Supplier_Id, '' Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'STA' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptStockAdjustSummary rptStAdjustSummary = new rptStockAdjustSummary();
+                    rptStAdjustSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptStAdjustSummary;
+                    break;
+
+                case 215: //transfer Of Goods Note Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.To_Loca, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'GRN' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.To_Loca, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'GRN' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptTogSummary rptTogSummary = new rptTogSummary();
+                    rptTogSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptTogSummary;
+                    break;
+
+                case 216:
+                    objRepView.SqlStatement = "SELECT Transaction_Header.Doc_no, Transaction_Header.Supplier_Id ,Supplier.Supp_Name, Transaction_Header.Loca,Location.Loca_Descrip, Transaction_Header.Post_Date, Transaction_Header.inv_no, Transaction_Header.Inv_Amt, Transaction_Header.Porder_no, Transaction_Header.Net_Amount,Transaction_Header.Amount Gross_Amount ,Transaction_Header.Discount Sub_Discount, Transaction_Header.Disc, Transaction_Header.Remarks, Transaction_Header.Reference, Transaction_Header.Pay_Type, Transaction_Header.Tax,Transaction_Details.Prod_code, Transaction_Details.Prod_Name, Transaction_Details.Qty, Transaction_Details.FreeQty, Transaction_Details.Purchase_Price, Transaction_Details.Selling_Price, Transaction_Details.Discount, Transaction_Details.Amount, Transaction_Details.Ln, 'Original' Status FROM Transaction_Header INNER JOIN Transaction_Details ON Transaction_Header.Doc_No = Transaction_Details.Doc_No AND Transaction_Header.Loca = Transaction_Details.Loca AND Transaction_Header.Iid = Transaction_Details.Iid INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN supplier ON Transaction_Header.Supplier_Id = supplier.supp_code WHERE Transaction_Header.Doc_No = '" + txtCodeFrom.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'SRN' ORDER BY Ln";
+                    objRepView.DataSetName = "dsGRNDetailsForRep";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSupplierReturnNote rptSrn = new rptSupplierReturnNote();
+                    rptSrn.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptSrn;
+                    break;
+
+                case 217: //Srn Summary
+                    if (radioButtonDocumentNo.Checked == true)
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE Transaction_Header.Doc_No BETWEEN '" + txtCodeFrom.Text.ToString() + "' AND '" + txtCodeTo.Text.ToString() + "' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'SRN' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    else
+                    {
+                        objRepView.SqlStatement = "select Transaction_Header.Iid, Transaction_Header.Doc_No, Transaction_Header.Loca, Location.Loca_Descrip, Transaction_Header.To_LocaDesc, Transaction_Header.Supplier_Id, Supplier.Supp_Name, Transaction_Header.Post_Date, Transaction_Header.Net_Amount from Transaction_Header INNER JOIN Location ON Transaction_Header.Loca = Location.Loca INNER JOIN Supplier ON Transaction_Header.Supplier_Id = Supplier.Supp_Code WHERE (CONVERT(DATETIME,Transaction_Header.Post_Date,103) BETWEEN CONVERT(DATETIME,'" + dtDateFrom.Text.Trim() + "',103) AND CONVERT(DATETIME,'" + dtDateTo.Text.Trim() + "', 103)) AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' AND Transaction_Header.Iid = 'SRN' ORDER BY RIGHT(Doc_No,6)";
+                    }
+                    objRepView.DataSetName = "TransactionSummary";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptSrnSummary rptSrnSummary = new rptSrnSummary();
+                    rptSrnSummary.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptSrnSummary;
+                    break;
+
+                case 218:
+                    objRepView.SqlStatement = "select transaction_header.Loca, Location.Loca_Descrip, transaction_header.Doc_No, transaction_header.Supplier_Id, transaction_header.Reference Acc_Name, transaction_header.Post_Date, transaction_header.Inv_Date, transaction_header.Inv_No, transaction_header.Code, transaction_header.Amount, transaction_header.Remarks, transaction_header.To_LocaDesc, transaction_header.User_Name, transaction_header.Iid from transaction_header inner join Location on transaction_header.Loca = Location.Loca where (transaction_header.iid = 'RRT' OR transaction_header.iid = 'PRT') AND transaction_header.Loca = '" + LoginManager.LocaCode + "' and transaction_header.Doc_No = '" + txtCodeFrom.Text.ToString() + "'";
+                    objRepView.DataSetName = "dsChequeReconDetails";
+                    objRepView.RetrieveData();
+                    dsDataForReport = objRepView.TempResultSet;
+                    rptChequeRecon rptChequeRecon = new rptChequeRecon();
+                    rptChequeRecon.SetDataSource(dsDataForReport);
+                    objRepViewer.crystalReportViewer1.ReportSource = rptChequeRecon;
+                    break;
+                default:
+                    break;
+            }
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+        }
+
+        private void btnDocumentTo_Click(object sender, EventArgs e)
+        {
+             if (search.IsDisposed)
+                {
+                    search = new frmSearch();
+                }
+                switch (intRepOption)
+                {
+                    case 208://Supp Payment Summary
+                        strQuery = "SELECT tbPaidPaymentSummary.Org_Doc_no [Document No], Supplier.Supp_Name [Supplier] FROM tbPaidPaymentSummary INNER JOIN Supplier ON tbPaidPaymentSummary.Acc_Code = Supplier.Supp_Code WHERE Iid = 'PMT' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "' GROUP BY Org_Doc_no, Supp_Name ORDER BY RIGHT(Org_Doc_no,6)";
+                        break;
+
+                    case 209://Customer Summary
+                        strQuery = "SELECT tbPaidPaymentSummary.Org_Doc_no [Document No], Customer.Cust_Name [Customer] FROM tbPaidPaymentSummary INNER JOIN Customer ON tbPaidPaymentSummary.Acc_Code = Customer.Cust_Code WHERE Iid = 'REC' AND tbPaidPaymentSummary.Loca = '" + LoginManager.LocaCode + "' GROUP BY Org_Doc_no, Cust_Name ORDER BY RIGHT(Org_Doc_no,6)";
+                        break;
+
+                    case 210: //Invoice Summary
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'INV' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+                    
+                    case 211: //Customer Return Summary
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'CUR' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 212://Purchase Order
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'PON' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 213://Grn summary
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'GRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 214: //Stock Adjustment
+
+                        strQuery = "SELECT Doc_No [Document No], Post_Date [Doc Date] FROM Transaction_Header WHERE Iid = 'STA' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+
+                    case 215://transfer note Summary
+
+                        strQuery = "SELECT Doc_No [Document No], To_LocaDesc [To Location] FROM Transaction_Header WHERE Iid = 'TGN' AND Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 216://Supplier Return
+
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'SRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+                        break;
+
+                    case 217://Supplier Return summary
+
+                        strQuery = "SELECT Doc_No [Document No], Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'SRN' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6)";
+                        break;
+                    default:
+                        break;
+                }
+
+                objTransactionInquary.SqlStatement = strQuery;
+                objTransactionInquary.dsName = "Table";
+                objTransactionInquary.RetriveData();
+
+                search.dgSearch.DataSource = objTransactionInquary.ResultSet.Tables["Table"];
+                search.Show();
+
+                search.prop_Focus = txtCodeTo;
+        }
+
+        private void radioButtonDocumentNo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDocumentNo.Checked == true)
+            {
+                btnDocumentFrom.Enabled = true;
+                btnDocumentTo.Enabled = true;
+                txtCodeFrom.Enabled = true;
+                txtCodeTo.Enabled = true;
+                dtDateFrom.Enabled = false;
+                dtDateTo.Enabled = false;
+                label1.Enabled = true;
+                label2.Enabled = true;
+                label3.Enabled = false;
+                label4.Enabled = false;
+            }
+            else
+            {
+                btnDocumentFrom.Enabled = false;
+                btnDocumentTo.Enabled = false;
+                txtCodeFrom.Enabled = false;
+                txtCodeTo.Enabled = false;
+                dtDateFrom.Enabled = true;
+                dtDateTo.Enabled = true;
+                label1.Enabled = false;
+                label2.Enabled = false;
+                label3.Enabled = true;
+                label4.Enabled = true;
+            }
+        }
+
+        private void radioButtonDate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDate.Checked ==true)
+            {
+                btnDocumentFrom.Enabled = false;
+                btnDocumentTo.Enabled = false;
+                txtCodeFrom.Enabled = false;
+                txtCodeTo.Enabled = false;
+                dtDateFrom.Enabled = true;
+                dtDateTo.Enabled = true;
+                label1.Enabled = false;
+                label2.Enabled = false;
+                label3.Enabled = true;
+                label4.Enabled = true;
+            }
+            else
+            {
+                btnDocumentFrom.Enabled = true;
+                btnDocumentTo.Enabled = true;
+                txtCodeFrom.Enabled = true;
+                txtCodeTo.Enabled = true;
+                dtDateFrom.Enabled = false;
+                dtDateTo.Enabled = false;
+                label1.Enabled = true;
+                label2.Enabled = true;
+                label3.Enabled = false;
+                label4.Enabled = false;
+            }
+        }
+    }
+}

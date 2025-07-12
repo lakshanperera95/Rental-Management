@@ -1,0 +1,893 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmProduct : Form
+    {
+        public frmProduct()
+        {
+            InitializeComponent();
+        }
+
+        private static frmProduct product;
+        private frmSearch search = new frmSearch();
+        private clsProduct prod = new clsProduct();
+        private string strDisc;
+        private int intPosOfPrec;
+        private float fltDiscPer;
+        private decimal decAmount;
+        private string strNextProductCode;
+        private int intNextProductCode;
+
+        int Err;
+        public static frmProduct GetProduct{
+            get {
+                return product;
+            }
+            set {
+                product = value;
+            }
+
+        }
+
+        private void txtCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code !="")
+            {
+                
+                txtCode.Text = search.Code.Trim();;
+                txtDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+
+        }
+
+        private void btnProdsearch_Click(object sender, EventArgs e)
+        {
+            if (search .IsDisposed ){
+                search = new frmSearch();
+            }
+            if (txtCode.Text.Trim() == string.Empty && txtDepCode.Text.Trim() != string.Empty && txtCatCode.Text.Trim() != string.Empty)
+            {
+                prod.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name]FROM Product WHERE Department_Id = '" + txtDepCode.Text.Trim() + "' and Category_Id = '" + txtCatCode.Text.Trim() + "' order by Prod_Code";
+            }
+            else
+            {
+                if (txtCode.Text.Trim() == string.Empty && txtDepCode.Text.Trim() != string.Empty && txtCatCode.Text.Trim() == string.Empty)
+                {
+                    prod.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Department_Id = '" + txtDepCode.Text.Trim() + "' order by Prod_Code";
+                }
+                else
+                {
+                    if (txtCode.Text.Trim() != string.Empty && txtDepCode.Text.Trim() == string.Empty && txtCatCode.Text.Trim() == string.Empty)
+                    {
+                        prod.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code Like '%" + txtCode.Text.Trim() + "%' order by Prod_Code";
+                    }
+                    else
+                    {
+                        if (txtCode.Text.Trim() != string.Empty && txtDepCode.Text.Trim() != string.Empty && txtCatCode.Text.Trim() != string.Empty)
+                        {
+                            prod.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name]FROM Product WHERE WHERE Department_Id = '" + txtDepCode.Text.Trim() + "' and Category_Id = '" + txtCatCode.Text.Trim() + "' and Prod_Code Like '%" + txtCode.Text.Trim() + "%' order by Prod_Code";
+                        }
+                        else
+                        {
+                            prod.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name]FROM Product order by Prod_Code";
+                        }
+                    }
+                }
+            }
+            //prod.SqlString = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name]FROM Product";
+            prod.RetrieveFields_ProductNo();
+            search.dgSearch.DataSource = prod.GetDataset1.Tables["dsProduct"];
+            search.prop_Focus = txtCode;
+            search.Show();
+        }
+
+        private void txtDepCode_Enter(object sender, EventArgs e)
+        {
+
+            if (search.Code != null && search.Code !="" )
+            {
+                txtDepCode.Text = search.Code.Trim();
+                txtDepDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtDepCode.Text == string.Empty)
+            {
+                txtDepCode.Focus();
+            }
+        }
+
+        private void btnDepDescript_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+            prod.SqlString = "SELECT Dept_Code AS [Department Code] ,Dept_Name AS [Department Name]FROM Department";
+            prod.RetrieveFields_Department();
+            search.dgSearch.DataSource = prod.GetDataset1.Tables["dsDept"];
+            search.prop_Focus = txtDepCode;
+            search.Show();
+        }
+
+        private void txtCatCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtCatCode.Text = search.Code.Trim();
+                txtCatDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtCatCode.Text != string.Empty && txtCatDescript.Text.Trim() == string.Empty)
+            {
+                btnSupSearch.Focus();
+            }
+            else
+            {
+                txtCatCode.Focus();
+            }
+        }
+
+        private void btnCatSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            } 
+            if (txtDepCode.Text == string.Empty)
+            {
+                MessageBox.Show("Please Select the Department", "Product", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtDepCode.Focus();
+            }
+            else 
+            {
+                prod.SqlString = "SELECT Cat_Code AS [Category Code],Cat_Name AS [Category Name] FROM Category WHERE Dept_Code = '"+txtDepCode.Text+"'";
+                prod.RetrieveFields_Category();
+                search.dgSearch.DataSource = prod.GetDataset1.Tables["dsCategory"];
+                search.prop_Focus = txtCatCode;
+                search.Show();
+      
+            }
+
+        }
+
+        private void txtSupCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != string.Empty)
+            {
+                txtSupCode.Text = search.Code.Trim();
+                txtSupDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtSupCode.Text != string.Empty && txtSupDescript.Text.Trim() == string.Empty)
+            {
+                btnManSearch.Focus();
+            }
+            else
+            {
+                txtSupCode.Focus();
+            }
+        }
+
+        private void btnSupSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+            prod.SqlString = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier";
+            prod.RetrieveFields_Supplier();
+            search.dgSearch.DataSource = prod.GetDataset1.Tables["dsSupplier"];
+            search.prop_Focus = txtSupCode;
+            search.Show();
+        }
+
+        private void txtManCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtManCode.Text = search.Code.Trim();
+                txtManDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            if (txtManCode.Text != string.Empty && txtManDescript.Text.Trim() == string.Empty)
+            {
+                txtPurchPrice.Focus();
+            }
+            else
+            {
+                txtManCode.Focus();
+            }
+        }
+
+        private void btnManSearch_Click(object sender, EventArgs e)
+        {
+
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            } 
+            prod.SqlString = "SELECT Manf_Code AS [Manufacturer Code],Manf_Name AS [Manufacturer Name]FROM Manufacturer";
+            prod.RetrieveFields_Manufacturer();
+            search.dgSearch.DataSource = prod.GetDataset1.Tables["dsManufacturer"];
+            search.prop_Focus = txtManCode;
+            search.Show();
+        }
+
+        #region Validate whether credit limit contains non numerical character
+        internal static bool IsNumeric(string cnt)
+        {
+            double d;
+            try
+            {
+                d = Double.Parse(cnt);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
+
+        #region Validate whether textfeilds contains ' character
+        public void validator(Control cnt)
+        {
+
+            for (int i = 0; i < cnt.Controls.Count; i++)
+            {
+                if ((cnt.Controls[i].GetType() == typeof(TextBox)) && (cnt.Controls[i].Text.Contains("'")))
+                {
+                    MessageBox.Show("Invalid characters in Textfeilds Please check the characters entered.", "Invalid character (') found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    cnt.Controls[i].Text = string.Empty;
+                    cnt.Controls[i].Focus();
+
+                    Err++;
+
+                }
+            }
+        }
+        #endregion 
+
+        private void txtCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter  )
+            {
+                prod.SqlString = "SELECT product.Prod_Code, product.Prod_Name, product.Short_Description, product.Barcode, product.Department_Id, product.Category_Id, product.Supplier_Id, product.Manufacturer_Id, product.Purchase_price, product.Selling_Price, product.Whole_Price, product.Reorder_Level, product.Purchased_Date, product.Last_Purch_Qty, product.Unit, product.Avarage_Cost, product.Reorder_Qty,Product.Rack_No, product.Pack_Size, product.Discontinued, product.Created_User, product.Modified_User, product.Created_Date, product.Modified_Date, product.LockedItem, Stock_Master.Loca, Stock_Master.Qty, product.Disc_Price, product.Disc_Str FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Prod_Code = '" + txtCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                prod.GetProductDetails();
+                if (prod.RecordFound == true)
+                {
+                    txtCode.Text = txtCode.Text.Trim();
+                    txtDescript.Text = prod.Descript;
+                    txtShortDescription.Text = prod.Short_Description;
+                    txtBarcode.Text = prod.Barcode;
+                    txtDepCode.Text = prod.Department;
+                    txtCatCode.Text = prod.Category;
+                    txtSupCode.Text = prod.Supplier;
+                    txtManCode.Text = prod.Manufacturer;
+                    txtPurchPrice.Text = prod.Purchaseprice;
+                    txtReOrdrQty.Text = prod.ReorderQty.ToString();
+                    txtSelPrice.Text = prod.SellingPrice;
+                    txtDiscounted.Text = string.Empty;
+                    txtDiscounted.Text = prod.DiscountPrice;
+                    txtWholeSalePrice.Text = prod.WholePrice;
+                    txtLastPurQty.Text = prod.Last_Purch_Qty.ToString();
+                    txtReOrderLevl.Text = prod.Reorderlevel;
+                    txtCurntQty.Text = prod.CurrentQty.ToString();
+                    txtPurDate.Text = prod.PurchaseDate;
+                    txtRackNo.Text = prod.Rack_No.ToString();
+                    cmbUnit.Text = prod.Unit;
+                    txtPackSize.Text = prod.PackSize.ToString();
+                    txtAvgCost.Text = prod.Avarage_Cost;
+                    txtLastEditDate.Text = prod.Modified_Date;
+                    if (prod.LockedItem == "T")
+                    {
+                        DesabledControl();
+                        chkTransactionLock.Checked = true;
+                    }
+                    else
+                    {
+                        EnabledControl();
+                        chkTransactionLock.Checked = false;
+                    }
+
+                    txtDiscount.Text = prod.Disc_Str;
+                    lblCreatedUser.Text = prod.Created_User;
+                    lblModifiedUser.Text = prod.Modified_User;
+                    //Display Departemnt
+                    prod.SqlString = "SELECT Dept_Code,Dept_Name FROM Department WHERE Dept_Code = '" + txtDepCode.Text.Trim() + "'";
+                    prod.DeptRead();
+                    txtDepDescript.Text = prod.DepartmentName;
+
+                    //Display Category
+                    prod.SqlString = "SELECT Cat_Code, Cat_Name FROM Category WHERE Cat_Code = '" + txtCatCode.Text.Trim() + "'";
+                    prod.CategoryRead();
+                    txtCatDescript.Text = prod.CategoryName;
+
+                    //Display Supplier
+                    prod.SqlString = "SELECT Supp_Code, Supp_Name FROM Supplier WHERE Supp_Code = '" + txtSupCode.Text.Trim() + "'";
+                    prod.SupplierRead();
+                    txtSupDescript.Text = prod.SupplierName;
+
+                    //Display Manufacturer
+                    prod.SqlString = "SELECT Manf_Code, Manf_Name FROM manufacturer WHERE Manf_Code = '" + txtManCode.Text.Trim() + "'";
+                    prod.ManufacturerRead();
+                    txtManDescript.Text = prod.ManufacturerName;
+                }
+                txtDescript.Focus();
+            }
+        }
+
+        private void txtDepCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Display Departemnt
+
+                if (txtDepCode.Text.Trim() != "" )
+                {
+                    prod.SqlString = "SELECT Dept_Code,Dept_Name FROM Department WHERE Dept_Code = '" + txtDepCode.Text.Trim() + "'";
+                    prod.DeptRead();
+                    if (prod.RecordFound == true)
+                    {
+                        txtDepDescript.Text = prod.DepartmentName;
+                        txtCatCode.Focus();
+                    }
+                    else
+                    {
+                        txtDepDescript.Text = string.Empty;
+                        MessageBox.Show("Department Code Not Found. Please Check Department Code.", this.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtDepCode.Focus();
+                    }
+                }
+            }
+        }
+
+        private void txtCatCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Display Category
+                if (txtCatCode.Text.Trim() != "")
+                {
+                    prod.SqlString = "SELECT Cat_Code, Cat_Name FROM Category WHERE Dept_Code = '"+ txtDepCode.Text.Trim() +"' and Cat_Code = '" + txtCatCode.Text.Trim() + "'";
+                    prod.CategoryRead();
+                    if (prod.RecordFound == true)
+                    {
+                        txtCatDescript.Text = prod.CategoryName;
+                        //Generate New Product Code
+                        if (chkNextItemCode.Checked = true && txtCode.Text.Trim() == String.Empty && txtDepCode.Text.Trim() != String.Empty && txtCatCode.Text.Trim() != String.Empty)
+                        {
+                            prod.SqlString = "select max(Prod_Code) Prod_Code from product where Department_Id = '" + txtDepCode.Text.Trim() + "' and Category_Id = '" + txtCatCode.Text.Trim() + "'";
+                            prod.ReadMaxProductCode();
+                            strNextProductCode = prod.NextProductCode;
+                            if (clsValidation.isNumeric(strNextProductCode, System.Globalization.NumberStyles.Float) == true)
+                            {
+                                intNextProductCode = int.Parse(strNextProductCode) + 1;
+                                txtCode.Text = intNextProductCode.ToString();
+                            }
+                            txtDescript.Focus();
+                        }
+                        else
+                        {
+                            txtSupCode.Focus();
+                        }
+                    }
+                    else
+                    {
+                        txtCatDescript.Text = string.Empty;
+                        MessageBox.Show("Category Code Not Found. Please Check Category Code.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtCatCode.Focus();
+                    }
+                }
+            }
+        }
+
+        private void txtSupCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Display Supplier
+                if (txtSupCode.Text.Trim() != "")
+                {
+                    prod.SqlString = "SELECT Supp_Code, Supp_Name FROM Supplier WHERE Supp_Code = '" + txtSupCode.Text.Trim() + "'";
+                    prod.SupplierRead();
+                    if (prod.RecordFound == true)
+                    {
+                        txtSupDescript.Text = prod.SupplierName;
+                        txtManCode.Focus();
+                    }
+                    else
+                    {
+                        txtSupDescript.Text = string.Empty;
+                        MessageBox.Show("Supplier Code Not Found. Please Check Supplier Code.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSupCode.Focus();
+                    }
+                }
+            }
+        }
+
+        private void txtManCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Display Manufacturer
+                if (txtManCode.Text.Trim() != "")
+                {
+                    prod.SqlString = "SELECT Manf_Code, Manf_Name FROM manufacturer WHERE Manf_Code = '" + txtManCode.Text.Trim() + "'";
+                    prod.ManufacturerRead();
+                    txtManDescript.Text = prod.ManufacturerName;
+                    txtPurchPrice.Focus();
+                }
+            }
+        }
+
+        private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Display Barcode
+                if (txtCode.Text.Trim() == "")
+                {
+                    prod.SqlString = "SELECT Prod_Code, Barcode FROM product WHERE Barcode = '" + txtBarcode.Text.Trim() + "'";
+                    prod.BarcodeRead();
+                    txtCode.Text = prod.Code;
+                    txtCode.Focus();
+                }
+                else
+                {
+                    if (txtBarcode.Text.Trim() != "")
+                    {
+                        prod.SqlString = "SELECT Prod_Code, Barcode FROM product WHERE Barcode = '" + txtBarcode.Text.Trim() + "' AND Prod_Code <> '" + txtCode.Text.Trim() + "'";
+                        prod.BarcodeReadForDuplicate();
+                        if (prod.Code != string.Empty)
+                        {
+                            MessageBox.Show("Barcode Already Using for Other Product.", "Product Master", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtCode.Text = prod.Code;
+                            return;
+                        }
+                    }
+                    txtShortDescription.Focus();
+                }
+            }
+        }
+
+        private void txtDescript_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtDescript.Text.Trim() != "")
+                {
+                    if (txtShortDescription.Text.Trim() == string.Empty)
+                    {
+                        if (txtDescript.Text.Trim().Length <= 50)
+                        {
+                            txtShortDescription.Text = txtDescript.Text.Trim().Substring(0, txtDescript.Text.Trim().Length);
+                        }
+                        else
+                        {
+                            txtShortDescription.Text = txtDescript.Text.Trim().Substring(0, 50);
+                        }
+                    }
+                    txtBarcode.Focus();
+                }
+            }
+        }
+
+        private void txtPurchPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtPurchPrice.Text) == true )
+                {
+                    txtSelPrice.Focus();
+                }
+            }
+        }
+
+        private void txtReOrdrQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtReOrdrQty.Text) == true)
+                {
+                    cmbUnit.Focus();
+                }
+            }
+        }
+
+        private void txtSelPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtSelPrice.Text) == true)
+                {
+                    txtWholeSalePrice.Focus();
+                }
+            }
+        }
+
+        private void txtReOrderLevl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtReOrderLevl.Text) == true)
+                {
+                    txtReOrdrQty.Focus();
+                    //cmbUnit.Focus();
+                }
+            }
+        }
+
+        private void cmbUnit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (cmbUnit.Text.Trim() != "Select")
+                {
+                    txtPackSize.Select();
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Err = 0;
+            if ((txtCatDescript.Text == string.Empty) || (txtDescript.Text == string.Empty))
+            {
+                Err++;
+            }
+            if ((!IsNumeric(txtPurchPrice.Text)) || (!IsNumeric(txtSelPrice.Text)))
+            {
+                Err++;
+            }
+            this.validator(grpProduct);
+            this.validator(grpPrice);
+
+            prod.SqlString = "SELECT Dept_Code,Dept_Name FROM Department WHERE Dept_Code = '" + txtDepCode.Text.Trim() + "'";
+            prod.DeptRead();
+            if (prod.RecordFound != true)
+            {
+                MessageBox.Show("Department Code Not Found. Please Check Department Code.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDepCode.Focus();
+                return;
+            }
+
+            prod.SqlString = "SELECT Cat_Code, Cat_Name FROM Category WHERE Dept_Code = '" + txtDepCode.Text.Trim() + "' and Cat_Code = '" + txtCatCode.Text.Trim() + "'";
+            prod.CategoryRead();
+            if (prod.RecordFound != true)
+            {
+                txtCatDescript.Text = string.Empty;
+                MessageBox.Show("Category Code Not Found. Please Check Category Code.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCatCode.Focus();
+                return;
+            }
+
+            prod.SqlString = "SELECT Supp_Code, Supp_Name FROM Supplier WHERE Supp_Code = '" + txtSupCode.Text.Trim() + "'";
+            prod.SupplierRead();
+            if (prod.RecordFound != true)
+            {
+                txtSupDescript.Text = string.Empty;
+                MessageBox.Show("Supplier Code Not Found. Please Check Supplier Code.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSupCode.Focus();
+                return;
+            }
+
+            if (Err == 0)
+            {
+                prod.ErrorCode = 0;
+                prod.Code = txtCode.Text.Trim().ToUpper();
+                prod.Descript = txtDescript.Text.Trim().ToUpper();
+                prod.Short_Description = txtShortDescription.Text.Trim().ToUpper();
+                prod.Barcode = txtBarcode.Text.Trim().ToUpper();
+                prod.Department = txtDepCode.Text.Trim().ToUpper();
+                prod.Category = txtCatCode.Text.Trim().ToUpper();
+                prod.Supplier = txtSupCode.Text.Trim().ToUpper();
+                prod.Manufacturer = txtManCode.Text.Trim().ToUpper();
+                prod.Purchaseprice = txtPurchPrice.Text.Trim().ToUpper();
+                prod.SellingPrice = txtSelPrice.Text.Trim().ToUpper();
+                prod.DiscountPrice = txtDiscounted.Text.Trim().ToUpper();
+                prod.WholePrice  = txtWholeSalePrice.Text.Trim().ToUpper();
+                prod.Reorderlevel = txtReOrderLevl.Text.Trim().ToUpper();
+                prod.Unit = cmbUnit.Text.Trim();
+                prod.Disc_Str = txtDiscount.Text.Trim();
+                //Check Item Locked
+                if (chkTransactionLock.Checked)
+                {
+                    prod.LockedItem = "T";
+                }
+                else
+                {
+                    prod.LockedItem = "F";
+                }
+                try
+                {
+                    prod.ReorderQty = float.Parse(txtReOrdrQty.Text.Trim());
+                    prod.CurrentQty = float.Parse(txtCurntQty.Text.Trim());
+                    prod.Rack_No  = txtRackNo.Text.Trim();
+
+                    prod.PackSize = Int32.Parse(txtPackSize.Text.Trim());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                //clear all the properties used in search form
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+                search.prop_Focus = null;
+                search.prop_Name = string.Empty;
+
+                prod.UpdateData();
+                chkTransactionLock.Checked = false;
+                if (chkClearItemDet.Checked == true)
+                {
+                    clsClear.getclear().clearfeilds(grpProduct, txtCode);
+                    clsClear.getclear().clearfeilds(grpPrice, txtCode);
+                }
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            product = null;
+            prod = null;
+        }
+
+        private void btnClear_Click_1(object sender, EventArgs e)
+        {
+            clsClear.getclear().clearfeilds(grpProduct, txtCode);
+            clsClear.getclear().clearfeilds(grpPrice, txtCode);
+        }
+
+        private void txtShortDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtShortDescription.Text.Trim() != "")
+                {
+                    txtDepCode.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Short Description Can't Be Empty.", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    txtShortDescription.Focus();
+                }
+            }
+        }
+
+        private void DesabledControl()
+        {
+            try
+            {
+                txtDescript.Enabled = false;
+                txtBarcode.Enabled = false;
+                txtShortDescription.Enabled = false;
+                txtDepCode.Enabled = false;
+                txtDepDescript.Enabled = false;
+                txtCatCode.Enabled = false;
+                txtCatDescript.Enabled = false;
+                txtSupCode.Enabled = false;
+                txtSupDescript.Enabled = false;
+                txtManCode.Enabled = false;
+                txtManDescript.Enabled = false;
+                txtPurchPrice.Enabled = false;
+                txtReOrderLevl.Enabled = false;
+                txtSelPrice.Enabled = false;
+                txtWholeSalePrice.Enabled = false;
+                txtLastPurQty.Enabled = false;
+                txtReOrderLevl.Enabled = false;
+                txtRackNo.Enabled = false;
+                cmbUnit.Enabled = false;
+                txtPackSize.Enabled = false;
+                txtDiscount.Enabled = false;
+                txtReOrdrQty.Enabled = false;
+                btnDepDescript.Enabled = false;
+                btnCatSearch.Enabled = false;
+                btnSupSearch.Enabled = false;
+                btnManSearch.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EnabledControl()
+        {
+            try
+            {
+                txtDescript.Enabled = true ;
+                txtBarcode.Enabled = true;
+                txtShortDescription.Enabled = true;
+                txtDepCode.Enabled = true;
+                txtDepDescript.Enabled = true;
+                txtCatCode.Enabled = true;
+                txtCatDescript.Enabled = true;
+                txtSupCode.Enabled = true;
+                txtSupDescript.Enabled = true;
+                txtManCode.Enabled = true;
+                txtManDescript.Enabled = true;
+                txtPurchPrice.Enabled = true;
+                txtReOrderLevl.Enabled = true;
+                txtSelPrice.Enabled = true;
+                txtWholeSalePrice.Enabled = true;
+                txtLastPurQty.Enabled = true;
+                txtReOrderLevl.Enabled = true;
+                txtRackNo.Enabled = true;
+                cmbUnit.Enabled = true;
+                txtPackSize.Enabled = true;
+                txtDiscount.Enabled = true;
+                txtReOrdrQty.Enabled = true;
+                btnDepDescript.Enabled = true;
+                btnCatSearch.Enabled = true;
+                btnSupSearch.Enabled = true;
+                btnManSearch.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void chkTransactionLock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTransactionLock.Checked)
+            {
+                DesabledControl();
+            }
+            else
+            {
+                EnabledControl();
+            }
+        }
+
+        private void txtWholeSalePrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtWholeSalePrice.Text) == true)
+                {
+                    txtDiscount.Focus();
+                }
+            }
+        }
+
+        private void txtDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtDiscount.Text.Trim() == string.Empty)
+                {
+                    txtDiscount.Text = "0";
+                }
+
+                strDisc = string.Empty;
+
+                if (clsValidation.isNumeric(txtDiscount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateDiscount(txtDiscount.Text.Trim());
+                }
+                else
+                {
+                    CalculateDiscountAmount(decimal.Parse(txtDiscount.Text.Trim()));
+                }
+                txtRackNo.Focus();
+            }
+        }
+        
+        private void CalculateDiscount(string strDiscText)
+        {
+            if (strDiscText.IndexOf("%") > 0 && strDiscText.IndexOf("%") < 3)
+            {
+                strDisc = strDiscText;
+                intPosOfPrec = strDiscText.IndexOf("%");
+                fltDiscPer = float.Parse(strDiscText.Substring(0, intPosOfPrec).ToString());
+                decAmount = decimal.Parse(txtSelPrice.Text.ToString());
+                fltDiscPer = 100 - fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                //decDiscountAmount = decimal.Parse(txtSelPrice.Text) - decAmount;
+                txtDiscounted.Text = decAmount.ToString();
+
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiscount.Focus();
+            }
+        }
+
+        private void CalculateDiscountAmount(decimal decDiscText)
+        {
+            if (decDiscText <= decimal.Parse(txtSelPrice.Text.ToString()))
+            {
+                decAmount = decimal.Parse(txtSelPrice.Text.ToString()) ;
+                decAmount = decAmount - decDiscText;
+                //decDiscountAmount = decDiscText;
+                txtDiscounted.Text = decAmount.ToString();
+
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiscount.Focus();
+            }
+        }
+
+        private void frmProduct_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            product = null;
+        }
+
+        private void frmProduct_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnBarSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+            prod.SqlString = "SELECT Barcode AS [Barcode],Prod_Name AS [Product Name]FROM Product WHERE Barcode <> ''";
+            prod.RetrieveFields_ProductNo();
+            search.dgSearch.DataSource = prod.GetDataset1.Tables["dsProduct"];
+            search.prop_Focus = txtBarcode;
+            search.Show();
+        }
+
+        private void txtBarcode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+
+                txtBarcode.Text = search.Code.Trim(); ;
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void txtRackNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtRackNo.Text) == true)
+                {
+                    txtReOrderLevl.Focus();
+                }
+            }
+        }
+
+        private void txtPackSize_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (IsNumeric(txtPackSize.Text) == true)
+                {
+                    btnSave.Focus();
+                }
+            }
+        }
+    }
+}
+

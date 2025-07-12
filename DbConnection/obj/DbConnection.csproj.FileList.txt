@@ -1,0 +1,10 @@
+bin\Release\DbConnection.dll
+bin\Release\DbConnection.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\DbConnection.dll
+obj\Release\DbConnection.pdb
+bin\Debug\DbConnection.dll
+bin\Debug\DbConnection.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\DbConnection.dll
+obj\Debug\DbConnection.pdb

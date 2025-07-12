@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace clsLibrary
+{
+    public class clsValidation
+    {
+        string strTextString;
+        int intfeildLength;
+        string strFieldType;
+        bool blnIsBlank;
+        string strNamefield;
+        public string TextString {
+            get 
+            {
+                return strTextString;
+            }
+            set {
+                strTextString = value;
+            }
+        }
+
+        public int  FeildLength
+        {
+            get
+            {
+                return intfeildLength;
+            }
+            set
+            {
+                intfeildLength = value;
+            }
+        }
+
+        public string FieldType
+        {
+            get
+            {
+                return strFieldType;
+            }
+            set
+            {
+                strFieldType = value;
+            }
+        }
+
+        public bool IsBlank
+        {
+            get
+            {
+                return blnIsBlank;
+            }
+            set
+            {
+                blnIsBlank = value;
+            }
+        }
+
+        public string Namefield
+        {
+            get
+            {
+                return strNamefield;
+            }
+            set
+            {
+                strNamefield = value;
+            }
+        }
+
+        public void Validation() { 
+
+        if ((IsBlank == false) && (strTextString.Trim ()== "")) {
+            throw new ArgumentException(Namefield+ " Field Cannot be blank. Please enter required data");
+        }
+            if (strTextString.Contains("'")){
+                throw new ArgumentException("Invalid characters in " + Namefield + " Please check the characters entered.");
+            }
+            if ( TextString .Length == 0){
+                throw new ArgumentException("Length is exceeding in field " +Namefield +". Please limit the length to the accepted length.");
+            }
+            if (FieldType == "NUM" && strTextString.IsNormalized()== true){
+            throw new ArgumentException("A numeric field " +Namefield + " is containing alpha characters. Please check the data entered");
+            }
+        
+        }
+
+
+        public static bool isNumeric(string val, System.Globalization.NumberStyles NumberStyle)
+        {
+            Double result;
+            return Double.TryParse(val, NumberStyle, System.Globalization.CultureInfo.CurrentCulture, out result);
+        }
+
+    }
+}

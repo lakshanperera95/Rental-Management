@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{45DAC9F8-FE92-4ECC-AC77-D5ACDE410B58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>clsLibrary</RootNamespace>
+    <AssemblyName>clsLibrary</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <ApplicationIcon>shopping-cart-icon-515.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.PointOfService, Version=1.12.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dlls\Microsoft.PointOfService.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseClass.cs" />
+    <Compile Include="Clear.cs" />
+    <Compile Include="clsAccount.cs" />
+    <Compile Include="clsDayEndProcessNew.cs" />
+    <Compile Include="clsDisplayReceipt.cs" />
+    <Compile Include="clsJob.cs" />
+    <Compile Include="clsPosDisplay.cs" />
+    <Compile Include="clsSalesTransfer.cs" />
+    <Compile Include="clsSecurity.cs" />
+    <Compile Include="clsSerialNo.cs" />
+    <Compile Include="clsSupplier.cs" />
+    <Compile Include="clsAccountAnalyse.cs" />
+    <Compile Include="clsAccUplad.cs" />
+    <Compile Include="clsAnalyse.cs" />
+    <Compile Include="clsApiResponse.cs" />
+    <Compile Include="clsApiSalesuploard.cs" />
+    <Compile Include="clsBarcode.cs" />
+    <Compile Include="clsBase.cs" />
+    <Compile Include="clsBrand.cs" />
+    <Compile Include="clsBulkProductCombination.cs" />
+    <Compile Include="clsBundleIssue.cs" />
+    <Compile Include="clsBundling.cs" />
+    <Compile Include="clsCashDrawerClass.cs" />
+    <Compile Include="clsCashierDetails.cs" />
+    <Compile Include="clsCategory.cs" />
+    <Compile Include="clsChangeDateFormat.cs" />
+    <Compile Include="clsChequeRecon.cs" />
+    <Compile Include="clsClear.cs" />
+    <Compile Include="clsCommon.cs" />
+    <Compile Include="clsCRMCustomer.cs" />
+    <Compile Include="clsCustomer.cs" />
+    <Compile Include="clsCustomerPayment.cs" />
+    <Compile Include="clsCustomerReturn.cs" />
+    <Compile Include="clsDataUploading.cs" />
+    <Compile Include="clsDayEndProcess.cs" />
+    <Compile Include="clsDebCredSetOff.cs" />
+    <Compile Include="clsDebtorBalance.cs" />
+    <Compile Include="clsDenomination.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsDepartment.cs" />
+    <Compile Include="clsGiftVoucher.cs" />
+    <Compile Include="clsGiftVoucherIssue.cs" />
+    <Compile Include="clsGiftVoucherPrint.cs" />
+    <Compile Include="clsGrn.cs" />
+    <Compile Include="clsInvApiUpload.cs" />
+    <Compile Include="clsInvoiceCustomerPayment.cs" />
+    <Compile Include="clsLocation.cs" />
+    <Compile Include="clsLogin.cs" />
+    <Compile Include="clsMain.cs" />
+    <Compile Include="clsManufacturer.cs" />
+    <Compile Include="clsMasterDetailsInquary.cs" />
+    <Compile Include="clsProductPacketReg.cs" />
+    <Compile Include="clsProductPacketing.cs" />
+    <Compile Include="clsPaymentSetOff.cs" />
+    <Compile Include="clsPosTerminal.cs" />
+    <Compile Include="clsPosUpdate.cs" />
+    <Compile Include="clsPrinterSettings.cs" />
+    <Compile Include="clsProduct.cs" />
+    <Compile Include="clsProductLink.cs" />
+    <Compile Include="clsProductPriceMaste.cs" />
+    <Compile Include="clsProductToBeReturn.cs" />
+    <Compile Include="clsPublic.cs" />
+    <Compile Include="clsPurchaseOrder.cs" />
+    <Compile Include="clsQuotaion.cs" />
+    <Compile Include="clsReportViewer.cs" />
+    <Compile Include="clsRetriveGenaral.cs" />
+    <Compile Include="clsSalesDownload.cs" />
+    <Compile Include="clsSalesInquary.cs" />
+    <Compile Include="clsSalesman.cs" />
+    <Compile Include="clsSMS.cs" />
+    <Compile Include="clsSMS2.cs" />
+    <Compile Include="clsSplash.cs" />
+    <Compile Include="clsStockAdjustment.cs" />
+    <Compile Include="clsStockOverwrite.cs" />
+    <Compile Include="clsSupplier2.cs" />
+    <Compile Include="clsSupplierPayment.cs" />
+    <Compile Include="clsSupplierReturn.cs" />
+    <Compile Include="clsTransactionInquary.cs" />
+    <Compile Include="clsTransferGoodNote.cs" />
+    <Compile Include="clsUploardResponse.cs" />
+    <Compile Include="clsUserProfile.cs" />
+    <Compile Include="clsValidation.cs" />
+    <Compile Include="clsWholeSaleInvoice.cs" />
+    <Compile Include="ImageProcessor.cs" />
+    <Compile Include="LoginManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawPrinterHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cart.ico" />
+    <Content Include="shopping-cart-icon-515.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DbConnection\DbConnection.csproj">
+      <Project>{0d610dae-72b3-41b0-876a-ef117bbc30dd}</Project>
+      <Name>DbConnection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

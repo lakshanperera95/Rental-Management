@@ -1,0 +1,936 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+namespace Inventory
+{
+    public partial class frmGrn : Form
+    {
+        private decimal decDiscountAmount;
+        private decimal decAmount;
+        private decimal decAdjustment;
+
+        private string strDisc;
+
+        private int intPosOfPerc;   // find Percentage mark on percentage
+        private float fltDiscPer;
+
+        clsGrn objGrn = new clsGrn();
+        public frmGrn()
+        {
+            InitializeComponent();
+        }
+
+        private static frmGrn Grn;
+
+        private frmSearch search = new frmSearch();
+
+        public static frmGrn GetGrn
+        {
+            get
+            {
+                return Grn;
+            }
+            set
+            {
+                Grn = value;
+            }
+        }
+
+        private void frmGrn_Load(object sender, EventArgs e)
+        {
+            objGrn.SqlStatement = "SELECT Temp_Grn FROM DocumentNoDetails WHERE Loca = ";
+            objGrn.GetTempDocumentNo();
+            lblTempDocNo.Text = objGrn.TempDocNo;
+            dataGridTempGRN.DataSource = objGrn.TempGrn;
+            dataGridTempGRN.Refresh();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            Grn = null;
+        }
+
+        private void btnSupplierSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtSuppCode.Text.Trim() == string.Empty && txtSuppName.Text.Trim() == string.Empty)
+            {
+                objGrn.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier";
+            }
+            else
+            {
+                if (txtSuppCode.Text.Trim() != string.Empty && txtSuppName.Text.Trim() == string.Empty)
+                {
+                    objGrn.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier WHERE Supp_Code LIKE '%" + txtSuppCode.Text.Trim() + "%'";
+                }
+                else
+                {
+                    if (txtSuppCode.Text.Trim() == string.Empty && txtSuppName.Text.Trim() != string.Empty)
+                    {
+                        objGrn.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier WHERE Supp_Name LIKE '%" + txtSuppName.Text.Trim() + "%'";
+                    }
+                }
+            }
+            objGrn.DataetName = "dsSupplier";
+            objGrn.GetSupplierDetails();
+            search.dgSearch.DataSource = objGrn.GetSupplierDataset.Tables["dsSupplier"];
+            search.prop_Focus = txtSuppCode;
+            search.Show();
+        }
+
+        private void txtSuppCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtSuppCode.Text = search.Code.Trim();
+                txtSuppName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+
+        }
+
+        private void txtSuppCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtSuppCode.Text.Trim() != "")
+            {
+                objGrn.SuppCode  = txtSuppCode.Text.ToString().Trim();
+                objGrn.SqlStatement = "SELECT Supp_Code, Supp_Name FROM supplier WHERE Supp_Code = '" + txtSuppCode.Text.Trim() + "'";
+                objGrn.ReadSupplierDetails();
+                if (objGrn.RecordFound == true)
+                {
+                    txtSuppCode.Text = objGrn.SuppCode;
+                    txtSuppName.Text = objGrn.SuppName;
+                    txtSuppName.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Supplier Code Not Found.", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSuppCode.Focus();
+                }
+            }
+        }
+
+        private void txtSuppName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtSuppName.Text.Trim() != "")
+            {
+                txtInvAmount.Focus();
+            }
+        }
+
+        private void txtInvAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtInvAmount.Text.Trim() != string.Empty && clsValidation.isNumeric(txtInvAmount.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtInvAmount.Text) > 0)
+            {
+                cmbPayment.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtInvAmount.Text.Trim() == string.Empty)
+                {
+                    txtInvAmount.Text = "0";
+                    cmbPayment.Focus();
+                }
+            }
+
+        }
+
+        private void cmbPayment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbPayment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && cmbPayment.Text.Trim()!= string.Empty )
+            {
+                txtCreditPeriod.Focus();
+            }
+        }
+
+        private void txtCreditPeriod_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtCreditPeriod.Text.Trim() != string.Empty && clsValidation.isNumeric(txtCreditPeriod.Text, System.Globalization.NumberStyles.Float) == true && int.Parse(txtCreditPeriod.Text) > 0)
+            {
+                txtSupplierInv.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtCreditPeriod.Text.Trim() == string.Empty )
+                {
+                    txtCreditPeriod.Text = "0";
+                    txtSupplierInv.Focus();
+                }
+            }
+        }
+
+        private void txtSupplierInv_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtSupplierInv.Text.Trim() != string.Empty )
+            {
+                txtReference.Focus();
+            }
+            else
+            {
+                if (e.KeyCode == Keys.Enter && txtSupplierInv.Text.Trim() == string.Empty)
+                {
+                    txtSupplierInv.Text = ".";
+                    txtReference.Focus();
+                }
+            }
+
+        }
+
+        private void txtRemarks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtProductCode.Focus();
+            }
+        }
+
+        private void btnItemSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            if (txtProductCode.Text.Trim() != string.Empty && txtProductName.Text.Trim() == string.Empty)
+            {
+                objGrn.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Supplier_Id = '" + txtSuppCode.Text.Trim() + "' AND Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%'";
+            }
+            else
+            {
+                if (txtProductCode.Text.Trim() == string.Empty && txtProductName.Text.Trim() != string.Empty)
+                {
+                    objGrn.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Supplier_Id = '" + txtSuppCode.Text.Trim() + "' AND Prod_Name LIKE '%" + txtProductName.Text.Trim() + "%'";
+                }
+                else
+                {
+                    objGrn.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Supplier_Id = '" + txtSuppCode.Text.Trim() + "'";
+                }
+            }
+
+            objGrn.DataetName = "dsProduct";
+            objGrn.GetItemDetails();
+
+            search.dgSearch.DataSource = objGrn.GetItemDataset.Tables["dsProduct"];
+            search.prop_Focus = txtProductCode;
+            search.Show();
+        }
+
+        private void txtSuppCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtProductCode.Text = search.Code.Trim();
+                txtProductName.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+
+        }
+
+        private void txtProductCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                objGrn.SuppCode = txtSuppCode.Text.ToString().Trim();
+                objGrn.SqlStatement = "SELECT Supp_Code, Supp_Name FROM supplier WHERE Supp_Code = '" + txtSuppCode.Text.Trim() + "'";
+                objGrn.ReadSupplierDetails();
+                if (objGrn.RecordFound == true)
+                {
+                    txtSuppCode.Text = objGrn.SuppCode;
+                    txtSuppName.Text = objGrn.SuppName;
+                }
+                else
+                {
+                    MessageBox.Show("Supplier Code Not Found.", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSuppCode.Focus();
+                }
+                txtProductCode.Text = txtProductCode.Text.ToUpper();
+                objGrn.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Supplier_Id = '" + txtSuppCode.Text.Trim() + "' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objGrn.ReadProductDetails();
+                if (objGrn.RecordFound == true)
+                {
+                    txtProductName.Text = objGrn.ProductName;
+                    txtPurchasePrice.Text = (string ) objGrn.PurchasePrice.ToString();
+                    txtSellingPrice.Text = (string)objGrn.SellingPrice.ToString();
+                    lblCurrentQty.Text = (string) objGrn.CurrentQty.ToString();
+                    txtFreeQty.Text = "0";
+                    txtDiscount.Text = "0";
+                    objGrn.SqlStatement = "SELECT qty FROM TransactionTemp_Details WHERE Prod_Code = '" + objGrn.ProductCode + "' AND Doc_No = '" + objGrn.TempDocNo + "' AND IId = 'GRN' AND Loca = ";
+                    objGrn.ReadExsistProductDetails();
+                    txtQty.Text = (string)objGrn.Qty.ToString();
+                    txtQty.Select(0, txtQty.Text.Trim().Length);
+                    txtQty.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found. Please Check Product Code.", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void txtReference_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtRemarks.Focus();
+            }
+        }
+
+        private void txtQty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtQty.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtQty.Text) > 0)
+            {
+                decAmount = decimal.Parse(txtPurchasePrice.Text.ToString()) * decimal.Parse(txtQty.Text.ToString());
+                lblAmount.Text = decAmount.ToString();
+                txtFreeQty.Focus();
+            }
+        }
+
+        private void txtFreeQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && clsValidation.isNumeric(txtFreeQty.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtFreeQty.Text) >= 0)
+            {
+                txtDiscount.Focus();
+            }
+        }
+
+        private void CalculateDiscount(string strDiscText)
+        {
+            if (strDiscText.IndexOf("%") > 0 && strDiscText.IndexOf("%") < 3)
+            {
+                strDisc = strDiscText;
+                intPosOfPerc = strDiscText.IndexOf("%");
+                fltDiscPer = float.Parse(strDiscText.Substring(0, intPosOfPerc).ToString());
+                decAmount = decimal.Parse(txtPurchasePrice.Text.ToString()) * decimal.Parse(txtQty.Text.ToString());
+                fltDiscPer = 100 - fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                decDiscountAmount = decimal.Parse(lblAmount.Text) - decAmount;
+                txtDiscount.Text = decDiscountAmount.ToString();
+                lblAmount.Text = decAmount.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiscount.Focus();
+            }
+        }
+
+        private void CalculateDiscountAmount(decimal decDiscText)
+        {
+            if (decDiscText<= decimal.Parse(lblAmount.Text.ToString ()))
+            {
+                decAmount = decimal.Parse(txtPurchasePrice.Text.ToString()) * decimal.Parse(txtQty.Text.ToString());
+                decAmount = decAmount - decDiscText;
+                decDiscountAmount = decDiscText;
+                txtDiscount.Text = decDiscountAmount.ToString();
+                lblAmount.Text = decAmount.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDiscount.Focus();
+            }
+        }
+
+        private void txtDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtDiscount.Text.Trim() != string.Empty)
+            {
+                txtProductCode.Text = txtProductCode.Text.ToUpper();
+                objGrn.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Supplier_Id = '" + txtSuppCode.Text.Trim() + "' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objGrn.ReadProductDetails();
+                if (objGrn.RecordFound == true)
+                {
+                    txtProductName.Text = objGrn.ProductName;
+                    txtPurchasePrice.Text = (string)objGrn.PurchasePrice.ToString();
+                    txtSellingPrice.Text = (string)objGrn.SellingPrice.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Product Code Not Found. Please Check Product Code.", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtProductCode.Focus();
+                    return;
+                }
+
+                strDisc = string.Empty;
+
+                if (clsValidation.isNumeric(txtDiscount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateDiscount(txtDiscount.Text.Trim());
+                }
+                else
+                {
+                    CalculateDiscountAmount(decimal.Parse(txtDiscount.Text.Trim()));
+                }
+
+                objGrn.ProductCode = txtProductCode.Text.Trim().ToUpper();
+                objGrn.ProductName = txtProductName.Text.Trim().ToUpper();
+                lblCurrentQty.Text = objGrn.CurrentQty.ToString();
+                objGrn.Qty = float.Parse(txtQty.Text.ToString());
+                objGrn.FreeQty = float.Parse(txtFreeQty.Text.ToString());
+                objGrn.Disc = strDisc;
+                objGrn.Discount = decimal.Parse(txtDiscount.Text.ToString());
+                //objGrn.Amount = (decimal.Parse(txtQty.Text.ToString()) * objGrn.SellingPrice) - decimal.Parse(txtDiscount.Text.ToString());
+                objGrn.Amount = decimal.Parse(lblAmount.Text.ToString());
+                objGrn.UpdateGrnTempDataSet();
+                objGrn.GetTempDataset();
+                dataGridTempGRN.DataSource = objGrn.TempGrn.Tables["GoodReceivedNote"];
+                dataGridTempGRN.Refresh();
+                txtProductCode.Text = string.Empty;
+                txtProductName.Text = string.Empty;
+                txtQty.Text = string.Empty;
+                lblCurrentQty.Text = string.Empty;
+                txtPurchasePrice.Text = string.Empty;
+                txtSellingPrice.Text = string.Empty;
+                txtDiscount.Text = "0";
+                txtQty.Text = "0";
+                txtFreeQty.Text = "0";
+
+                lblAmount.Text = string.Empty;
+                objGrn.Disc = string.Empty ;
+                txtReference.Enabled = false;
+                txtRemarks.Enabled = false;
+
+                objGrn.GetTotalValues();
+
+                lblTotalQty.Text = string.Format("{0:0.00}", objGrn.TotalQty);
+                lblTotalAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                decAdjustment = decimal.Parse ( txtInvAmount.Text.Trim().ToString());
+                decAdjustment = decAdjustment - objGrn.TotalAmount;
+                lblInvoiceAdjust.Text =  string.Format("{0:0.00}", decAdjustment);
+                txtSubDiscount.Text = "0";
+                txtSubDiscPer.Text = string.Empty;
+                txtTaxAmount.Text ="0";
+                lblSubTotal.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                lblNetAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                txtSuppCode.Enabled = false;
+                txtSuppName.Enabled = false;
+                txtInvAmount.Enabled = false;
+                cmbPayment.Enabled = false;
+                dtpDate.Enabled = false;
+                txtCreditPeriod.Enabled = false;
+                txtReference.Enabled = false;
+                txtRemarks.Enabled = false;
+                txtSupplierInv.Enabled = false;
+                txtSubDiscPer.Enabled = true;
+                txtSubDiscount.Enabled = true;
+                txtTaxAmount.Enabled = true;
+                txtProductCode.Focus();
+            }
+        }
+
+        private void dataGridTempGRN_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridTempGRN_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridTempGRN.SelectedRows.Count <= 0 || dataGridTempGRN.SelectedRows[0].Cells[0].ToString() == ""  )
+            {
+                MessageBox.Show("Select Data", "Select", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                txtProductCode.Text= dataGridTempGRN.SelectedRows[0].Cells[0].Value.ToString();
+                txtProductName.Text = dataGridTempGRN.SelectedRows[0].Cells[1].Value.ToString();
+                objGrn.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                objGrn.ReadProductDetails();
+                txtPurchasePrice.Text = dataGridTempGRN.SelectedRows[0].Cells[3].Value.ToString();
+                txtSellingPrice.Text = dataGridTempGRN.SelectedRows[0].Cells[4].Value.ToString();
+                txtQty.Text = dataGridTempGRN.SelectedRows[0].Cells[5].Value.ToString();
+                txtFreeQty.Text = dataGridTempGRN.SelectedRows[0].Cells[6].Value.ToString();
+                txtDiscount.Text = dataGridTempGRN.SelectedRows[0].Cells[7].Value.ToString();
+                lblAmount.Text = dataGridTempGRN.SelectedRows[0].Cells[8].Value.ToString();
+                txtQty.Focus();
+            }
+        }
+
+        private void txtProductCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridTempGRN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F2 && dataGridTempGRN.SelectedRows[0].Cells[0].Value.ToString() != string.Empty)
+            {
+                if (MessageBox.Show("Are You Sure You want to Delete This Item. ", "Goods Received Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    objGrn.TempDocNo = lblTempDocNo.Text.Trim();
+                    objGrn.ProductCode = dataGridTempGRN.SelectedRows[0].Cells[0].Value.ToString();
+                    objGrn.DeleteProductDetaile();
+                    objGrn.GetTempDataset();
+                    dataGridTempGRN.DataSource = objGrn.TempGrn.Tables["GoodReceivedNote"];
+                    dataGridTempGRN.Refresh();
+
+                    objGrn.GetTotalValues();
+
+                    lblTotalQty.Text = objGrn.TotalQty.ToString();
+                    lblTotalAmount.Text = objGrn.TotalAmount.ToString();
+
+                    objGrn.GetTotalValues();
+
+                    lblTotalQty.Text = string.Format("{0:0.00}", objGrn.TotalQty);
+                    lblTotalAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                    decAdjustment = decimal.Parse(txtInvAmount.Text.Trim().ToString());
+                    decAdjustment = decAdjustment - objGrn.TotalAmount;
+                    lblInvoiceAdjust.Text = string.Format("{0:0.00}", decAdjustment);
+                    txtSubDiscount.Text = "0";
+                    txtSubDiscPer.Text = string.Empty;
+                    txtTaxAmount.Text = "0";
+                    lblSubTotal.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                    lblNetAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+
+                    txtProductCode.Focus();
+                }
+            }
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure You want to Apply This Document. ", "Goods Received Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                DataSet dsDataForReport = new DataSet();
+                frmReportViewer objRepViewer = new frmReportViewer();
+
+                objGrn.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'GRN' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                objGrn.ReadTempTransDetails();
+                if (objGrn.RecordFound != true)
+                {
+                    MessageBox.Show("Goods Received Note Details Not Found.", "Goods Received Note Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                objGrn.InvAmount = decimal.Parse(txtInvAmount.Text.Trim());
+                objGrn.Pay_Type = cmbPayment.Text;
+                objGrn.PoNo = lblPoNumber.Text.Trim();
+                objGrn.InvNo = txtSupplierInv.Text.Trim();
+                objGrn.Reference = txtReference.Text.Trim();
+                objGrn.Remark = txtRemarks.Text.Trim();
+                objGrn.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                objGrn.Disc = txtSubDiscPer.Text.Trim();
+                objGrn.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                objGrn.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                objGrn.GoodReceivedNoteApply();
+                MessageBox.Show("Goods Received Note Successfully Applied as Document No. " + objGrn.OrgDocNo, "Goods Received Note Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                objGrn.GetDataSetForReport();
+                dsDataForReport = objGrn.GetReportDataset;
+                rptGoodReceivedNote rptGrn = new rptGoodReceivedNote();
+                rptGrn.SetDataSource(dsDataForReport);
+
+                objRepViewer.crystalReportViewer1.ReportSource = rptGrn;
+                objRepViewer.Show();
+
+                this.Close();
+                this.Dispose();
+                Grn = null;
+            }
+        }
+        //calculating subtotal discount
+        private void CalculateSubTotalDiscount(string strDiscText)
+        {
+            if (strDiscText.IndexOf("%") > 0 && strDiscText.IndexOf("%") < 3)
+            {
+                strDisc = strDiscText;
+                intPosOfPerc = strDiscText.IndexOf("%");
+                fltDiscPer = float.Parse(strDiscText.Substring(0, intPosOfPerc).ToString());
+                decAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                fltDiscPer = 100 - fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                decDiscountAmount = decimal.Parse(lblTotalAmount.Text) - decAmount;
+                txtSubDiscount.Text = string.Format("{0:0.00}", decDiscountAmount);
+                lblSubTotal.Text = string.Format("{0:0.00}", decAmount);
+                txtTaxAmount.Text = "0";
+                lblNetAmount.Text = string.Format("{0:0.00}", decAmount);
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSubDiscPer.Select(0, txtSubDiscPer.Text.Trim().Length);
+                
+            }
+        }
+
+        private void CalculateSubTotalDiscountAmount(decimal decDiscText)
+        {
+            if (decDiscText <= decimal.Parse(lblTotalAmount.Text.ToString()))
+            {
+                decAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                decAmount = decAmount - decDiscText;
+                decDiscountAmount = decDiscText;
+                //txtSubDiscount.Text = decDiscountAmount.ToString();
+                txtSubDiscount.Text = string.Format("{0:0.00}", decDiscountAmount);
+                lblSubTotal.Text = string.Format("{0:0.00}", decAmount);
+                txtTaxAmount.Text = "0";
+                lblNetAmount.Text = string.Format("{0:0.00}", decAmount);
+                txtSubDiscPer.Text = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtSubDiscount.Text = "0";
+                txtSubDiscount.Select(0, txtSubDiscount.Text.Trim().Length);
+            }
+        }
+
+        private void txtSubDiscPer_KeyDown(object sender, KeyEventArgs e)
+        {
+            strDisc = string.Empty;
+            if (e.KeyCode == Keys.Enter && txtSubDiscPer.Text.Trim() != string.Empty)
+            {
+                if (clsValidation.isNumeric(txtSubDiscPer.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateSubTotalDiscount(txtSubDiscPer.Text.Trim());
+                    txtTaxAmount.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSubDiscPer.Focus();
+                }
+            }
+        }
+
+        private void txtSubDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            strDisc = string.Empty;
+            if (e.KeyCode == Keys.Enter && txtSubDiscount.Text.Trim() != string.Empty)
+            {
+                if (clsValidation.isNumeric(txtSubDiscount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 225.00)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSubDiscount.Text = "0";
+                    txtSubDiscount.Select(0, txtSubDiscount.Text.Trim().Length);               
+                }
+                else
+                {
+                    CalculateSubTotalDiscountAmount(decimal.Parse(txtSubDiscount.Text.Trim()));
+                    txtTaxAmount.Focus();
+                }
+            }
+        }
+        //Tax Calculation
+        private void CalculateTax(string strTaxText)
+        {
+            if (strTaxText.IndexOf("%") > 0 && strTaxText.IndexOf("%") < 3)
+            {
+                strDisc = strTaxText;
+                intPosOfPerc = strTaxText.IndexOf("%");
+                fltDiscPer = float.Parse(strTaxText.Substring(0, intPosOfPerc).ToString());
+                decAmount = decimal.Parse(lblSubTotal.Text.ToString());
+                fltDiscPer = 100 + fltDiscPer;
+                decAmount = (decimal.Parse(decAmount.ToString()) * decimal.Parse(fltDiscPer.ToString())) / 100;
+                decDiscountAmount = decAmount - decimal.Parse(lblSubTotal.Text);
+                txtTaxAmount.Text = string.Format("{0:0.00}", decDiscountAmount);
+                lblNetAmount.Text = string.Format("{0:0.00}", decAmount);
+            }
+            else
+            {
+                MessageBox.Show("Invalid Tax Percentage. Please Enter Valid Percentage(Ex: 22% )", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtTaxAmount.Focus();
+            }
+        }
+
+        private void txtTaxAmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            strDisc = string.Empty;
+            if (e.KeyCode == Keys.Enter && txtTaxAmount.Text.Trim() != string.Empty)
+            {
+                if (clsValidation.isNumeric(txtTaxAmount.Text, System.Globalization.NumberStyles.Currency) == false)
+                {
+                    CalculateTax(txtTaxAmount.Text.Trim());
+                    txtTaxAmount.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Tax Percentage. Please Enter Valid Tax Percentage(Ex: 22%)", "Goods Received Note", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void btnSaveDocSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            objGrn.SqlStatement = "SELECT Doc_No [Document No], Post_Date + '  ' + Supplier.Supp_Name [Supplier] FROM Transaction_Save_Header INNER JOIN supplier on Transaction_Save_Header.Supplier_Id = supplier.supp_code WHERE Iid = 'GRN' AND Transaction_Save_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+            objGrn.DataetName = "Table";
+            objGrn.GetItemDetails();
+
+            search.dgSearch.DataSource = objGrn.GetItemDataset.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = lblTempDocNo;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Sure You want to Save This Document. ", "Goods Received Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+
+                objGrn.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'GRN' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                objGrn.ReadTempTransDetails();
+                if (objGrn.RecordFound != true)
+                {
+                    MessageBox.Show("Goods Received Note Details Not Found.", "Goods Received Note Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                objGrn.Reference = txtReference.Text.Trim();
+                objGrn.InvAmount = decimal.Parse(txtInvAmount.Text.Trim());
+                objGrn.Pay_Type = cmbPayment.Text;
+                objGrn.PoNo = lblPoNumber.Text.Trim();
+                objGrn.InvNo = txtSupplierInv.Text.Trim();
+                objGrn.Reference = txtReference.Text.Trim();
+                objGrn.Remark = txtRemarks.Text.Trim();
+                objGrn.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                objGrn.Disc = txtSubDiscPer.Text.Trim();
+                objGrn.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                objGrn.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                objGrn.GoodReceivedNoteSave();
+                MessageBox.Show("Goods Received Note Successfully Saved as Document No. " + objGrn.OrgDocNo, "Goods Received Note Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
+                this.Dispose();
+                Grn = null;
+            }
+        }
+
+        private void lblTempDocNo_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                if (MessageBox.Show("Are You Sure You want to Load Saved GRN Document No :" + search.Code.Trim() + ". ", "Goods Received Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                  
+                    objGrn.RecallSaveDocNo = search.Code.Trim();
+                    objGrn.SqlStatement = "SELECT Transaction_Save_Header.*, Supplier.Supp_Name FROM Transaction_Save_Header INNER JOIN Supplier ON Supplier.Supp_Code = Transaction_Save_Header.Supplier_Id WHERE iid = 'GRN' AND Doc_No = '" + search.Code.Trim() + "' AND Loca = ";
+                    objGrn.ReadSavedDocument();
+                    if (objGrn.RecordFound)
+                    {
+                        lblTempDocNo.Text = objGrn.TempDocNo;
+                        lblPoNumber.Text = objGrn.PoNo.ToString();
+                        txtSuppCode.Text = objGrn.SuppCode.ToString();
+                        txtSuppName.Text = objGrn.SuppName.ToString();
+                        txtInvAmount.Text = (string)objGrn.InvAmount.ToString();
+                        cmbPayment.Text = objGrn.Pay_Type;
+                        txtSupplierInv.Text = objGrn.InvNo.ToString();
+                        txtReference.Text = objGrn.Reference.ToString();
+                        txtRemarks.Text = objGrn.Remark.ToString();
+
+                        objGrn.GetTempDataset();
+                        dataGridTempGRN.DataSource = objGrn.TempGrn.Tables["GoodReceivedNote"];
+                        dataGridTempGRN.Refresh();
+
+                        objGrn.GetTotalValues();
+
+                        lblTotalQty.Text = string.Format("{0:0.00}", objGrn.TotalQty);
+                        lblTotalAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                        txtSubDiscount.Text = "0";
+                        txtSubDiscPer.Text = string.Empty;
+                        txtTaxAmount.Text = "0";
+                        lblSubTotal.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                        lblNetAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                        txtSuppCode.Enabled = false;
+                        txtSuppName.Enabled = false;
+                        txtInvAmount.Enabled = false;
+                        cmbPayment.Enabled = false;
+                        dtpDate.Enabled = false;
+                        txtCreditPeriod.Enabled = false;
+                        txtReference.Enabled = false;
+                        txtRemarks.Enabled = false;
+                        txtSupplierInv.Enabled = false;
+                        btnSaveDocSearch.Enabled = false;
+                        btnPoSearch.Enabled = false;
+                    }
+                }
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+            }
+        }
+
+        private void frmGrn_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Grn = null;
+        }
+
+        private void frmGrn_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form...
+            this.Hide();
+
+            // Cancel the close...
+            e.Cancel = true;
+        }
+
+        private void btnPoSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            objGrn.SqlStatement = "SELECT Doc_No [Document No], Post_Date + '  ' + Supplier.Supp_Name [Supplier] FROM Transaction_Header INNER JOIN supplier on Transaction_Header.Supplier_Id = supplier.supp_code WHERE Recalled = 'F' AND Iid = 'PON' AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
+            objGrn.DataetName = "Table";
+            objGrn.GetItemDetails();
+
+            search.dgSearch.DataSource = objGrn.GetItemDataset.Tables["Table"];
+            search.Show();
+
+            search.prop_Focus = lblPoNumber ;
+        }
+
+        private void txtProductName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtProductName.Text.Trim() != String.Empty)
+            {
+                txtQty.Focus();
+            }
+        }
+
+        private void lblPoNumber_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                if (MessageBox.Show("Are You Sure You want to Load Purchase Order Document No :" + search.Code.Trim() + ". ", "Goods Received Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+
+                    objGrn.RecallSaveDocNo = search.Code.Trim();
+                    objGrn.SqlStatement = "SELECT Transaction_Header.*, Supplier.Supp_Name FROM Transaction_Header INNER JOIN Supplier ON Supplier.Supp_Code = Transaction_Header.Supplier_Id WHERE Iid = 'PON' AND Doc_No = '" + search.Code.Trim() + "' AND Loca = ";
+                    objGrn.ReadPurchaseOrderDocument();
+                    if (objGrn.RecordFound)
+                    {
+                        //lblTempDocNo.Text = objGrn.TempDocNo;
+                        lblPoNumber.Text = objGrn.PoNo.ToString();
+                        txtSuppCode.Text = objGrn.SuppCode.ToString();
+                        txtSuppName.Text = objGrn.SuppName.ToString();
+                        txtInvAmount.Text = (string)objGrn.InvAmount.ToString();
+                        cmbPayment.Text = objGrn.Pay_Type;
+                        txtSupplierInv.Text = objGrn.InvNo.ToString();
+                        txtReference.Text = objGrn.Reference.ToString();
+                        txtRemarks.Text = objGrn.Remark.ToString();
+
+                        objGrn.GetTempDataset();
+                        dataGridTempGRN.DataSource = objGrn.TempGrn.Tables["GoodReceivedNote"];
+                        dataGridTempGRN.Refresh();
+
+                        objGrn.GetTotalValues();
+
+                        lblTotalQty.Text = string.Format("{0:0.00}", objGrn.TotalQty);
+                        lblTotalAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                        txtSubDiscount.Text = "0";
+                        txtSubDiscPer.Text = string.Empty;
+                        txtTaxAmount.Text = "0";
+                        lblSubTotal.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                        lblNetAmount.Text = string.Format("{0:0.00}", objGrn.TotalAmount);
+                        txtSuppCode.Enabled = false;
+                        txtSuppName.Enabled = false;
+                        txtInvAmount.Enabled = false;
+                        cmbPayment.Enabled = false;
+                        dtpDate.Enabled = false;
+                        txtCreditPeriod.Enabled = false;
+                        txtReference.Enabled = false;
+                        txtRemarks.Enabled = false;
+                        txtSupplierInv.Enabled = false;
+                        btnSaveDocSearch.Enabled = false;
+                    }
+                }
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+            }
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            DataSet dsDataForReport = new DataSet();
+            frmReportViewer objRepViewer = new frmReportViewer();
+
+            objGrn.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'GRN' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+            objGrn.ReadTempTransDetails();
+            if (objGrn.RecordFound != true)
+            {
+                MessageBox.Show("Goods Received Note Details Not Found.", "Goods Received Note Preview", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            objGrn.Reference = txtReference.Text.Trim();
+            objGrn.InvAmount = decimal.Parse(txtInvAmount.Text.Trim());
+            objGrn.Pay_Type = cmbPayment.Text;
+            objGrn.PoNo = lblPoNumber.Text.Trim();
+            objGrn.InvNo = txtSupplierInv.Text.Trim();
+            objGrn.Reference = txtReference.Text.Trim();
+            objGrn.Remark = txtRemarks.Text.Trim();
+            objGrn.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+            objGrn.Disc = txtSubDiscPer.Text.Trim();
+            objGrn.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+            objGrn.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+            objGrn.Amount = decimal.Parse(lblNetAmount.Text.ToString());
+
+            objGrn.GetDataSetForPreview();
+            dsDataForReport = objGrn.GetReportDataset;
+            rptGoodReceivedNote rptGrn = new rptGoodReceivedNote();
+            rptGrn.SetDataSource(dsDataForReport);
+
+            objRepViewer.crystalReportViewer1.ReportSource = rptGrn;
+            objRepViewer.WindowState = FormWindowState.Maximized;
+            objRepViewer.Show();
+        }
+
+        private void txtFreeQty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDiscount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTempDocNo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridTempGRN_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            clsDGV dg = new clsDGV();
+            dg.invoke(e);
+        }
+    }
+}

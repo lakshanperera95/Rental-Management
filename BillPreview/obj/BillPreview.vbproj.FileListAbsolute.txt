@@ -1,0 +1,187 @@
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\Inventory.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.Smo.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\bin\Debug\Inventory.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.exe
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.xml
+D:\Source Code\Other\Vi John\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\Inventory.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.Smo.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\bin\Debug\Inventory.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.exe
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.xml
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Inventory.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\PDUConverter.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.ConnectionInfo.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.Smo.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\MetroFramework.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\GSMCommShared.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\GSMCommunication.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Inventory.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.exe
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.xml
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Newtonsoft.Json.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\Inventory.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\PDUConverter.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\GSMCommShared.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\Newtonsoft.Json.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.Replication.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\MetroFramework.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\GSMCommunication.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\bin\Debug\Inventory.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.exe
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.xml
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\BillPreview.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Inventory.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\PDUConverter.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\GSMCommShared.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\MetroFramework.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\GSMCommunication.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\bin\Debug\Inventory.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.exe
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.xml
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\BillPreview\obj\Debug\BillPreview.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\BillPreview.exe
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\BillPreview.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\BillPreview.xml
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\clsLibrary.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Inventory.exe
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\PDUConverter.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\GSMCommShared.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Newtonsoft.Json.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\MetroFramework.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\WindowsApplication2.exe
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\GSMCommunication.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\WindowsApplication2.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\WindowsApplication2.xml
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\clsLibrary.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Inventory.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.Resources.resources
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.exe
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.xml
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.pdb
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\BillPreview.exe
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\BillPreview.pdb
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\BillPreview.xml
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Inventory.exe
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\PDUConverter.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\GSMCommShared.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\MetroFramework.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\GSMCommunication.dll
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\bin\Debug\Inventory.pdb
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.exe
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.xml
+D:\Source Code\Inventory\Sangrilla Common\BillPreview\obj\Debug\BillPreview.pdb
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\BillPreview.exe
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\BillPreview.pdb
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\BillPreview.xml
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\clsLibrary.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\Inventory.exe
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\PDUConverter.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\GSMCommShared.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\MetroFramework.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\WindowsApplication2.exe
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\Microsoft.SqlServer.BatchParser.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\GSMCommunication.dll
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\WindowsApplication2.pdb
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\WindowsApplication2.xml
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\clsLibrary.pdb
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\bin\Debug\Inventory.pdb
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.Resources.resources
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.vbproj.GenerateResource.Cache
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.exe
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.xml
+D:\Source Code\Inventory\Shangrilla Systems\BillPreview\obj\Debug\BillPreview.pdb

@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+using DbConnection;
+
+namespace clsLibrary
+{
+    public class clsSplash
+    {
+
+        public int checkCon() {
+
+           return dbcon.checkCon();           
+        }
+    }
+}

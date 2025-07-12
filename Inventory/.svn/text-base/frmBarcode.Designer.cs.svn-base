@@ -1,0 +1,292 @@
+namespace Inventory
+{
+    partial class frmBarcode
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridViewBarcode = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtQty = new System.Windows.Forms.TextBox();
+            this.txtSellingPrice = new System.Windows.Forms.TextBox();
+            this.btnItemSearch = new System.Windows.Forms.Button();
+            this.txtProductName = new System.Windows.Forms.TextBox();
+            this.txtProductCode = new System.Windows.Forms.TextBox();
+            this.lblSuppCode = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnDisplay = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.prodCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellingPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suppCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dsBarcodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsForReports = new Inventory.dsForReports();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBarcode)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dsBarcodeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dataGridViewBarcode);
+            this.groupBox1.Location = new System.Drawing.Point(4, -2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(911, 306);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // dataGridViewBarcode
+            // 
+            this.dataGridViewBarcode.AllowUserToAddRows = false;
+            this.dataGridViewBarcode.AutoGenerateColumns = false;
+            this.dataGridViewBarcode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBarcode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.prodCodeDataGridViewTextBoxColumn,
+            this.prodNameDataGridViewTextBoxColumn,
+            this.sellingPriceDataGridViewTextBoxColumn,
+            this.qtyDataGridViewTextBoxColumn,
+            this.suppCodeDataGridViewTextBoxColumn});
+            this.dataGridViewBarcode.DataSource = this.dsBarcodeBindingSource;
+            this.dataGridViewBarcode.Location = new System.Drawing.Point(8, 14);
+            this.dataGridViewBarcode.Name = "dataGridViewBarcode";
+            this.dataGridViewBarcode.Size = new System.Drawing.Size(897, 286);
+            this.dataGridViewBarcode.TabIndex = 0;
+            this.dataGridViewBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewBarcode_KeyDown);
+            this.dataGridViewBarcode.DoubleClick += new System.EventHandler(this.dataGridViewBarcode_DoubleClick);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblSuppCode);
+            this.groupBox2.Controls.Add(this.txtQty);
+            this.groupBox2.Controls.Add(this.txtSellingPrice);
+            this.groupBox2.Controls.Add(this.btnItemSearch);
+            this.groupBox2.Controls.Add(this.txtProductName);
+            this.groupBox2.Controls.Add(this.txtProductCode);
+            this.groupBox2.Location = new System.Drawing.Point(4, 305);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(910, 38);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(704, 12);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Size = new System.Drawing.Size(101, 20);
+            this.txtQty.TabIndex = 150;
+            this.txtQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQty_KeyDown);
+            // 
+            // txtSellingPrice
+            // 
+            this.txtSellingPrice.Enabled = false;
+            this.txtSellingPrice.Location = new System.Drawing.Point(594, 12);
+            this.txtSellingPrice.Name = "txtSellingPrice";
+            this.txtSellingPrice.Size = new System.Drawing.Size(109, 20);
+            this.txtSellingPrice.TabIndex = 149;
+            // 
+            // btnItemSearch
+            // 
+            this.btnItemSearch.Location = new System.Drawing.Point(545, 12);
+            this.btnItemSearch.Name = "btnItemSearch";
+            this.btnItemSearch.Size = new System.Drawing.Size(45, 20);
+            this.btnItemSearch.TabIndex = 148;
+            this.btnItemSearch.Text = "....";
+            this.btnItemSearch.UseVisualStyleBackColor = true;
+            this.btnItemSearch.Click += new System.EventHandler(this.btnItemSearch_Click);
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.Location = new System.Drawing.Point(251, 12);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Size = new System.Drawing.Size(288, 20);
+            this.txtProductName.TabIndex = 147;
+            // 
+            // txtProductCode
+            // 
+            this.txtProductCode.Location = new System.Drawing.Point(8, 12);
+            this.txtProductCode.Name = "txtProductCode";
+            this.txtProductCode.Size = new System.Drawing.Size(237, 20);
+            this.txtProductCode.TabIndex = 146;
+            this.txtProductCode.Enter += new System.EventHandler(this.txtProductCode_Enter);
+            this.txtProductCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProductCode_KeyDown);
+            // 
+            // lblSuppCode
+            // 
+            this.lblSuppCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSuppCode.Location = new System.Drawing.Point(805, 12);
+            this.lblSuppCode.Name = "lblSuppCode";
+            this.lblSuppCode.Size = new System.Drawing.Size(100, 20);
+            this.lblSuppCode.TabIndex = 151;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Location = new System.Drawing.Point(0, 346);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(917, 69);
+            this.toolStrip1.TabIndex = 142;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnDisplay
+            // 
+            this.btnDisplay.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnDisplay.FlatAppearance.BorderSize = 0;
+            this.btnDisplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDisplay.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDisplay.Location = new System.Drawing.Point(674, 362);
+            this.btnDisplay.Name = "btnDisplay";
+            this.btnDisplay.Size = new System.Drawing.Size(89, 41);
+            this.btnDisplay.TabIndex = 145;
+            this.btnDisplay.Text = "Print";
+            this.btnDisplay.UseVisualStyleBackColor = false;
+            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(794, 362);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(82, 41);
+            this.btnClose.TabIndex = 144;
+            this.btnClose.Text = "Exit";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // prodCodeDataGridViewTextBoxColumn
+            // 
+            this.prodCodeDataGridViewTextBoxColumn.DataPropertyName = "Prod_Code";
+            this.prodCodeDataGridViewTextBoxColumn.HeaderText = "Prod Code";
+            this.prodCodeDataGridViewTextBoxColumn.Name = "prodCodeDataGridViewTextBoxColumn";
+            this.prodCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.prodCodeDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // prodNameDataGridViewTextBoxColumn
+            // 
+            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "Prod_Name";
+            this.prodNameDataGridViewTextBoxColumn.HeaderText = "Product Name";
+            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
+            this.prodNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.prodNameDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.prodNameDataGridViewTextBoxColumn.Width = 350;
+            // 
+            // sellingPriceDataGridViewTextBoxColumn
+            // 
+            this.sellingPriceDataGridViewTextBoxColumn.DataPropertyName = "Selling_Price";
+            this.sellingPriceDataGridViewTextBoxColumn.HeaderText = "Selling Price";
+            this.sellingPriceDataGridViewTextBoxColumn.Name = "sellingPriceDataGridViewTextBoxColumn";
+            this.sellingPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sellingPriceDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // qtyDataGridViewTextBoxColumn
+            // 
+            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
+            this.qtyDataGridViewTextBoxColumn.HeaderText = "Qty";
+            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
+            this.qtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.qtyDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // suppCodeDataGridViewTextBoxColumn
+            // 
+            this.suppCodeDataGridViewTextBoxColumn.DataPropertyName = "Supp_Code";
+            this.suppCodeDataGridViewTextBoxColumn.HeaderText = "Supp Code";
+            this.suppCodeDataGridViewTextBoxColumn.Name = "suppCodeDataGridViewTextBoxColumn";
+            this.suppCodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.suppCodeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // dsBarcodeBindingSource
+            // 
+            this.dsBarcodeBindingSource.DataMember = "dsBarcode";
+            this.dsBarcodeBindingSource.DataSource = this.dsForReports;
+            // 
+            // dsForReports
+            // 
+            this.dsForReports.DataSetName = "dsForReports";
+            this.dsForReports.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // frmBarcode
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(917, 415);
+            this.Controls.Add(this.btnDisplay);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmBarcode";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Barcode";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmBarcode_FormClosed);
+            this.Load += new System.EventHandler(this.frmBarcode_Load);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBarcode)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dsBarcodeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dataGridViewBarcode;
+        private System.Windows.Forms.BindingSource dsBarcodeBindingSource;
+        private dsForReports dsForReports;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtQty;
+        private System.Windows.Forms.TextBox txtSellingPrice;
+        private System.Windows.Forms.Button btnItemSearch;
+        private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.TextBox txtProductCode;
+        private System.Windows.Forms.Label lblSuppCode;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.Button btnDisplay;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodCodeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellingPriceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtyDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn suppCodeDataGridViewTextBoxColumn;
+    }
+}

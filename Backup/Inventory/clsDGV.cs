@@ -1,0 +1,57 @@
+
+/// ******************************************************************
+///  AUTHOR: Siraj Rasanga
+///  DATE: 27 September 2007
+///  FOR: Display Numbers to the Rows in a DataGridView
+/// *****************************************************************
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows.Forms;
+using System.Drawing;
+
+namespace Inventory
+{
+    public class clsDGV : DataGridView
+    {
+        private DataGridViewRowPostPaintEventArgs dgv;
+
+        public void invoke(DataGridViewRowPostPaintEventArgs dgv) {
+
+            this.OnRowPostPaint(dgv);
+        }
+
+        //override the Datagrid view's OnRowPostPaint Method
+        protected  override void OnRowPostPaint(DataGridViewRowPostPaintEventArgs e)                                              
+        {
+
+            //store a string representation of the row number in 'strRowNumber'
+            string strRowNumber = (e.RowIndex + 1).ToString();
+
+            //there are 100 rows in the grid, row seven will be numbered as "007".
+            while (strRowNumber.Length < this.RowCount.ToString().Length) strRowNumber = "0" + strRowNumber;
+
+
+            //format the DataGridView's current font.
+            SizeF size = e.Graphics.MeasureString(strRowNumber, this.Font);
+
+            //adjust the width of the column that contains the row header cells 
+            //if necessary
+            if (this.RowHeadersWidth < (int)(size.Width + 20)) this.RowHeadersWidth = (int)(size.Width + 20);
+
+            //this brush will be used to draw the row number string on the
+            //row header cell using the system's current ControlText color
+            Brush b = SystemBrushes.ControlText;
+
+            //draw the row number string on the current row header cell using
+            //the brush defined above and the DataGridView's default font
+            e.Graphics.DrawString(strRowNumber, this.Font, b, e.RowBounds.Location.X + 15, e.RowBounds.Location.Y + ((e.RowBounds.Height - size.Height) / 2));
+
+            //call the base object's OnRowPostPaint method
+            base.OnRowPostPaint(e);
+
+        }
+    }
+}

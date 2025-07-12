@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.Diagnostics;using System.Runtime.InteropServices;
+using System.Globalization;
+
+namespace clsLibrary
+{
+    public class clsChangeDateFormat
+    {
+        [DllImport("kernel32.dll", SetLastError = true)]
+
+        // static extern int SetLocaleInfo(int Locale, int LCType, string lpLCData);
+        static extern int SetLocaleInfo(int LOCALE_SYSTEM_DEFAULT, int LOCALE_SSHORTDATE, string lpLCData);
+        public const int LOCALE_STIMEFORMAT = 0x1003;
+        public const int LOCALE_SYSTEM_DEFAULT = 0x800;
+        public const int LOCAL_SSHORTDATE = 0x31;
+
+         public void SetLocaDateFormat()
+         {
+             SetLocaleInfo(LOCALE_SYSTEM_DEFAULT, LOCAL_SSHORTDATE, "yyyy-MM-dd");
+
+             SetLocaleInfo(LOCALE_SYSTEM_DEFAULT, LOCALE_STIMEFORMAT, "HH:mm:ss");
+
+             MessageBox.Show("" + DateTime.Now.ToString());
+         }
+    }
+}

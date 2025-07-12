@@ -1,0 +1,711 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using clsLibrary;
+
+namespace Inventory
+{
+    public partial class frmAccounts : Form
+    {
+        public frmAccounts()
+        {
+            InitializeComponent();
+        }
+
+        private clsAccount objCustomer = new clsAccount();
+        private clsAccount ObjSupplier = new clsAccount();
+        private frmSearch search = new frmSearch();
+        private static frmAccounts accounts;
+        private int Err;
+
+        private string strSqlString;
+        private string strDatasetName;
+
+        public static frmAccounts GetAccount {
+            get 
+            {
+                return accounts;
+            }
+            set
+            {
+                accounts = value;
+            }     
+        }
+
+#region Supplier functions here
+
+        private void txtSupCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtSupCode.Text = search.Code.Trim();
+                txtSupDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void btnSupSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed ){
+                search = new frmSearch();
+            }
+            strSqlString = "SELECT Supp_Code [Supplier Code],Supp_Name [Supplier Name] FROM Supplier";
+            strDatasetName = "dsSupplier";
+
+            ObjSupplier.SqlStatement = strSqlString;
+            ObjSupplier.DataSetName = strDatasetName;
+
+            ObjSupplier.GetSupplierDetails();
+            search.dgSearch.DataSource = ObjSupplier.GetSupplierDataset.Tables[strDatasetName];
+            search.prop_Focus = txtSupCode;
+            search.Cont_Descript = txtSupDescript;
+            search.Show();
+        }
+
+#region toolstrip buttons
+        private void btnSupSave_Click(object sender, EventArgs e)
+        {
+            Err = 0;
+            if ((txtSupCode.Text == string.Empty) || (txtSupDescript.Text == string.Empty))
+            {
+                Err++;
+            }
+
+            this.validator(tabSupplier);
+
+            if (Err == 0)
+            {
+                ObjSupplier.ErrorCode = 0;
+                ObjSupplier.Supp_Code = txtSupCode.Text.Trim().ToUpper();
+                ObjSupplier.Supp_Name = txtSupDescript.Text.Trim().ToUpper();
+                ObjSupplier.SuppAddress1 = txtSupAdd1.Text.Trim().ToUpper();
+                ObjSupplier.SuppAddress2 = txtSupAdd2.Text.Trim().ToUpper();
+                ObjSupplier.SuppAddress3 = txtSupAdd3.Text.Trim().ToUpper();
+                ObjSupplier.SuppAddress4 = txtSupCity.Text.Trim().ToUpper();
+                ObjSupplier.SuppTel = txtSupTelphone.Text.Trim().ToUpper();
+                ObjSupplier.SuppFax = txtSupFax.Text.Trim().ToUpper();
+                ObjSupplier.SuppEmail = txtSupEmail.Text.Trim();
+                ObjSupplier.SuppContact_Prsn = txtSupContPersn.Text;
+                ObjSupplier.SuppCredit_Period = int.Parse(txtSupCreditPeriod.Text);
+
+              //clear all the properties used in search form
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+                search.prop_Focus = null;
+                search.prop_Name = string.Empty;
+
+                ObjSupplier.SupplierUpdate();
+
+                clsClear.getclear().clearfeilds(tabSupplier, txtSupCode);
+
+            }
+        }
+
+        private void btnSupDelete_Click(object sender, EventArgs e)
+        {
+            if (txtSupCode .Text != string .Empty ){
+                if (MessageBox.Show("Do you really want to delete the record ?  " + txtSupCode.Text + "", "Supplier Details",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult .Yes )
+                
+                {
+                    ObjSupplier.Supp_Code = txtSupCode.Text.Trim().ToUpper();
+                    ObjSupplier.SupplierDelete();
+                    clsClear.getclear().clearfeilds(tabSupplier, txtSupCode);
+                }
+            
+            }
+
+        }
+
+        private void btnSupClear_Click(object sender, EventArgs e)
+        {
+            clsClear.getclear().clearfeilds(tabSupplier, txtSupCode);
+        }
+
+        private void btnSupExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            accounts = null;
+        } 
+#endregion
+        
+#endregion
+
+
+#region Customer functions here
+
+        private void tabCustomer_Enter(object sender, EventArgs e)
+        {
+            accounts.Text = "Customer Details";
+        }
+
+        private void txtCusCode_Enter(object sender, EventArgs e)
+        {
+            if (search.Code != null && search.Code != "")
+            {
+                txtCusCode.Text = search.Code.Trim();
+                txtCusDescript.Text = search.Descript.Trim();
+            }
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+        }
+
+        private void btnCusSearch_Click(object sender, EventArgs e)
+        {
+            if (search.IsDisposed){
+                search = new frmSearch();
+            }
+            strSqlString = "SELECT Cust_Code As [Customer Code],Cust_Name As [Customer Name] FROM Customer "; 
+            strDatasetName = "dsCustomer";
+
+            objCustomer.SqlStatement = strSqlString;
+            objCustomer.DataSetName = strDatasetName;
+            objCustomer.GetCustomerDetails();
+            search.dgSearch.DataSource = objCustomer.GetCustomerDataset.Tables[strDatasetName];
+            search.prop_Focus = txtCusCode;
+            search.Cont_Descript = txtCusDescript;
+            search.Show();
+        }
+
+        #region ToolStrip Buttons
+        private void btnCusSave_Click(object sender, EventArgs e)
+        {
+            Err = 0;
+            if ((txtCusCode.Text == string.Empty) || (txtCusDescript.Text == string.Empty))
+            {
+                Err++;
+            }
+            if (!IsNumeric(txtCusCreditLimit.Text))
+            {
+                Err++;
+            }
+
+            if (clsValidation.isNumeric(txtCusDiscount.Text, System.Globalization.NumberStyles.Float) != true || float.Parse(txtCusDiscount.Text) > 100)
+            {
+                MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCusDiscount.Text = "0";
+                return;
+            }
+
+            if (clsValidation.isNumeric(txtCusCreditLimit.Text, System.Globalization.NumberStyles.Float) != true)
+            {
+                MessageBox.Show("Invalid Credit Limit. Please Enter Valid Credit Limit", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCusCreditLimit.Text = "0";
+                return;
+            }
+
+            if (clsValidation.isNumeric(txtCusCreditPeriod.Text, System.Globalization.NumberStyles.Float) != true )
+            {
+                MessageBox.Show("Invalid Credit Period. Please Enter Valid Credit Period", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCusCreditPeriod.Text = "0";
+                return;
+            }
+
+            this.validator(tabCustomer);
+
+            if (Err == 0)
+            {
+                objCustomer.ErrorCode = 0;
+                objCustomer.Cust_Code = txtCusCode.Text.Trim().ToUpper();
+                objCustomer.Cust_Name = txtCusDescript.Text.Trim().ToUpper();
+                objCustomer.CusAddress1 = txtCusAdd1.Text.Trim().ToUpper();
+                objCustomer.CusAddress2 = txtCusAdd2.Text.Trim().ToUpper();
+                objCustomer.CusAddress3 = txtcusAdd3.Text.Trim().ToUpper();
+                objCustomer.CusAddress4 = txtCusCity.Text.Trim().ToUpper();
+                objCustomer.CusCountry = txtCusCountry.Text.Trim().ToUpper();
+                objCustomer.CusContact_Prsn = txtCusContPrsn.Text.Trim().ToUpper();
+                objCustomer.CusTel = txtCusTel.Text.Trim().ToUpper();
+                objCustomer.CusFax = txtCusFax.Text.Trim().ToUpper();
+                objCustomer.CusEmail = txtCusEmail.Text.Trim();
+                objCustomer.CusCredit_Limit = decimal.Parse( txtCusCreditLimit.Text);
+                objCustomer.CusNIC = txtcusNic.Text.Trim().ToUpper();
+                objCustomer.CusCredit_Period = int.Parse(txtCusCreditPeriod.Text);
+                objCustomer.CusDiscount = decimal.Parse(txtCusDiscount.Text);
+
+                //clear all the properties used in search form
+                search.Code = string.Empty;
+                search.Descript = string.Empty;
+                search.prop_Focus = null;
+                search.prop_Name = string.Empty;
+
+                objCustomer.CustomerUpdate();
+
+                txtCusCode.Text = string.Empty;
+                txtCusDescript.Text = string.Empty;
+                txtCusAdd1.Text = string.Empty;
+                txtCusAdd2.Text = string.Empty;
+                txtcusAdd3.Text = string.Empty;
+                txtCusCity.Text = string.Empty;
+                txtCusCountry.Text = string.Empty;
+                txtCusContPrsn.Text = string.Empty;
+                txtCusTel.Text = string.Empty;
+                txtCusFax.Text = string.Empty;
+                txtCusEmail.Text = string.Empty;
+                txtCusCreditLimit.Text = string.Empty;
+                txtcusNic.Text = string.Empty;
+
+                clsClear.getclear().clearfeilds(tabCustomer, txtCusCode);
+            }
+        }
+
+        private void btnCusDelete_Click(object sender, EventArgs e)
+        {
+            if (txtCusCode.Text != string.Empty) { 
+            if ((MessageBox.Show("Do you really want to delete the record ?  " + txtCusCode.Text + "", "Customer Details",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question))== DialogResult .Yes) {
+
+                objCustomer.Cust_Code = txtCusCode.Text.Trim().ToUpper();
+                objCustomer.CustomerDelete();
+                clsClear.getclear().clearfeilds(tabCustomer, txtCusCode);
+            }
+            
+            }
+        }
+
+        private void btnCusClear_Click(object sender, EventArgs e)
+        {
+            search.Code = string.Empty;
+            search.Descript = string.Empty;
+            txtCusCode.Text = string.Empty;
+            txtCusDescript.Text = string.Empty;
+            txtCusAdd1.Text = string.Empty;
+            txtCusAdd2.Text = string.Empty;
+            txtcusAdd3.Text = string.Empty;
+            txtCusCity.Text = string.Empty;
+            txtCusCountry.Text = string.Empty;
+            txtCusContPrsn.Text = string.Empty;
+            txtCusTel.Text = string.Empty;
+            txtCusFax.Text = string.Empty;
+            txtCusEmail.Text = string.Empty;
+            txtCusCreditLimit.Text = string.Empty;
+            txtCusCreditPeriod.Text = string.Empty;
+            txtCusDiscount.Text = string.Empty;
+            txtcusNic.Text = string.Empty;
+
+            clsClear.getclear().clearfeilds(tabCustomer, txtCusDescript);
+        }
+
+        private void btnCusExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            accounts = null;
+        }
+
+        #endregion
+
+#endregion
+
+
+        #region Validate whether credit limit contains non numerical character
+        internal static bool IsNumeric(string cnt)
+        {
+            double d;
+            try
+            {
+                d = Double.Parse(cnt);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region Validate whether textfeilds contains ' character
+        public void validator(Control cnt)
+        {
+
+            for (int i = 0; i < cnt.Controls.Count; i++)
+            {
+                if ((cnt.Controls[i].GetType() == typeof(TextBox)) && (cnt.Controls[i].Text.Contains("'")))
+                {
+                    MessageBox.Show("Invalid characters in Textfeilds Please check the characters entered.", "Invalid character (') found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    cnt.Controls[i].Text = string.Empty;
+                    cnt.Controls[i].Focus();
+
+                    Err++;
+
+                }
+            }
+        }
+
+
+        #endregion 
+
+        private void frmAccounts_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            accounts = null;
+        }
+
+        private void tabSupplier_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCusCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtCusCode.Text.Trim() != String.Empty)
+                {
+                    objCustomer.SqlStatement = "SELECT Cust_Code, Cust_Name, Area_Code, Address1, Address2, Address3, Address4, Country, Tel, Fax, Email, DateOfBirth, NIC, Age, RemindDate, Credit_Period, Credit_Limit, Contact_Prsn, Discount FROM customer where Cust_Code = '"+ txtCusCode.Text.Trim().ToUpper() +"'";
+                    objCustomer.ReadCustomerDetails();
+                    if (objCustomer.RecordFound == true)
+                    {
+                        txtCusCode.Text = objCustomer.Cust_Code ;
+                        txtCusDescript.Text = objCustomer.Cust_Name ;
+                        txtCusAdd1.Text = objCustomer.CusAddress1 ;
+                        txtCusAdd2.Text = objCustomer.CusAddress2 ;
+                        txtcusAdd3.Text = objCustomer.CusAddress3 ;
+                        txtCusCity.Text = objCustomer.CusAddress4;
+                        txtCusCountry.Text = objCustomer.CusCountry;
+                        txtCusContPrsn.Text = objCustomer.CusContact_Prsn ;
+                        txtCusTel.Text = objCustomer.CusTel ;
+                        txtCusFax.Text = objCustomer.CusFax;
+                        txtCusEmail.Text = objCustomer.CusEmail;
+                        txtCusCreditLimit.Text = objCustomer.CusCredit_Limit.ToString();
+                        txtcusNic.Text = objCustomer.CusNIC;
+                        txtCusCreditPeriod.Text  = objCustomer.CusCredit_Period.ToString();
+                        txtCusDiscount.Text = objCustomer.CusDiscount.ToString();
+                        txtCusDescript.Focus();
+                    }
+                    else
+                    {
+                        txtCusDescript.Focus();
+                    }
+                }
+            }
+        }
+
+        private void txtCusDescript_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusAdd1.Focus();
+            }
+        }
+
+        private void txtCusAdd2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtcusAdd3.Focus();
+            }
+        }
+
+        private void txtCusAdd1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusAdd2.Focus();
+            }
+        }
+
+        private void txtcusAdd3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusCity.Focus();
+            }
+        }
+
+        private void txtCusCity_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusCountry.Focus();
+            }
+        }
+
+        private void txtCusCountry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusTel.Focus();
+            }
+        }
+
+        private void txtCusContPrsn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusCreditPeriod.Focus();
+            }
+        }
+
+        private void txtCusTel_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusFax.Focus();
+            }
+        }
+
+        private void txtCusFax_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusEmail.Focus();
+            }
+        }
+
+        private void txtCusEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtcusNic.Focus();
+            }
+        }
+
+        private void txtcusNic_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusContPrsn.Focus();
+            }
+        }
+
+        private void txtcusRemind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtCusCreditLimit.Focus();
+            }
+        }
+
+        private void txtCusCreditLimit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (clsValidation.isNumeric(txtCusCreditLimit.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtCusCreditLimit.Text) >= 0)
+                {
+                    txtCusDiscount.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Credit Limit. Please Enter Valid Credit Limit", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCusCreditLimit.Text = "0";
+                    return;
+                }
+            }
+        }
+
+        private void txtSupCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtSupCode.Text.Trim() != String.Empty)
+                {
+                    ObjSupplier.SqlStatement = "SELECT Supp_Code, Supp_Name, Address1, Address2, Address3, Address4, Tel, Fax, Email, Status, Contact_Prsn, ISNULL(Credit_Period, 0) Credit_Period FROM SUPPLIER where Supp_Code = '" + txtSupCode.Text.Trim().ToUpper() + "'";
+                    ObjSupplier.ReadSupplierDetails();
+                    if (ObjSupplier.RecordFound == true)
+                    {
+                        txtSupCode.Text = ObjSupplier.Supp_Code;
+                        txtSupDescript.Text = ObjSupplier.Supp_Name;
+                        txtSupAdd1.Text = ObjSupplier.SuppAddress1;
+                        txtSupAdd2.Text = ObjSupplier.SuppAddress2;
+                        txtSupAdd3.Text = ObjSupplier.SuppAddress3;
+                        txtSupCity.Text = ObjSupplier.SuppAddress4;
+
+                        txtSupTelphone.Text = ObjSupplier.SuppTel;
+                        txtSupFax.Text = ObjSupplier.SuppFax;
+                        txtSupEmail.Text = ObjSupplier.SuppEmail;
+                        txtSupContPersn.Text = ObjSupplier.SuppContact_Prsn;
+                        txtSupCreditPeriod.Text = ObjSupplier.SuppCredit_Period.ToString();
+                        txtSupDescript.Focus();
+                    }
+                    else
+                    {
+                        txtSupDescript.Focus();
+                    }
+                }
+            }
+        }
+        
+        private void txtSupDescript_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupAdd1.Focus();
+            }
+        }
+
+        private void txtSupAdd1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupAdd2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupAdd3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupCity_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupTelphone_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupFax_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupEmail_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupContPersn_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupAdd1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupAdd2.Focus();
+            }
+        }
+
+        private void txtSupContPersn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupCreditPeriod.Focus();
+            }
+        }
+
+        private void txtSupEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupContPersn.Focus();
+            }
+        }
+
+        private void txtSupFax_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupEmail.Focus();
+            }
+        }
+
+        private void txtSupTelphone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupFax.Focus();
+            }
+        }
+
+        private void txtSupCity_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupTelphone.Focus();
+            }
+        }
+
+        private void txtSupAdd3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupCity.Focus();
+            }
+        }
+
+        private void txtSupAdd2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSupAdd3.Focus();
+            }
+        }
+
+        private void btnSupExit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            accounts = null;
+        }
+
+        private void txtCusDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (clsValidation.isNumeric(txtCusDiscount.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtCusDiscount.Text) >= 0 && float.Parse(txtCusDiscount.Text) < 100 )
+                {
+                    btnCusSave.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCusDiscount.Text = "0";
+                    return;
+                }
+            }
+        }
+
+        private void txtCusCreditPeriod_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (clsValidation.isNumeric(txtCusCreditPeriod.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtCusCreditPeriod.Text) >= 0)
+                {
+                    txtCusCreditLimit.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Credit Period. Please Enter Valid Credit Period", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCusCreditPeriod.Text = "0";
+                    return;
+                }
+            }
+        }
+
+        private void txtSupCreditPeriod_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (clsValidation.isNumeric(txtSupCreditPeriod.Text, System.Globalization.NumberStyles.Float) == true && float.Parse(txtSupCreditPeriod.Text) >= 0)
+                {
+                    btnSupSave.Select();
+                }
+                else
+                {
+                    txtSupCreditPeriod.Text = "0";
+                    MessageBox.Show("Invalid Credit Period. Please Enter Valid Credit Period", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+        }
+
+
+    }
+}

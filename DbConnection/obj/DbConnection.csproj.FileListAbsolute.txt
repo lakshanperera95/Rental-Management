@@ -1,0 +1,63 @@
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Vi John -\Super Seller Standerd\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Vi John -\Super Seller Standerd\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\Other\Vi John -\Super Seller Standerd\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\Other\Nimaya Wrking\Super Seller Standerd\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.pdb
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\obj\Release\DbConnection.dll
+D:\SOURCE-CODES\Chathuka\Super Seller Standerd\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\INV\Shangrill\Super Seller Standerd\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrill\Super Seller Standerd\DbConnection\obj\Debug\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\DbConnection\bin\Debug\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\DbConnection\bin\Debug\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Debug\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Release\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Release\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\Inventory\Sangrilla Common\DbConnection\obj\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\ResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\DbConnection.pdb

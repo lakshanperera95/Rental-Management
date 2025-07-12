@@ -1,0 +1,324 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.IO;
+using System.Windows.Forms;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Globalization;
+using clsLibrary;
+
+namespace Inventory
+{
+	public partial class Login : Form
+	{
+
+        public static string username;
+        public static string location;
+        DateTime dtCurrentDate = DateTime.Now ;
+        clsUserProfile objUserProfile = new clsUserProfile();
+
+		private string selectquery;
+        static frmSearch search = new frmSearch ();
+ 
+		public Login()
+		{
+			InitializeComponent();
+            txtPassword.PasswordChar = (char)0x25CF; 
+		}
+
+		private void btnExit_Click(object sender, EventArgs e)
+		{
+            //MainClass.login.Close();
+            Application.Exit();
+		}
+
+		private void btnLocation_Click(object sender, EventArgs e)
+		{
+
+         
+		}
+
+        private void txtLocation_Leave(object sender, EventArgs e)
+        {
+         
+            if (search.Descript != "")
+            {
+                txtLocation.Text = search.Descript;
+                search.Hide();
+            }
+        }
+           
+        private void btnLocation_Click_1(object sender, EventArgs e)
+        {
+            MainClass.getmdi().Cursor = Cursors.WaitCursor;
+            if (search.IsDisposed)
+            {
+                search = new frmSearch();
+            }
+
+            selectquery = "SELECT Loca AS Code, Loca_Descrip AS Description FROM Location ORDER BY Loca";
+
+            search.dgSearch.DataSource = clsRetriveGenaral.combofill1(selectquery).Tables["Table"];
+            search.Show();
+            search.prop_Focus = txtLocation;
+            txtLocation.Text = search.Descript; 
+        }
+
+        private void btnLogin_Click_1(object sender, EventArgs e)
+        {
+            this.mLogin();
+        }
+
+        private void txtLocation_Enter_1(object sender, EventArgs e)
+        {
+            txtLocation.Text = search.Descript;
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                this.mLogin();
+            }
+            if (e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void mLogin() {
+
+            string query = "SELECT Id_No, UserRole_Id FROM Employee WHERE(Emp_Name = '" + txtUsername.Text + "') AND (Pass_Word = '" + txtPassword.Text + "') AND (Loca = '" + search.Code + "') AND Acc_Desable = 'F'";
+            if ((clsLogin.PasswordValidator(query)) != "")
+            {
+                username = txtUsername.Text;
+                location = txtLocation.Text;
+
+                LoginManager.UserName = txtUsername.Text;
+                LoginManager.Location = txtLocation.Text;
+                LoginManager.LocaCode = search.Code;
+
+                MainClass.mdi.mnuMain.Enabled = true;
+
+                //menu visible true for user
+                //this.MenuVisibleTrueFalse();
+                //
+
+                MainClass.mdi.Text = txtUsername.Text.ToUpper()  + " Logged On to : " + txtLocation.Text.ToUpper() + " at : " + DateTime.Now;
+                //Write to Log
+                FileStream fileStream = new FileStream(@"..\LoginInfo.txt", FileMode.Append);
+                StreamWriter m_streamWriter = new StreamWriter(fileStream);
+                try
+                {
+                    m_streamWriter.WriteLine("'Location :' " + txtLocation.Text + " 'User Name :' " + txtUsername.Text + " 'Date/Time :' " + string.Format("{0:dd/MM/yyyy HH:mm:ss}", dtCurrentDate));
+                    // read from file or write to file
+                }
+                finally
+                {
+                    m_streamWriter.Close();
+                    fileStream.Close();
+                }
+
+                if (objUserProfile.ChgPwdNxtLogin == "T")
+                {
+                    if (frmChangePassword.GetChangePassword == null)
+                    {
+                        frmChangePassword.GetChangePassword = new frmChangePassword();
+                        //frmChangePassword.GetChangePassword.MdiParent = MDI;
+                        frmChangePassword.GetChangePassword.Show();
+                    }
+                    else
+                    {
+                        frmChangePassword.GetChangePassword.Focus();
+                    }
+                }
+                this.Hide();
+
+                search.Descript = string.Empty;
+                search.Code = string.Empty;
+                search.prop_Focus = null;
+
+            }
+            else
+            {
+                MessageBox.Show("Invalid Username or Password or Access Denied !", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void Login_MouseClick(object sender, MouseEventArgs e)
+        {
+            txtLocation.Focus();
+        }
+
+        private void txtLocation_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            Login.ActiveForm.KeyPreview = true;
+        }
+
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == (char)27)
+            {
+                this.Close();
+            }
+        }
+
+        private void MenuVisibleTrueFalse()
+        {
+            objUserProfile.SqlStatement = "select tbUserRoleDetails.*, Employee.UserCannotChgPwd, Employee.chgPwdNxtLogin from tbUserRoleDetails Inner join Employee on Employee.UserRole_Id = tbUserRoleDetails.UserRole_Id Where Employee.Emp_Name = '" + LoginManager.UserName + "' and Employee.Loca = '" + LoginManager.LocaCode + "'";
+            objUserProfile.ReadProfileDetails();
+
+            if (objUserProfile.MSTDT == "T")
+            {
+                MainClass.mdi.mnuMain.Items["masterDetailsToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["masterDetailsToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.PUR == "T")
+            {
+                MainClass.mdi.mnuMain.Items["purchasingToolStripMenuItem"].Enabled = true;
+                MainClass.mdi.mnuMain.Items["purchaseOrderDetailsToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["purchasingToolStripMenuItem"].Visible = false;
+                MainClass.mdi.mnuMain.Items["purchaseOrderDetailsToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.SALE == "T")
+            {
+                MainClass.mdi.mnuMain.Items["salesReportToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["salesReportToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.PMT == "T")
+            {
+                MainClass.mdi.mnuMain.Items["paymentsToolStripMenuItem"].Visible = true;
+                MainClass.mdi.mnuMain.Items["paymentsDetailsToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["paymentsToolStripMenuItem"].Visible = false;
+                MainClass.mdi.mnuMain.Items["paymentsDetailsToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.STAD == "T")
+            {
+                MainClass.mdi.mnuMain.Items["stockAdjustmentToolStripMenuItem"].Visible = true;
+                MainClass.mdi.mnuMain.Items["stockAdjustmentDetailsToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["stockAdjustmentToolStripMenuItem"].Enabled = false;
+                MainClass.mdi.mnuMain.Items["stockAdjustmentDetailsToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.REPSTBAL == "T")
+            {
+                MainClass.mdi.mnuMain.Items["StockBalanceToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["StockBalanceToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.REPSTVAL == "T")
+            {
+                MainClass.mdi.mnuMain.Items["stockValuationReportToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["stockValuationReportToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.REPSTVAL == "T")
+            {
+                MainClass.mdi.mnuMain.Items["stockValuationReportToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["stockValuationReportToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.REPPUR == "T")
+            {
+                MainClass.mdi.mnuMain.Items["purchasingReportToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["purchasingReportToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.REPGP == "T")
+            {
+                MainClass.mdi.mnuMain.Items["grossProfitReportToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["grossProfitReportToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.REPANY == "T")
+            {
+                MainClass.mdi.mnuMain.Items["analyseReportToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["analyseReportToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.SYSTL == "T")
+            {
+                MainClass.mdi.mnuMain.Items["systemToolsToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["systemToolsToolStripMenuItem"].Visible = false;
+            }
+
+            if (objUserProfile.USER == "T")
+            {
+                MainClass.mdi.mnuMain.Items["userProfileToolStripMenuItem"].Visible = true;
+            }
+            else
+            {
+                MainClass.mdi.mnuMain.Items["userProfileToolStripMenuItem"].Visible = false;
+            }
+            //child menu enable/desable
+
+
+            //***************
+        }
+	}
+}

@@ -1,0 +1,11 @@
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Release\DbConnection.csprojResolveAssemblyReference.cache
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Release\DbConnection.dll
+D:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Release\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\DbConnection.pdb
+\\192.168.1.105\d$\Source Code\Inventory\Shangrilla Systems\DbConnection\bin\Debug\Newtonsoft.Json.dll
+\\192.168.1.105\d$\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Release\DbConnection.csprojResolveAssemblyReference.cache
+\\192.168.1.105\d$\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Release\DbConnection.dll
+\\192.168.1.105\d$\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Release\DbConnection.pdb

@@ -1,0 +1,102 @@
+namespace Inventory
+{
+    partial class frmDayEndProcess
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnDayEnd = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.Location = new System.Drawing.Point(0, 37);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(454, 89);
+            this.toolStrip1.TabIndex = 142;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnDayEnd
+            // 
+            this.btnDayEnd.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnDayEnd.FlatAppearance.BorderSize = 0;
+            this.btnDayEnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDayEnd.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDayEnd.Location = new System.Drawing.Point(57, 53);
+            this.btnDayEnd.Name = "btnDayEnd";
+            this.btnDayEnd.Size = new System.Drawing.Size(119, 54);
+            this.btnDayEnd.TabIndex = 145;
+            this.btnDayEnd.Text = "Day End";
+            this.btnDayEnd.UseVisualStyleBackColor = false;
+            this.btnDayEnd.Click += new System.EventHandler(this.btnDayEnd_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(262, 53);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(135, 54);
+            this.btnClose.TabIndex = 144;
+            this.btnClose.Text = "Exit";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // frmDayEndProcess
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(454, 126);
+            this.Controls.Add(this.btnDayEnd);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmDayEndProcess";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DayEnd Process";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDayEndProcess_FormClosed);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.Button btnDayEnd;
+        private System.Windows.Forms.Button btnClose;
+    }
+}
