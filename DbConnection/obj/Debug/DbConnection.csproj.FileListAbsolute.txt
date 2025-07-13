@@ -36,3 +36,10 @@ H:\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\DbConnection.
 \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\DbConnection.csproj.CopyComplete
 \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\DbConnection.dll
 \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\DbConnection\obj\Debug\DbConnection.pdb
+D:\Source Code\Rental-Management\DbConnection\bin\Debug\DbConnection.dll
+D:\Source Code\Rental-Management\DbConnection\bin\Debug\DbConnection.pdb
+D:\Source Code\Rental-Management\DbConnection\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Rental-Management\DbConnection\obj\Debug\DbConnection.csprojAssemblyReference.cache
+D:\Source Code\Rental-Management\DbConnection\obj\Debug\DbConnection.csproj.CopyComplete
+D:\Source Code\Rental-Management\DbConnection\obj\Debug\DbConnection.dll
+D:\Source Code\Rental-Management\DbConnection\obj\Debug\DbConnection.pdb

@@ -7571,6 +7571,20 @@ namespace Inventory
             }
         }
 
+        private void CheqPrintToolStripMenuItemTool_Click(object sender, EventArgs e)
+        {
+            if (frmChequePrint._objCP == null)
+            {
+                frmChequePrint._objCP = new frmChequePrint();
+                frmChequePrint._objCP.MdiParent = this;
+                frmChequePrint._objCP.Show();
+            }
+            else
+            {
+                frmSpaVoucher.GetGiftVoucher.Focus();
+            }
+        }
+
         //private void specialPromotionSalesReportToolStripMenuItem1_Click(object sender, EventArgs e)
         //{
         //    if (frmSalesInquary.GetSalesInquary == null)

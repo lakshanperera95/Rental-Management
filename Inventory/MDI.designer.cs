@@ -459,6 +459,7 @@ namespace Inventory
             this.cashINOUTToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
             this.barcodePrintToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
             this.dailySalesCollectionSummeryToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
+            this.CheqPrintToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -500,7 +501,7 @@ namespace Inventory
             this.mnuMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(1040, 23);
+            this.mnuMain.Size = new System.Drawing.Size(1339, 23);
             this.mnuMain.TabIndex = 1;
             this.mnuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMain_ItemClicked);
             // 
@@ -4297,11 +4298,12 @@ namespace Inventory
             this.cashDenominationToolStripMenuItem2Tool,
             this.cashINOUTToolStripMenuItemTool,
             this.barcodePrintToolStripMenuItemTool,
-            this.dailySalesCollectionSummeryToolStripMenuItemTool});
+            this.dailySalesCollectionSummeryToolStripMenuItemTool,
+            this.CheqPrintToolStripMenuItemTool});
             this.toolStrip1.Location = new System.Drawing.Point(0, 23);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(1040, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1339, 55);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -4529,7 +4531,7 @@ namespace Inventory
             this.cashINOUTToolStripMenuItemTool.Image = global::Inventory.Properties.Resources._3;
             this.cashINOUTToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cashINOUTToolStripMenuItemTool.Name = "cashINOUTToolStripMenuItemTool";
-            this.cashINOUTToolStripMenuItemTool.Size = new System.Drawing.Size(78, 51);
+            this.cashINOUTToolStripMenuItemTool.Size = new System.Drawing.Size(78, 52);
             this.cashINOUTToolStripMenuItemTool.Tag = "M03M02M08";
             this.cashINOUTToolStripMenuItemTool.Text = "Cash IN OUT";
             this.cashINOUTToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4552,11 +4554,24 @@ namespace Inventory
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Image = global::Inventory.Properties.Resources.User_Role;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Name = "dailySalesCollectionSummeryToolStripMenuItemTool";
-            this.dailySalesCollectionSummeryToolStripMenuItemTool.Size = new System.Drawing.Size(108, 51);
+            this.dailySalesCollectionSummeryToolStripMenuItemTool.Size = new System.Drawing.Size(108, 52);
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Text = "Day End Summery";
             this.dailySalesCollectionSummeryToolStripMenuItemTool.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Click += new System.EventHandler(this.toolStripdailySalesSummary_Click);
+            // 
+            // CheqPrintToolStripMenuItemTool
+            // 
+            this.CheqPrintToolStripMenuItemTool.AutoSize = false;
+            this.CheqPrintToolStripMenuItemTool.Image = global::Inventory.Properties.Resources.chequebook;
+            this.CheqPrintToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CheqPrintToolStripMenuItemTool.Name = "CheqPrintToolStripMenuItemTool";
+            this.CheqPrintToolStripMenuItemTool.Size = new System.Drawing.Size(61, 52);
+            this.CheqPrintToolStripMenuItemTool.Tag = "M12M01";
+            this.CheqPrintToolStripMenuItemTool.Text = "Cheq Print";
+            this.CheqPrintToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.CheqPrintToolStripMenuItemTool.ToolTipText = "Cheq Print";
+            this.CheqPrintToolStripMenuItemTool.Click += new System.EventHandler(this.CheqPrintToolStripMenuItemTool_Click);
             // 
             // contextMenuStrip1
             // 
@@ -4609,7 +4624,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1040, 569);
+            this.ClientSize = new System.Drawing.Size(1339, 569);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mnuMain);
@@ -4620,7 +4635,7 @@ namespace Inventory
             this.MainMenuStrip = this.mnuMain;
             this.Name = "MDI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Merit Plus Super Seller";
+            this.Text = "Inventry Management System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MDI_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MDI_FormClosed);
@@ -5077,5 +5092,6 @@ namespace Inventory
         private System.Windows.Forms.ToolStripMenuItem productStockIssueRecievedDetailsToolStripMenuItem;
         public System.Windows.Forms.ToolStripButton quotationToolStripMenuItemTool;
         private System.Windows.Forms.ToolStripMenuItem spaVouchersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton CheqPrintToolStripMenuItemTool;
     }
 }

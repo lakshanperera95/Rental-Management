@@ -111,3 +111,12 @@ H:\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\clsLibrary.pdb
 \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\clsLibrary.csproj.CopyComplete
 \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\clsLibrary.dll
 \\192.168.1.105\h$\Source Code\Inventory\Shangrilla Systems\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\Source Code\Rental-Management\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Source Code\Rental-Management\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Source Code\Rental-Management\clsLibrary\bin\Debug\DbConnection.dll
+D:\Source Code\Rental-Management\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Source Code\Rental-Management\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.csprojAssemblyReference.cache
+D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.csproj.CopyComplete
+D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.pdb
