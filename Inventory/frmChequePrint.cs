@@ -8,10 +8,12 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Globalization;
 using System.Drawing.Drawing2D;
-using System.IO;
+
+//using Onimta_AccClassLibrary;
 using clsLibrary;
 
 namespace Inventory
+//namespace Onimta_Accounting
 {
     public partial class frmChequePrint : Form
     {
@@ -19,75 +21,22 @@ namespace Inventory
         {
             InitializeComponent();
 
-            try
-            {
-                dt = common.getChequePrint_Settings();
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    foreach (DataRow Row in dt.Rows)
-                    {
-                        Control Con = pnlCheque.Controls.Find(Row["FieldName"].ToString(), true)[0];
-                        Con.Location = new Point(int.Parse(Row["x"].ToString()), int.Parse(Row["y"].ToString()));
-                    }
-                }
-
-                dtNameProfile = common.getChequePrint_NameProfiles();
-                cmbNameProfile.DataSource = null;
-                cmbNameProfile.DataSource = dtNameProfile;
-                cmbNameProfile.DisplayMember = "CompanyType";
-                cmbNameProfile.ValueMember = "CompanyName";
-                cmbNameProfile.Refresh();
-
-                if (LoginManager.DupliCheqPrint == "T")
-                {
-                    btnLoadPrintedCheqDetails.Visible = true;
-                    dtpDate.Enabled = true;
-                    txtAmount.Enabled = true;
-                    txtPay.Enabled = true;
-                }
-                else
-                {
-                    btnLoadPrintedCheqDetails.Visible = false;
-                    dtpDate.Enabled = false;
-                    txtAmount.Enabled = false;
-                    txtPay.Enabled = false;
-                }
-
-                if (LoginManager.CheqPrSettings == "T")
-                {
-                    //cmbField.Enabled = true;
-                    cmbNameProfile.Enabled = true;
-                    chkHide.Enabled = true;
-                    txtX.Enabled = true;
-                    txtY.Enabled = true;
-                    txtPageX.Enabled = true;
-                    txtPageY.Enabled = true;
-                    btnSaveBankFormat.Enabled = true;
-                    btnDefault.Enabled = true;
-                }
-                else
-                {
-                    //cmbField.Enabled = false;
-                    cmbNameProfile.Enabled = false;
-                    chkHide.Enabled = false;
-                    txtX.Enabled = false;
-                    txtY.Enabled = false;
-                    txtPageX.Enabled = false;
-                    txtPageY.Enabled = false;
-                    btnSaveBankFormat.Enabled = false;
-                    btnDefault.Enabled = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
-            }
+            DataSet dsCPS = new DataSet();
             
-
+            dsCPS = objChqPrint.getDataset("SELECT x, y, FieldName FROM tb_Settings_CheqPrint WHERE Standerd=0", "table1");
+           
+            if ( dt!=null && dt.Rows.Count>0)
+            {
+                foreach (DataRow Row in dt.Rows)
+                {
+                    Control Con = pnlCheque.Controls.Find(Row["FieldName"].ToString(), true)[0];
+                    Con.Location = new Point(int.Parse(Row["x"].ToString()), int.Parse(Row["y"].ToString()));
+                }
+            }
         }
 
         private DataSet dsBankName;
-        private frmSearch search = new frmSearch();
+       // private frmSearch search = new frmSearch();
 
         private static frmChequePrint objCP;
         public static frmChequePrint _objCP
@@ -96,11 +45,11 @@ namespace Inventory
             set { objCP = value; }
         }
 
-        clsChequePrint common = new clsChequePrint();
+        clsCommon objChqPrint = new clsCommon();
+        //clsChequePrint common = new clsChequePrint();
         DataTable dt = new DataTable();
         DataTable dt2 = new DataTable();
         DataTable dt3 = new DataTable();
-        DataTable dtNameProfile = new DataTable();
         public int PageXX = 0;
         public int PageYY = 0;
 
@@ -110,55 +59,36 @@ namespace Inventory
         {
             try
             {
-                if (lblDocNo.Text!="" && lblCheqDate.Text.Trim() != "" && lblCheqNo.Text.Trim() != "" && lblBank.Text.Trim() != "")
+                PrintPreviewDialog previewdlg = new PrintPreviewDialog();
+                printDocument1.DefaultPageSettings.Landscape = true;
+                printDocument1.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
+                printDocument1.DefaultPageSettings.PaperSize = new PaperSize("A4", 827, 1169);
+                previewdlg.Document = printDocument1;
+                ((Form)previewdlg).WindowState = FormWindowState.Maximized;
+
+                
+                //string SqlStatement = "DELETE FROM tb_Settings_CheqPrint WHERE Standerd=0;";
+                //objChqPrint.ReadDetails(SqlStatement);
+
+                //common.DeleteChequePrint_Settings();
+
+                foreach (Control CON in pnlCheque.Controls)
                 {
-                    if (MessageBox.Show("You Are Going To Print The Cheque No ''" + lblCheqNo.Text.Trim() + "'' . Do you Want To Continue ?",this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        int PreCount = common.getChequePrint_Count(lblDocNo.Text, lblCheqNo.Text.Trim());
-                        if (PreCount > 0)
-                        {
-                            if (LoginManager.DupliCheqPrint=="T")
-                            {
-                                if (MessageBox.Show("Cheque No ''" + lblCheqNo.Text.Trim() + "'' Has Been Printed " + PreCount + " Times. Do You Want To Continue?",this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                                {
-                                    return;
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Cheque No ''" + lblCheqNo.Text.Trim() + "'' Has Been Printed " + PreCount + " Times. Need Permission To Continue?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                return;
-                            }
-                        }
-                        
-                        printDocument1.DefaultPageSettings.Landscape = true;
-                        printDocument1.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
-                        //printDocument1.DefaultPageSettings.PaperSize = new PaperSize("XXX", 380, 725);
-                        printDocument1.Print();
+                    //string SqlStatement = "INSERT INTO tb_Settings_CheqPrint (x, y, FieldName, Standerd) VALUES (" + CON.Location.X + ", " + CON.Location.Y + ", '" + CON.Name + "', 0)";
+                    //objChqPrint.ReadDetails(SqlStatement);
 
-                        common.ChequePrint_Apply(lblDocNo.Text.Trim(), "PMT", cmbBankName.SelectedValue.ToString(), lblCheqNo.Text.Trim(), common.SuppCode);
+                    string SqlStatement = "DELETE FROM tb_Settings_CheqPrint WHERE FieldName='" + CON.Name + "' AND BankFormat='" + cmbBankName.Text.ToString() + "' AND Standerd=0";
+                    objChqPrint.getDataReader(SqlStatement);
 
-                        btnClear.PerformClick();
-                        txtSuppCode.Text = txtSuppName.Text = "";
-                        dataGridViewPendingPayments.DataSource = null;
+                    SqlStatement = " INSERT INTO tb_Settings_CheqPrint (x, y, FieldName, Standerd, BankFormat, PageX, PageY, Hide) VALUES (" + CON.Location.X + ", " + CON.Location.Y + ", '" + CON.Name + "', 0, '" + cmbBankName.Text.ToString() + "', " + Convert.ToInt16(txtPageX.Value) + ", " + Convert.ToInt16(txtPageY.Value) + ", " + Convert.ToInt16(!CON.Visible) + ")";
+                    objChqPrint.getDataReader(SqlStatement);
 
-                    }
+                    //common.UpdateChequePrint_Settings(CON.Location.X, CON.Location.Y, CON.Name);
                 }
-                else
-                {
-                    PrintPreviewDialog previewdlg = new PrintPreviewDialog();
-                    printDocument1.DefaultPageSettings.Landscape = true;
-                    printDocument1.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
-                    //printDocument1.DefaultPageSettings.PaperSize = new PaperSize("XXX", 380, 725);
-                    previewdlg.Document = printDocument1;
-                    ((Form)previewdlg).WindowState = FormWindowState.Maximized;
 
-                    previewdlg.ShowDialog();
-                }
+                previewdlg.ShowDialog();
+                btnPrint.Enabled = false;
+                btnClear.PerformClick();
             }
             catch (Exception ex)
             {
@@ -185,22 +115,26 @@ namespace Inventory
 
             if (chkPayeeOnly.Checked)
             {
-                
-                PictureBox pict = (PictureBox)lblImgPO;
+                PictureBox pict = (PictureBox)pictureBox1;
                 pict.SizeMode = PictureBoxSizeMode.Zoom;
                 Bitmap bm = new Bitmap(pict.ClientSize.Width, pict.ClientSize.Height);
                 pict.DrawToBitmap(bm, pict.ClientRectangle);
                 //pict.Location = new Point(pictureBox1.Location.X + PageXX, pictureBox1.Location.Y + PageYY);
                 e.Graphics.DrawImage(bm, pict.Bounds.X + PageXX, pict.Bounds.Y + PageYY, pict.Bounds.Width, pict.Bounds.Height);
 
-                //e.Graphics.ResetTransform();
-                //e.Graphics.DrawLine(new Pen(Brushes.Black), 0 + PageXX, 75 + PageYY, 75 + PageXX, 0 + PageYY);
-                //e.Graphics.ResetTransform();
-                //e.Graphics.DrawLine(new Pen(Brushes.Black), 0 + PageXX, 110 + PageYY, 110 + PageXX, 0 + PageYY);
-
+                e.Graphics.ResetTransform();
+                e.Graphics.DrawLine(new Pen(Brushes.Black), 0 + PageXX, 75 + PageYY, 75 + PageXX, 0 + PageYY);
+                e.Graphics.ResetTransform();
+                e.Graphics.DrawLine(new Pen(Brushes.Black), 0 + PageXX, 110 + PageYY, 110 + PageXX, 0 + PageYY);
             }
 
-            
+            if (chkNormalCrossing.Checked)
+            {
+                e.Graphics.ResetTransform();
+                e.Graphics.DrawLine(new Pen(Brushes.Black), 0 + PageXX, 75 + PageYY, 75 + PageXX, 0 + PageYY);
+                e.Graphics.ResetTransform();
+                e.Graphics.DrawLine(new Pen(Brushes.Black), 0 + PageXX, 110 + PageYY, 110 + PageXX, 0 + PageYY);
+            }
 
             foreach (Control c in pnlCheque.Controls)
             {
@@ -225,9 +159,9 @@ namespace Inventory
                         {
 
                             string txt = c.Text;
-                            SizeF fit = new SizeF(75F, 75);
+                            SizeF fit = new SizeF(75F, 125);
                             StringFormat fmt = StringFormat.GenericTypographic;
-                            int spacing = (int)(2.0 * c.Font.Height);
+                            int spacing = (int)(1.8 * c.Font.Height);
                             int line = 0;
                             for (int ix = 0; ix < txt.Length; )
                             {
@@ -235,76 +169,38 @@ namespace Inventory
                                 e.Graphics.MeasureString(txt.Substring(ix), c.Font, fit, fmt, out chars, out lines);
                                 //e.Graphics.MeasureString(txt.Substring(ix), c.Font, fit,
                                 //e.Graphics.DrawString(txt.Substring(ix, chars), c.Font, Brushes.Black, 0, spacing * line);
-                                e.Graphics.DrawString(txt.Substring(ix, chars), c.Font, Brushes.Black, new RectangleF(c.Location.X + PageXX, c.Location.Y + PageYY + (spacing * line), c.Width + 50, c.Height));
+                                e.Graphics.DrawString(txt.Substring(ix, chars), c.Font, Brushes.Black, new RectangleF(c.Location.X + PageXX, c.Location.Y + PageYY + (spacing * line), c.Width + 100, c.Height));
                                 ++line;
                                 ix += chars;
                             }
-
-                        }
-                        else if (c.Name == "lblCompanyName")
-                        {
-                            return;//This label Printed in Below Panel Section
                         }
                         else
                         {
                             e.Graphics.DrawString(c.Text, c.Font, Brushes.Black, new RectangleF(c.Location.X + PageXX, c.Location.Y + PageYY, c.Width, c.Height));
                         }
-
-                    }
-                    if (c is Panel)
-                    {
-                        
-                        Bitmap bm2 = new Bitmap(c.ClientSize.Width, c.ClientSize.Height);
-                        c.DrawToBitmap(bm2, c.ClientRectangle);
-                        e.Graphics.DrawImage(bm2, c.Bounds.X + PageXX, c.Bounds.Y + PageYY, c.Bounds.Width, c.Bounds.Height);
-                        bm2.Save(@"C:\TestDrawToBitmap.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
-
-                        //foreach (Control b in c.Controls)
-                        //{
-                        //    if (b is Label)
-                        //    {
-                        //        e.Graphics.DrawString(c.Text, c.Font, Brushes.Black, new RectangleF(c.Location.X + PageXX, c.Location.Y + PageYY, c.Width, c.Height));
-                        //    }
-                        //    if (b is PictureBox && b.Name == "lblImgHolder")
-                        //    {
-                        //        PictureBox pict2 = (PictureBox)lblImgHolder;
-                        //        pict2.SizeMode = PictureBoxSizeMode.Zoom;
-                        //        Bitmap bm2 = new Bitmap(pict2.ClientSize.Width, pict2.ClientSize.Height);
-                        //        pict2.DrawToBitmap(bm2, pict2.ClientRectangle);
-                        //        e.Graphics.DrawImage(bm2, pict2.Bounds.X + PageXX, pict2.Bounds.Y + PageYY, pict2.Bounds.Width, pict2.Bounds.Height);
-                        //    }
-                        //}
                     }
                 }
             }
-
-            
-
-
-           
         }
-        
-        
 
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
 
-                common.GetBankDetails();
-                dsBankName = common.BankName;
-                cmbBankName.DataSource = dsBankName.Tables["BankDetails"];
-                cmbBankName.DisplayMember = "Bank_Name";
-                cmbBankName.ValueMember = "Bank_Code";
-
-                
-               
+                string SqlStatement = "SELECT * FROM BankDetails ORDER BY Bank_Code";
+                objChqPrint.getDataReader(SqlStatement);
+                while (objChqPrint.Adr.Read())
+                {
+                    cmbBankName.Items.Add(objChqPrint.Adr["Bank_Name"]).ToString();
+                    cmbBankName.DisplayMember = "Bank_Name";
+                    cmbBankName.ValueMember = "Bank_Code";
+                }
             }
             catch (Exception ex)
             {
                 clsClear.ErrMessage(ex.Message, ex.StackTrace);
             }
-            
         }
 
         public string NumberToWords(int number)
@@ -338,7 +234,7 @@ namespace Inventory
 
             if ((number / 100) > 0)
             {
-                words += NumberToWords(number / 100) + " hundred ";
+                words += NumberToWords(number / 100) + " hundred and ";
                 number %= 100;
             }
 
@@ -356,7 +252,7 @@ namespace Inventory
                 {
                     words += tensMap[number / 10];
                     if ((number % 10) > 0)
-                        words += "-" + unitsMap[number % 10];
+                        words += " " + unitsMap[number % 10];
                 }
             }
 
@@ -371,20 +267,10 @@ namespace Inventory
                 if (cmbField.Text.Trim() != "")
                 {
                     Control c = pnlCheque.Controls.Find("lbl" + cmbField.Text.Trim(), true)[0];
-                    
+                    c.BringToFront();
                     txtX.Value = c.Location.X;
                     txtY.Value = c.Location.Y;
-                    if (c.Name!="lblImgPO")
-                    {
-                        c.BringToFront();
-                        chkHide.Checked = !c.Visible;
-                    }
-
-                    if (c.Name == "lblHolderSeal")
-                    {
-                        cmbNameProfile_SelectedIndexChanged(new object(), new EventArgs());
-                    }
-                    
+                    chkHide.Checked = !c.Visible;
                 }
             }
             catch (Exception ex)
@@ -429,31 +315,30 @@ namespace Inventory
         {
             try
             {
-                if (cmbBankName.SelectedValue == null || cmbBankName.SelectedValue.ToString() == "" || cmbBankName.Text == "")
+                //if (cmbBankName.SelectedValue == null || cmbBankName.SelectedValue.ToString() == "" || cmbBankName.Text == "")
+                if(cmbBankName.Text.Trim()==string.Empty)
                 {
                     MessageBox.Show("Bank Not Selected !", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cmbBankName.Focus();
                     btnClear.PerformClick();
                 }
+                DataSet dsCPS = new DataSet();
+                dsCPS = objChqPrint.getDataset("SELECT x, y, FieldName, PageX, PageY, Hide FROM tb_Settings_CheqPrint WHERE Standerd=0 AND BankFormat='" + cmbBankName.Text.ToString() + "' ", "table3");
 
-                dt3 = common.getChequePrint_BankSettings(cmbBankName.SelectedValue.ToString());
+                dt3 = dsCPS.Tables[0];
+
                 if (dt3 != null && dt3.Rows.Count > 0)
                 {
                     foreach (DataRow Row in dt3.Rows)
                     {
                         Control Con = pnlCheque.Controls.Find(Row["FieldName"].ToString(), true)[0];
-                        if (Con is Label || Con is Panel)
+                        if (Con is Label)
                         {
-                            //if (Con.Name == "lblHolderSeal")
-                            //{
-
-                            //}
                             Con.Location = new Point(int.Parse(Row["x"].ToString()), int.Parse(Row["y"].ToString()));
                             Con.Visible = !Convert.ToBoolean(Row["Hide"].ToString());
                         }
                     }
 
-                    cmbNameProfile.Text = dt3.Rows[0]["SealFormat"].ToString();
                     txtPageX.Value = int.Parse(dt3.Rows[0]["PageX"].ToString());
                     txtPageY.Value = int.Parse(dt3.Rows[0]["PageY"].ToString());
 
@@ -483,6 +368,11 @@ namespace Inventory
                     if (First != 0)
                     {
                         paymentword1 = NumberToWords(Convert.ToInt32(First));
+                        string x = paymentword1.Substring(paymentword1.Length - 5,5);
+                        if (x ==  " And ")
+                        {
+                            paymentword1 = paymentword1.Substring(0, paymentword1.Length - 5);
+                        }
                     }
                     if (second != 0)
                     {
@@ -490,26 +380,20 @@ namespace Inventory
                     }
                     if (second != 0)
                     {
-                        paymentword = paymentword1 + " Rupees And " + paymentword2 + " Cents Only";
+                        paymentword = paymentword1 + " And Cents " + paymentword2 + " Only";
                     }
                     else
                     {
-                        paymentword = paymentword1 + " Rupees Only";
+                        paymentword = paymentword1 + " Only";
                     }
+                    paymentword = paymentword.Replace("And  Thousand", "Thousand");
 
                     lblAmountText.Text = "**" + paymentword + "**";
 
-                    if (txtPay.Text.Trim()=="")
-                    {
-                        lblPay.Text = "";
-                    }
-                    else
-                    {
-                        lblPay.Text = "**" + System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtPay.Text.Trim().ToLower()) + "**";
-                        //lblPay.Text = "**" + txtPay.Text.Trim() + "**";
+                    lblPay.Text = "**" + System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(txtPay.Text.Trim().ToLower()) + "**";
+                    //lblPay.Text = "**" + txtPay.Text.Trim() + "**";
 
-                    }
-                    
+                    btnPrint.Enabled = true;
                 }
                 else
                 {
@@ -544,11 +428,12 @@ namespace Inventory
             {
                 if (chkPayeeOnly.Checked)
                 {
-                    lblImgPO.Visible = true;
+                    pictureBox1.Visible = true;
+                    chkNormalCrossing.Checked = false;
                 }
                 else
                 {
-                    lblImgPO.Visible = false;
+                    pictureBox1.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -563,7 +448,9 @@ namespace Inventory
             {
                 if (MessageBox.Show("Do You Want To Load Default Positions ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
                 {
-                    dt2=common.getChequePrint_DefaultSettings();
+                    DataSet dsCPS = new DataSet();
+                    dsCPS = objChqPrint.getDataset("SELECT x, y, FieldName, PageX, PageY, Hide FROM tb_Settings_CheqPrint WHERE Standerd=1", "table2");
+                   
                     if (dt2 != null && dt2.Rows.Count > 0)
                     {
                         foreach (DataRow Row in dt2.Rows)
@@ -584,161 +471,23 @@ namespace Inventory
             }
         }
 
-        private void btnSupplierSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (search.IsDisposed)
-                {
-                    search = new frmSearch();
-                }
-
-                if (txtSuppCode.Text.Trim() == string.Empty && txtSuppName.Text.Trim() == string.Empty)
-                {
-                    common.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier ORDER BY Supp_Code";
-                }
-                else
-                {
-                    if (txtSuppCode.Text.Trim() != string.Empty && txtSuppName.Text.Trim() == string.Empty)
-                    {
-                        common.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier WHERE Supp_Code LIKE '%" + txtSuppCode.Text.Trim() + "%' ORDER BY Supp_Code ASC";
-                    }
-                    else
-                    {
-                        if (txtSuppCode.Text.Trim() == string.Empty && txtSuppName.Text.Trim() != string.Empty)
-                        {
-                            common.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier WHERE Supp_Name LIKE '%" + txtSuppName.Text.Trim() + "%' ORDER BY Supp_Name";
-                        }
-                        else
-                        {
-                            common.SqlStatement = "SELECT Supp_Code AS [Supplier Code],Supp_Name AS [Supplier Name] FROM Supplier ORDER BY Supp_Code";
-                        }
-                    }
-                }
-                common.DataSetName = "dsSupplier";
-                common.GetSupplierDetails();
-                search.dgSearch.DataSource = common.GetSupplierDataSet.Tables["dsSupplier"];
-                search.prop_Focus = txtSuppCode;
-                search.Cont_Descript = txtSuppName;
-                search.Show();
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
-            }
-        }
-
-        private void txtSuppCode_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                if (search.Code != null && search.Code != "")
-                {
-                    txtSuppCode.Text = search.Code.Trim();
-                    txtSuppName.Text = search.Descript.Trim();
-                }
-                search.Code = string.Empty;
-                search.Descript = string.Empty;
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
-            }
-        }
-
-        private void txtSuppCode_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (txtSuppCode.Text!="")
-                {
-                    if (e.KeyCode==Keys.Enter)
-                    {
-                        common.SuppCode = txtSuppCode.Text.ToString().Trim();
-                        common.SqlStatement = "SELECT Supp_Code, Supp_Name, Supp_Name PrintName FROM Supplier WHERE Supp_Code = '" + txtSuppCode.Text.Trim() + "'";
-                        common.ReadSupplierDetails();
-                        if (common.RecordFound == true)
-                        {
-                            txtSuppCode.Text = common.SuppCode;
-                            txtSuppName.Text = common.SuppName;
-
-                            dataGridViewPendingPayments.DataSource = null;
-                            dataGridViewPendingPayments.DataSource = common.Get_Pending_ChequePrintList("PMT", common.SuppCode);
-                            dataGridViewPendingPayments.Refresh();
-                        }
-
-                        
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
-            }
-        }
-
-        private void dataGridViewPendingPayments_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dataGridViewPendingPayments.SelectedRows.Count == 1 && dataGridViewPendingPayments.SelectedRows[0].Cells[0].ToString() != "")
-                {
-                    if (MessageBox.Show("Do You Want To Load The Selected Document?",this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
-                    {
-                        lblDocNo.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[0].Value.ToString();
-                        lblBank.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[1].Value.ToString();
-                        lblCheqNo.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[2].Value.ToString();
-                        lblCheqDate.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[3].Value.ToString();
-                        lblCheqAmt.Text = dataGridViewPendingPayments.SelectedRows[0].Cells[4].Value.ToString();
-                        dtpDate.Text = lblCheqDate.Text;
-                        txtAmount.Text = decimal.Parse(lblCheqAmt.Text).ToString("N2");
-                        if (common._strPrintName.ToString() == "")
-                        {
-                            txtPay.Text = common.SuppName;
-                        }
-                        else
-                        {
-                            txtPay.Text = common._strPrintName;
-                        }
-                        cmbBankName.Text = lblBank.Text;
-
-                        cmbBankName.Enabled = false;
-                        txtAmount.ReadOnly = true;
-                        dtpDate.Enabled = false;
-
-                        btnLoad.PerformClick();
-
-
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please Select Data Row", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
-            }
-        }
-
         private void btnSaveBankFormat_Click(object sender, EventArgs e)
         {
             try
             {
-                if (MessageBox.Show("Do You Want To Save Current Format To Selected Bank ? Previous Settings Will Be Deleted !", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do You Want To Save Current Format To Selected Bank ?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-
-                    if (cmbBankName.SelectedValue != null && cmbBankName.SelectedValue.ToString()!="" && cmbBankName.Text!="")
+                    if(cmbBankName.Text.Trim() != string.Empty)
                     {
-
-                        string BankCode=cmbBankName.SelectedValue.ToString();
                         foreach (Control CON in pnlCheque.Controls)
                         {
-                            common.UpdateChequePrint_Settings(CON.Location.X, CON.Location.Y, CON.Name, BankCode, Convert.ToInt16(txtPageX.Value), Convert.ToInt16(txtPageY.Value), Convert.ToInt16(!CON.Visible), cmbNameProfile.Text.Trim());
+                            string SqlStatement = "DELETE FROM tb_Settings_CheqPrint WHERE FieldName='" + CON.Name + "' AND BankFormat='" + cmbBankName.Text.ToString() + "' AND Standerd=0";
+                            objChqPrint.getDataReader(SqlStatement);
+
+                            SqlStatement = " INSERT INTO tb_Settings_CheqPrint (x, y, FieldName, Standerd, BankFormat, PageX, PageY, Hide) VALUES (" + CON.Location.X + ", " + CON.Location.Y + ", '" + CON.Name + "', 0, '" + cmbBankName.Text.ToString() + "', " + Convert.ToInt16(txtPageX.Value) + ", " + Convert.ToInt16(txtPageY.Value) + ", " + Convert.ToInt16(!CON.Visible) + ")";
+                            objChqPrint.getDataReader(SqlStatement);
                         }
                         MessageBox.Show("Bank Format Saved Succussfully!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     }
                     else
                     {
@@ -771,7 +520,7 @@ namespace Inventory
                 lblAmountValue.Text = objCPForValues.lblAmountValue.Text;
                 objCPForValues = null;
 
-                lblDocNo.Text = lblBank.Text = lblCheqNo.Text = lblCheqDate.Text = lblCheqAmt.Text = "";
+               // lblDocNo.Text = lblBank.Text = lblCheqNo.Text = lblCheqDate.Text = lblCheqAmt.Text = "";
 
                 txtPay.Text = txtAmount.Text = "";
 
@@ -805,42 +554,7 @@ namespace Inventory
             }
         }
 
-        private void btnLoadPrintedCheqDetails_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                common.SuppCode = txtSuppCode.Text.ToString().Trim();
-                common.SqlStatement = "SELECT Supp_Code, Supp_Name, Supp_Name PrintName FROM Supplier WHERE Supp_Code = '" + txtSuppCode.Text.Trim() + "'";
-                common.ReadSupplierDetails();
-                if (common.RecordFound == true)
-                {
-                    txtSuppCode.Text = common.SuppCode;
-                    txtSuppName.Text = common.SuppName;
-
-                    if (LoginManager.DupliCheqPrint == "T")
-                    {
-                        if (MessageBox.Show("Do You Want To Load The Printed Cheques?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            dataGridViewPendingPayments.DataSource = null;
-                            dataGridViewPendingPayments.DataSource = common.Get_Printed_ChequePrintList("PMT", common.SuppCode);
-                            dataGridViewPendingPayments.Refresh();
-                        }
-                    }
-                    
-
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Please Select Supplier First !", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
-            }
-        }
+      
 
         private void txtPageX_ValueChanged(object sender, EventArgs e)
         {
@@ -875,17 +589,11 @@ namespace Inventory
                     Control c = pnlCheque.Controls.Find("lbl" + cmbField.Text, true)[0];
                     if (chkHide.Checked)
                     {
-                        if (c.Name != "lblImgPO")
-                        {
-                            c.Visible = false;
-                        }
+                        c.Visible = false;
                     }
                     else
                     {
-                        if (c.Name != "lblImgPO")
-                        {
-                            c.Visible = true;
-                        }
+                        c.Visible = true;
                     }
                 }
             }
@@ -895,41 +603,20 @@ namespace Inventory
             }
         }
 
-        
-
-        private void cmbNameProfile_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtAmount_KeyDown(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyCode == Keys.Enter)
             {
-                if (cmbNameProfile.Visible == true)
-                {
-
-
-                    if (cmbNameProfile.DataSource != null)
-                    {
-                        string ImageFile = Application.StartupPath + @"\Cheque Print\" + cmbNameProfile.Text.ToString() + ".png ";
-                        if (File.Exists(ImageFile))
-                        {
-                            lblImgHolder.Image = Image.FromFile(ImageFile);
-                            lblCompanyName.Text = cmbNameProfile.SelectedValue.ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Profile Not Found!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                clsClear.ErrMessage(ex.Message, ex.StackTrace);
+                txtPay.Focus();
             }
         }
 
-        private void cmbBankName_SelectedIndexChanged(object sender, EventArgs e)
+        private void chkNormalCrossing_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (chkNormalCrossing.Checked == true)
+            {
+                chkPayeeOnly.Checked = false;
+            }
         }
 
     }

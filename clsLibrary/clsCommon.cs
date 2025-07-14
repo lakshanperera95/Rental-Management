@@ -551,7 +551,30 @@ namespace clsLibrary
             }
         }
 
-        
+        public DataSet getDataset(string query, string setName)
+        {
+            DataSet ds = new DataSet();
+
+            if (dbcon.connection.State != ConnectionState.Open)
+            {
+                dbcon.OpenConnection();
+            }
+
+            if (dbcon.reader != null && dbcon.reader.IsClosed == false)
+            {
+                dbcon.reader.Close();
+            }
+
+            SqlDataAdapter da = new SqlDataAdapter(query, dbcon.connection);
+            da.Fill(ds, setName);
+            dbcon.CloseConnection();
+            da.Dispose();
+            return ds;
+
+        }
+
+
+
 
     }
 }

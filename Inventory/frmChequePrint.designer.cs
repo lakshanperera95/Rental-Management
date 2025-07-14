@@ -28,19 +28,13 @@ namespace Inventory
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChequePrint));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.btnPrint = new System.Windows.Forms.Button();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.pnlCheque = new System.Windows.Forms.Panel();
-            this.lblHolderSeal = new System.Windows.Forms.Panel();
-            this.lblImgHolder = new System.Windows.Forms.PictureBox();
-            this.lblCompanyName = new System.Windows.Forms.Label();
             this.lblCut = new System.Windows.Forms.Label();
             this.lblAmountValue = new System.Windows.Forms.Label();
             this.lblAmountText = new System.Windows.Forms.Label();
@@ -53,7 +47,7 @@ namespace Inventory
             this.lblD2 = new System.Windows.Forms.Label();
             this.lblD1 = new System.Windows.Forms.Label();
             this.lblPay = new System.Windows.Forms.Label();
-            this.lblImgPO = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmbField = new System.Windows.Forms.ComboBox();
             this.txtX = new System.Windows.Forms.NumericUpDown();
             this.txtY = new System.Windows.Forms.NumericUpDown();
@@ -71,31 +65,6 @@ namespace Inventory
             this.btnDefault = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbBankName = new System.Windows.Forms.ComboBox();
-            this.txtSuppName = new System.Windows.Forms.TextBox();
-            this.txtSuppCode = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnLoadPrintedCheqDetails = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblCheqAmt = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblCheqDate = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblCheqNo = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblBank = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblDocNo = new System.Windows.Forms.Label();
-            this.dataGridViewPendingPayments = new System.Windows.Forms.DataGridView();
-            this.payDocumentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bankNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chequeNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chequeDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chequeAmountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dsPendingChequePrintListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsForReports = new Inventory.dsForReports();
-            this.btnSupplierSearch = new System.Windows.Forms.Button();
             this.btnSaveBankFormat = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -104,18 +73,11 @@ namespace Inventory
             this.txtPageX = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.chkHide = new System.Windows.Forms.CheckBox();
-            this.cmbNameProfile = new System.Windows.Forms.ComboBox();
-            this.lblComType = new System.Windows.Forms.Label();
+            this.chkNormalCrossing = new System.Windows.Forms.CheckBox();
             this.pnlCheque.SuspendLayout();
-            this.lblHolderSeal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lblImgHolder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblImgPO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtY)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPendingPayments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsPendingChequePrintListBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPageY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPageX)).BeginInit();
             this.SuspendLayout();
@@ -137,10 +99,11 @@ namespace Inventory
             // btnPrint
             // 
             this.btnPrint.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnPrint.Enabled = false;
             this.btnPrint.FlatAppearance.BorderSize = 0;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(168, 488);
+            this.btnPrint.Location = new System.Drawing.Point(643, 466);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 48);
             this.btnPrint.TabIndex = 1;
@@ -155,7 +118,6 @@ namespace Inventory
             // pnlCheque
             // 
             this.pnlCheque.BackColor = System.Drawing.SystemColors.Window;
-            this.pnlCheque.Controls.Add(this.lblHolderSeal);
             this.pnlCheque.Controls.Add(this.lblCut);
             this.pnlCheque.Controls.Add(this.lblAmountValue);
             this.pnlCheque.Controls.Add(this.lblAmountText);
@@ -168,41 +130,11 @@ namespace Inventory
             this.pnlCheque.Controls.Add(this.lblD2);
             this.pnlCheque.Controls.Add(this.lblD1);
             this.pnlCheque.Controls.Add(this.lblPay);
-            this.pnlCheque.Controls.Add(this.lblImgPO);
+            this.pnlCheque.Controls.Add(this.pictureBox1);
             this.pnlCheque.Location = new System.Drawing.Point(12, 24);
             this.pnlCheque.Name = "pnlCheque";
             this.pnlCheque.Size = new System.Drawing.Size(708, 337);
             this.pnlCheque.TabIndex = 2;
-            // 
-            // lblHolderSeal
-            // 
-            this.lblHolderSeal.Controls.Add(this.lblImgHolder);
-            this.lblHolderSeal.Controls.Add(this.lblCompanyName);
-            this.lblHolderSeal.Location = new System.Drawing.Point(448, 184);
-            this.lblHolderSeal.Name = "lblHolderSeal";
-            this.lblHolderSeal.Size = new System.Drawing.Size(256, 112);
-            this.lblHolderSeal.TabIndex = 15;
-            this.lblHolderSeal.Visible = false;
-            // 
-            // lblImgHolder
-            // 
-            this.lblImgHolder.Location = new System.Drawing.Point(8, 56);
-            this.lblImgHolder.Name = "lblImgHolder";
-            this.lblImgHolder.Size = new System.Drawing.Size(232, 48);
-            this.lblImgHolder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.lblImgHolder.TabIndex = 14;
-            this.lblImgHolder.TabStop = false;
-            // 
-            // lblCompanyName
-            // 
-            this.lblCompanyName.BackColor = System.Drawing.Color.Transparent;
-            this.lblCompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompanyName.Location = new System.Drawing.Point(8, 16);
-            this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(232, 16);
-            this.lblCompanyName.TabIndex = 13;
-            this.lblCompanyName.Text = "Company Name";
-            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblCut
             // 
@@ -229,8 +161,8 @@ namespace Inventory
             // 
             // lblAmountText
             // 
-            this.lblAmountText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmountText.Location = new System.Drawing.Point(75, 125);
+            this.lblAmountText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmountText.Location = new System.Drawing.Point(75, 120);
             this.lblAmountText.Name = "lblAmountText";
             this.lblAmountText.Size = new System.Drawing.Size(340, 93);
             this.lblAmountText.TabIndex = 9;
@@ -238,7 +170,7 @@ namespace Inventory
             // 
             // lblY4
             // 
-            this.lblY4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblY4.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY4.Location = new System.Drawing.Point(652, 27);
             this.lblY4.Name = "lblY4";
             this.lblY4.Size = new System.Drawing.Size(20, 20);
@@ -248,7 +180,7 @@ namespace Inventory
             // 
             // lblY3
             // 
-            this.lblY3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblY3.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY3.Location = new System.Drawing.Point(628, 27);
             this.lblY3.Name = "lblY3";
             this.lblY3.Size = new System.Drawing.Size(20, 20);
@@ -258,7 +190,7 @@ namespace Inventory
             // 
             // lblY2
             // 
-            this.lblY2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblY2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY2.Location = new System.Drawing.Point(604, 27);
             this.lblY2.Name = "lblY2";
             this.lblY2.Size = new System.Drawing.Size(20, 20);
@@ -268,7 +200,7 @@ namespace Inventory
             // 
             // lblY1
             // 
-            this.lblY1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblY1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblY1.Location = new System.Drawing.Point(580, 27);
             this.lblY1.Name = "lblY1";
             this.lblY1.Size = new System.Drawing.Size(20, 20);
@@ -278,7 +210,7 @@ namespace Inventory
             // 
             // lblM2
             // 
-            this.lblM2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblM2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblM2.Location = new System.Drawing.Point(556, 27);
             this.lblM2.Name = "lblM2";
             this.lblM2.Size = new System.Drawing.Size(20, 20);
@@ -288,7 +220,7 @@ namespace Inventory
             // 
             // lblM1
             // 
-            this.lblM1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblM1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblM1.Location = new System.Drawing.Point(532, 27);
             this.lblM1.Name = "lblM1";
             this.lblM1.Size = new System.Drawing.Size(20, 20);
@@ -298,7 +230,7 @@ namespace Inventory
             // 
             // lblD2
             // 
-            this.lblD2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblD2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblD2.Location = new System.Drawing.Point(508, 27);
             this.lblD2.Name = "lblD2";
             this.lblD2.Size = new System.Drawing.Size(20, 20);
@@ -308,7 +240,7 @@ namespace Inventory
             // 
             // lblD1
             // 
-            this.lblD1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblD1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblD1.Location = new System.Drawing.Point(484, 27);
             this.lblD1.Name = "lblD1";
             this.lblD1.Size = new System.Drawing.Size(20, 20);
@@ -319,23 +251,23 @@ namespace Inventory
             // lblPay
             // 
             this.lblPay.BackColor = System.Drawing.Color.Transparent;
-            this.lblPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPay.Location = new System.Drawing.Point(75, 87);
+            this.lblPay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPay.Location = new System.Drawing.Point(75, 80);
             this.lblPay.Name = "lblPay";
-            this.lblPay.Size = new System.Drawing.Size(401, 16);
+            this.lblPay.Size = new System.Drawing.Size(401, 24);
             this.lblPay.TabIndex = 8;
             this.lblPay.Text = "Pay";
             // 
-            // lblImgPO
+            // pictureBox1
             // 
-            this.lblImgPO.Image = global::Inventory.Properties.Resources.Ac_payee_only1;
-            this.lblImgPO.Location = new System.Drawing.Point(-16, -8);
-            this.lblImgPO.Name = "lblImgPO";
-            this.lblImgPO.Size = new System.Drawing.Size(160, 104);
-            this.lblImgPO.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.lblImgPO.TabIndex = 11;
-            this.lblImgPO.TabStop = false;
-            this.lblImgPO.Visible = false;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // cmbField
             // 
@@ -352,9 +284,7 @@ namespace Inventory
             "Pay",
             "AmountText",
             "AmountValue",
-            "Cut",
-            "ImgPO",
-            "HolderSeal"});
+            "Cut"});
             this.cmbField.Location = new System.Drawing.Point(514, 370);
             this.cmbField.Name = "cmbField";
             this.cmbField.Size = new System.Drawing.Size(158, 21);
@@ -436,6 +366,7 @@ namespace Inventory
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(126, 20);
             this.txtAmount.TabIndex = 11;
+            this.txtAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyDown);
             // 
             // label4
             // 
@@ -470,7 +401,7 @@ namespace Inventory
             this.btnLoad.FlatAppearance.BorderSize = 0;
             this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(86, 488);
+            this.btnLoad.Location = new System.Drawing.Point(561, 466);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 48);
             this.btnLoad.TabIndex = 15;
@@ -481,7 +412,7 @@ namespace Inventory
             // chkPayeeOnly
             // 
             this.chkPayeeOnly.AutoSize = true;
-            this.chkPayeeOnly.Location = new System.Drawing.Point(344, 416);
+            this.chkPayeeOnly.Location = new System.Drawing.Point(230, 417);
             this.chkPayeeOnly.Name = "chkPayeeOnly";
             this.chkPayeeOnly.Size = new System.Drawing.Size(104, 17);
             this.chkPayeeOnly.TabIndex = 16;
@@ -494,7 +425,7 @@ namespace Inventory
             this.btnDefault.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnDefault.FlatAppearance.BorderSize = 0;
             this.btnDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDefault.Location = new System.Drawing.Point(256, 513);
+            this.btnDefault.Location = new System.Drawing.Point(275, 492);
             this.btnDefault.Name = "btnDefault";
             this.btnDefault.Size = new System.Drawing.Size(132, 23);
             this.btnDefault.TabIndex = 17;
@@ -504,7 +435,7 @@ namespace Inventory
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(488, 479);
+            this.label12.Location = new System.Drawing.Point(12, 450);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(79, 13);
             this.label12.TabIndex = 19;
@@ -514,270 +445,12 @@ namespace Inventory
             // 
             this.cmbBankName.DisplayMember = "Bank_Name";
             this.cmbBankName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBankName.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbBankName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbBankName.FormattingEnabled = true;
-            this.cmbBankName.Location = new System.Drawing.Point(488, 495);
+            this.cmbBankName.Location = new System.Drawing.Point(12, 466);
             this.cmbBankName.Name = "cmbBankName";
             this.cmbBankName.Size = new System.Drawing.Size(228, 21);
             this.cmbBankName.TabIndex = 18;
-            this.cmbBankName.SelectedIndexChanged += new System.EventHandler(this.cmbBankName_SelectedIndexChanged);
-            // 
-            // txtSuppName
-            // 
-            this.txtSuppName.Location = new System.Drawing.Point(96, 40);
-            this.txtSuppName.Name = "txtSuppName";
-            this.txtSuppName.Size = new System.Drawing.Size(304, 20);
-            this.txtSuppName.TabIndex = 21;
-            // 
-            // txtSuppCode
-            // 
-            this.txtSuppCode.Location = new System.Drawing.Point(8, 40);
-            this.txtSuppCode.Name = "txtSuppCode";
-            this.txtSuppCode.Size = new System.Drawing.Size(87, 20);
-            this.txtSuppCode.TabIndex = 20;
-            this.txtSuppCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSuppCode_KeyDown);
-            this.txtSuppCode.Enter += new System.EventHandler(this.txtSuppCode_Enter);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(45, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Supplier";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnLoadPrintedCheqDetails);
-            this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.lblCheqAmt);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.lblCheqDate);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.lblCheqNo);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.lblBank);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.lblDocNo);
-            this.groupBox1.Controls.Add(this.dataGridViewPendingPayments);
-            this.groupBox1.Controls.Add(this.btnSupplierSearch);
-            this.groupBox1.Controls.Add(this.txtSuppName);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.txtSuppCode);
-            this.groupBox1.Location = new System.Drawing.Point(728, 8);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(440, 536);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pending Details";
-            // 
-            // btnLoadPrintedCheqDetails
-            // 
-            this.btnLoadPrintedCheqDetails.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnLoadPrintedCheqDetails.FlatAppearance.BorderSize = 0;
-            this.btnLoadPrintedCheqDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadPrintedCheqDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoadPrintedCheqDetails.Location = new System.Drawing.Point(272, 16);
-            this.btnLoadPrintedCheqDetails.Name = "btnLoadPrintedCheqDetails";
-            this.btnLoadPrintedCheqDetails.Size = new System.Drawing.Size(128, 23);
-            this.btnLoadPrintedCheqDetails.TabIndex = 27;
-            this.btnLoadPrintedCheqDetails.Text = "Load Printed Cheques";
-            this.btnLoadPrintedCheqDetails.UseVisualStyleBackColor = false;
-            this.btnLoadPrintedCheqDetails.Visible = false;
-            this.btnLoadPrintedCheqDetails.Click += new System.EventHandler(this.btnLoadPrintedCheqDetails_Click);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(24, 460);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(71, 13);
-            this.label18.TabIndex = 35;
-            this.label18.Text = "Cheq.Amount";
-            // 
-            // lblCheqAmt
-            // 
-            this.lblCheqAmt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCheqAmt.Location = new System.Drawing.Point(112, 456);
-            this.lblCheqAmt.Name = "lblCheqAmt";
-            this.lblCheqAmt.Size = new System.Drawing.Size(320, 20);
-            this.lblCheqAmt.TabIndex = 34;
-            this.lblCheqAmt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(24, 436);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(58, 13);
-            this.label16.TabIndex = 33;
-            this.label16.Text = "Cheq.Date";
-            // 
-            // lblCheqDate
-            // 
-            this.lblCheqDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCheqDate.Location = new System.Drawing.Point(112, 432);
-            this.lblCheqDate.Name = "lblCheqDate";
-            this.lblCheqDate.Size = new System.Drawing.Size(320, 20);
-            this.lblCheqDate.TabIndex = 32;
-            this.lblCheqDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(24, 412);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 13);
-            this.label14.TabIndex = 31;
-            this.label14.Text = "Cheq.No";
-            // 
-            // lblCheqNo
-            // 
-            this.lblCheqNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCheqNo.Location = new System.Drawing.Point(112, 408);
-            this.lblCheqNo.Name = "lblCheqNo";
-            this.lblCheqNo.Size = new System.Drawing.Size(320, 20);
-            this.lblCheqNo.TabIndex = 30;
-            this.lblCheqNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(24, 388);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 13);
-            this.label11.TabIndex = 29;
-            this.label11.Text = "Bank";
-            // 
-            // lblBank
-            // 
-            this.lblBank.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblBank.Location = new System.Drawing.Point(112, 384);
-            this.lblBank.Name = "lblBank";
-            this.lblBank.Size = new System.Drawing.Size(320, 20);
-            this.lblBank.TabIndex = 28;
-            this.lblBank.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(24, 364);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 13);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "Doc.No";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 344);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(136, 13);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "Selected Document Details";
-            // 
-            // lblDocNo
-            // 
-            this.lblDocNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblDocNo.Location = new System.Drawing.Point(112, 360);
-            this.lblDocNo.Name = "lblDocNo";
-            this.lblDocNo.Size = new System.Drawing.Size(320, 20);
-            this.lblDocNo.TabIndex = 26;
-            this.lblDocNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dataGridViewPendingPayments
-            // 
-            this.dataGridViewPendingPayments.AllowUserToAddRows = false;
-            this.dataGridViewPendingPayments.AllowUserToDeleteRows = false;
-            this.dataGridViewPendingPayments.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.AliceBlue;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPendingPayments.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewPendingPayments.AutoGenerateColumns = false;
-            this.dataGridViewPendingPayments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewPendingPayments.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dataGridViewPendingPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPendingPayments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.payDocumentDataGridViewTextBoxColumn,
-            this.bankNameDataGridViewTextBoxColumn,
-            this.chequeNoDataGridViewTextBoxColumn,
-            this.chequeDateDataGridViewTextBoxColumn,
-            this.chequeAmountDataGridViewTextBoxColumn});
-            this.dataGridViewPendingPayments.DataSource = this.dsPendingChequePrintListBindingSource;
-            this.dataGridViewPendingPayments.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewPendingPayments.Location = new System.Drawing.Point(8, 64);
-            this.dataGridViewPendingPayments.Name = "dataGridViewPendingPayments";
-            this.dataGridViewPendingPayments.ReadOnly = true;
-            this.dataGridViewPendingPayments.RowHeadersWidth = 20;
-            this.dataGridViewPendingPayments.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPendingPayments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPendingPayments.Size = new System.Drawing.Size(424, 272);
-            this.dataGridViewPendingPayments.TabIndex = 25;
-            this.dataGridViewPendingPayments.DoubleClick += new System.EventHandler(this.dataGridViewPendingPayments_DoubleClick);
-            // 
-            // payDocumentDataGridViewTextBoxColumn
-            // 
-            this.payDocumentDataGridViewTextBoxColumn.DataPropertyName = "PayDocument";
-            this.payDocumentDataGridViewTextBoxColumn.HeaderText = "Doc.No";
-            this.payDocumentDataGridViewTextBoxColumn.Name = "payDocumentDataGridViewTextBoxColumn";
-            this.payDocumentDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bankNameDataGridViewTextBoxColumn
-            // 
-            this.bankNameDataGridViewTextBoxColumn.DataPropertyName = "BankName";
-            this.bankNameDataGridViewTextBoxColumn.HeaderText = "Bank";
-            this.bankNameDataGridViewTextBoxColumn.Name = "bankNameDataGridViewTextBoxColumn";
-            this.bankNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // chequeNoDataGridViewTextBoxColumn
-            // 
-            this.chequeNoDataGridViewTextBoxColumn.DataPropertyName = "ChequeNo";
-            this.chequeNoDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.chequeNoDataGridViewTextBoxColumn.HeaderText = "Cheq.No";
-            this.chequeNoDataGridViewTextBoxColumn.Name = "chequeNoDataGridViewTextBoxColumn";
-            this.chequeNoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // chequeDateDataGridViewTextBoxColumn
-            // 
-            this.chequeDateDataGridViewTextBoxColumn.DataPropertyName = "ChequeDate";
-            this.chequeDateDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.chequeDateDataGridViewTextBoxColumn.HeaderText = "Cheq.Date";
-            this.chequeDateDataGridViewTextBoxColumn.Name = "chequeDateDataGridViewTextBoxColumn";
-            this.chequeDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // chequeAmountDataGridViewTextBoxColumn
-            // 
-            this.chequeAmountDataGridViewTextBoxColumn.DataPropertyName = "ChequeAmount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.chequeAmountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.chequeAmountDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.chequeAmountDataGridViewTextBoxColumn.HeaderText = "Cheq.Amt";
-            this.chequeAmountDataGridViewTextBoxColumn.Name = "chequeAmountDataGridViewTextBoxColumn";
-            this.chequeAmountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dsPendingChequePrintListBindingSource
-            // 
-            this.dsPendingChequePrintListBindingSource.DataMember = "dsPendingChequePrintList";
-            this.dsPendingChequePrintListBindingSource.DataSource = this.dsForReports;
-            // 
-            // dsForReports
-            // 
-            this.dsForReports.DataSetName = "dsForReports";
-            this.dsForReports.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // btnSupplierSearch
-            // 
-            this.btnSupplierSearch.ForeColor = System.Drawing.Color.DimGray;
-            this.btnSupplierSearch.Image = global::Inventory.Properties.Resources.Finder_Toolbar_Search;
-            this.btnSupplierSearch.Location = new System.Drawing.Point(408, 39);
-            this.btnSupplierSearch.Name = "btnSupplierSearch";
-            this.btnSupplierSearch.Size = new System.Drawing.Size(25, 22);
-            this.btnSupplierSearch.TabIndex = 22;
-            this.btnSupplierSearch.UseVisualStyleBackColor = true;
-            this.btnSupplierSearch.Click += new System.EventHandler(this.btnSupplierSearch_Click);
             // 
             // btnSaveBankFormat
             // 
@@ -785,7 +458,7 @@ namespace Inventory
             this.btnSaveBankFormat.FlatAppearance.BorderSize = 0;
             this.btnSaveBankFormat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveBankFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveBankFormat.Location = new System.Drawing.Point(488, 520);
+            this.btnSaveBankFormat.Location = new System.Drawing.Point(12, 491);
             this.btnSaveBankFormat.Name = "btnSaveBankFormat";
             this.btnSaveBankFormat.Size = new System.Drawing.Size(132, 23);
             this.btnSaveBankFormat.TabIndex = 25;
@@ -799,7 +472,7 @@ namespace Inventory
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.Location = new System.Drawing.Point(4, 488);
+            this.btnClear.Location = new System.Drawing.Point(479, 466);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 48);
             this.btnClear.TabIndex = 26;
@@ -881,47 +554,24 @@ namespace Inventory
             this.chkHide.UseVisualStyleBackColor = true;
             this.chkHide.CheckedChanged += new System.EventHandler(this.chkShowHide_CheckedChanged);
             // 
-            // cmbNameProfile
+            // chkNormalCrossing
             // 
-            this.cmbNameProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNameProfile.FormattingEnabled = true;
-            this.cmbNameProfile.Items.AddRange(new object[] {
-            "D1",
-            "D2",
-            "M1",
-            "M2",
-            "Y1",
-            "Y2",
-            "Y3",
-            "Y4",
-            "Pay",
-            "AmountText",
-            "AmountValue",
-            "Cut",
-            "ImgPO"});
-            this.cmbNameProfile.Location = new System.Drawing.Point(296, 3);
-            this.cmbNameProfile.Name = "cmbNameProfile";
-            this.cmbNameProfile.Size = new System.Drawing.Size(158, 21);
-            this.cmbNameProfile.TabIndex = 33;
-            this.cmbNameProfile.SelectedIndexChanged += new System.EventHandler(this.cmbNameProfile_SelectedIndexChanged);
-            // 
-            // lblComType
-            // 
-            this.lblComType.AutoSize = true;
-            this.lblComType.Location = new System.Drawing.Point(212, 7);
-            this.lblComType.Name = "lblComType";
-            this.lblComType.Size = new System.Drawing.Size(78, 13);
-            this.lblComType.TabIndex = 34;
-            this.lblComType.Text = "Company Type";
+            this.chkNormalCrossing.AutoSize = true;
+            this.chkNormalCrossing.Location = new System.Drawing.Point(341, 418);
+            this.chkNormalCrossing.Name = "chkNormalCrossing";
+            this.chkNormalCrossing.Size = new System.Drawing.Size(108, 17);
+            this.chkNormalCrossing.TabIndex = 33;
+            this.chkNormalCrossing.Text = "Normal Creossing";
+            this.chkNormalCrossing.UseVisualStyleBackColor = true;
+            this.chkNormalCrossing.CheckedChanged += new System.EventHandler(this.chkNormalCrossing_CheckedChanged);
             // 
             // frmChequePrint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(222)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(1177, 548);
-            this.Controls.Add(this.lblComType);
-            this.Controls.Add(this.cmbNameProfile);
+            this.ClientSize = new System.Drawing.Size(734, 523);
+            this.Controls.Add(this.chkNormalCrossing);
             this.Controls.Add(this.chkHide);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label7);
@@ -929,7 +579,6 @@ namespace Inventory
             this.Controls.Add(this.btnSaveBankFormat);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtPageY);
             this.Controls.Add(this.txtPageX);
             this.Controls.Add(this.btnDefault);
@@ -956,22 +605,15 @@ namespace Inventory
             this.MinimizeBox = false;
             this.Name = "frmChequePrint";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cheque Print";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmChequePrint_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChequePrint_FormClosing);
             this.pnlCheque.ResumeLayout(false);
-            this.lblHolderSeal.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lblImgHolder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblImgPO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtY)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPendingPayments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsPendingChequePrintListBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsForReports)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPageY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPageX)).EndInit();
             this.ResumeLayout(false);
@@ -1015,46 +657,17 @@ namespace Inventory
         public System.Windows.Forms.Button btnDefault;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbBankName;
-        private System.Windows.Forms.Button btnSupplierSearch;
-        private System.Windows.Forms.TextBox txtSuppName;
-        private System.Windows.Forms.TextBox txtSuppCode;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridViewPendingPayments;
-        private System.Windows.Forms.BindingSource dsPendingChequePrintListBindingSource;
-        private dsForReports dsForReports;
-        private System.Windows.Forms.DataGridViewTextBoxColumn payDocumentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bankNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chequeNoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chequeDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chequeAmountDataGridViewTextBoxColumn;
         public System.Windows.Forms.Button btnSaveBankFormat;
-        public System.Windows.Forms.Label lblDocNo;
-        public System.Windows.Forms.Label label10;
-        public System.Windows.Forms.Label label9;
-        public System.Windows.Forms.Label label18;
-        public System.Windows.Forms.Label lblCheqAmt;
-        public System.Windows.Forms.Label label16;
-        public System.Windows.Forms.Label lblCheqDate;
-        public System.Windows.Forms.Label label14;
-        public System.Windows.Forms.Label lblCheqNo;
-        public System.Windows.Forms.Label label11;
-        public System.Windows.Forms.Label lblBank;
         public System.Windows.Forms.Button btnClear;
-        public System.Windows.Forms.Button btnLoadPrintedCheqDetails;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label label13;
         public System.Windows.Forms.NumericUpDown txtPageY;
         public System.Windows.Forms.NumericUpDown txtPageX;
         public System.Windows.Forms.Label label15;
-        private System.Windows.Forms.PictureBox lblImgPO;
+        private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.CheckBox chkHide;
         public System.Windows.Forms.Label lblCut;
-        public System.Windows.Forms.Label lblCompanyName;
-        public System.Windows.Forms.ComboBox cmbNameProfile;
-        private System.Windows.Forms.PictureBox lblImgHolder;
-        private System.Windows.Forms.Panel lblHolderSeal;
-        public System.Windows.Forms.Label lblComType;
+        private System.Windows.Forms.CheckBox chkNormalCrossing;
 
     }
 }

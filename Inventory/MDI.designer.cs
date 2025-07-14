@@ -501,7 +501,7 @@ namespace Inventory
             this.mnuMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(1339, 23);
+            this.mnuMain.Size = new System.Drawing.Size(1340, 23);
             this.mnuMain.TabIndex = 1;
             this.mnuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMain_ItemClicked);
             // 
@@ -4303,7 +4303,7 @@ namespace Inventory
             this.toolStrip1.Location = new System.Drawing.Point(0, 23);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(1339, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1340, 55);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -4624,7 +4624,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1339, 569);
+            this.ClientSize = new System.Drawing.Size(1340, 569);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mnuMain);

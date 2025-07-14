@@ -120,3 +120,13 @@ D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.csprojAssemblyR
 D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.csproj.CopyComplete
 D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.dll
 D:\Source Code\Rental-Management\clsLibrary\obj\Debug\clsLibrary.pdb
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\bin\Debug\clsLibrary.dll
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\bin\Debug\clsLibrary.pdb
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\bin\Debug\DbConnection.dll
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\bin\Debug\Newtonsoft.Json.dll
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\bin\Debug\DbConnection.pdb
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\obj\Debug\clsLibrary.csproj.AssemblyReference.cache
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\obj\Debug\clsLibrary.csproj.CoreCompileInputs.cache
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\obj\Debug\clsLibrary.csproj.CopyComplete
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\obj\Debug\clsLibrary.dll
+D:\Laiz Source Code\STANDERD\Rental Management Systems\clsLibrary\obj\Debug\clsLibrary.pdb

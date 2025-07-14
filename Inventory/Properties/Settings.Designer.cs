@@ -1011,5 +1011,20 @@ namespace Inventory.Properties {
                 this["PosBilling"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InvType
+        {
+            get
+            {
+                return ((bool)(this["InvType"]));
+            }
+            set
+            {
+                this["InvType"] = value;
+            }
+        }
     }
 }

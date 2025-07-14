@@ -185,9 +185,9 @@ namespace Inventory
             this.label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label5.Location = new System.Drawing.Point(108, 296);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(254, 13);
+            this.label5.Size = new System.Drawing.Size(222, 13);
             this.label5.TabIndex = 50;
-            this.label5.Text = "Copyright © 2008-2021 All Rights Reserved";
+            this.label5.Text = "Copyright © 2025 All Rights Reserved";
             // 
             // label7
             // 
@@ -210,9 +210,8 @@ namespace Inventory
             this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label6.Location = new System.Drawing.Point(182, 313);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 15);
+            this.label6.Size = new System.Drawing.Size(0, 15);
             this.label6.TabIndex = 52;
-            this.label6.Text = "ONIMTA";
             // 
             // btnLogin
             // 
