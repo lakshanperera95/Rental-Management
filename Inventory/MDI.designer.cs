@@ -501,7 +501,7 @@ namespace Inventory
             this.mnuMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(1340, 23);
+            this.mnuMain.Size = new System.Drawing.Size(1338, 23);
             this.mnuMain.TabIndex = 1;
             this.mnuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMain_ItemClicked);
             // 
@@ -4151,35 +4151,35 @@ namespace Inventory
             // walpaper1ToolStripMenuItem
             // 
             this.walpaper1ToolStripMenuItem.Name = "walpaper1ToolStripMenuItem";
-            this.walpaper1ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.walpaper1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.walpaper1ToolStripMenuItem.Text = "Walpaper 1";
             this.walpaper1ToolStripMenuItem.Click += new System.EventHandler(this.walpaper1ToolStripMenuItem_Click);
             // 
             // walpaper2ToolStripMenuItem
             // 
             this.walpaper2ToolStripMenuItem.Name = "walpaper2ToolStripMenuItem";
-            this.walpaper2ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.walpaper2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.walpaper2ToolStripMenuItem.Text = "Walpaper 2";
             this.walpaper2ToolStripMenuItem.Click += new System.EventHandler(this.walpaper2ToolStripMenuItem_Click);
             // 
             // walpaper3ToolStripMenuItem
             // 
             this.walpaper3ToolStripMenuItem.Name = "walpaper3ToolStripMenuItem";
-            this.walpaper3ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.walpaper3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.walpaper3ToolStripMenuItem.Text = "Walpaper 3";
             this.walpaper3ToolStripMenuItem.Click += new System.EventHandler(this.walpaper3ToolStripMenuItem_Click);
             // 
             // walpaper4ToolStripMenuItem
             // 
             this.walpaper4ToolStripMenuItem.Name = "walpaper4ToolStripMenuItem";
-            this.walpaper4ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.walpaper4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.walpaper4ToolStripMenuItem.Text = "Walpaper 4";
             this.walpaper4ToolStripMenuItem.Click += new System.EventHandler(this.walpaper4ToolStripMenuItem_Click);
             // 
             // walpaper5ToolStripMenuItem
             // 
             this.walpaper5ToolStripMenuItem.Name = "walpaper5ToolStripMenuItem";
-            this.walpaper5ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.walpaper5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.walpaper5ToolStripMenuItem.Text = "Walpaper 5";
             this.walpaper5ToolStripMenuItem.Click += new System.EventHandler(this.walpaper5ToolStripMenuItem_Click);
             // 
@@ -4303,7 +4303,7 @@ namespace Inventory
             this.toolStrip1.Location = new System.Drawing.Point(0, 23);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(1340, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1338, 55);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -4624,7 +4624,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1340, 569);
+            this.ClientSize = new System.Drawing.Size(1338, 569);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mnuMain);

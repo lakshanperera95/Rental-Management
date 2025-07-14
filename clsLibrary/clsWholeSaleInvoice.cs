@@ -327,6 +327,8 @@ namespace clsLibrary
         public string ConNo { get; set; }
         public string ConPer { get; set; }
         public string BookNo { get; set; }
+        public string Rdate_from { get; set; }
+        public string Rdate_To { get; set; }
         public string SqlStatement
         {
             get { return strSqlStatement; }
@@ -1576,13 +1578,13 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@BatchNo", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strBatchNo));
                 command.Parameters.Add(new SqlParameter("@AutoSelect", SqlDbType.Bit, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, AutoSelect));
                 command.Parameters.Add(new SqlParameter("@Purchase_price", SqlDbType.Money, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, decPurchasePrice));
-
                 command.Parameters.Add(new SqlParameter("@Code", SqlDbType.NVarChar, 60, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, code));
                 command.Parameters.Add(new SqlParameter("@Unit_No ", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, LoginManager.MachineUnit));
                 command.Parameters.Add(new SqlParameter("@Salsmen_Code", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default,Salsmen_Code));
                 command.Parameters.Add(new SqlParameter("@Remarks", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Remark));
                 command.Parameters.Add(new SqlParameter("@Po_Number", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default,Po_Number));
                 command.Parameters.Add(new SqlParameter("@Serial_No", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strSerialNo));
+                command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
 
 
                 DataSet emptyDs = null;
@@ -1789,6 +1791,9 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@ConNo", ConNo));
                 command.Parameters.Add(new SqlParameter("@ConPer", ConPer));
                 command.Parameters.Add(new SqlParameter("@BookingNo", BookNo));
+                command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
+                command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
+                command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
 
                 //SqlDataAdapter da = new SqlDataAdapter(command);
                 //da.Fill(dsForReport = new DataSet(), "dsInvoiceDetails");
@@ -2113,6 +2118,7 @@ namespace clsLibrary
         public string Salsmen_Code { get; set; }
         public string Po_Number { get; set; }
         public string strSerialNo { get; set; }
+        public string strInvType { get; set; }
         public void AddToPaymentModeForRpt()
         {
             try

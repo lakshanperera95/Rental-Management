@@ -169,3 +169,13 @@ Date/Time :' 14/07/2025 18:44:47'frmWholeSaleInvoice 001. Error Description Inva
 Parameter name: SelectedIndex 'Location :' 01 'User Name :' ONIMTA '
 Date/Time :' 14/07/2025 18:47:14'frmWholeSaleInvoice 001. Error Description InvalidArgument=Value of '1' is not valid for 'SelectedIndex'.
 Parameter name: SelectedIndex 'Location :' 01 'User Name :' ONIMTA '
+'Connection Open Failier. Date/Time :' 14/07/2025 19:54:37 Error Description Cannot open database "Rental" requested by the login. The login failed.
+Login failed for user 'sa'.
+Date/Time :' 14/07/2025 21:43:48'frmGrn 001. Error Description Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 14/07/2025 21:44:02'frmGrn 001. Error Description Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index 'Location :' 01 'User Name :' ONIMTA '
+Date/Time :' 14/07/2025 21:54:53'Error Location  :  Inventory.FrmPrinterSelect.FrmPrinterSelect_Load(Object sender, EventArgs e) in D:\Source Code\Rental-Management\Inventory\FrmPrinterSelect.cs:line 43.   Error Description  :There is no row at position 0. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 15/07/2025 00:26:45'Error Location  :  Inventory.frmWholeSaleInvoice.btnApply_Click(Object sender, EventArgs e).   Error Description  :Procedure or function 'sp_InvoiceApply' expects parameter '@Rdatefrom', which was not supplied. 'Location :'01'User Name :'USER'
+Date/Time :' 15/07/2025 00:37:37'Error Location  :  Inventory.frmWholeSaleInvoice.btnApply_Click(Object sender, EventArgs e) in D:\Source Code\Rental-Management\Inventory\frmWholeSaleInvoice.cs:line 2271.   Error Description  :Procedure or function 'sp_InvoiceApply' expects parameter '@Rdate_from', which was not supplied. 'Location :'01'User Name :'ONIMTA'
+Date/Time :' 15/07/2025 00:53:12'Error Location  :  Inventory.frmWholeSaleInvoice.btnApply_Click(Object sender, EventArgs e).   Error Description  :Procedure or function 'sp_InvoiceApply' expects parameter '@Rdate_from', which was not supplied. 'Location :'01'User Name :'ONIMTA'
