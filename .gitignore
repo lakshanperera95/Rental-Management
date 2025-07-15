@@ -2,6 +2,19 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+# Ignore Visual Studio workspace and user settings
 .vs/
-/Inventory/bin
-.vs/
+*.user
+*.suo
+
+# Ignore build output folders
+bin/
+obj/
+Inventory/bin/
+Inventory/obj/
+
+# Ignore temp and build-generated files
+*.log
+*.cache
+*.db
+*.pdb
