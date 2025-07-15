@@ -501,7 +501,7 @@ namespace Inventory
             this.mnuMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(1338, 23);
+            this.mnuMain.Size = new System.Drawing.Size(1299, 23);
             this.mnuMain.TabIndex = 1;
             this.mnuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMain_ItemClicked);
             // 
@@ -4151,35 +4151,35 @@ namespace Inventory
             // walpaper1ToolStripMenuItem
             // 
             this.walpaper1ToolStripMenuItem.Name = "walpaper1ToolStripMenuItem";
-            this.walpaper1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.walpaper1ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.walpaper1ToolStripMenuItem.Text = "Walpaper 1";
             this.walpaper1ToolStripMenuItem.Click += new System.EventHandler(this.walpaper1ToolStripMenuItem_Click);
             // 
             // walpaper2ToolStripMenuItem
             // 
             this.walpaper2ToolStripMenuItem.Name = "walpaper2ToolStripMenuItem";
-            this.walpaper2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.walpaper2ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.walpaper2ToolStripMenuItem.Text = "Walpaper 2";
             this.walpaper2ToolStripMenuItem.Click += new System.EventHandler(this.walpaper2ToolStripMenuItem_Click);
             // 
             // walpaper3ToolStripMenuItem
             // 
             this.walpaper3ToolStripMenuItem.Name = "walpaper3ToolStripMenuItem";
-            this.walpaper3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.walpaper3ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.walpaper3ToolStripMenuItem.Text = "Walpaper 3";
             this.walpaper3ToolStripMenuItem.Click += new System.EventHandler(this.walpaper3ToolStripMenuItem_Click);
             // 
             // walpaper4ToolStripMenuItem
             // 
             this.walpaper4ToolStripMenuItem.Name = "walpaper4ToolStripMenuItem";
-            this.walpaper4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.walpaper4ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.walpaper4ToolStripMenuItem.Text = "Walpaper 4";
             this.walpaper4ToolStripMenuItem.Click += new System.EventHandler(this.walpaper4ToolStripMenuItem_Click);
             // 
             // walpaper5ToolStripMenuItem
             // 
             this.walpaper5ToolStripMenuItem.Name = "walpaper5ToolStripMenuItem";
-            this.walpaper5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.walpaper5ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.walpaper5ToolStripMenuItem.Text = "Walpaper 5";
             this.walpaper5ToolStripMenuItem.Click += new System.EventHandler(this.walpaper5ToolStripMenuItem_Click);
             // 
@@ -4303,7 +4303,7 @@ namespace Inventory
             this.toolStrip1.Location = new System.Drawing.Point(0, 23);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(1338, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1299, 56);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -4353,7 +4353,7 @@ namespace Inventory
             this.customerToolStripMenuItemTool.Image = global::Inventory.Properties.Resources.user;
             this.customerToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.customerToolStripMenuItemTool.Name = "customerToolStripMenuItemTool";
-            this.customerToolStripMenuItemTool.Size = new System.Drawing.Size(63, 52);
+            this.customerToolStripMenuItemTool.Size = new System.Drawing.Size(63, 53);
             this.customerToolStripMenuItemTool.Tag = "M01M02";
             this.customerToolStripMenuItemTool.Text = "Customer";
             this.customerToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4364,7 +4364,7 @@ namespace Inventory
             this.supplierToolStripMenuItem1Tool.Image = global::Inventory.Properties.Resources.supplier;
             this.supplierToolStripMenuItem1Tool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.supplierToolStripMenuItem1Tool.Name = "supplierToolStripMenuItem1Tool";
-            this.supplierToolStripMenuItem1Tool.Size = new System.Drawing.Size(54, 52);
+            this.supplierToolStripMenuItem1Tool.Size = new System.Drawing.Size(54, 53);
             this.supplierToolStripMenuItem1Tool.Tag = "M01M03";
             this.supplierToolStripMenuItem1Tool.Text = "Supplier";
             this.supplierToolStripMenuItem1Tool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4387,7 +4387,7 @@ namespace Inventory
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 56);
             // 
             // purchaseOrderNoteToolStripMenuItem2Tool
             // 
@@ -4444,7 +4444,7 @@ namespace Inventory
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
             // wholeSaleInvoiceToolStripMenuItem2Tool
             // 
@@ -4463,7 +4463,7 @@ namespace Inventory
             this.quotationToolStripMenuItemTool.Image = global::Inventory.Properties.Resources.price_list__2_;
             this.quotationToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.quotationToolStripMenuItemTool.Name = "quotationToolStripMenuItemTool";
-            this.quotationToolStripMenuItemTool.Size = new System.Drawing.Size(65, 52);
+            this.quotationToolStripMenuItemTool.Size = new System.Drawing.Size(65, 53);
             this.quotationToolStripMenuItemTool.Tag = "M03M02M02";
             this.quotationToolStripMenuItemTool.Text = "Quotation";
             this.quotationToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4472,7 +4472,7 @@ namespace Inventory
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 56);
             // 
             // receiptToolStripMenuItem1Tool
             // 
@@ -4501,14 +4501,14 @@ namespace Inventory
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 56);
             // 
             // receivedOnAccToolStripMenuItem1Tool
             // 
             this.receivedOnAccToolStripMenuItem1Tool.Image = global::Inventory.Properties.Resources._1;
             this.receivedOnAccToolStripMenuItem1Tool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.receivedOnAccToolStripMenuItem1Tool.Name = "receivedOnAccToolStripMenuItem1Tool";
-            this.receivedOnAccToolStripMenuItem1Tool.Size = new System.Drawing.Size(36, 52);
+            this.receivedOnAccToolStripMenuItem1Tool.Size = new System.Drawing.Size(36, 53);
             this.receivedOnAccToolStripMenuItem1Tool.Tag = "M03M02M10";
             this.receivedOnAccToolStripMenuItem1Tool.Text = "ROA";
             this.receivedOnAccToolStripMenuItem1Tool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4519,7 +4519,7 @@ namespace Inventory
             this.cashDenominationToolStripMenuItem2Tool.Image = global::Inventory.Properties.Resources._2;
             this.cashDenominationToolStripMenuItem2Tool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cashDenominationToolStripMenuItem2Tool.Name = "cashDenominationToolStripMenuItem2Tool";
-            this.cashDenominationToolStripMenuItem2Tool.Size = new System.Drawing.Size(47, 52);
+            this.cashDenominationToolStripMenuItem2Tool.Size = new System.Drawing.Size(47, 53);
             this.cashDenominationToolStripMenuItem2Tool.Tag = "M03M02M11";
             this.cashDenominationToolStripMenuItem2Tool.Text = "CDNM";
             this.cashDenominationToolStripMenuItem2Tool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4531,7 +4531,7 @@ namespace Inventory
             this.cashINOUTToolStripMenuItemTool.Image = global::Inventory.Properties.Resources._3;
             this.cashINOUTToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cashINOUTToolStripMenuItemTool.Name = "cashINOUTToolStripMenuItemTool";
-            this.cashINOUTToolStripMenuItemTool.Size = new System.Drawing.Size(78, 52);
+            this.cashINOUTToolStripMenuItemTool.Size = new System.Drawing.Size(78, 53);
             this.cashINOUTToolStripMenuItemTool.Tag = "M03M02M08";
             this.cashINOUTToolStripMenuItemTool.Text = "Cash IN OUT";
             this.cashINOUTToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4554,7 +4554,7 @@ namespace Inventory
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Image = global::Inventory.Properties.Resources.User_Role;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Name = "dailySalesCollectionSummeryToolStripMenuItemTool";
-            this.dailySalesCollectionSummeryToolStripMenuItemTool.Size = new System.Drawing.Size(108, 52);
+            this.dailySalesCollectionSummeryToolStripMenuItemTool.Size = new System.Drawing.Size(108, 53);
             this.dailySalesCollectionSummeryToolStripMenuItemTool.Text = "Day End Summery";
             this.dailySalesCollectionSummeryToolStripMenuItemTool.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.dailySalesCollectionSummeryToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -4624,7 +4624,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1338, 569);
+            this.ClientSize = new System.Drawing.Size(1299, 569);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mnuMain);

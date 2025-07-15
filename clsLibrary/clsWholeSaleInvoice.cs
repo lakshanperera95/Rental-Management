@@ -327,8 +327,6 @@ namespace clsLibrary
         public string ConNo { get; set; }
         public string ConPer { get; set; }
         public string BookNo { get; set; }
-        public string Rdate_from { get; set; }
-        public string Rdate_To { get; set; }
         public string SqlStatement
         {
             get { return strSqlStatement; }
@@ -1585,7 +1583,8 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@Po_Number", SqlDbType.NVarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default,Po_Number));
                 command.Parameters.Add(new SqlParameter("@Serial_No", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strSerialNo));
                 command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
-
+                command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
+                command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
 
                 DataSet emptyDs = null;
                 DataTableReader emtyDTR = null;
@@ -1742,7 +1741,7 @@ namespace clsLibrary
 
         public void InvoiceApply(bool sinhala)
         {
-            DateTime PostDate = DateTime.Now;
+            //DateTime PostDate = DateTime.Now;
             try
             {
                 intErrCode = 0;
@@ -1794,6 +1793,8 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
                 command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
                 command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
+                //command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15) { Value = Rdate_from.ToString() });
+                //command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15) { Value = Rdate_To.ToString() });
 
                 //SqlDataAdapter da = new SqlDataAdapter(command);
                 //da.Fill(dsForReport = new DataSet(), "dsInvoiceDetails");
@@ -1860,7 +1861,9 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@ConNo", ConNo));
                 command.Parameters.Add(new SqlParameter("@ConPer", ConPer));
                 command.Parameters.Add(new SqlParameter("@BookingNo", BookNo));
-
+                command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
+                command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
+                command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
 
                 // command.ExecuteNonQuery();
 
@@ -2119,6 +2122,8 @@ namespace clsLibrary
         public string Po_Number { get; set; }
         public string strSerialNo { get; set; }
         public string strInvType { get; set; }
+        public string Rdate_from { get; set; }
+        public string Rdate_To { get; set; }
         public void AddToPaymentModeForRpt()
         {
             try
