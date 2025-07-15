@@ -18,3 +18,16 @@ Inventory/obj/
 *.cache
 *.db
 *.pdb
+
+# Ignore compiled DLLs and EXEs (if any)
+*.dll
+*.exe
+
+# Ignore other temp/debug folders (optional)
+Debug/
+Release/
+
+# Ignore NuGet packages if not checked in
+packages/
+*.nupkg
+project.lock.json
