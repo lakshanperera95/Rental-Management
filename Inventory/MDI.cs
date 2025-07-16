@@ -7585,6 +7585,21 @@ namespace Inventory
             }
         }
 
+        private void RentToolStripMenuItemTool_Click(object sender, EventArgs e)
+        {
+            if (frmRental.GetRent == null)
+            {
+                frmRental.GetRent = new frmRental();
+                frmRental.GetRent.MdiParent = this;
+                frmRental.GetRent.Show();
+            }
+            else
+            {
+                frmSpaVoucher.GetGiftVoucher.Focus();
+            }
+
+        }
+
         //private void specialPromotionSalesReportToolStripMenuItem1_Click(object sender, EventArgs e)
         //{
         //    if (frmSalesInquary.GetSalesInquary == null)

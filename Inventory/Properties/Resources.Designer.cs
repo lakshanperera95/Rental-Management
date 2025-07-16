@@ -580,6 +580,16 @@ namespace Inventory.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rent_6090893 {
+            get {
+                object obj = ResourceManager.GetObject("rent_6090893", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap returndsss {
             get {
                 object obj = ResourceManager.GetObject("returndsss", resourceCulture);
