@@ -794,6 +794,11 @@ namespace clsLibrary
                     Tech1 = objdtReader["Tech1"].ToString();
                     Tech2 = objdtReader["Tech2"].ToString();
                     BookNo = objdtReader["PayRemark3"].ToString();
+                    strInvType = objdtReader["InvType"].ToString();
+                    Rdate_from = objdtReader["Rdate_from"].ToString();
+                    Rdate_To = objdtReader["Rdate_To"].ToString();
+                    Deposit = objdtReader["Deposit"].ToString();
+
 
                     blRecordFound = true;
                 }
@@ -1009,8 +1014,9 @@ namespace clsLibrary
         {
             try
             {
+                
 
-                strSqlStatement = "select isnull(sum(Amount),0) from TransactionTemp_Details WHERE Iid = 'INV' AND Loca = '" + LoginManager.LocaCode + "' AND Doc_No = '" + strTempDocumentNo + "';" +
+                strSqlStatement = "select isnull(sum(Amount ),0) from TransactionTemp_Details WHERE Iid = 'INV' AND Loca = '" + LoginManager.LocaCode + "' AND Doc_No = '" + strTempDocumentNo + "';" +
                     "select isnull(sum(Qty),0),count(Distinct Prod_Code) from TransactionTemp_Details WHERE Iid = 'INV' AND Loca = '" + LoginManager.LocaCode + "' AND Doc_No = '" + strTempDocumentNo + "'";
 
                 Ads = dbconApi.getDataset(strSqlStatement, "ds");
@@ -1585,6 +1591,7 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
                 command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
                 command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
+                command.Parameters.Add(new SqlParameter("@Deposit", SqlDbType.Money,0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Deposit));
 
                 DataSet emptyDs = null;
                 DataTableReader emtyDTR = null;
@@ -1793,6 +1800,7 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
                 command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
                 command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
+                command.Parameters.Add(new SqlParameter("@Deposit", SqlDbType.Money, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Deposit));
                 //command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15) { Value = Rdate_from.ToString() });
                 //command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15) { Value = Rdate_To.ToString() });
 
@@ -1864,6 +1872,7 @@ namespace clsLibrary
                 command.Parameters.Add(new SqlParameter("@InvTypeFor", SqlDbType.NVarChar, 10, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, strInvType));
                 command.Parameters.Add(new SqlParameter("@Rdatefrom", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_from));
                 command.Parameters.Add(new SqlParameter("@RdateTo", SqlDbType.NVarChar, 15, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Rdate_To));
+                command.Parameters.Add(new SqlParameter("@Deposit", SqlDbType.Money, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, Deposit));
 
                 // command.ExecuteNonQuery();
 
@@ -2124,6 +2133,7 @@ namespace clsLibrary
         public string strInvType { get; set; }
         public string Rdate_from { get; set; }
         public string Rdate_To { get; set; }
+        public string Deposit { get; set; }
         public void AddToPaymentModeForRpt()
         {
             try
