@@ -604,6 +604,7 @@ namespace Inventory
                         // Added by Nipuni - 2024.03.28
                         chkServItem.Checked = prod.ServiceItem;
                         txtServTime.Text = prod.ServiceTime.ToString();
+                        chkRentItem.Checked = prod.Rentitem;
 
                         lblMargineAmount.Text = string.Format("{0:0.00}", decimal.Parse(txtSelPrice.Text) - decimal.Parse(txtPurchPrice.Text));
                         lblDiscounted.Text = prod.DiscountPrice;// string.Format("{0:0.00}", decimal.Parse(txtSelPrice.Text) - decimal.Parse(txtPurchPrice.Text));
@@ -1756,6 +1757,7 @@ namespace Inventory
 
                     // Added By Nipuni - 2024.03.28
                     prod.ServiceItem = chkServItem.Checked;
+                    prod.Rentitem = chkRentItem.Checked;
                     prod.ServiceTime = Convert.ToDecimal(txtServTime.Text);
 
                     try
@@ -1926,6 +1928,7 @@ namespace Inventory
                 chkOgf.Checked =chkBatchPUpdate.Checked=chkSerialNo.Checked=chkInstallCharges.Checked=chkwarntyhandle.Checked= false;
                 chkServItem.Checked = false;
                 txtServTime.Text = "0";
+                chkRentItem.Checked = false;
 
             }
             catch (Exception ex)

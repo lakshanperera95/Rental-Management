@@ -89,6 +89,7 @@ namespace Inventory
             this.chkPRNEditSelling = new System.Windows.Forms.CheckBox();
             this.tabINV = new System.Windows.Forms.TabPage();
             this.grpINV = new System.Windows.Forms.GroupBox();
+            this.chkinvtypeallow = new System.Windows.Forms.CheckBox();
             this.chkSerialAllow = new System.Windows.Forms.CheckBox();
             this.chkNSrchMode = new System.Windows.Forms.CheckBox();
             this.chkShowPurchasePrice = new System.Windows.Forms.CheckBox();
@@ -147,7 +148,7 @@ namespace Inventory
             this.chkGift = new System.Windows.Forms.CheckBox();
             this.chkCRM = new System.Windows.Forms.CheckBox();
             this.chkInsertContinuesly = new System.Windows.Forms.CheckBox();
-            this.chkinvtypeallow = new System.Windows.Forms.CheckBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.grpProduct.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -443,6 +444,7 @@ namespace Inventory
             this.tabMain.Controls.Add(this.tabCUR);
             this.tabMain.Controls.Add(this.tabRec);
             this.tabMain.Controls.Add(this.tabCommon);
+            this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Location = new System.Drawing.Point(4, 6);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -876,6 +878,17 @@ namespace Inventory
             this.grpINV.TabIndex = 1;
             this.grpINV.TabStop = false;
             this.grpINV.Enter += new System.EventHandler(this.grpINV_Enter);
+            // 
+            // chkinvtypeallow
+            // 
+            this.chkinvtypeallow.AutoSize = true;
+            this.chkinvtypeallow.Location = new System.Drawing.Point(283, 66);
+            this.chkinvtypeallow.Name = "chkinvtypeallow";
+            this.chkinvtypeallow.Size = new System.Drawing.Size(112, 17);
+            this.chkinvtypeallow.TabIndex = 237;
+            this.chkinvtypeallow.Text = "Invoice type Allow";
+            this.chkinvtypeallow.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.chkinvtypeallow.UseVisualStyleBackColor = true;
             // 
             // chkSerialAllow
             // 
@@ -1489,16 +1502,15 @@ namespace Inventory
             this.chkInsertContinuesly.UseVisualStyleBackColor = true;
             this.chkInsertContinuesly.CheckedChanged += new System.EventHandler(this.chkInsertContinuesly_CheckedChanged);
             // 
-            // chkinvtypeallow
+            // tabPage1
             // 
-            this.chkinvtypeallow.AutoSize = true;
-            this.chkinvtypeallow.Location = new System.Drawing.Point(283, 66);
-            this.chkinvtypeallow.Name = "chkinvtypeallow";
-            this.chkinvtypeallow.Size = new System.Drawing.Size(112, 17);
-            this.chkinvtypeallow.TabIndex = 237;
-            this.chkinvtypeallow.Text = "Invoice type Allow";
-            this.chkinvtypeallow.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.chkinvtypeallow.UseVisualStyleBackColor = true;
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(634, 210);
+            this.tabPage1.TabIndex = 11;
+            this.tabPage1.Text = "Menu";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 
@@ -1686,5 +1698,6 @@ namespace Inventory
         private System.Windows.Forms.CheckBox chkSerialAllow;
         private System.Windows.Forms.CheckBox chkPosBillings;
         private System.Windows.Forms.CheckBox chkinvtypeallow;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }

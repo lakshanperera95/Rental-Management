@@ -528,10 +528,17 @@ namespace clsLibrary
         public bool BatchPUpdate { get; set; }
 
         private bool blServiceItem;
+        private bool blRentitem;
         public bool ServiceItem
         {
             get { return blServiceItem; }
             set { blServiceItem = value; }
+        }
+
+        public bool Rentitem
+        {
+            get { return blRentitem; }
+            set { blRentitem = value; }
         }
 
         public void newReader()
@@ -648,6 +655,7 @@ namespace clsLibrary
                 // Added By Nipuni - 2024.03.28
                 command.Parameters.Add(new SqlParameter("@ServiceItem", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, ServiceItem));
                 command.Parameters.Add(new SqlParameter("@ServiceTime", SqlDbType.Decimal, 0, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default, ServiceTime));
+                command.Parameters.Add(new SqlParameter("@Rentitem", SqlDbType.Bit, 1, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Default,Rentitem));
 
                 command.ExecuteNonQuery();
                 command.UpdatedRowSource = UpdateRowSource.OutputParameters;
@@ -873,6 +881,7 @@ namespace clsLibrary
                     // Added by Nipuni - 2024.03.28
                     ServiceItem = (bool)DataReader["ServiceItem"];
                     ServiceTime = decimal.Parse(DataReader["ServiceTime"].ToString());
+                    Rentitem = (bool)DataReader["Rentitem"];
 
                     try
                     {

@@ -460,6 +460,7 @@ namespace Inventory
             this.barcodePrintToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
             this.dailySalesCollectionSummeryToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
             this.CheqPrintToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
+            this.RentToolStripMenuItemTool = new System.Windows.Forms.ToolStripButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -501,7 +502,7 @@ namespace Inventory
             this.mnuMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(1299, 23);
+            this.mnuMain.Size = new System.Drawing.Size(1359, 23);
             this.mnuMain.TabIndex = 1;
             this.mnuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMain_ItemClicked);
             // 
@@ -541,7 +542,7 @@ namespace Inventory
             // 
             // customerToolStripMenuItem
             // 
-            this.customerToolStripMenuItem.Image = global::Inventory.Properties.Resources._1319516725_testimonials;
+            this.customerToolStripMenuItem.Image = global::Inventory.Properties.Resources.user;
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
             this.customerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.customerToolStripMenuItem.Tag = "M01M02";
@@ -551,7 +552,7 @@ namespace Inventory
             // 
             // supplierToolStripMenuItem1
             // 
-            this.supplierToolStripMenuItem1.Image = global::Inventory.Properties.Resources._1284123336_people;
+            this.supplierToolStripMenuItem1.Image = global::Inventory.Properties.Resources.supplier;
             this.supplierToolStripMenuItem1.Name = "supplierToolStripMenuItem1";
             this.supplierToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.supplierToolStripMenuItem1.Tag = "M01M03";
@@ -561,7 +562,7 @@ namespace Inventory
             // 
             // mnuDepartment
             // 
-            this.mnuDepartment.Image = global::Inventory.Properties.Resources.Department;
+            this.mnuDepartment.Image = global::Inventory.Properties.Resources.hierarchy;
             this.mnuDepartment.Name = "mnuDepartment";
             this.mnuDepartment.Size = new System.Drawing.Size(172, 22);
             this.mnuDepartment.Tag = "M01M04";
@@ -571,7 +572,7 @@ namespace Inventory
             // 
             // mnuCategory
             // 
-            this.mnuCategory.Image = global::Inventory.Properties.Resources.categories;
+            this.mnuCategory.Image = global::Inventory.Properties.Resources.cat;
             this.mnuCategory.Name = "mnuCategory";
             this.mnuCategory.Size = new System.Drawing.Size(172, 22);
             this.mnuCategory.Tag = "M01M05";
@@ -595,7 +596,7 @@ namespace Inventory
             this.bundlingRegistreToolStripMenuItem,
             this.abstractRegisterToolStripMenuItem,
             this.productLinkToolStripMenuItem});
-            this.mnuProduct.Image = global::Inventory.Properties.Resources.Product;
+            this.mnuProduct.Image = global::Inventory.Properties.Resources.shopping_cart;
             this.mnuProduct.Name = "mnuProduct";
             this.mnuProduct.Size = new System.Drawing.Size(172, 22);
             this.mnuProduct.Tag = "M01M07";
@@ -694,7 +695,7 @@ namespace Inventory
             // 
             // logoffToolStripMenuItem
             // 
-            this.logoffToolStripMenuItem.Image = global::Inventory.Properties.Resources.unlock_32_2_;
+            this.logoffToolStripMenuItem.Image = global::Inventory.Properties.Resources.log_off;
             this.logoffToolStripMenuItem.Name = "logoffToolStripMenuItem";
             this.logoffToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.logoffToolStripMenuItem.Text = "Log Off";
@@ -4299,11 +4300,12 @@ namespace Inventory
             this.cashINOUTToolStripMenuItemTool,
             this.barcodePrintToolStripMenuItemTool,
             this.dailySalesCollectionSummeryToolStripMenuItemTool,
-            this.CheqPrintToolStripMenuItemTool});
+            this.CheqPrintToolStripMenuItemTool,
+            this.RentToolStripMenuItemTool});
             this.toolStrip1.Location = new System.Drawing.Point(0, 23);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(1299, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(1359, 56);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -4573,6 +4575,19 @@ namespace Inventory
             this.CheqPrintToolStripMenuItemTool.ToolTipText = "Cheq Print";
             this.CheqPrintToolStripMenuItemTool.Click += new System.EventHandler(this.CheqPrintToolStripMenuItemTool_Click);
             // 
+            // RentToolStripMenuItemTool
+            // 
+            this.RentToolStripMenuItemTool.AutoSize = false;
+            this.RentToolStripMenuItemTool.Image = global::Inventory.Properties.Resources.rent_6090893;
+            this.RentToolStripMenuItemTool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RentToolStripMenuItemTool.Name = "RentToolStripMenuItemTool";
+            this.RentToolStripMenuItemTool.Size = new System.Drawing.Size(61, 52);
+            this.RentToolStripMenuItemTool.Tag = "M12M01";
+            this.RentToolStripMenuItemTool.Text = "Rent Recall";
+            this.RentToolStripMenuItemTool.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.RentToolStripMenuItemTool.ToolTipText = "Cheq Print";
+            this.RentToolStripMenuItemTool.Click += new System.EventHandler(this.RentToolStripMenuItemTool_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Enabled = false;
@@ -4624,7 +4639,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1299, 569);
+            this.ClientSize = new System.Drawing.Size(1359, 569);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mnuMain);
@@ -5093,5 +5108,6 @@ namespace Inventory
         public System.Windows.Forms.ToolStripButton quotationToolStripMenuItemTool;
         private System.Windows.Forms.ToolStripMenuItem spaVouchersToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton CheqPrintToolStripMenuItemTool;
+        private System.Windows.Forms.ToolStripButton RentToolStripMenuItemTool;
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="clsDisplayReceipt.cs" />
     <Compile Include="clsJob.cs" />
     <Compile Include="clsPosDisplay.cs" />
+    <Compile Include="clsRent.cs" />
     <Compile Include="clsSalesTransfer.cs" />
     <Compile Include="clsSecurity.cs" />
     <Compile Include="clsSerialNo.cs" />

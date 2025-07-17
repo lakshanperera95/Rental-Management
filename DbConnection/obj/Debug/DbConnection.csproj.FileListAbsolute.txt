@@ -46,7 +46,6 @@ D:\Source Code\Rental-Management\DbConnection\obj\Debug\DbConnection.pdb
 D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\bin\Debug\DbConnection.dll
 D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\bin\Debug\DbConnection.pdb
 D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\bin\Debug\Newtonsoft.Json.dll
-D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\obj\Debug\DbConnection.csproj.AssemblyReference.cache
 D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\obj\Debug\DbConnection.csproj.CoreCompileInputs.cache
 D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\obj\Debug\DbConnection.csproj.CopyComplete
 D:\Laiz Source Code\STANDERD\Rental Management Systems\DbConnection\obj\Debug\DbConnection.dll

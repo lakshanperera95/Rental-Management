@@ -19,21 +19,21 @@ namespace Inventory
         private int intPosOfPerc;   // find Percentage mark on percentage
         private decimal fltDiscPer;
         bool CusSearching = Settings.Default.Searching;
-        clsQuotaion objQuotation = new clsQuotaion();
+        clsRent objRent = new clsRent();
 
         public frmRental()
         {
             InitializeComponent();
         }
 
-        private static frmRental Quotation;
+        private static frmRental Rental;
 
         private frmSearch search = new frmSearch();
 
-        public static frmRental GetQuotation
+        public static frmRental GetRent
         {
-            get { return Quotation; }
-            set { Quotation = value; }
+            get { return Rental; }
+            set { Rental = value; }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace Inventory
             {
                 this.Close();
                 this.Dispose();
-                Quotation = null;
+                Rental = null;
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace Inventory
         {
             try
             {
-                Quotation = null;
+                Rental = null;
             }
             catch (Exception ex)
             {
@@ -124,10 +124,10 @@ namespace Inventory
         {
             try
             {
-                objQuotation.SqlStatement = "SELECT Temp_Quot FROM DocumentNoDetails WHERE Loca = ";
-                objQuotation.GetTempDocumentNo();
-                lblTempDocNo.Text = objQuotation.TempDocNo;
-                dataGridTempInvoice.DataSource = objQuotation.TempInvoice;
+                //objRent.SqlStatement = "SELECT Temp_Quot FROM DocumentNoDetails WHERE Loca = ";
+                //objRent.GetTempDocumentNo();
+                //lblTempDocNo.Text = objRent.TempDocNo;
+                dataGridTempInvoice.DataSource = objRent.TempInvoice;
                 dataGridTempInvoice.Refresh();
 
                 if (CusSearching == true)
@@ -166,11 +166,11 @@ namespace Inventory
                     search = new frmSearch();
                 }
 
-                objQuotation.SqlStatement = "SELECT Doc_No [Document No], Post_Date + '  ' + Customer.Cust_Name [Customer] FROM Transaction_Save_Header INNER JOIN Customer on Transaction_Save_Header.Supplier_Id = Customer.Cust_code WHERE Transaction_Save_Header.Iid = 'QUO' AND Transaction_Save_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC";
-                objQuotation.DataetName = "Table";
-                objQuotation.GetItemDetails();
+                objRent.SqlStatement = " SELECT Doc_No [Document No], Post_Date + '  ' + Customer.Cust_Name [Customer] FROM Transaction_Header INNER JOIN Customer on Transaction_Header.Supplier_Id = Customer.Cust_code WHERE Transaction_Header.Iid = 'INV'  and Transaction_Header.InvType = 'RENT' and Transaction_Header.Recalled = 'F'AND Transaction_Header.Loca = '" + LoginManager.LocaCode + "' ORDER BY RIGHT(Doc_No,6) DESC ";
+                objRent.DataetName = "Table";
+                objRent.GetItemDetails();
 
-                search.dgSearch.DataSource = objQuotation.GetItemDataset.Tables["Table"];
+                search.dgSearch.DataSource = objRent.GetItemDataset.Tables["Table"];
                 search.Show();
 
                 search.prop_Focus = lblTempDocNo;
@@ -201,37 +201,37 @@ namespace Inventory
             {
                 if (search.Code != null && search.Code != "")
                 {
-                    if (MessageBox.Show("Are You Sure You want to Load Saved Quotation Document No :" + search.Code.Trim() + ". ", "Quotation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    if (MessageBox.Show("Are You Sure You want to Load Rental Item  Document No :" + search.Code.Trim() + ". ", "Rental", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
 
-                        objQuotation.RecallSaveDocNo = search.Code.Trim();
-                        objQuotation.SqlStatement = "SELECT Supplier_Id, To_LocaDesc, PayRemark1, PayRemark2, PayRemark3, Pay_Type, Remarks, Reference, Code, Ref_Name, Tax, Discount FROM Transaction_Save_Header WHERE iid = 'QUO' AND Doc_No = '" + search.Code.Trim() + "' AND Loca = ";
-                        objQuotation.ReadSavedDocument();
-                        if (objQuotation.RecordFound)
+                        objRent.RecallSaveDocNo = search.Code.Trim();
+                        objRent.SqlStatement = " SELECT Supplier_Id, To_LocaDesc, PayRemark1, PayRemark2, PayRemark3, Pay_Type, Remarks, Reference, Code, Ref_Name, Tax, Discount FROM Transaction_Header WHERE iid = 'INV' and Transaction_Header.InvType = 'RENT' and Transaction_Header.Recalled = 'F' AND Doc_No = '" + search.Code.Trim() + "' AND Loca = ";
+                        objRent.ReadSavedDocument();
+                        if (objRent.RecordFound)
                         {
-                            lblTempDocNo.Text = objQuotation.TempDocNo;
-                            txtCustCode.Text = objQuotation.CustCode.ToString();
-                            txtCustName.Text = objQuotation.CustName.ToString();
-                            txtCustAddress1.Text = objQuotation.Address1.ToString();
-                            txtCustAddress2.Text = objQuotation.Address2.ToString();
-                            txtCustAddress3.Text = objQuotation.Address3.ToString();
-                            txtReference.Text = objQuotation.Reference.ToString();
-                            txtRemarks.Text = objQuotation.Remark.ToString();
-                            txtSalesAssist.Text = objQuotation.SalesAssistant.ToString();
-                            txtComments.Text = objQuotation.Comments.ToString();
-                            objQuotation.GetTempDataset();
-                            dataGridTempInvoice.DataSource = objQuotation.TempInvoice.Tables["Invoice"];
+                            lblTempDocNo.Text = objRent.TempDocNo;
+                            txtCustCode.Text = objRent.CustCode.ToString();
+                            txtCustName.Text = objRent.CustName.ToString();
+                            txtCustAddress1.Text = objRent.Address1.ToString();
+                            txtCustAddress2.Text = objRent.Address2.ToString();
+                            txtCustAddress3.Text = objRent.Address3.ToString();
+                            txtReference.Text = objRent.Reference.ToString();
+                            txtRemarks.Text = objRent.Remark.ToString();
+                            txtSalesAssist.Text = objRent.SalesAssistant.ToString();
+                            txtComments.Text = objRent.Comments.ToString();
+                            objRent.GetTempDataset();
+                            dataGridTempInvoice.DataSource = objRent.TempInvoice.Tables["Invoice"];
                             dataGridTempInvoice.Refresh();
 
-                            objQuotation.GetTotalValues();
+                            objRent.GetTotalValues();
 
-                            lblTotalQty.Text = string.Format("{0:0.00}", objQuotation.TotalQty);
-                            lblTotalAmount.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
+                            lblTotalQty.Text = string.Format("{0:0.00}", objRent.TotalQty);
+                            lblTotalAmount.Text = string.Format("{0:0.00}", objRent.TotalAmount);
                             txtSubDiscount.Text = "0";
                             txtSubDiscPer.Text = string.Empty;
                             txtTaxAmount.Text = "0";
-                            lblSubTotal.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
-                            lblNetAmount.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
+                            lblSubTotal.Text = string.Format("{0:0.00}", objRent.TotalAmount);
+                            lblNetAmount.Text = string.Format("{0:0.00}", objRent.TotalAmount);
                             txtCustCode.ReadOnly = true;
                             txtCustName.Enabled = false;
                             txtCustAddress1.Enabled = false;
@@ -307,16 +307,16 @@ namespace Inventory
             {
                 if (e.KeyCode == Keys.Enter && txtCustCode.Text.Trim() != "")
                 {
-                    objQuotation.CustCode = txtCustCode.Text.ToString().Trim();
-                    objQuotation.SqlStatement = "SELECT Cust_Code, Cust_Name, Address1, Address2, Address3 FROM Customer WHERE Cust_Code = '" + txtCustCode.Text.Trim() + "'";
-                    objQuotation.ReadCustomerDetails();
-                    if (objQuotation.RecordFound == true)
+                    objRent.CustCode = txtCustCode.Text.ToString().Trim();
+                    objRent.SqlStatement = "SELECT Cust_Code, Cust_Name, Address1, Address2, Address3 FROM Customer WHERE Cust_Code = '" + txtCustCode.Text.Trim() + "'";
+                    objRent.ReadCustomerDetails();
+                    if (objRent.RecordFound == true)
                     {
-                        txtCustCode.Text = objQuotation.CustCode;
-                        txtCustName.Text = objQuotation.CustName;
-                        txtCustAddress1.Text = objQuotation.Address1;
-                        txtCustAddress2.Text = objQuotation.Address2;
-                        txtCustAddress3.Text = objQuotation.Address3;
+                        txtCustCode.Text = objRent.CustCode;
+                        txtCustName.Text = objRent.CustName;
+                        txtCustAddress1.Text = objRent.Address1;
+                        txtCustAddress2.Text = objRent.Address2;
+                        txtCustAddress3.Text = objRent.Address3;
                         txtCustName.Focus();
                     }
                     else
@@ -436,29 +436,29 @@ namespace Inventory
 
                 if (txtCustCode.Text.Trim() == string.Empty && txtCustName.Text.Trim() == string.Empty)
                 {
-                    objQuotation.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer ORDER BY Cust_Code";
+                    objRent.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer ORDER BY Cust_Code";
                 }
                 else
                 {
                     if (txtCustCode.Text.Trim() != string.Empty && txtCustName.Text.Trim() == string.Empty)
                     {
-                        objQuotation.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer WHERE Cust_Code LIKE '%" + txtCustCode.Text.Trim() + "%' ORDER BY Cust_Code";
+                        objRent.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer WHERE Cust_Code LIKE '%" + txtCustCode.Text.Trim() + "%' ORDER BY Cust_Code";
                     }
                     else
                     {
                         if (txtCustCode.Text.Trim() == string.Empty && txtCustName.Text.Trim() != string.Empty)
                         {
-                            objQuotation.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer WHERE Cust_Name LIKE '%" + txtCustName.Text.Trim() + "%' ORDER BY Cust_Name";
+                            objRent.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer WHERE Cust_Name LIKE '%" + txtCustName.Text.Trim() + "%' ORDER BY Cust_Name";
                         }
                         else
                         {
-                            objQuotation.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer ORDER BY Cust_Code";
+                            objRent.SqlStatement = "SELECT Cust_Code AS [Customer Code],Cust_Name AS [Customer Name] FROM Customer ORDER BY Cust_Code";
                         }
                     }
                 }
-                objQuotation.DataetName = "dsCustomer";
-                objQuotation.GetCustomerDetails();
-                search.dgSearch.DataSource = objQuotation.GetCustomerDataSet.Tables["dsCustomer"];
+                objRent.DataetName = "dsCustomer";
+                objRent.GetCustomerDetails();
+                search.dgSearch.DataSource = objRent.GetCustomerDataSet.Tables["dsCustomer"];
                 search.prop_Focus = txtCustCode;
                 search.Cont_Descript = txtCustName;
                 search.Show();
@@ -713,24 +713,24 @@ namespace Inventory
                 {
 
                     txtProductCode.Text = txtProductCode.Text.ToUpper();
-                    objQuotation.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
-                    objQuotation.ReadProductDetails();
-                    if (objQuotation.RecordFound == true)
+                    objRent.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                    objRent.ReadProductDetails();
+                    if (objRent.RecordFound == true)
                     {
-                        txtProductName.Text = objQuotation.ProductName;
-                        txtSellingPrice.Text = (string)objQuotation.SellingPrice.ToString();
-                        lblCurrentQty.Text = (string)objQuotation.CurrentQty.ToString();
+                        txtProductName.Text = objRent.ProductName;
+                        txtSellingPrice.Text = (string)objRent.SellingPrice.ToString();
+                        lblCurrentQty.Text = (string)objRent.CurrentQty.ToString();
                         txtFreeQty.Text = "0";
                         txtDiscount.Text = "0";
-                        objQuotation.SqlStatement = "SELECT qty FROM TransactionTemp_Details WHERE Prod_Code = '" + objQuotation.ProductCode + "' AND Doc_No = '" + objQuotation.TempDocNo + "' AND IId = 'QUO' AND Loca = ";
-                        objQuotation.ReadExsistProductDetails();
-                        txtQty.Text = (string)objQuotation.Qty.ToString();
+                        objRent.SqlStatement = "SELECT qty FROM TransactionTemp_Details WHERE Prod_Code = '" + objRent.ProductCode + "' AND Doc_No = '" + objRent.TempDocNo + "' AND IId = 'QUO' AND Loca = ";
+                        objRent.ReadExsistProductDetails();
+                        txtQty.Text = (string)objRent.Qty.ToString();
                         txtQty.Select(0, txtQty.Text.Trim().Length);
                         txtQty.Focus();
                     }
                     else
                     {
-                        MessageBox.Show("Product Code Not Found Or Locked For Transaction. Please Check Product Code.", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Product Code Not Found Or Locked For Transaction. Please Check Product Code.", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -797,24 +797,24 @@ namespace Inventory
 
                 if (txtProductCode.Text.Trim() != string.Empty && txtProductName.Text.Trim() == string.Empty)
                 {
-                    objQuotation.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%'";
+                    objRent.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Code LIKE '%" + txtProductCode.Text.Trim() + "%'";
                 }
                 else
                 {
                     if (txtProductCode.Text.Trim() == string.Empty && txtProductName.Text.Trim() != string.Empty)
                     {
-                        objQuotation.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Name LIKE '%" + txtProductName.Text.Trim() + "%'";
+                        objRent.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product WHERE Prod_Name LIKE '%" + txtProductName.Text.Trim() + "%'";
                     }
                     else
                     {
-                        objQuotation.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product";
+                        objRent.SqlStatement = "SELECT Prod_Code AS [Product Code],Prod_Name AS [Product Name] FROM Product";
                     }
                 }
 
-                objQuotation.DataetName = "dsProduct";
-                objQuotation.GetItemDetails();
+                objRent.DataetName = "dsProduct";
+                objRent.GetItemDetails();
 
-                search.dgSearch.DataSource = objQuotation.GetItemDataset.Tables["dsProduct"];
+                search.dgSearch.DataSource = objRent.GetItemDataset.Tables["dsProduct"];
                 search.prop_Focus = txtProductCode;
                 search.Cont_Descript = txtProductName;
                 search.Show();
@@ -906,16 +906,16 @@ namespace Inventory
                 if (e.KeyCode == Keys.Enter && txtDiscount.Text.Trim() != string.Empty)
                 {
                     txtProductCode.Text = txtProductCode.Text.ToUpper();
-                    objQuotation.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
-                    objQuotation.ReadProductDetails();
-                    if (objQuotation.RecordFound == true)
+                    objRent.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE product.LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                    objRent.ReadProductDetails();
+                    if (objRent.RecordFound == true)
                     {
-                        txtProductName.Text = objQuotation.ProductName;
-                        txtSellingPrice.Text = (string)objQuotation.SellingPrice.ToString();
+                        txtProductName.Text = objRent.ProductName;
+                        txtSellingPrice.Text = (string)objRent.SellingPrice.ToString();
                     }
                     else
                     {
-                        MessageBox.Show("Product Code Not Found or Transaction Locked for This Product. Please Check Product Code.", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Product Code Not Found or Transaction Locked for This Product. Please Check Product Code.", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtProductCode.Focus();
                         return;
                     }
@@ -931,18 +931,18 @@ namespace Inventory
                         CalculateDiscountAmount(decimal.Parse(txtDiscount.Text.Trim()));
                     }
 
-                    objQuotation.ProductCode = txtProductCode.Text.Trim().ToUpper();
-                    objQuotation.ProductName = txtProductName.Text.Trim().ToUpper();
-                    lblCurrentQty.Text = objQuotation.CurrentQty.ToString();
-                    objQuotation.Qty = decimal.Parse(txtQty.Text.ToString());
-                    objQuotation.FreeQty = decimal.Parse(txtFreeQty.Text.ToString());
-                    objQuotation.Disc = strDisc;
-                    objQuotation.Discount = decimal.Parse(txtDiscount.Text.ToString());
+                    objRent.ProductCode = txtProductCode.Text.Trim().ToUpper();
+                    objRent.ProductName = txtProductName.Text.Trim().ToUpper();
+                    lblCurrentQty.Text = objRent.CurrentQty.ToString();
+                    objRent.Qty = decimal.Parse(txtQty.Text.ToString());
+                    objRent.FreeQty = decimal.Parse(txtFreeQty.Text.ToString());
+                    objRent.Disc = strDisc;
+                    objRent.Discount = decimal.Parse(txtDiscount.Text.ToString());
 
-                    objQuotation.Amount = decimal.Parse(lblAmount.Text.ToString());
-                    objQuotation.UpdateInvoiceTempDataSet();
-                    objQuotation.GetTempDataset();
-                    dataGridTempInvoice.DataSource = objQuotation.TempInvoice.Tables["Invoice"];
+                    objRent.Amount = decimal.Parse(lblAmount.Text.ToString());
+                    objRent.UpdateInvoiceTempDataSet();
+                    objRent.GetTempDataset();
+                    dataGridTempInvoice.DataSource = objRent.TempInvoice.Tables["Invoice"];
                     dataGridTempInvoice.Refresh();
                     //Set Grid Last Record
                     if (dataGridTempInvoice.RowCount > 13)
@@ -960,20 +960,20 @@ namespace Inventory
                     txtFreeQty.Text = "0";
 
                     lblAmount.Text = string.Empty;
-                    objQuotation.Disc = string.Empty;
+                    objRent.Disc = string.Empty;
                     //txtReference.Enabled = false;
                     //txtRemarks.Enabled = false;
 
-                    objQuotation.GetTotalValues();
+                    objRent.GetTotalValues();
 
-                    lblTotalQty.Text = string.Format("{0:0.00}", objQuotation.TotalQty);
-                    lblTotalAmount.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
+                    lblTotalQty.Text = string.Format("{0:0.00}", objRent.TotalQty);
+                    lblTotalAmount.Text = string.Format("{0:0.00}", objRent.TotalAmount);
 
                     txtSubDiscount.Text = "0";
                     txtSubDiscPer.Text = string.Empty;
                     txtTaxAmount.Text = "0";
-                    lblSubTotal.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
-                    lblNetAmount.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
+                    lblSubTotal.Text = string.Format("{0:0.00}", objRent.TotalAmount);
+                    lblNetAmount.Text = string.Format("{0:0.00}", objRent.TotalAmount);
                     txtCustCode.ReadOnly = true;
                     txtCustName.Enabled = false;
                     txtCustAddress1.Enabled = false;
@@ -1109,7 +1109,7 @@ namespace Inventory
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtDiscount.Focus();
                 }
             }
@@ -1147,7 +1147,7 @@ namespace Inventory
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22% or 225.00)", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtDiscount.Focus();
                 }
             }
@@ -1192,7 +1192,7 @@ namespace Inventory
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 22%)", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtSubDiscPer.Select(0, txtSubDiscPer.Text.Trim().Length);
 
                 }
@@ -1235,7 +1235,7 @@ namespace Inventory
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 225.00)", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Invalid Discount. Please Enter Valid Discount(Ex: 225.00)", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtSubDiscount.Text = "0";
                     txtSubDiscount.Select(0, txtSubDiscount.Text.Trim().Length);
                 }
@@ -1272,8 +1272,8 @@ namespace Inventory
                 {
                     txtProductCode.Text = dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString();
                     txtProductName.Text = dataGridTempInvoice.SelectedRows[0].Cells[1].Value.ToString();
-                    objQuotation.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
-                    objQuotation.ReadProductDetails();
+                    objRent.SqlStatement = "SELECT product.Prod_Code, product.Prod_Name, product.Purchase_price, product.Selling_Price, product.Whole_Price, Stock_Master.Qty, product.Pack_Size, product.Unit FROM product INNER JOIN Stock_Master ON product.Prod_Code = Stock_Master.Prod_Code WHERE LockedItem = 'F' AND product.Prod_Code = '" + txtProductCode.Text.Trim() + "' and Stock_Master.Loca = ";
+                    objRent.ReadProductDetails();
                     txtSellingPrice.Text = dataGridTempInvoice.SelectedRows[0].Cells[3].Value.ToString();
                     txtQty.Text = dataGridTempInvoice.SelectedRows[0].Cells[4].Value.ToString();
                     txtFreeQty.Text = dataGridTempInvoice.SelectedRows[0].Cells[5].Value.ToString();
@@ -1308,30 +1308,30 @@ namespace Inventory
             {
                 if (e.KeyCode == Keys.F2 && dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString() != string.Empty)
                 {
-                    if (MessageBox.Show("Are You Sure You want to Delete This Item. ", "Quotation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    if (MessageBox.Show("Are You Sure You want to Delete This Item. ", "Rental", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
-                        objQuotation.TempDocNo = lblTempDocNo.Text.Trim();
-                        objQuotation.ProductCode = dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString();
-                        objQuotation.DeleteProductDetaile();
-                        objQuotation.GetTempDataset();
-                        dataGridTempInvoice.DataSource = objQuotation.TempInvoice.Tables["Invoice"];
+                        objRent.TempDocNo = lblTempDocNo.Text.Trim();
+                        objRent.ProductCode = dataGridTempInvoice.SelectedRows[0].Cells[0].Value.ToString();
+                        objRent.DeleteProductDetaile();
+                        objRent.GetTempDataset();
+                        dataGridTempInvoice.DataSource = objRent.TempInvoice.Tables["Invoice"];
                         dataGridTempInvoice.Refresh();
 
-                        objQuotation.GetTotalValues();
+                        objRent.GetTotalValues();
 
-                        lblTotalQty.Text = objQuotation.TotalQty.ToString();
-                        lblTotalAmount.Text = objQuotation.TotalAmount.ToString();
+                        lblTotalQty.Text = objRent.TotalQty.ToString();
+                        lblTotalAmount.Text = objRent.TotalAmount.ToString();
 
-                        objQuotation.GetTotalValues();
+                        objRent.GetTotalValues();
 
-                        lblTotalQty.Text = string.Format("{0:0.00}", objQuotation.TotalQty);
-                        lblTotalAmount.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
+                        lblTotalQty.Text = string.Format("{0:0.00}", objRent.TotalQty);
+                        lblTotalAmount.Text = string.Format("{0:0.00}", objRent.TotalAmount);
 
                         txtSubDiscount.Text = "0";
                         txtSubDiscPer.Text = string.Empty;
                         txtTaxAmount.Text = "0";
-                        lblSubTotal.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
-                        lblNetAmount.Text = string.Format("{0:0.00}", objQuotation.TotalAmount);
+                        lblSubTotal.Text = string.Format("{0:0.00}", objRent.TotalAmount);
+                        lblNetAmount.Text = string.Format("{0:0.00}", objRent.TotalAmount);
 
                         txtProductCode.Focus();
                     }
@@ -1364,36 +1364,36 @@ namespace Inventory
 
             try
             {
-                objQuotation.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'QUO' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
-                objQuotation.ReadTempTransDetails();
-                if (objQuotation.RecordFound != true)
+                objRent.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'QUO' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                objRent.ReadTempTransDetails();
+                if (objRent.RecordFound != true)
                 {
-                    MessageBox.Show("Quotation Details Not Found.", "Quotation Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Rental Details Not Found.", "Rental Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                objQuotation.CustCode = txtCustCode.Text.Trim();
-                objQuotation.CustName = txtCustName.Text.Trim();
-                objQuotation.Address1 = txtCustAddress1.Text.Trim();
-                objQuotation.Address2 = txtCustAddress2.Text.Trim();
-                objQuotation.Address3 = txtCustAddress3.Text.Trim();
-                objQuotation.PostDate = dtpDate.Text;
-                objQuotation.SalesAssistant = txtSalesAssist.Text.Trim();
-                objQuotation.Reference = txtReference.Text.Trim();
-                objQuotation.Remark = txtRemarks.Text.Trim();
-                objQuotation.Comments = txtComments.Text.Trim();
-                objQuotation.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
-                objQuotation.Disc = txtSubDiscPer.Text.Trim();
-                objQuotation.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
-                objQuotation.Amount = decimal.Parse(lblNetAmount.Text.ToString());
-                objQuotation.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                objRent.CustCode = txtCustCode.Text.Trim();
+                objRent.CustName = txtCustName.Text.Trim();
+                objRent.Address1 = txtCustAddress1.Text.Trim();
+                objRent.Address2 = txtCustAddress2.Text.Trim();
+                objRent.Address3 = txtCustAddress3.Text.Trim();
+                objRent.PostDate = dtpDate.Text;
+                objRent.SalesAssistant = txtSalesAssist.Text.Trim();
+                objRent.Reference = txtReference.Text.Trim();
+                objRent.Remark = txtRemarks.Text.Trim();
+                objRent.Comments = txtComments.Text.Trim();
+                objRent.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                objRent.Disc = txtSubDiscPer.Text.Trim();
+                objRent.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                objRent.Amount = decimal.Parse(lblNetAmount.Text.ToString());
+                objRent.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
 
-                objQuotation.GetDataSetForPreview();
-                dsDataForReport = objQuotation.GetReportDataset;
-                rptQuotation Quotation = new rptQuotation();
-                Quotation.SetDataSource(dsDataForReport);
+                objRent.GetDataSetForPreview();
+                dsDataForReport = objRent.GetReportDataset;
+                rptQuotation Rental = new rptQuotation();
+                Rental.SetDataSource(dsDataForReport);
 
-                objRepViewer.crystalReportViewer1.ReportSource = Quotation;
+                objRepViewer.crystalReportViewer1.ReportSource = Rental;
                 objRepViewer.WindowState = FormWindowState.Maximized;
                 objRepViewer.Show();
             }
@@ -1436,36 +1436,36 @@ namespace Inventory
                     txtRemarks.Text = ".";
                 }
 
-                if (MessageBox.Show("Are You Sure You want to Save This Document. ", "Quotation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                if (MessageBox.Show("Are You Sure You want to Save This Document. ", "Rental", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     DataSet dsDataForReport = new DataSet();
                     frmReportViewer objRepViewer = new frmReportViewer();
 
-                    objQuotation.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'QUO' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
-                    objQuotation.ReadTempTransDetails();
-                    if (objQuotation.RecordFound != true)
+                    objRent.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'QUO' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                    objRent.ReadTempTransDetails();
+                    if (objRent.RecordFound != true)
                     {
-                        MessageBox.Show("Quotation Details Not Found.", "Quotation Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Rental Details Not Found.", "Rental Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    objQuotation.CustName = txtCustName.Text.Trim();
-                    objQuotation.Address1 = txtCustAddress1.Text.Trim();
-                    objQuotation.Address2 = txtCustAddress2.Text.Trim();
-                    objQuotation.Address3 = txtCustAddress3.Text.Trim();
-                    objQuotation.SalesAssistant = txtSalesAssist.Text.Trim();
-                    objQuotation.Reference = txtReference.Text.Trim();
-                    objQuotation.Remark = txtRemarks.Text.Trim();
-                    objQuotation.Comments = txtComments.Text.Trim();
-                    objQuotation.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
-                    objQuotation.Disc = txtSubDiscPer.Text.Trim();
-                    objQuotation.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
-                    objQuotation.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
-                    objQuotation.InvoiceSave();
-                    MessageBox.Show("Quotation Successfully Saved as Document No. " + objQuotation.OrgDocNo, "Quotation Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    objRent.CustName = txtCustName.Text.Trim();
+                    objRent.Address1 = txtCustAddress1.Text.Trim();
+                    objRent.Address2 = txtCustAddress2.Text.Trim();
+                    objRent.Address3 = txtCustAddress3.Text.Trim();
+                    objRent.SalesAssistant = txtSalesAssist.Text.Trim();
+                    objRent.Reference = txtReference.Text.Trim();
+                    objRent.Remark = txtRemarks.Text.Trim();
+                    objRent.Comments = txtComments.Text.Trim();
+                    objRent.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                    objRent.Disc = txtSubDiscPer.Text.Trim();
+                    objRent.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                    objRent.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                    objRent.InvoiceSave();
+                    MessageBox.Show("Rental Successfully Saved as Document No. " + objRent.OrgDocNo, "Rental Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.Close();
                     this.Dispose();
-                    Quotation = null;
+                    Rental = null;
                 }
             }
             catch (Exception ex)
@@ -1507,48 +1507,48 @@ namespace Inventory
                     txtRemarks.Text = ".";
                 }
 
-                if (MessageBox.Show("Do You want to Apply This Document. ", "Quotation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Do You want to Apply This Document. ", "Rental", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     DataSet dsDataForReport = new DataSet();
                     frmReportViewer objRepViewer = new frmReportViewer();
 
-                    objQuotation.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'QUO' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
-                    objQuotation.ReadTempTransDetails();
-                    if (objQuotation.RecordFound != true)
+                    objRent.SqlStatement = "SELECT TransactionTemp_Details.* from TransactionTemp_Details WHERE TransactionTemp_Details.IId = 'QUO' AND TransactionTemp_Details.Doc_No = '" + lblTempDocNo.Text.ToString() + "' AND TransactionTemp_Details.Loca = " + LoginManager.LocaCode;
+                    objRent.ReadTempTransDetails();
+                    if (objRent.RecordFound != true)
                     {
-                        MessageBox.Show("Quotation Details Not Found.", "Quotation Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Rental Details Not Found.", "Rental Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    objQuotation.CustCode = txtCustCode.Text.Trim().ToUpper();
-                    objQuotation.CustName = txtCustName.Text.Trim().ToUpper();
-                    objQuotation.Address1 = txtCustAddress1.Text.Trim().ToUpper();
-                    objQuotation.Address2 = txtCustAddress2.Text.Trim().ToUpper();
-                    objQuotation.Address3 = txtCustAddress3.Text.Trim().ToUpper();
-                    objQuotation.SalesAssistant = txtSalesAssist.Text.Trim();
-                    objQuotation.Reference = txtReference.Text.Trim();
-                    objQuotation.Remark = txtRemarks.Text.Trim();
-                    objQuotation.Comments = txtComments.Text.Trim();
-                    objQuotation.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
-                    objQuotation.Disc = txtSubDiscPer.Text.Trim();
-                    objQuotation.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
-                    objQuotation.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
-                    objQuotation.TotalAmount = decimal.Parse(lblNetAmount.Text.ToString());
-                    objQuotation.InvoiceApply();
-                    MessageBox.Show("Quotation Successfully Applied as Document No. " + objQuotation.OrgDocNo, "Quotation Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    objRent.CustCode = txtCustCode.Text.Trim().ToUpper();
+                    objRent.CustName = txtCustName.Text.Trim().ToUpper();
+                    objRent.Address1 = txtCustAddress1.Text.Trim().ToUpper();
+                    objRent.Address2 = txtCustAddress2.Text.Trim().ToUpper();
+                    objRent.Address3 = txtCustAddress3.Text.Trim().ToUpper();
+                    objRent.SalesAssistant = txtSalesAssist.Text.Trim();
+                    objRent.Reference = txtReference.Text.Trim();
+                    objRent.Remark = txtRemarks.Text.Trim();
+                    objRent.Comments = txtComments.Text.Trim();
+                    objRent.GrossAmount = decimal.Parse(lblTotalAmount.Text.ToString());
+                    objRent.Disc = txtSubDiscPer.Text.Trim();
+                    objRent.Discount = decimal.Parse(txtSubDiscount.Text.ToString());
+                    objRent.Tax = decimal.Parse(txtTaxAmount.Text.ToString());
+                    objRent.TotalAmount = decimal.Parse(lblNetAmount.Text.ToString());
+                    objRent.InvoiceApply();
+                    MessageBox.Show("Rental Successfully Applied as Document No. " + objRent.OrgDocNo, "Rental Apply", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    objQuotation.GetDataSetForReport();
-                    objQuotation.GetReportDataset.Tables["dsInvoiceDetails1"].TableName = "CompanyProfile";
-                    dsDataForReport = objQuotation.GetReportDataset;                    
-                    rptQuotation Quotation = new rptQuotation();
-                    Quotation.SetDataSource(dsDataForReport);
+                    objRent.GetDataSetForReport();
+                    objRent.GetReportDataset.Tables["dsInvoiceDetails1"].TableName = "CompanyProfile";
+                    dsDataForReport = objRent.GetReportDataset;
+                    rptQuotation Rental = new rptQuotation();
+                    Rental.SetDataSource(dsDataForReport);
 
-                    objRepViewer.crystalReportViewer1.ReportSource = Quotation;
+                    objRepViewer.crystalReportViewer1.ReportSource = Rental;
                     objRepViewer.WindowState = FormWindowState.Maximized;
                     objRepViewer.Show();
 
                     this.Close();
                     this.Dispose();
-                    Quotation = null;
+                    Rental = null;
                 }
             }
             catch (Exception ex)
@@ -1719,7 +1719,7 @@ namespace Inventory
                     }
                     else
                     {
-                        MessageBox.Show("Invalid Tax Percentage. Please Enter Valid Tax Percentage(Ex: 22%)", "Quotation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Invalid Tax Percentage. Please Enter Valid Tax Percentage(Ex: 22%)", "Rental", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -1755,29 +1755,29 @@ namespace Inventory
 
                 if (txtSaleAssisCode.Text.Trim() == string.Empty && txtSalesAssist.Text.Trim() == string.Empty)
                 {
-                    objQuotation.SqlStatement = "select Sale_Code[Saleman Code], Sale_Name[Salesman Name] from tb_Salesman order by Sale_Code ASC";
+                    objRent.SqlStatement = "select Sale_Code[Saleman Code], Sale_Name[Salesman Name] from tb_Salesman order by Sale_Code ASC";
                 }
                 else
                 {
                     if (txtSaleAssisCode.Text.Trim() != string.Empty && txtSalesAssist.Text.Trim() == string.Empty)
                     {
-                        objQuotation.SqlStatement = "select Sale_Code[Saleman Code],Sale_Name[Salesman Name] from tb_Salesman  WHERE Sale_Code  LIKE '%" + txtSaleAssisCode.Text.Trim() + "%' order by Sale_Code ASC";
+                        objRent.SqlStatement = "select Sale_Code[Saleman Code],Sale_Name[Salesman Name] from tb_Salesman  WHERE Sale_Code  LIKE '%" + txtSaleAssisCode.Text.Trim() + "%' order by Sale_Code ASC";
                     }
                     else
                     {
                         if (txtSaleAssisCode.Text.Trim() == string.Empty && txtSalesAssist.Text.Trim() != string.Empty)
                         {
-                            objQuotation.SqlStatement = "select Sale_Code[Saleman Code], Sale_Name[Salesman Name] from tb_Salesman WHERE Sale_Name  LIKE '%" + txtSalesAssist.Text.Trim() + "%' order by Sale_Name ASC";
+                            objRent.SqlStatement = "select Sale_Code[Saleman Code], Sale_Name[Salesman Name] from tb_Salesman WHERE Sale_Name  LIKE '%" + txtSalesAssist.Text.Trim() + "%' order by Sale_Name ASC";
                         }
                         else
                         {
-                            objQuotation.SqlStatement = "select Sale_Code[Saleman Code], Sale_Name[Salesman Name] from tb_Salesman order by Sale_Code ASC";
+                            objRent.SqlStatement = "select Sale_Code[Saleman Code], Sale_Name[Salesman Name] from tb_Salesman order by Sale_Code ASC";
                         }
                     }
                 }
-                objQuotation.DataetName = "dsAssitant";
-                objQuotation.GetCustomerDetails();
-                search.dgSearch.DataSource = objQuotation.GetCustomerDataSet.Tables["dsAssitant"];
+                objRent.DataetName = "dsAssitant";
+                objRent.GetCustomerDetails();
+                search.dgSearch.DataSource = objRent.GetCustomerDataSet.Tables["dsAssitant"];
                 search.prop_Focus = txtSaleAssisCode;
                 search.Cont_Descript = txtSalesAssist;
                 search.Show();
@@ -1806,13 +1806,13 @@ namespace Inventory
             {
                 if (e.KeyCode == Keys.Enter && txtSaleAssisCode.Text != string.Empty)
                 {
-                    objQuotation.SalesAssisCode = txtSaleAssisCode.Text.Trim();
-                    objQuotation.SqlStatement = "select Sale_Code, Sale_Name from tb_Salesman where Sale_Code = '"+txtSaleAssisCode.Text.Trim()+"'";
-                    objQuotation.ReadAssitantDetail();
-                    if(objQuotation.RecordFound == true)
+                    objRent.SalesAssisCode = txtSaleAssisCode.Text.Trim();
+                    objRent.SqlStatement = "select Sale_Code, Sale_Name from tb_Salesman where Sale_Code = '"+txtSaleAssisCode.Text.Trim()+"'";
+                    objRent.ReadAssitantDetail();
+                    if(objRent.RecordFound == true)
                     {
-                        txtSaleAssisCode.Text = objQuotation.SalesAssisCode;
-                        txtSalesAssist.Text = objQuotation.SalesAssistant;
+                        txtSaleAssisCode.Text = objRent.SalesAssisCode;
+                        txtSalesAssist.Text = objRent.SalesAssistant;
                         txtReference.Focus();
                     }
                     else

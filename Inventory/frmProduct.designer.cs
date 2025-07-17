@@ -179,6 +179,7 @@ namespace Inventory
             this.chkOgf = new System.Windows.Forms.CheckBox();
             this.btnBatch = new System.Windows.Forms.Button();
             this.cachedrptCategoryItemStock1 = new Inventory.CachedrptCategoryItemStock();
+            this.chkRentItem = new System.Windows.Forms.CheckBox();
             this.grpProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.grpPrice.SuspendLayout();
@@ -257,11 +258,11 @@ namespace Inventory
             // txtSinghalaDescription
             // 
             this.txtSinghalaDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtSinghalaDescription.Font = new System.Drawing.Font("AA Amali", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSinghalaDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSinghalaDescription.Location = new System.Drawing.Point(113, 186);
             this.txtSinghalaDescription.MaxLength = 50;
             this.txtSinghalaDescription.Name = "txtSinghalaDescription";
-            this.txtSinghalaDescription.Size = new System.Drawing.Size(413, 23);
+            this.txtSinghalaDescription.Size = new System.Drawing.Size(413, 24);
             this.txtSinghalaDescription.TabIndex = 20;
             this.txtSinghalaDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSinghalaDescription_KeyDown);
             // 
@@ -911,7 +912,7 @@ namespace Inventory
             this.chkCreditBilling.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkCreditBilling.AutoSize = true;
             this.chkCreditBilling.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCreditBilling.Location = new System.Drawing.Point(25, 34);
+            this.chkCreditBilling.Location = new System.Drawing.Point(17, 34);
             this.chkCreditBilling.Name = "chkCreditBilling";
             this.chkCreditBilling.Size = new System.Drawing.Size(121, 17);
             this.chkCreditBilling.TabIndex = 39;
@@ -1071,7 +1072,7 @@ namespace Inventory
             this.chkTransactionLock.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkTransactionLock.AutoSize = true;
             this.chkTransactionLock.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTransactionLock.Location = new System.Drawing.Point(185, 16);
+            this.chkTransactionLock.Location = new System.Drawing.Point(177, 16);
             this.chkTransactionLock.Name = "chkTransactionLock";
             this.chkTransactionLock.Size = new System.Drawing.Size(109, 17);
             this.chkTransactionLock.TabIndex = 38;
@@ -1221,7 +1222,7 @@ namespace Inventory
             this.chkNextItemCode.Checked = true;
             this.chkNextItemCode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkNextItemCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNextItemCode.Location = new System.Drawing.Point(25, 5);
+            this.chkNextItemCode.Location = new System.Drawing.Point(17, 5);
             this.chkNextItemCode.Name = "chkNextItemCode";
             this.chkNextItemCode.Size = new System.Drawing.Size(119, 30);
             this.chkNextItemCode.TabIndex = 37;
@@ -1611,7 +1612,7 @@ namespace Inventory
             this.chkPkt.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkPkt.AutoSize = true;
             this.chkPkt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPkt.Location = new System.Drawing.Point(185, 64);
+            this.chkPkt.Location = new System.Drawing.Point(177, 64);
             this.chkPkt.Name = "chkPkt";
             this.chkPkt.Size = new System.Drawing.Size(114, 17);
             this.chkPkt.TabIndex = 211;
@@ -1623,7 +1624,7 @@ namespace Inventory
             this.chkbundle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkbundle.AutoSize = true;
             this.chkbundle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkbundle.Location = new System.Drawing.Point(185, 48);
+            this.chkbundle.Location = new System.Drawing.Point(177, 48);
             this.chkbundle.Name = "chkbundle";
             this.chkbundle.Size = new System.Drawing.Size(107, 17);
             this.chkbundle.TabIndex = 48;
@@ -1635,7 +1636,7 @@ namespace Inventory
             this.chkVatProd.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkVatProd.AutoSize = true;
             this.chkVatProd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkVatProd.Location = new System.Drawing.Point(25, 50);
+            this.chkVatProd.Location = new System.Drawing.Point(17, 50);
             this.chkVatProd.Name = "chkVatProd";
             this.chkVatProd.Size = new System.Drawing.Size(82, 17);
             this.chkVatProd.TabIndex = 47;
@@ -1647,7 +1648,7 @@ namespace Inventory
             this.chkExpireItem.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkExpireItem.AutoSize = true;
             this.chkExpireItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkExpireItem.Location = new System.Drawing.Point(185, 81);
+            this.chkExpireItem.Location = new System.Drawing.Point(177, 81);
             this.chkExpireItem.Name = "chkExpireItem";
             this.chkExpireItem.Size = new System.Drawing.Size(98, 17);
             this.chkExpireItem.TabIndex = 46;
@@ -1659,7 +1660,7 @@ namespace Inventory
             this.chkDisNotAllow.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkDisNotAllow.AutoSize = true;
             this.chkDisNotAllow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisNotAllow.Location = new System.Drawing.Point(25, 84);
+            this.chkDisNotAllow.Location = new System.Drawing.Point(17, 84);
             this.chkDisNotAllow.Name = "chkDisNotAllow";
             this.chkDisNotAllow.Size = new System.Drawing.Size(116, 17);
             this.chkDisNotAllow.TabIndex = 45;
@@ -1671,7 +1672,7 @@ namespace Inventory
             this.chkLoose.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkLoose.AutoSize = true;
             this.chkLoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLoose.Location = new System.Drawing.Point(185, 32);
+            this.chkLoose.Location = new System.Drawing.Point(177, 32);
             this.chkLoose.Name = "chkLoose";
             this.chkLoose.Size = new System.Drawing.Size(105, 17);
             this.chkLoose.TabIndex = 43;
@@ -1683,7 +1684,7 @@ namespace Inventory
             this.chkPointsAllow.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkPointsAllow.AutoSize = true;
             this.chkPointsAllow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPointsAllow.Location = new System.Drawing.Point(25, 103);
+            this.chkPointsAllow.Location = new System.Drawing.Point(17, 103);
             this.chkPointsAllow.Name = "chkPointsAllow";
             this.chkPointsAllow.Size = new System.Drawing.Size(83, 17);
             this.chkPointsAllow.TabIndex = 42;
@@ -1696,7 +1697,7 @@ namespace Inventory
             this.chkMinusAllow.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkMinusAllow.AutoSize = true;
             this.chkMinusAllow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMinusAllow.Location = new System.Drawing.Point(25, 67);
+            this.chkMinusAllow.Location = new System.Drawing.Point(17, 67);
             this.chkMinusAllow.Name = "chkMinusAllow";
             this.chkMinusAllow.Size = new System.Drawing.Size(82, 17);
             this.chkMinusAllow.TabIndex = 40;
@@ -1708,7 +1709,7 @@ namespace Inventory
             this.chkUnderCost.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkUnderCost.AutoSize = true;
             this.chkUnderCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUnderCost.Location = new System.Drawing.Point(185, 99);
+            this.chkUnderCost.Location = new System.Drawing.Point(177, 99);
             this.chkUnderCost.Name = "chkUnderCost";
             this.chkUnderCost.Size = new System.Drawing.Size(79, 17);
             this.chkUnderCost.TabIndex = 41;
@@ -1827,7 +1828,7 @@ namespace Inventory
             this.chkFreeIssue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkFreeIssue.AutoSize = true;
             this.chkFreeIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkFreeIssue.Location = new System.Drawing.Point(185, 116);
+            this.chkFreeIssue.Location = new System.Drawing.Point(177, 116);
             this.chkFreeIssue.Name = "chkFreeIssue";
             this.chkFreeIssue.Size = new System.Drawing.Size(75, 17);
             this.chkFreeIssue.TabIndex = 212;
@@ -1838,6 +1839,7 @@ namespace Inventory
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.chkRentItem);
             this.panel1.Controls.Add(this.txtServTime);
             this.panel1.Controls.Add(this.label37);
             this.panel1.Controls.Add(this.chkServItem);
@@ -1895,7 +1897,7 @@ namespace Inventory
             this.chkServItem.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkServItem.AutoSize = true;
             this.chkServItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkServItem.Location = new System.Drawing.Point(25, 202);
+            this.chkServItem.Location = new System.Drawing.Point(17, 195);
             this.chkServItem.Name = "chkServItem";
             this.chkServItem.Size = new System.Drawing.Size(85, 17);
             this.chkServItem.TabIndex = 220;
@@ -1958,7 +1960,7 @@ namespace Inventory
             this.chkwarntyhandle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkwarntyhandle.AutoSize = true;
             this.chkwarntyhandle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkwarntyhandle.Location = new System.Drawing.Point(25, 180);
+            this.chkwarntyhandle.Location = new System.Drawing.Point(17, 175);
             this.chkwarntyhandle.Name = "chkwarntyhandle";
             this.chkwarntyhandle.Size = new System.Drawing.Size(106, 17);
             this.chkwarntyhandle.TabIndex = 217;
@@ -1971,7 +1973,7 @@ namespace Inventory
             this.chkInstallCharges.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkInstallCharges.AutoSize = true;
             this.chkInstallCharges.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkInstallCharges.Location = new System.Drawing.Point(25, 158);
+            this.chkInstallCharges.Location = new System.Drawing.Point(17, 157);
             this.chkInstallCharges.Name = "chkInstallCharges";
             this.chkInstallCharges.Size = new System.Drawing.Size(118, 17);
             this.chkInstallCharges.TabIndex = 216;
@@ -1984,7 +1986,7 @@ namespace Inventory
             this.chkSerialNo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkSerialNo.AutoSize = true;
             this.chkSerialNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSerialNo.Location = new System.Drawing.Point(185, 135);
+            this.chkSerialNo.Location = new System.Drawing.Point(177, 135);
             this.chkSerialNo.Name = "chkSerialNo";
             this.chkSerialNo.Size = new System.Drawing.Size(97, 17);
             this.chkSerialNo.TabIndex = 215;
@@ -1996,7 +1998,7 @@ namespace Inventory
             this.chkBatchPUpdate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkBatchPUpdate.AutoSize = true;
             this.chkBatchPUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBatchPUpdate.Location = new System.Drawing.Point(25, 139);
+            this.chkBatchPUpdate.Location = new System.Drawing.Point(17, 139);
             this.chkBatchPUpdate.Name = "chkBatchPUpdate";
             this.chkBatchPUpdate.Size = new System.Drawing.Size(119, 17);
             this.chkBatchPUpdate.TabIndex = 214;
@@ -2008,7 +2010,7 @@ namespace Inventory
             this.chkOgf.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkOgf.AutoSize = true;
             this.chkOgf.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.chkOgf.Location = new System.Drawing.Point(25, 121);
+            this.chkOgf.Location = new System.Drawing.Point(17, 121);
             this.chkOgf.Name = "chkOgf";
             this.chkOgf.Size = new System.Drawing.Size(50, 17);
             this.chkOgf.TabIndex = 213;
@@ -2026,6 +2028,18 @@ namespace Inventory
             this.btnBatch.Text = "Batch M";
             this.btnBatch.UseVisualStyleBackColor = false;
             this.btnBatch.Click += new System.EventHandler(this.btnBatch_Click);
+            // 
+            // chkRentItem
+            // 
+            this.chkRentItem.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.chkRentItem.AutoSize = true;
+            this.chkRentItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkRentItem.Location = new System.Drawing.Point(17, 212);
+            this.chkRentItem.Name = "chkRentItem";
+            this.chkRentItem.Size = new System.Drawing.Size(72, 17);
+            this.chkRentItem.TabIndex = 221;
+            this.chkRentItem.Text = "Rent Item";
+            this.chkRentItem.UseVisualStyleBackColor = true;
             // 
             // frmProduct
             // 
@@ -2238,5 +2252,6 @@ namespace Inventory
         private System.Windows.Forms.TextBox txtDiscount;
         private System.Windows.Forms.TextBox txtminimumPrice;
         private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.CheckBox chkRentItem;
     }
 }
